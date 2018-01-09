@@ -1,0 +1,150 @@
+﻿
+@{
+    ViewBag.Title = "BaoCaoChoXepLop";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<script src="~/Content/js/bootbox.min.js"></script>
+<div class="box box-danger">
+    <div class="box-header with-border">
+        <h3 class="box-title">Danh sách học sinh chờ xếp lớp</h3>
+    </div>
+    <form class="form-horizontal">
+        <div class="row">
+            <div class="col-sm-12">
+                <div id="gridDS"></div>
+            </div>
+        </div>
+    </form>
+</div>
+<!-- /.box -->
+
+<script>
+    $(document).ready(function () {
+        LoadDanhSach();
+    });
+    function LoadDanhSach() {
+        $.ajax({
+            url: '@Url.Action("Get_ChoXepLop", "BaoCao")',
+            type: 'GET',
+            contentType: 'application/json',
+            success: function (rs) {
+                var dataGrid = $("#gridDS").dxDataGrid({
+                    dataSource: rs,
+                    allowColumnReordering: true,
+                    allowColumnResizing: true,
+                    columnAutoWidth: true,
+                    columnFixing: {
+                        enabled: true
+                    },
+                    paging: {
+                        pageSize: 10
+                    },
+                    pager: {
+                        showPageSizeSelector: true,
+                        allowedPageSizes: [10, 20, 50],
+                        showInfo: true
+                    },
+                    showColumnLines: true,
+                    showRowLines: true,
+                    filterRow: {
+                        visible: true,
+                        applyFilter: "auto"
+                    },
+                    selection: {
+                        mode: "single"
+                    },
+                    "export": {
+                        enabled: true,
+                        fileName: "DS_HocSinhChoXepLop",
+                    },
+                    columns: [{
+                              dataField: "MAHOCVIEN",
+                              caption: "Mã học sinh",
+                          }, {
+                              caption: "Tên học sinh",
+                              dataField: "TENHOCVIEN",
+                          }, {
+                              dataField: "ma_lms",
+                              caption: "Mã LMS",
+                          }, {
+                              caption: "Mã EFFECT",
+                              dataField: "ma_effect",
+                          }, {
+                              dataField: "NGAYDANGKY",
+                              caption: "Ngày đăng ký",
+                              alignment: "right",
+                          }, {
+                              caption: "Ngày dự kiến học",
+                              dataField: "NGAYDUKIENHOC",
+                              alignment: "right",
+                          }, {
+                              caption: "Trung tâm",
+                              dataField: "TENTRUNGTAM",
+                          }, {
+                              caption: "Nhóm sản phẩm",
+                              dataField: "NHOMSANPHAM",
+                          }, {
+                              caption: "Chương trình",
+                              dataField: "CHUONGTRINH",
+                          }, {
+                              caption: "Số buổi học",
+                              dataField: "SOBUOIHOC",
+                          }, {
+                              caption: "Đơn giá",
+                              dataField: "DONGIA",
+                              format: "fixedPoint",
+                              alignment: "right",
+                          }, {
+                              caption: "Chiết khấu",
+                              dataField: "CHIETKHAU",
+                          }, {
+                              caption: "Thành tiền",
+                              dataField: "THANHTIEN",
+                              format: "fixedPoint",
+                              alignment: "right",
+                          },  {
+                              caption: "Tên lớp",
+                              dataField: "tenlop",
+                          }, {
+                              caption: "EC",
+                              dataField: "EC",
+                          }, {
+                              caption: "EC LEADER",
+                              dataField: "EC_LEADER",
+                          }, {
+                              caption: "CM",
+                              dataField: "CM",
+                          }, {
+                              caption: "OM",
+                              dataField: "OM",
+                          }, {
+                              caption: "GĐTT",
+                              dataField: "GDTT",
+                          }, {
+                              caption: "GĐV",
+                              dataField: "GDV",
+                          }, {
+                              caption: "Tổng tiền thu",
+                              dataField: "TONGTIENTHU",
+                              format: "fixedPoint",
+                              alignment: "right",
+                          }, {
+                              caption: "Ngày thu tiền",
+                              dataField: "NGAYTHUTIEN",
+                              alignment: "right",
+                          }, {
+                              caption: "Số ngày chờ xếp lớp",
+                              dataField: "SoNgayChoXepLop",
+                          }, {
+                              caption: "Trạng thái",
+                              dataField: "TRANGTHAI",
+                          }
+                    ],
+                }).dxDataGrid('instance');
+            },
+            error: function (a, b, c) {
+                DevExpress.ui.notify('Error ' + a.status + ': ' + a.statusText, 'error', 2000);
+            }
+        });
+    }
+</script>

@@ -1,0 +1,27 @@
+﻿@{
+    ViewBag.Title = "ChiTietBaoLuu";
+    Layout = null;
+}
+<object width=900 height=500 id="excel" data="http://file:///localhost:40530/Content/upload/@ViewBag.TenHinh" classid="clsid:0002E55a-0000-0000-C000-000000000046" VIEWASTEXT>
+    <param name="DisplayTitleBar" value=true />
+    <param name="DataType" value="CSVURL" />
+    <param name="AutoFit" value="0" />
+    <param name="DisplayColHeaders" value="1" />
+    <param name="DisplayGridlines" value="1" />
+    <param name="DisplayHorizontalScrollBar" value="1" />
+    <param name="DisplayRowHeaders" value="1" />
+    <param name="DisplayTitleBar" value="1" />
+    <param name="DisplayToolbar" value="1" />
+    <param name="DisplayVerticalScrollBar" value="1" />
+    <param name="EnableAutoCalculate" value="0" />
+    <param name="EnableEvents" value="0" />
+    <param name="MoveAfterReturn" value="1" />
+    <param name="MoveAfterReturnDirection" value="0" />
+    <param name="RightToLeft" value="0" />
+</object>
+<body style="margin:0px;padding:0px;overflow:hidden">
+    <iframe src="http://file:///localhost:40530/Content/upload/@ViewBag.TenHinh" frameborder="0" style="overflow:hidden;overflow-x:hidden;overflow-y:hidden;height:100%;width:100%;position:absolute;top:0px;left:0px;right:0px;bottom:0px" height="100%" width="100%"></iframe>
+</body>
+
+
+

@@ -1,0 +1,116 @@
+﻿
+@{
+    ViewBag.Title = "BaoCaoHocSinh";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<script src="~/Content/js/bootbox.min.js"></script>
+<div class="box box-danger">
+    <div class="box-header with-border">
+        <h3 class="box-title">Danh sách học sinh</h3>
+    </div>
+    <form class="form-horizontal">
+        <div class="row">
+            <div class="col-sm-12">
+                <div id="gridDS"></div>
+            </div>
+        </div>
+    </form>
+</div>
+<!-- /.box -->
+
+<script>
+    $(document).ready(function () {
+        LoadDanhSach();
+    });
+    function LoadDanhSach() {
+        $.ajax({
+            url: '@Url.Action("Get_HocSinh", "BaoCao")',
+            type: 'GET',
+            contentType: 'application/json',
+            success: function (rs) {
+                var dataGrid = $("#gridDS").dxDataGrid({
+                    dataSource: rs,
+                    allowColumnReordering: true,
+                    allowColumnResizing: true,
+                    columnAutoWidth: true,
+                    columnFixing: {
+                        enabled: true
+                    },
+                    paging: {
+                        pageSize: 10
+                    },
+                    pager: {
+                        showPageSizeSelector: true,
+                        allowedPageSizes: [10, 20, 50],
+                        showInfo: true
+                    },
+                    showColumnLines: true,
+                    showRowLines: true,
+                    filterRow: {
+                        visible: true,
+                        applyFilter: "auto"
+                    },
+                    selection: {
+                        mode: "single"
+                    },
+                    "export": {
+                        enabled: true,
+                        fileName: "DS_HocSinh",
+                    },
+                    columns: [{
+                              dataField: "TrungTam",
+                              caption: "Trung tâm",
+                          }, {
+                              caption: "Mã CRM",
+                              dataField: "MaCRM",
+                          }, {
+                              caption: "Mã LMS",
+                              dataField: "MaLMS",
+
+                          }, {
+                              dataField: "MaEffect",
+                              caption: "Mã Effect",
+                          }, {
+                              dataField: "TenHocSinh",
+                              caption: "Tên học sinh",
+                          }, {
+                              caption: "NickName",
+                              dataField: "NickName",
+                          }, {
+                              caption: "Ngày sinh",
+                              dataField: "NgaySinh",
+                              alignment: "right",
+                          },{
+                              caption: "Tỉnh thành phố",
+                              dataField: "TinhThanhPho",
+                          }, {
+                              caption: "Quận huyện",
+                              dataField: "QuanHuyen",
+                          }, {
+                              dataField: "DiaChi",
+                              caption: "Địa chỉ",
+                          }, {
+                              caption: "Phụ huynh",
+                              dataField: "PhuHuynh",
+                          }, {
+                              caption: "Di động",
+                              dataField: "DiDong",
+                          }, {
+                              caption: "Email",
+                              dataField: "Email",
+                          }, {
+                              caption: "CM",
+                              dataField: "CM",
+                          }, {
+                              caption: "EC",
+                              dataField: "EC",
+                          },
+                    ],
+                }).dxDataGrid('instance');
+            },
+            error: function (a, b, c) {
+                DevExpress.ui.notify('Error ' + a.status + ': ' + a.statusText, 'error', 2000);
+            }
+        });
+    }
+</script>

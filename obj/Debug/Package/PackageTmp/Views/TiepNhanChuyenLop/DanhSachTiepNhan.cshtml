@@ -1,0 +1,1750 @@
+﻿
+@{
+    ViewBag.Title = "DanhSachTiepNhan";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    string NguoiDung = ViewBag.TenNguoiDung;
+    <input type="hidden" value="@ViewBag.ChucVuTK" id="ChucVuTK" />
+}
+
+<div class="box box-danger">
+    <div class="box-header with-border">
+        <h3 class="box-title">Danh sách đề nghị chuyển trung tâm</h3>
+    </div>
+    <!-- /.box-header -->
+    <!-- form start -->
+    <form class="form-horizontal">
+        <div class="box-body"></div>
+        <div class="row">
+            <div class="col-md-12">
+                <div id="gridDanhSachChuyenTrungTam"></div>
+            </div>
+        </div>
+        <!-- /.box-body -->
+    </form>
+</div>
+<div class="box box-danger">
+    <div class="box-header with-border">
+        <h3 class="box-title">Danh sách chờ duyệt xếp lớp cho học sinh từ trung tâm khác</h3>
+    </div>
+    <!-- /.box-header -->
+    <!-- form start -->
+    <form class="form-horizontal">
+        <div class="box-body"></div>
+        <div class="row">
+            <div class="col-md-12">
+                <div id="gridDanhSachChoDuyetXepLop"></div>
+            </div>
+        </div>
+        <!-- /.box-body -->
+    </form>
+</div>
+<!-- /.box -->
+<div class="modal fade" id="DuyetTiepNhan" style="display: none;">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header bg-red">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">×</span>
+                </button>
+                <h4 class="modal-title">Duyệt thực hiện</h4>
+            </div>
+            <div class="modal-body">
+                <div class="box-body">
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label class="col-sm-4 control-label">Tên người dùng</label>
+                            <div class="col-sm-8">
+                                <input type="text" value="@NguoiDung" id="TenNguoiDung" readonly class="form-control">
+                            </div>
+                        </div>
+                        <div class="form-group" style="margin-top:40px;">
+                            <label class="col-sm-4 control-label" style="padding-left:0px">Nội dung/Ghi chú</label>
+                            <div class="col-sm-8">
+                                <textarea class="form-control" rows="3" id="GhiChuDuyet" placeholder="Nội dung ..."></textarea>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label class="col-sm-4 control-label">ý kiến duyệt<span style="color:red">*</span></label>
+                            <div class="col-sm-8">
+                                <div id="YKienDuyet" style="width:100%"></div>
+                            </div>
+                        </div>
+                        <div class="form-group" style="margin-top:40px;">
+                            <div class="col-sm-8">
+                                <button id="LuuDuyet" style="width:90px;height:90px;border-radius:10px;border-color:red" onclick="LuuDuyetTiepNhanChuyenLop()" class="btn-danger">Duyệt</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div id="gridDanhSachLichSuDuyet">
+                </div>
+            </div>
+        </div>
+        <!-- /.modal-content -->
+    </div>
+    <!-- /.modal-dialog -->
+</div>
+<div class="modal fade" id="GanQuanLy" style="display: none;">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header bg-red">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">×</span>
+                </button>
+                <h4 class="modal-title">Gán quản lý</h4>
+            </div>
+            <div class="modal-body">
+                <div class="box-body">
+                    <div class="col-md-4">
+                        @Html.Hidden("IDHOCSINHGAN")
+                        @Html.Hidden("ID_TrungTam")
+                        @Html.Hidden("MaTrungTam")
+                        <div class="form-group">
+                            <label class="col-sm-4 control-label">Mã học sinh</label>
+                            <div class="col-sm-8">
+                                <input type="text" id="MaHocSinh" readonly class="form-control">
+                            </div>
+                        </div>
+                        <div class="form-group" style="margin-top:40px;">
+                            <label class="col-sm-4 control-label" style="padding-left:0px">Tên học sinh</label>
+                            <div class="col-sm-8">
+                                <input type="text" id="TenHocSinh" readonly class="form-control">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label class="col-sm-4 control-label">EC</label>
+                            <div class="col-sm-8">
+                                <div id="SalePhuTrach"></div>
+                            </div>
+                        </div>
+                        <div class="form-group" style="margin-top:40px;">
+                            <label class="col-sm-4 control-label" style="padding-left:0px">CM</label>
+                            <div class="col-sm-8">
+                                <div id="CMPhuTrach"></div>
+                            </div>
+                        </div>
+                        <div class="form-group" style="margin-top:40px;">
+                            <div class="col-sm-8">
+                                <button id="LuuDuyet" style="width:90px;height:90px;border-radius:10px;border-color:red" onclick="LuuCMSM()" class="btn-danger">Lưu</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div id="gridDanhSachLichSuDuyet">
+                </div>
+            </div>
+        </div>
+        <!-- /.modal-content -->
+    </div>
+    <!-- /.modal-dialog -->
+</div>
+<div class="modal fade" id="TimLopHoc" style="display: none;">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header bg-red">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">×</span>
+                </button>
+                <h4 class="modal-title">Danh sách lớp học</h4>
+            </div>
+            <div class="modal-body">
+                <div id="gridDanhSachHocLopHoc">
+                </div>
+            </div>
+        </div>
+        <!-- /.modal-content -->
+    </div>
+    <!-- /.modal-dialog -->
+</div>
+<div class="modal fade" id="ChiTietTiepNhan" style="display: none;">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header bg-red">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">×</span>
+                </button>
+                <h4 class="modal-title">Chi tiết tiếp nhận</h4>
+            </div>
+            <div class="modal-body">
+                <form class="form-horizontal">
+                    <!--Menu-->
+                    <!--Menu-->
+                    <div class="margin text-right">
+                        <div class="btn-group"><button type="button" class="btn btn-block btn-danger" onclick="DuyetTiepNhanChuyenLop()">Duyệt</button></div>
+                        <div class="btn-group"><button type="button" class="btn btn-block btn-danger" id="btnLuuTiepNhan" onclick="Luu()">Cập nhật</button></div>
+                    </div>
+                    <div class="box-body">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label class="col-sm-3 control-label">Tên học viên</label>
+                                <div class="col-sm-9">
+                                    <input type="text" class="form-control" readonly id="TenHocVien" placeholder="">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-sm-3 control-label">Số điện thoại</label>
+                                <div class="col-sm-9">
+                                    <input type="text" class="form-control" readonly id="SDT" placeholder="">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label class="col-sm-3 control-label"></label>
+
+                            </div>
+                            <div class="form-group">
+                                <label class="col-sm-3 control-label">Email</label>
+                                <div class="col-sm-9">
+                                    <input type="text" class="form-control" readonly id="Email" placeholder="">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-sm-3 control-label">Địa chỉ</label>
+                                <div class="col-sm-9">
+                                    <input type="text" class="form-control" readonly id="DiaChi" placeholder="">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- /.box-body -->
+                    <div class="box-body">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <h5><label class="col-sm-12 control-label text-bold" style="text-align:left">THÔNG TIN HỌC LỚP ĐANG HỌC</label></h5>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-sm-3 control-label">Tên lớp</label>
+                                <div class="col-sm-9">
+                                    <input type="text" class="form-control" readonly id="TenLop" placeholder="">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-sm-3 control-label">Trung tâm</label>
+                                <div class="col-sm-9">
+                                    <input type="text" class="form-control" readonly id="TrungTam" placeholder="">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-sm-3 control-label">Chương trình</label>
+                                <div class="col-sm-9">
+                                    <input type="text" class="form-control" readonly id="ChuongTrinh" placeholder="">
+                                </div>
+                            </div>
+                            <div class="form-group" style="margin-bottom: 0px;">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label class="col-sm-6 control-label">Buổi 1</label>
+                                        <div class="col-sm-6">
+                                            <input type="text" id="Buoi1" readonly class="form-control">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label class="col-sm-5 control-label" style="padding-right: 0px!important">Buổi 2</label>
+                                        <div class="col-sm-7">
+                                            <input type="text" id="Buoi2" readonly class="form-control">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group" style="margin-bottom: 0px;">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label class="col-sm-6 control-label">Số buổi</label>
+                                        <div class="col-sm-6">
+                                            <input type="text" id="SoBuoi" readonly class="form-control">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label class="col-sm-5 control-label" style="padding-right: 0px!important">Số buổi còn lại</label>
+                                        <div class="col-sm-7">
+                                            <input type="text" id="SoBuoiConLai" readonly class="form-control">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group" style="margin-bottom: 0px;">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label class="col-sm-6 control-label">Đơn giá</label>
+                                        <div class="col-sm-6">
+                                            <input type="text" id="DonGia" readonly class="form-control">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label class="col-sm-5 control-label" style="padding-right: 0px!important">Thành tiền còn lại</label>
+                                        <div class="col-sm-7">
+                                            <input type="text" id="ThanhTienConLai" readonly class="form-control">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group" style="margin-bottom: 0px;">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label class="col-sm-6 control-label">Ngày bắt đầu</label>
+                                        <div class="col-sm-6">
+                                            <input type="text" id="NgayBatDau" readonly class="form-control">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label class="col-sm-5 control-label" style="padding-right: 0px!important">Ngày học cuối</label>
+                                        <div class="col-sm-7">
+                                            <input type="text" id="NgayKetThuc" readonly class="form-control">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <h5><label class="col-sm-12 control-label text-bold" style="text-align:left">THÔNG TIN LỚP CHUYỂN ĐẾN</label></h5>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-sm-3 control-label">Lớp học</label>
+                                <div class="col-sm-9">
+                                    <div class="input-group">
+                                        <input type="text" readonly class="form-control" id="TIMKIEMLOPHOC">
+                                        <span class="input-group-btn">
+                                            <button type="button" class="btn btn-block btn-danger" onclick="TimKiemLop()">Tìm kiếm</button>
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-sm-3 control-label">Chương trình</label>
+                                <div class="col-sm-9">
+                                    <input type="text" class="form-control" readonly id="ChuongTrinhLopChuyenDen" placeholder="">
+                                </div>
+                            </div>
+                            <div class="form-group" style="margin-bottom: 0px;">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label class="col-sm-6 control-label">Buổi 1</label>
+                                        <div class="col-sm-6">
+                                            <input type="text" id="Buoi1LopChuyenDen" readonly class="form-control">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label class="col-sm-5 control-label" style="padding-right: 0px!important">Buổi 2</label>
+                                        <div class="col-sm-7">
+                                            <input type="text" id="Buoi2LopChuyenDen" readonly class="form-control">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group" style="margin-bottom: 0px;">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label class="col-sm-6 control-label">Số buổi nhận</label>
+                                        <div class="col-sm-6">
+                                            <input type="text" id="SoBuoiNhanLopChuyenDen" readonly class="form-control">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+
+                                </div>
+                            </div>
+                            <div class="form-group" style="margin-bottom: 0px;">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label class="col-sm-6 control-label">Đơn giá</label>
+                                        <div class="col-sm-6">
+                                            <input type="text" id="DonGiaLopChuyenDen" readonly class="form-control">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label class="col-sm-5 control-label" style="padding-right: 0px!important">Thành tiền</label>
+                                        <div class="col-sm-7">
+                                            <input type="text" id="ThanhTienLopChuyenDen" readonly class="form-control">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group" style="margin-bottom: 0px;">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label class="col-sm-6 control-label">Ngày bắt đầu</label>
+                                        <div class="col-sm-6">
+                                            <div id="NgayBatDauLopChuyenDen" style="width:115px"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label class="col-sm-5 control-label" style="padding-right: 0px!important">Ngày học cuối</label>
+                                        <div class="col-sm-7">
+                                            <div id="NgayKetThucLopChuyenDen" style="width:135px"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+        <!-- /.modal-content -->
+    </div>
+    <!-- /.modal-dialog -->
+</div>
+<div class="modal fade" id="modalxeplop" style="display: none;">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header bg-red">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">×</span>
+                </button>
+                <h4 class="modal-title">Chi tiết xếp lớp</h4>
+            </div>
+            <div class="modal-body">
+                <form class="form-horizontal">
+                    <!--Menu-->
+                    <!--Menu-->
+                    <div class="box-body">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label class="col-sm-3 control-label">Tên học viên</label>
+                                <div class="col-sm-9">
+                                    <input type="text" class="form-control" readonly id="TenHocVien1" placeholder="">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-sm-3 control-label">Số điện thoại</label>
+                                <div class="col-sm-9">
+                                    <input type="text" class="form-control" readonly id="SDT1" placeholder="">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label class="col-sm-3 control-label">Email</label>
+                                <div class="col-sm-9">
+                                    <input type="text" class="form-control" readonly id="Email1" placeholder="">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-sm-3 control-label">Địa chỉ</label>
+                                <div class="col-sm-9">
+                                    <input type="text" class="form-control" readonly id="DiaChi1" placeholder="">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- /.box-body -->
+                    <div class="box-body">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <h5><label class="col-sm-12 control-label text-bold" style="text-align:left">THÔNG TIN HỌC LỚP ĐANG HỌC</label></h5>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-sm-3 control-label">Tên lớp</label>
+                                <div class="col-sm-9">
+                                    <input type="text" class="form-control" readonly id="TenLop1" placeholder="">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-sm-3 control-label">Trung tâm</label>
+                                <div class="col-sm-9">
+                                    <input type="text" class="form-control" readonly id="TrungTam1" placeholder="">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-sm-3 control-label">Chương trình</label>
+                                <div class="col-sm-9">
+                                    <input type="text" class="form-control" readonly id="ChuongTrinh1" placeholder="">
+                                </div>
+                            </div>
+                            <div class="form-group" style="margin-bottom: 0px;">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label class="col-sm-6 control-label">Buổi 1</label>
+                                        <div class="col-sm-6">
+                                            <input type="text" id="Buoi11" readonly class="form-control">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label class="col-sm-5 control-label" style="padding-right: 0px!important">Buổi 2</label>
+                                        <div class="col-sm-7">
+                                            <input type="text" id="Buoi21" readonly class="form-control">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group" style="margin-bottom: 0px;">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label class="col-sm-6 control-label">Số buổi</label>
+                                        <div class="col-sm-6">
+                                            <input type="text" id="SoBuoi1" readonly class="form-control">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label class="col-sm-5 control-label" style="padding-right: 0px!important">Số buổi còn lại</label>
+                                        <div class="col-sm-7">
+                                            <input type="text" id="SoBuoiConLai1" readonly class="form-control">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group" style="margin-bottom: 0px;">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label class="col-sm-6 control-label">Đơn giá</label>
+                                        <div class="col-sm-6">
+                                            <input type="text" id="DonGia1" readonly class="form-control">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label class="col-sm-5 control-label" style="padding-right: 0px!important">Thành tiền còn lại</label>
+                                        <div class="col-sm-7">
+                                            <input type="text" id="ThanhTienConLai1" readonly class="form-control">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group" style="margin-bottom: 0px;">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label class="col-sm-6 control-label">Ngày bắt đầu</label>
+                                        <div class="col-sm-6">
+                                            <input type="text" id="NgayBatDau1" readonly class="form-control">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label class="col-sm-5 control-label" style="padding-right: 0px!important">Ngày học cuối</label>
+                                        <div class="col-sm-7">
+                                            <input type="text" id="NgayKetThuc1" readonly class="form-control">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <h5><label class="col-sm-12 control-label text-bold" style="text-align:left">THÔNG TIN LỚP CHUYỂN ĐẾN</label></h5>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-sm-3 control-label">Lớp học</label>
+                                <div class="col-sm-9">
+                                    <div class="input-group">
+                                        <input type="text" readonly class="form-control" id="TIMKIEMLOPHOC1">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-sm-3 control-label">Chương trình</label>
+                                <div class="col-sm-9">
+                                    <input type="text" class="form-control" readonly id="ChuongTrinhLopChuyenDen1" placeholder="">
+                                </div>
+                            </div>
+                            <div class="form-group" style="margin-bottom: 0px;">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label class="col-sm-6 control-label">Buổi 1</label>
+                                        <div class="col-sm-6">
+                                            <input type="text" id="Buoi1LopChuyenDen1" readonly class="form-control">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label class="col-sm-5 control-label" style="padding-right: 0px!important">Buổi 2</label>
+                                        <div class="col-sm-7">
+                                            <input type="text" id="Buoi2LopChuyenDen1" readonly class="form-control">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group" style="margin-bottom: 0px;">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label class="col-sm-6 control-label">Số buổi nhận</label>
+                                        <div class="col-sm-6">
+                                            <input type="text" id="SoBuoiNhanLopChuyenDen1" readonly class="form-control">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+
+                                </div>
+                            </div>
+                            <div class="form-group" style="margin-bottom: 0px;">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label class="col-sm-6 control-label">Đơn giá</label>
+                                        <div class="col-sm-6">
+                                            <input type="text" id="DonGiaLopChuyenDen1" readonly class="form-control">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label class="col-sm-5 control-label" style="padding-right: 0px!important">Thành tiền</label>
+                                        <div class="col-sm-7">
+                                            <input type="text" id="ThanhTienLopChuyenDen1" readonly class="form-control">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group" style="margin-bottom: 0px;">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label class="col-sm-6 control-label">Ngày bắt đầu</label>
+                                        <div class="col-sm-6">
+                                            <input type="text" id="NgayBatDauLopChuyenDen1" readonly class="form-control">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label class="col-sm-5 control-label" style="padding-right: 0px!important">Ngày học cuối</label>
+                                        <div class="col-sm-7">
+                                            <input type="text" id="NgayKetThucLopChuyenDen1" readonly class="form-control">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+        <!-- /.modal-content -->
+    </div>
+    <!-- /.modal-dialog -->
+</div>
+<div class="modal fade" id="modalDuyetXepLop" style="display: none;">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header bg-red">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">×</span>
+                </button>
+                <h4 class="modal-title">Duyệt xếp lớp</h4>
+            </div>
+            <div class="modal-body">
+                <div class="box-body">
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label class="col-sm-4 control-label">Tên người dùng</label>
+                            <div class="col-sm-8">
+                                <input type="text" value="@NguoiDung" id="TenNguoiDungXL" readonly class="form-control">
+                            </div>
+                        </div>
+                        <div class="form-group" style="margin-top:40px;">
+                            <label class="col-sm-4 control-label" style="padding-left:0px">Nội dung/Ghi chú</label>
+                            <div class="col-sm-8">
+                                <textarea class="form-control" rows="3" id="GhiChuDuyetXL" placeholder="Nội dung ..."></textarea>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label class="col-sm-4 control-label">ý kiến duyệt<span style="color:red">*</span></label>
+                            <div class="col-sm-8">
+                                <div id="YKienDuyetXL" style="width:100%"></div>
+                            </div>
+                        </div>
+                        <div class="form-group" style="margin-top:40px;">
+                            <div class="col-sm-8">
+                                <button id="LuuDuyetXL" style="width:90px;height:90px;border-radius:10px;border-color:red" onclick="LuuDuyetXepLop()" class="btn-danger">Duyệt</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div id="gridDanhSachLichSuDuyetXL">
+                </div>
+            </div>
+        </div>
+        <!-- /.modal-content -->
+    </div>
+    <!-- /.modal-dialog -->
+</div>
+<script>
+    var id_duyet = 0, a_dubao = 0, loaichuyenden = null, id_duyetxl=0;
+    var sobuoiconlai = 0,
+        buoi1 = 0,
+        buoi2 = 0,
+        j_hopdong,
+        a_hocsinhganquanly,
+        a_hosokhachhang,
+        a_kehoach,
+        a_kehoachden,
+        a_sanpham,
+        id_trungtam,
+        id_trungtamhocvien,
+        a_sanphamhocvien,
+        khuvuc = 0,
+        id_buoi1 = 0,
+        id_buoi2 = 0,
+        id_khuvuc = 0;
+    var tk_ec,
+        tk_ecleader,
+        tk_cm,
+        tk_cmleader,
+        tk_gdtt,
+        tk_gdv,
+        id_ttdi,
+        a_dubao_duyetxl,
+        id_ttden;
+    $(document).ready(function () {
+        $("#NgayKetThucLopChuyenDen").dxDateBox({
+            formatString: 'dd/MM/yyyy',
+            onValueChanged: function (data) {
+            },
+        }).dxDateBox("instance");
+        LoadDeNghiChuyenTrungTam();
+        LoadDeNghiXepLopTuTrungTamKhac();
+        LoadDanhMucDuyet();
+        LoadDanhMucDuyetXL();
+        LoadDanhSachHocVien(0);
+        $("#NgayBatDauLopChuyenDen").dxDateBox({
+            formatString: 'dd/MM/yyyy',
+            onChange: function (data) {
+                var dateBox = $("#NgayBatDauLopChuyenDen").dxDateBox("instance");
+                var dateBoxValue = dateBox.option('text');
+                $("#NgayBatDauLopChuyenDen").dxDateBox('instance').option('value', ConvertDate(dateBoxValue));
+            },
+            onValueChanged: function (data) {
+                ngaybatdaulopchuyenden = Globalize.format(data.value, 'yyyy-MM-dd');
+                $.ajax({
+                    url: '@Url.Action("LayNGayKetThucHoanChinh", "DangKyBaoLuu")',
+                    data: { ngaybd: ngaybatdaulopchuyenden, SoBuoi: sobuoiconlai, Buoi1: buoi1, Buoi2: buoi2, KhuVuc: id_khuvuc },
+                    type: 'GET',
+                    contentType: 'application/json',
+                    success: function (rs) {
+                        var kq = rs.split("/")[1] + "/" + rs.split("/")[0] + "/" + rs.split("/")[2];
+                        $("#NgayKetThucLopChuyenDen").dxDateBox('instance').option('value', kq);
+                    }
+                })
+            },
+        }).dxDateBox("instance");
+    })
+    function LoadDanhMucDuyet() {
+        $.ajax({
+            url: '@Url.Action("DM_DuyetThucHien", "DanhMuc")',
+            type: 'GET',
+            contentType: 'application/json',
+            success: function (rs) {
+                $("#YKienDuyet").dxSelectBox({
+                    items: rs,
+                    showPopupTitle: false,
+                    displayExpr: "TENDUYET",
+                    valueExpr: "ID_DUYET",
+                    searchEnabled: true,
+                    onValueChanged: function (e) {
+                        id_duyet = e.value;
+                    },
+                });
+            }
+        })
+    }
+    function LoadDanhMucDuyetXL() {
+        $.ajax({
+            url: '@Url.Action("DM_DuyetThucHien", "DanhMuc")',
+            type: 'GET',
+            contentType: 'application/json',
+            success: function (rs) {
+                $("#YKienDuyetXL").dxSelectBox({
+                    items: rs,
+                    showPopupTitle: false,
+                    displayExpr: "TENDUYET",
+                    valueExpr: "ID_DUYET",
+                    searchEnabled: true,
+                    onValueChanged: function (e) {
+                        id_duyetxl = e.value;
+                    },
+                });
+            }
+        })
+    }
+    function LoadDanhSachHocSinh(A_duBao, CHUYENDEN) {
+        if (CHUYENDEN != 1) {
+            DevExpress.ui.notify('Không thể tiếp nhận học sinh chuyển đi', 'error', 2000);
+            document.querySelector('.dx-toast-warning').style.transform = "translate(720px, 30px)";
+        }
+        else {
+            LoadChiTietTiepNhan(A_duBao);
+            LoadDanhSachLopHoc(0);
+            $('#ChiTietTiepNhan').modal('show');
+        }
+    }
+    function LoadChiTietTiepNhan(A_duBao) {
+        if (A_duBao > 0) {
+            $.ajax({
+                url: '@Url.Action("GETDANHSACHCHUYENLOPTUTTKHAC", "TiepNhanChuyenLop")',
+                type: 'GET',
+                data: { DuBao: A_duBao },
+                contentType: 'application/json',
+                success: function (rs) {
+                    if (rs.length > 0) {
+                        if (rs[0].ID_DUYET > 0) {
+                            $("#btnLuuTiepNhan").prop("disabled", false);
+                        }
+                        else {
+                            $("#btnLuuTiepNhan").prop("disabled", true);
+                        }
+                        khuvuc = rs[0].ID_KHUVUC;
+                        $('#TenHocVien').val(rs[0].TenHocVien);
+                        $('#SDT').val(rs[0].DIENTHOAI1);
+                        $('#TenLop').val(rs[0].TenLop);
+                        $('#TrungTam').val(rs[0].TrungTam);
+                        $('#ChuongTrinh').val(rs[0].ChuongTrinh);
+                        $('#Buoi1').val(rs[0].Buoi1);
+                        $('#Buoi2').val(rs[0].Buoi2);
+                        $('#SoBuoi').val(rs[0].SobuoiHoc);
+                        $('#SoBuoiConLai').val(Number(rs[0].SOBUOI));
+                        //sobuoiconlai = Number(rs[0].SobuoiHoc) - Number(rs[0].SOBUOIDAHOC);
+                        $('#DonGia').val(rs[0].DonGia);
+                        $('#ThanhTienConLai').val(Number(rs[0].DonGia) * Number(rs[0].SOBUOI));
+                        $('#NgayBatDau').val(rs[0].NGAYDUKIENHOC);
+                        $('#NgayKetThuc').val(rs[0].NGAYKETHUCHOC);
+                        $('#Email').val(rs[0].EMAIL);
+                        $('#DiaChi').val(rs[0].DiaChi);
+                        sobuoiconlai = Number(rs[0].SOBUOI);
+                        a_dubao = rs[0].A_TH_DUBAO;
+                        a_hosokhachhang = rs[0].A_HOSOKHACHHANG;
+                        a_kehoach = rs[0].A_KEHOACH;
+                        id_trungtamhocvien = rs[0].ID_TRUNGTAM == null ? 0 : rs[0].ID_TRUNGTAM;
+                        a_sanphamhocvien = rs[0].A_SANPHAM == null ? 0 : rs[0].A_SANPHAM;
+                        id_buoi1 = rs[0].ID_PHUONGTHUC;
+                        id_buoi2 = rs[0].ID_CONGCU;
+                        $('#SoBuoiNhanLopChuyenDen').val(rs[0].SOBUOI);
+                        $("#ThanhTienLopChuyenDen").val((Number(rs[0].DonGia) * Number(rs[0].SOBUOI)).toString().replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1,"));
+
+
+                        j_hopdong = rs[0].J_TH_HOPDONG;
+                        tk_ec = rs[0].EC;
+                        tk_ecleader = rs[0].EC_LEADER;
+                        tk_cm = rs[0].CM;
+                        tk_cmleader = rs[0].CMLEADER;
+                        tk_gdtt = rs[0].GDTT;
+                        tk_gdv = rs[0].GDV;
+                        id_ttdi = rs[0].ID_TRUNGTAM_DI;
+                        id_ttden = rs[0].ID_TRUNGTAM_DEN;
+                    }
+                }
+            })
+        }
+    }
+    function LoadDeNghiChuyenTrungTam() {
+        $.ajax({
+            url: '@Url.Action("GetDanhSachChuyenLop", "TiepNhanChuyenLop")',
+            type: 'GET',
+            contentType: 'application/json',
+            success: function (rs) {
+                var dataGrid = $("#gridDanhSachChuyenTrungTam").dxDataGrid({
+                    dataSource: rs,
+                    allowColumnReordering: false,
+                    allowColumnResizing: false,
+                    columnAutoWidth: false,
+                    columnFixing: {
+                        enabled: true
+                    },
+                    paging: {
+                        pageSize: 10
+                    },
+                    showColumnLines: true,
+                    showRowLines: true,
+                    filterRow: {
+                        visible: true,
+                        applyFilter: "auto"
+                    },
+                    columns: [
+                        {
+                            caption: "Tiếp nhận", alignment: 'center',
+                            width: 100,
+                            cellTemplate: function (container, options) {
+                                var dt = options.data;
+                                $('<a href="javascript:" onclick="LoadDanhSachHocSinh(' + dt.A_TH_DUBAO + ',' + dt.CHUYENDEN + ')"  class="text-green"><b>...</b></a>').appendTo(container);
+                            }
+                        },
+
+                        {
+                            dataField: "TENKHACHHANG",
+                            caption: "Tên học sinh",
+                            width: 150,
+                            alignment: "center"
+                        },
+
+                        {
+                            dataField: "TONGDOANHSOMUCTIEU",
+                            caption: "Số buổi",
+                            alignment: "center"
+                        },
+                        {
+                            dataField: "TENKEHOACH",
+                            caption: "Tên lớp",
+                            alignment: "center"
+                        },
+                        {
+                            dataField: "TENTRUNGTAMDI",
+                            caption: "Trung tâm đi",
+                            width: 200,
+                            alignment: "center"
+                        },
+                        {
+                            dataField: "TENTRUNGTAMDEN",
+                            caption: "Trung tâm đến",
+                            width: 200,
+                            alignment: "center"
+                        },
+                        {
+                            dataField: "TENLOAIKEHOACH",
+                            caption: "Chương trình",
+                            width: 100,
+                            alignment: "center"
+                        },
+                        {
+                            dataField: "NGAYLAM",
+                            caption: "Ngày đề nghị",
+                            width: 100,
+                            alignment: "center"
+                        },
+                        {
+                            dataField: "TENLYDOHV",
+                            caption: "Lý do",
+                            width: 200,
+                            alignment: "center"
+                        },
+                        {
+                            dataField: "TENDUYET",
+                            caption: "Trạng thái duyệt",
+                            alignment: "center"
+                        },
+                        {
+                            caption: "Gán quản lý", alignment: 'center',
+                            dataField: "A_TH_DUBAO",
+                            width: 100,
+                            cellTemplate: function (container, options) {
+                                var dt = options.data;
+                                //$('<a href="javascript:" onclick="LoadDanhSachHocSinh(\'' + dt.A_HOSOKHACHHANG + '\')"  class="text-green"><b>...</b></a>').appendTo(container);
+                                $('<a href="javascript:" onclick="GanQuanLyChoHocVien(' + dt.A_HOSOKHACHHANG + ',' + dt.ID_DUYET + ',' + dt.CHUYENDEN + ')"  class="text-green"><b>Gán</b></a>').appendTo(container);
+                            }
+                        },
+                        //{
+                        //    caption: "Duyệt", alignment: 'center',
+                        //    dataField: "A_TH_DUBAO",
+                        //    width: 100,
+                        //    cellTemplate: function (container, options) {
+                        //        var dt = options.data;
+                        //        //$('<a href="javascript:" onclick="LoadDanhSachHocSinh(\'' + dt.A_HOSOKHACHHANG + '\')"  class="text-green"><b>...</b></a>').appendTo(container);
+                        //        $('<a href="javascript:" onclick="DuyetTiepNhanChuyenLop1(' + options.value + ')"  class="text-green"><b>Duyệt</b></a>').appendTo(container);
+                        //    }
+                        //},
+                        {
+                            dataField: "TENCHUYENDEN",
+                            caption: "Loại chuyển",
+                            width: 200,
+                            alignment: "center"
+                        },
+                        {
+                            caption: "Duyệt", alignment: 'center',
+                            width: 100,
+                            cellTemplate: function (container, options) {
+                                var dt = options.data;
+                                $('<a href="javascript:" onclick="DuyetChuyenDenChuyenDi(' + dt.A_TH_DUBAO + ',' + dt.CHUYENDEN + ')"  class="text-green"><b>Duyệt</b></a>').appendTo(container);
+                            }
+                        },
+                    ],
+
+                }).dxDataGrid('instance');
+            },
+            error: function (a, b, c) {
+                DevExpress.ui.notify('Error ' + a.status + ': ' + a.statusText, 'error', 2000);
+            }
+
+        });
+    }
+    function DuyetChuyenDenChuyenDi(A_TH_DUBAO, CHUYENDEN) {
+        if (CHUYENDEN != 1) {
+            DevExpress.ui.notify('Chức năng duyệt chuyển đi không nằm ở form này!', 'warning', 2000);
+            document.querySelector('.dx-toast-warning').style.transform = "translate(720px, 30px)";
+        }
+        else {
+            $.getJSON('/TiepNhanChuyenLop/LoadNguoiDung', $.param({ DuBao: A_TH_DUBAO }), function (rs) {
+                if (rs.TENDTTC == undefined) {
+                    $('#TenNguoiDung').val(rs);
+                }
+                else {
+                    $('#TenNguoiDung').val(rs.TENDTTC);
+                }
+                $('#GhiChuDuyet').val(rs.YKIENBOSUNG);
+                $("#YKienDuyet").dxSelectBox('instance').option('value', rs.ID_DUYET);
+                if (rs.ID_DUYET > 0) {
+                    $("#LuuDuyet").prop("disabled", true);
+                }
+                else {
+                    $("#LuuDuyet").prop("disabled", false);
+                }
+            })
+            LoadDanhSachHocVien(A_TH_DUBAO);
+            $('#DuyetTiepNhan').modal('show');
+        }
+    }
+    function GanQuanLyChoHocVien(HocSinh, Duyet, CHUYENDI) {
+        if (CHUYENDI != 1)
+        {
+            DevExpress.ui.notify('Không thể gán quản lý cho học sinh chuyển đi!', 'warning', 2000);
+            document.querySelector('.dx-toast-warning').style.transform = "translate(720px, 30px)";
+        }
+        else if (Duyet != 1) {
+            DevExpress.ui.notify('Duyệt tiếp nhận trước khi gán quản lý cho học sinh!', 'warning', 2000);
+            document.querySelector('.dx-toast-warning').style.transform = "translate(720px, 30px)";
+        }
+        else {
+            a_hocsinhganquanly = HocSinh;
+            $.getJSON('/TiepNhanChuyenLop/LoadThongTinHocSinh', $.param({ HocSinh: HocSinh }), function (rs) {
+                $('#IDHOCSINHGAN').val(HocSinh);
+                $('#MaHocSinh').val(rs.MAKH);
+                $("#TenHocSinh").val(rs.TENKHACHHANG);
+                $('#ID_TrungTam').val(rs.TrungTam);
+                $("#MaTrungTam").val(rs.MA_DVCS);
+                loadsale(rs.ID_TRUNGTAM, rs.J_SALE_MAN)
+                loadcm(rs.ID_TRUNGTAM, rs.J_CSO)
+            })
+            $('#GanQuanLy').modal('show');
+        }
+    }
+    function loadsale(trungtam, j_saleman) {
+        $.ajax({
+            url: '@Url.Action("GetNhanSuTheoTrungTamSale", "HoSoHocVien")',
+            data: { TrungTam: Number(trungtam) },
+            success: function (rs) {
+                $("#SalePhuTrach").dxSelectBox({
+                    items: rs,
+                    showPopupTitle: false,
+                    displayExpr: "TENDTTC",
+                    valueExpr: "MADTTC",
+                    searchEnabled: true,
+                    value: j_saleman,
+                    onValueChanged: function (e) {
+                    },
+                });
+                $.ajax({
+                    url: '@Url.Action("GetECTheoTaiKhoan", "HoSoHocVien")?tk=' + j_saleman,
+                    success: function (rs) {
+                        if (rs != null) {
+                            $('#SalePhuTrach').dxSelectBox('instance').option('value', rs.MADTTC);
+                            if ($('#ChucVuTK').val() >= 186 || $('#ChucVuTK').val() == 181) {
+                                $('#SalePhuTrach').dxSelectBox('instance').option("disabled", false);
+                            } else {
+                                $('#SalePhuTrach').dxSelectBox('instance').option("disabled", true);
+                            }
+                        } else {
+                            $('#SalePhuTrach').dxSelectBox('instance').option("disabled", true);
+                        }
+                    }
+                })
+            }
+        });
+    }
+    function loadcm(trungtam, j_cso) {
+        $.ajax({
+            url: '@Url.Action("GetNhanSuTheoTrungTamCM", "HoSoHocVien")',
+            data: { TrungTam: Number(trungtam) },
+            success: function (rs) {
+                $("#CMPhuTrach").dxSelectBox({
+                    items: rs,
+                    showPopupTitle: false,
+                    displayExpr: "TENDTTC",
+                    valueExpr: "MADTTC",
+                    searchEnabled: true,
+                    value: j_cso,
+                    onValueChanged: function (e) {
+                    },
+                });
+                $.ajax({
+                    url: '@Url.Action("GetCMTheoTaiKhoan", "HoSoHocVien")?tk=' + j_cso,
+                    success: function (rs) {
+                        if (rs != null) {
+                            $('#CMPhuTrach').dxSelectBox('instance').option('value', rs.MADTTC);
+                            if ($('#ChucVuTK').val() == 185) {
+                                $('#CMPhuTrach').dxSelectBox('instance').option("disabled", false);
+                            } else {
+                                $('#CMPhuTrach').dxSelectBox('instance').option("disabled", true);
+                            }
+                        } else {
+                            $('#CMPhuTrach').dxSelectBox('instance').option("disabled", true);
+                        }
+                    }
+                })
+            }
+        });
+    }
+    function LuuCMSM() {
+        var result = DevExpress.ui.dialog.confirm('Bạn có muốn lưu kết quả không?', "Xác nhận thay đổi");
+        result.done(function (dialogResult) {
+            if (dialogResult) {
+                $.ajax({
+                    url: '@Url.Action("SaveHocVien", "TiepNhanChuyenLop")',
+                    data: JSON.stringify({
+                        khachhang: {
+                            A_HOSOKHACHHANG: $('#IDHOCSINHGAN').val(),
+                            J_SALE_MAN: $('#SalePhuTrach').dxSelectBox('instance').option('value'), J_CSO: $('#CMPhuTrach').dxSelectBox('instance').option('value'),
+                            ID_TRUNGTAM: $('#ID_TrungTam').dxSelectBox('instance').option('value'), MATRUNGTAM: $('#MaTrungTam').val()
+                        }
+                    }),
+                    type: 'POST',
+                    contentType: 'application/json; charset=utf-8',
+                    success: function (data) {
+
+                        idkhachhang = data;
+                        DevExpress.ui.notify('Cập nhật thành công', 'success', 2000);
+                    }
+                })
+            }
+            else {
+            }
+        });
+    }
+    function DuyetTiepNhanChuyenLop1(obj) {
+        $.getJSON('/TiepNhanChuyenLop/LoadNguoiDung', $.param({ DuBao: obj }), function (rs) {
+            if (rs.TENDTTC == undefined) {
+                $('#TenNguoiDung').val(rs);
+            }
+            else {
+                $('#TenNguoiDung').val(rs.TENDTTC);
+            }
+            $('#GhiChuDuyet').val(rs.YKIENBOSUNG);
+            $("#YKienDuyet").dxSelectBox('instance').option('value', rs.ID_DUYET);
+            if (rs.ID_DUYET > 0) {
+                $("#LuuDuyet").prop("disabled", true);
+            }
+            else {
+                $("#LuuDuyet").prop("disabled", false);
+            }
+        })
+        LoadDanhSachHocVien(obj);
+        $('#ChiTietTiepNhan').modal('hide');
+        $('#DuyetTiepNhan').modal('show');
+    }
+    function DuyetTiepNhanChuyenLop() {
+        $.getJSON('/TiepNhanChuyenLop/LoadNguoiDung', $.param({ DuBao: a_dubao }), function (rs) {
+            if (rs.TENDTTC == undefined) {
+                $('#TenNguoiDung').val(rs);
+            }
+            else {
+                $('#TenNguoiDung').val(rs.TENDTTC);
+            }
+            $('#GhiChuDuyet').val(rs.YKIENBOSUNG);
+            $("#YKienDuyet").dxSelectBox('instance').option('value', rs.ID_DUYET);
+            if (rs.ID_DUYET > 0) {
+                $("#LuuDuyet").prop("disabled", true);
+            }
+            else {
+                $("#LuuDuyet").prop("disabled", false);
+            }
+        })
+        LoadDanhSachHocVien(a_dubao);
+        $('#ChiTietTiepNhan').modal('hide');
+        $('#DuyetTiepNhan').modal('show');
+    }
+    function LoadDanhSachHocVien(obj) {
+        $.ajax({
+            url: '@Url.Action("GetDanhSachLichSuDuyet", "TiepNhanChuyenLop")',
+            type: 'GET',
+            data: { DuBao: obj },
+            contentType: 'application/json',
+            success: function (rs) {
+                var dataGrid = $("#gridDanhSachLichSuDuyet").dxDataGrid({
+                    dataSource: rs,
+                    allowColumnReordering: false,
+                    allowColumnResizing: false,
+                    columnAutoWidth: false,
+                    columnFixing: {
+                        enabled: true
+                    },
+                    paging: {
+                        pageSize: 10
+                    },
+                    showColumnLines: true,
+                    showRowLines: true,
+                    filterRow: {
+                        visible: true,
+                        applyFilter: "auto"
+                    },
+                    columns: [
+                        {
+                            caption: "Ngày duyệt",
+                            dataField: "NGAYDUYET",
+                            width: 200,
+                        }, {
+                            caption: "Người duyệt",
+                            dataField: "TENDTTC",
+                            width: 200,
+                        }, {
+                            dataField: "TENDUYET",
+                            caption: "Trạng thái",
+                            width: 200,
+                        },
+                        {
+                            dataField: "YKIENBOSUNG",
+                            caption: "Ý kiến duyệt",
+                            width: 200,
+                        },
+                    ],
+
+                }).dxDataGrid('instance');
+            },
+            error: function (a, b, c) {
+                DevExpress.ui.notify('Error ' + a.status + ': ' + a.statusText, 'error', 2000);
+            }
+
+        });
+    }
+    function LuuDuyetTiepNhanChuyenLop() {
+        var formData = new FormData();
+        formData.append("A_THDUBAO", a_dubao);
+        formData.append("IDDuyet", $("#YKienDuyet").dxSelectBox('instance').option('value'));
+        formData.append("NoiDung", $('#GhiChuDuyet').val());
+        var result = DevExpress.ui.dialog.confirm('Bạn có chắc chắn lưu không?', "Confirm changes");
+        result.done(function (dialogResult) {
+            if (dialogResult) {
+                $.ajax({
+                    type: "POST",
+                    url: '@Url.Action("SaveDuyetChuyenTrungTam", "TiepNhanChuyenLop")',
+                    dataType: 'json',
+                    contentType: false,
+                    processData: false,
+                    data: formData,
+                    beforeSend: function () { window.parent.$('#loading').show(); },
+                    success: function (data) {
+                        window.parent.$("#loading").fadeOut("fast");
+                        if (data > 0) {
+                            $("#btnLuu").prop("disabled", true);
+                            DevExpress.ui.notify('Cập nhật thành công', 'success', 2000);
+                            LoadDanhSachHocVien(a_dubao);
+                        }
+                        else {
+                            DevExpress.ui.notify('Chưa cập nhật được', 'error', 2000);
+                        }
+                    }
+                })
+            }
+        });
+    }
+    function ConvertDate(obj) {
+        var d = new Date(obj.split("/").reverse().join("-"));
+        var dd = d.getDate();
+        var mm = d.getMonth() + 1;
+        var yy = d.getFullYear();
+        return mm + "/" + dd + "/" + yy;
+    }
+    function TimKiemLop() {
+        $('#ChiTietTiepNhan').modal('hide');
+        $('#TimLopHoc').modal('show');
+        LoadDanhSachLop();
+    }
+    function LoadDanhSachLopHoc(lophoc) {
+        $('#TimLopHoc').modal('hide');
+        $('#ChiTietTiepNhan').modal('show');
+        $.ajax({
+            url: '@Url.Action("LoadDanhSachLop", "TiepNhanChuyenLop")',
+            type: 'GET',
+            data: { LopHoc: lophoc },
+            contentType: 'application/json',
+            success: function (rs) {
+                if (rs.length > 0) {
+                    $('#TIMKIEMLOPHOC').val(rs[0].TENLOP);
+                    $('#ChuongTrinhLopChuyenDen').val(rs[0].CHUONGTRINH);
+                    $('#Buoi1LopChuyenDen').val(rs[0].BUOI1);
+                    $('#Buoi2LopChuyenDen').val(rs[0].BUOI2);
+                    //$('#SoBuoiNhanLopChuyenDen').val(Number(sobuoiconlai));
+                    $('#DonGiaLopChuyenDen').val(rs[0].DONGIA);
+                    //$('#ThanhTienLopChuyenDen').val(Number(rs[0].DONGIA) * Number(sobuoiconlai));
+                    buoi1 = rs[0].ID_PHUONGTHUC;
+                    buoi2 = rs[0].ID_CONGCU;
+                    id_khuvuc = rs[0].ID_KHUVUC;
+                    a_sanpham = rs[0].A_SANPHAM == null ? 0 : rs[0].A_SANPHAM;
+                    id_trungtam = rs[0].ID_TRUNGTAM == null ? 0 : rs[0].ID_TRUNGTAM;
+                    a_kehoachden = lophoc;
+                }
+            }
+        })
+    }
+    function Luu() {
+        $.ajax({
+            url: '@Url.Action("CapNhatDangKyChuyenLopCungTrungTam", "TiepNhanChuyenLop")',
+            data: {
+                J_HOSOKHACHHANG: a_hosokhachhang,
+                J_KEHOACH: a_kehoachden,
+                NGAYGIAOHANG: Globalize.format($("#NgayKetThucLopChuyenDen").dxDateBox('instance').option('value'), 'yyyy-MM-dd'),
+                TONGTIEN_DH: $('#ThanhTienLopChuyenDen').val().replace(/,/g, ''),
+                SOBUOI: $('#SoBuoiNhanLopChuyenDen').val(),
+                DONGIA: $('#DonGiaLopChuyenDen').val(),
+                ID_BOPHAN: id_trungtam,
+                GHICHU: "",
+                J_SANPHAM: a_sanpham,
+                NGAYDUKIENHOC: Globalize.format($("#NgayBatDauLopChuyenDen").dxDateBox('instance').option('value'), 'yyyy-MM-dd'),
+                J_HOPDONG: j_hopdong,
+                TK_EC: tk_ec,
+                TK_EC_LEADER: tk_ecleader,
+                TK_CM: tk_cm,
+                TK_CM_LEADER: tk_cmleader,
+                TK_GDTT: tk_gdtt,
+                TK_GDV: tk_gdv,
+                ID_TRUNGTAM_DI: id_ttdi,
+                ID_TRUNGTAM_DEN:id_ttden
+            },
+            beforeSend: function () { window.parent.$('#loading').show(); },
+            success: function (data) {
+                window.parent.$("#loading").fadeOut("fast");
+                if (!isNaN(data)) {
+                    if (data == 1) {
+                        $("#btnLuuTiepNhan").prop("disabled", true);
+                        DevExpress.ui.notify('Cập nhật thành công', 'success', 2000);
+                        document.querySelector('.dx-toast-warning').style.transform = "translate(720px, 30px)";
+                    }
+                }
+                else {
+                    DevExpress.ui.notify('Chưa cập nhật được', 'error', 2000);
+                    document.querySelector('.dx-toast-warning').style.transform = "translate(720px, 30px)";
+                }
+            }
+        })
+    }
+    function LoadDanhSachLop() {
+        $.ajax({
+            url: '@Url.Action("GetDanhSachLopHoc", "TiepNhanChuyenLop")',
+            type: 'GET',
+            contentType: 'application/json',
+            success: function (rs) {
+                var dataGrid = $("#gridDanhSachHocLopHoc").dxDataGrid({
+                    dataSource: rs,
+                    allowColumnReordering: false,
+                    allowColumnResizing: false,
+                    columnAutoWidth: false,
+                    columnFixing: {
+                        enabled: true
+                    },
+                    paging: {
+                        pageSize: 10
+                    },
+                    showColumnLines: true,
+                    showRowLines: true,
+                    filterRow: {
+                        visible: true,
+                        applyFilter: "auto"
+                    },
+                    columns: [
+                        {
+                            caption: "Chọn", alignment: 'center',
+                            width: 100,
+                            cellTemplate: function (container, options) {
+                                var dt = options.data;
+                                $('<a href="javascript:" onclick="LoadDanhSachLopHoc(\'' + dt.A_KEHOACH + '\')"  class="text-green"><b>...</b></a>').appendTo(container);
+                            }
+                        },
+                          {
+                              dataField: "TENLOP",
+                              caption: "Tên lớp",
+                              width: 250,
+                          }, {
+                              caption: "Mã trung tâm",
+                              dataField: "TRUNGTAM",
+                              width: 250,
+                          }, {
+                              caption: "Số buổi",
+                              dataField: "SOBUOI",
+                              width: 120,
+                          }, {
+                              dataField: "BUOI1",
+                              caption: "Buổi 1",
+                              width: 100,
+                          },
+                           {
+                               dataField: "BUOI2",
+                               caption: "Buổi 2",
+                               width: 100,
+                           },
+                          {
+                              dataField: "NGAYBATDAU",
+                              caption: "Ngày bắt đầu",
+                              width: 120,
+                          }, {
+                              dataField: "CHUONGTRINH",
+                              caption: "Chương trình",
+                              width: 200,
+                          },
+                          {
+                              dataField: "TENNHOMSANPHAM",
+                              caption: "Nhóm sản phẩm",
+                              width: 120,
+                          },
+                          {
+                              caption: "Đơn giá",
+                              dataField: "DONGIA",
+                              width: 120,
+                          },
+                    ],
+
+                }).dxDataGrid('instance');
+            },
+            error: function (a, b, c) {
+                DevExpress.ui.notify('Error ' + a.status + ': ' + a.statusText, 'error', 2000);
+            }
+
+        });
+    }
+    function LoadDanhSachHocVien(obj) {
+        $.ajax({
+            url: '@Url.Action("GetDanhSachLichSuDuyet", "TiepNhanChuyenLop")',
+            type: 'GET',
+            data: { DuBao: obj },
+            contentType: 'application/json',
+            success: function (rs) {
+                var dataGrid = $("#gridDanhSachLichSuDuyet").dxDataGrid({
+                    dataSource: rs,
+                    allowColumnReordering: false,
+                    allowColumnResizing: false,
+                    columnAutoWidth: false,
+                    columnFixing: {
+                        enabled: true
+                    },
+                    paging: {
+                        pageSize: 10
+                    },
+                    showColumnLines: true,
+                    showRowLines: true,
+                    filterRow: {
+                        visible: true,
+                        applyFilter: "auto"
+                    },
+                    columns: [
+                        {
+                            caption: "Ngày duyệt",
+                            dataField: "NGAYDUYET",
+                            width: 200,
+                        }, {
+                            caption: "Người duyệt",
+                            dataField: "TENDTTC",
+                            width: 200,
+                        }, {
+                            dataField: "TENDUYET",
+                            caption: "Trạng thái",
+                            width: 200,
+                        },
+                        {
+                            dataField: "YKIENBOSUNG",
+                            caption: "Ý kiến duyệt",
+                            width: 200,
+                        },
+                    ],
+
+                }).dxDataGrid('instance');
+            },
+            error: function (a, b, c) {
+                DevExpress.ui.notify('Error ' + a.status + ': ' + a.statusText, 'error', 2000);
+            }
+
+        });
+    }
+    //danh sach de nghi duyet xep lop
+    function LoadDeNghiXepLopTuTrungTamKhac() {
+        $.ajax({
+            url: '@Url.Action("GetDanhSachDeNghiXepLopTuTTKhac", "TiepNhanChuyenLop")',
+            type: 'GET',
+            contentType: 'application/json',
+            success: function (rs) {
+                var dataGrid = $("#gridDanhSachChoDuyetXepLop").dxDataGrid({
+                    dataSource: rs,
+                    allowColumnReordering: false,
+                    allowColumnResizing: false,
+                    columnAutoWidth: false,
+                    columnFixing: {
+                        enabled: true
+                    },
+                    paging: {
+                        pageSize: 10
+                    },
+                    showColumnLines: true,
+                    showRowLines: true,
+                    filterRow: {
+                        visible: true,
+                        applyFilter: "auto"
+                    },
+                    columns: [
+                        {
+                            caption: "Chi tiết", alignment: 'center',
+                            width: 100,
+                            cellTemplate: function (container, options) {
+                                var dt = options.data;
+                                $('<a href="javascript:" onclick="LoadChiTietDuyetXepLop(' + dt.A_TH_DUBAO + ')"  class="text-green"><b>...</b></a>').appendTo(container);
+                            }
+                        },
+
+                        {
+                            dataField: "TENKHACHHANG",
+                            caption: "Tên học sinh",
+                            width: 150,
+                            alignment: "center"
+                        },
+
+                        {
+                            dataField: "SOBUOI",
+                            caption: "Số buổi",
+                            width: 100,
+                            alignment: "center"
+                        },
+                        {
+                            dataField: "TENKEHOACH",
+                            caption: "Tên lớp",
+                            width: 100,
+                            alignment: "center"
+                        },
+                        {
+                            dataField: "CHUONGTRINH",
+                            caption: "Chương trình",
+                            width: 100,
+                            alignment: "center"
+                        },
+                        {
+                            dataField: "TENTRUNGTAMDI",
+                            caption: "Trung tâm chuyển",
+                            width: 200,
+                            alignment: "center"
+                        },
+                        {
+                            dataField: "TENTRUNGTAMDEN",
+                            caption: "Trung tâm",
+                            width: 200,
+                            alignment: "center"
+                        },
+                        {
+                            dataField: "NGAYDUKIENHOC",
+                            caption: "Ngày bắt đầu",
+                            width: 100,
+                            alignment: "center"
+                        },
+                        {
+                            dataField: "TK_CM",
+                            caption: "CM",
+                            width: 100,
+                            alignment: "center"
+                        },
+                        {
+                            dataField: "TK_EC",
+                            caption: "EC",
+                            width: 100,
+                            alignment: "center"
+                        },
+                        //{
+                        //    dataField: "TENDUYET",
+                        //    caption: "Trạng thái duyệt",
+                        //    alignment: "center"
+                        //},
+                        //{
+                        //    caption: "Gán quản lý", alignment: 'center',
+                        //    dataField: "A_TH_DUBAO",
+                        //    width: 100,
+                        //    cellTemplate: function (container, options) {
+                        //        var dt = options.data;
+                        //        //$('<a href="javascript:" onclick="LoadDanhSachHocSinh(\'' + dt.A_HOSOKHACHHANG + '\')"  class="text-green"><b>...</b></a>').appendTo(container);
+                        //        $('<a href="javascript:" onclick="GanQuanLyChoHocVien(' + dt.A_HOSOKHACHHANG + ',' + dt.ID_DUYET + ')"  class="text-green"><b>Gán</b></a>').appendTo(container);
+                        //    }
+                        //},
+                        //{
+                        //    dataField: "TENCHUYENDEN",
+                        //    caption: "Loại chuyển",
+                        //    width: 200,
+                        //    alignment: "center"
+                        //},
+                        {
+                            caption: "Duyệt", alignment: 'center',
+                            width: 100,
+                            cellTemplate: function (container, options) {
+                                var dt = options.data;
+                                $('<a href="javascript:" onclick="DuyetXepLop('+ dt.A_TH_DUBAO + ')"  class="text-green"><b>Duyệt</b></a>').appendTo(container);
+                            }
+                        },
+                    ],
+
+                }).dxDataGrid('instance');
+            },
+            error: function (a, b, c) {
+                DevExpress.ui.notify('Error ' + a.status + ': ' + a.statusText, 'error', 2000);
+            }
+
+        });
+    }
+    function LoadChiTietDuyetXepLop(A_duBao) {
+        $('#modalxeplop').modal('show');
+        LoadChiTietXepLop(A_duBao);
+    }
+    function LoadChiTietXepLop(A_duBao) {
+        if (A_duBao > 0) {
+            $.ajax({
+                url: '@Url.Action("GETCHITIETXEPLOP", "TiepNhanChuyenLop")',
+                type: 'GET',
+                data: { DuBao: A_duBao },
+                contentType: 'application/json',
+                success: function (rs) {
+                    if (rs.length > 0) {
+                        $('#TenHocVien1').val(rs[0].TENHOCVIEN);
+                        $('#SDT1').val(rs[0].DIENTHOAI1);
+                        $('#TenLop1').val(rs[0].TENLOP);
+                        $('#TrungTam1').val(rs[0].TRUNGTAMTTCHUYEN);
+                        $('#ChuongTrinh1').val(rs[0].CHUONGTRINH);
+                        $('#Buoi11').val(rs[0].BUOI1);
+                        $('#Buoi21').val(rs[0].BUOI2);
+                        $('#SoBuoi1').val(rs[0].SOBUOIHOC);
+                        $('#SoBuoiConLai1').val(Number(rs[0].SOBUOITTCHUYEN));
+                        $('#DonGia1').val(rs[0].DONGIA);
+                        $('#ThanhTienConLai1').val(Number(rs[0].THANHTIENTTCHUYEN));
+                        $('#NgayBatDau1').val(rs[0].NGAYDUKIENHOC);
+                        $('#NgayKetThuc1').val(rs[0].NGAYKETHUCHOC);
+                        $('#Email1').val(rs[0].EMAIL);
+                        $('#DiaChi1').val(rs[0].DIACHI);
+                        $('#SoBuoiNhanLopChuyenDen1').val(rs[0].SOBUOITTCHUYEN);
+                        $("#ThanhTienLopChuyenDen1").val((Number(rs[0].THANHTIENTTCHUYEN)).toString().replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1,"));
+
+
+                        $('#TIMKIEMLOPHOC1').val(rs[0].TENKEHOACH);
+                        $('#ChuongTrinhLopChuyenDen1').val(rs[0].CHUONGTRINHCHUYEN);
+                        $('#Buoi1LopChuyenDen1').val(rs[0].BUOITTCHUYEN1);
+                        $('#Buoi2LopChuyenDen1').val(rs[0].BUOITTCHUYEN2);
+
+                        $('#DonGiaLopChuyenDen1').val(rs[0].DONGIATTCHUYEN);
+                        $('#NgayBatDauLopChuyenDen1').val(rs[0].NGAYDUKIENHOCTTCHUYEN);
+                        $('#NgayKetThucLopChuyenDen1').val(rs[0].NGAYKETHUCHOCTTCHUYEN);
+                    }
+                }
+            })
+        }
+    }
+    function DuyetXepLop(obj) {
+        a_dubao_duyetxl = obj;
+        $.getJSON('/TiepNhanChuyenLop/LoadNguoiDung', $.param({ DuBao: obj }), function (rs) {
+            if (rs.TENDTTC == undefined) {
+                $('#TenNguoiDungXL').val(rs);
+            }
+            else {
+                $('#TenNguoiDungXL').val(rs.TENDTTC);
+            }
+            $('#GhiChuDuyetXL').val(rs.YKIENBOSUNGCHUYEN);
+            $("#YKienDuyetXL").dxSelectBox('instance').option('value', rs.ID_DUYETCHUYEN);
+            if (rs.ID_DUYETCHUYEN > 0) {
+                $("#LuuDuyetXL").prop("disabled", true);
+            }
+            else {
+                $("#LuuDuyetXL").prop("disabled", false);
+            }
+        })
+        LoadDanhSachDuyetXepLop(obj);
+        $('#modalDuyetXepLop').modal('show');
+    }
+    function LuuDuyetXepLop() {
+        var formData = new FormData();
+        formData.append("A_THDUBAO", a_dubao_duyetxl);
+        formData.append("IDDuyet", $("#YKienDuyetXL").dxSelectBox('instance').option('value'));
+        formData.append("NoiDung", $('#GhiChuDuyetXL').val());
+        var result = DevExpress.ui.dialog.confirm('Bạn có chắc chắn lưu không?', "Confirm changes");
+        result.done(function (dialogResult) {
+            if (dialogResult) {
+                $.ajax({
+                    type: "POST",
+                    url: '@Url.Action("SaveDuyetXepLop", "TiepNhanChuyenLop")',
+                    dataType: 'json',
+                    contentType: false,
+                    processData: false,
+                    data: formData,
+                    beforeSend: function () { window.parent.$('#loading').show(); },
+                    success: function (data) {
+                        window.parent.$("#loading").fadeOut("fast");
+                        if (data > 0) {
+                            $("#LuuDuyetXL").prop("disabled", true);
+                            DevExpress.ui.notify('Cập nhật thành công', 'success', 2000);
+                            document.querySelector('.dx-toast-warning').style.transform = "translate(720px, 30px)";
+                            LoadDanhSachDuyetXepLop(a_dubao_duyetxl);
+                        }
+                        else {
+                            DevExpress.ui.notify('Chưa cập nhật được', 'error', 2000);
+                            document.querySelector('.dx-toast-warning').style.transform = "translate(720px, 30px)";
+                        }
+                    }
+                })
+            }
+        });
+    }
+    function LoadDanhSachDuyetXepLop(obj) {
+        $.ajax({
+            url: '@Url.Action("GetDanhSachLichSuDuyet", "TiepNhanChuyenLop")',
+            type: 'GET',
+            data: { DuBao: obj},
+            contentType: 'application/json',
+            success: function (rs) {
+                var dataGrid = $("#gridDanhSachLichSuDuyetXL").dxDataGrid({
+                    dataSource: rs,
+                    allowColumnReordering: false,
+                    allowColumnResizing: false,
+                    columnAutoWidth: false,
+                    columnFixing: {
+                        enabled: true
+                    },
+                    paging: {
+                        pageSize: 10
+                    },
+                    showColumnLines: true,
+                    showRowLines: true,
+                    filterRow: {
+                        visible: true,
+                        applyFilter: "auto"
+                    },
+                    columns: [
+                        {
+                            caption: "Ngày duyệt",
+                            dataField: "NGAYDUYET",
+                            width: 200,
+                        }, {
+                            caption: "Người duyệt",
+                            dataField: "TENDTTC",
+                            width: 200,
+                        }, {
+                            dataField: "TENDUYET",
+                            caption: "Trạng thái",
+                            width: 200,
+                        },
+                        {
+                            dataField: "YKIENBOSUNG",
+                            caption: "Ý kiến duyệt",
+                            width: 200,
+                        },
+                    ],
+
+                }).dxDataGrid('instance');
+            },
+            error: function (a, b, c) {
+                DevExpress.ui.notify('Error ' + a.status + ': ' + a.statusText, 'error', 2000);
+            }
+
+        });
+    }
+</script>

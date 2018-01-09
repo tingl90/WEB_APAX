@@ -1,0 +1,575 @@
+﻿@{
+    ViewBag.Title = "DangKyBAoLuu";
+    Layout = "~/Views/Shared/_Newlayout.cshtml";
+}
+@using APAX.Models;
+<script src="~/Content/plugins/jQuery/dx.all.js"></script>
+<script src="~/Content/plugins/jQuery/jszip.min.js"></script>
+<section class="content">
+    <div class="box box-danger">
+        <div class="box-header with-border">
+            <h3 class="box-title">@ResourceManager.GetString("DANGKYBAOLUU")</h3>
+            <div class="col-md-6 pull-right">
+                <div class="col-md-3">
+                    <button type="button" class="btn btn-block btn-danger" onclick="ThemMoi()">Thêm</button>
+                </div>
+                <div class="col-md-3">
+                    <button type="button" class="btn btn-block btn-danger" onclick="LuuDangKy()">Bảo lưu</button>
+                </div>
+            </div>
+        </div>
+        <div class="box-body">
+            <form method="post" id="frChiTietDangKyBaoLuu" class="form-horizontal" role="form" data-parsley-validate>
+                <div class="row">
+                    <div class="col-md-6">
+                        <form class="form-horizontal">
+                            <div class="box-body">
+                                <div class="form-group">
+                                    <label for="inputEmail3" class="col-sm-3 control-label">Tìm học viên</label>
+                                    <div class="col-sm-9">
+                                        <div class="input-group input-group-sm">
+                                            @Html.DevExpress().TextBox(
+                                            DateEditProperties =>
+                                            {
+                                                DateEditProperties.Name = "TIMKIEMTENHOCSINH";
+                                                DateEditProperties.Width = Unit.Percentage(100);
+                                                DateEditProperties.Properties.MaxLength = 500;
+                                                DateEditProperties.ControlStyle.CssClass = "form-control";
+                                            }
+                                            ).GetHtml()
+                                            <span class="input-group-btn">
+                                                <button type="button" class="btn btn-block btn-danger" onclick="TimKiemHocSinh()">Tìm kiếm</button>
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="inputEmail3" class="col-sm-3 control-label">@ResourceManager.GetString("MAHOCSINH")</label>
+                                    <div class="col-sm-9">
+                                        <input type="text" class="form-control" id="MaHocSinh">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="inputEmail3" class="col-sm-3 control-label">@ResourceManager.GetString("TENHOCSINH")</label>
+                                    <div class="col-sm-9">
+                                        <input type="text" class="form-control" id="TenHocSinh">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="inputEmail3" class="col-sm-3 control-label">@ResourceManager.GetString("TENLOP")</label>
+                                    <div class="col-sm-9">
+                                        <input type="text" class="form-control" id="TenLop">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="inputEmail3" class="col-sm-3 control-label">@ResourceManager.GetString("TRUNGTAM")</label>
+                                    <div class="col-sm-9">
+                                        <input type="text" class="form-control" id="TrungTam">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="inputEmail3" class="col-sm-3 control-label">@ResourceManager.GetString("CHUONGTRINH")</label>
+                                    <div class="col-sm-9">
+                                        <input type="text" class="form-control" id="ChuongTrinh">
+                                    </div>
+                                </div>
+                                <div class="form-group" style="margin-bottom: 0px;">
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label for="inputEmail3" class="col-sm-6 control-label">Buổi 1</label>
+                                            <div class="col-sm-6" style="padding-right: 0px;">
+                                                <input type="text" class="form-control" id="Buoi1">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label for="inputEmail3" class="col-sm-5 control-label">Buổi 2</label>
+                                            <div class="col-sm-7">
+                                                <input type="text" class="form-control" id="Buoi2">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group" style="margin-bottom: 0px;">
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label for="inputEmail3" class="col-sm-6 control-label">Số buổi</label>
+                                            <div class="col-sm-6" style="padding-right: 0px;">
+                                                <input type="text" class="form-control" id="SoBuoi">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+
+                                    </div>
+                                </div>
+                                <div class="form-group" style="margin-bottom: 0px;">
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label for="inputPassword3" class="col-sm-6 control-label" style="padding-right: 0px;">Ngày bắt đầu học</label>
+                                            <div class="col-sm-6" style="padding-right: 0px;">
+                                                <input type="text" class="form-control" id="NgayBatDau">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label for="inputPassword3" class="col-sm-5 control-label" style="padding-right: 0px!important">@ResourceManager.GetString("NGAYKETTHUC")</label>
+                                            <div class="col-sm-7">
+                                                <input type="text" class="form-control" id="NgayKetThuc">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </form>
+                    </div>
+                    <div class="col-md-6">
+                        <form class="form-horizontal">
+                            <div class="box-body">
+
+                                <div class="form-group">
+                                    <label for="inputPassword3" class="col-sm-3 control-label">Lý do bảo lưu</label>
+                                    <div class="col-sm-9">
+                                        <textarea class="form-control" rows="5" placeholder="Nội dung ..." id="GhiChu"></textarea>
+
+                                    </div>
+                                </div>
+                                <div class="form-group" style="margin-bottom: 0px;">
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label for="inputPassword3" class="col-sm-6 control-label" style="padding-right: 0px;">Số buổi bảo lưu</label>
+                                            <div class="col-sm-6" style="padding-right: 0px;">
+                                                <input type="text" class="form-control" id="SoBuoiBaoLuu">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+
+                                    </div>
+                                </div>
+                                <div class="form-group" style="margin-bottom: 0px;">
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label for="inputPassword3" class="col-sm-6 control-label" style="padding-right: 0px;">Bảo lưu từ ngày</label>
+                                            <div class="col-sm-6" style="padding-right: 0px;">
+                                                @Html.DevExpress().DateEdit(settings =>
+                                                {
+                                                    settings.Width = Unit.Percentage(100);
+                                                    settings.Name = "NGAYBATDAUBL";
+                                                    settings.ControlStyle.CssClass = "form-control";
+                                                    //settings.Properties.ClientSideEvents.ValueChanged = "function(e,c){OnValueChangedNgayBatDauBL(e)}";
+                                                }).GetHtml()
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <div class="box box-danger">
+        <style>
+            .dx-header-row {
+                background-color: #BF1E2D;
+                color: #fff;
+            }
+
+            .dx-datagrid .dx-header-filter {
+                color: #fff;
+            }
+        </style>
+        <div class="box-header">
+            <h3 class="box-title">Danh Sách học sinh bảo lưu</h3>
+        </div>
+        <div class="box-body">
+            <div id="gridDSBaoLuu">
+            </div>
+        </div>
+    </div>
+</section>
+
+<div id="DanhSachHocSinh" class="modal face" role="dialog">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">@ResourceManager.GetString("TimHocSinh").</h4>
+            </div>
+            <div class="modal-body">
+                <div class="box-body">
+                    <div id="gridDanhSachHocSinh">
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- /.modal-content -->
+    </div>
+    <!-- /.modal-dialog -->
+</div>
+
+<!--TIM KIEM-->
+
+<script>
+    @*$(function () {
+        $.getJSON('/QLHocSinh/LoadClassInfo', $.param({ ID: '@Model.A_KEHOACH' }, true), function (data) {
+            ID_PHUONGTHUC.SetValue(data.ID_PHUONGTHUC);
+            ID_CONGCU.SetValue(data.ID_CONGCU);
+            SOBUOI.SetValue(data.TONGDOANHSOMUCTIEU);
+            NGAYBATDAU.SetDate(new Date(parseInt(data.NGAYKEHOACHTU.substr(6, 13))));
+            NGAYKETTHUC.SetDate(new Date(parseInt(data.NGAYKEHOACHDEN.substr(6, 13))));
+            //ASPxClientComboBox.Cast('BUOI1').PerformCallback({});
+        });
+    });*@
+    function TimKiemHocSinh() {
+        LoadDSHocSinhDK();
+        $('#DanhSachHocSinh').modal('show');
+    }
+
+
+</script>
+
+@*Data lich su dang ky lop hoc *@
+<script>
+    var MaKhachHang = null, MaKeHoach = null, DaBaoLuu = 0, TongSoBuoi = 0, NgayKetThuc = null, buoi1 = 0, buoi2 = 0; var tongbuoi = 0;
+    $(document).ready(function () {
+        LoadDSNghiPhep();
+        LoadDSHocSinhDK();
+        //LoadDSLopHocDK();
+        $('#SoBuoiBaoLuu').keyup(function () {
+            tongbuoi = (+$('#SoBuoiBaoLuu').val()) + (+$('#SoBuoi').val());
+            //alert($('#SoBuoiBaoLuu').val())
+            //var NGAY = Globalize.format($('#NgayBatDau').val(), 'yyyy,MM,dd');
+            $.ajax({
+                url: '@Url.Action("LayNgayKetThuc2", "DangKyBaoLuu")',
+                data: { ngaybd: $('#NgayBatDau').val(), SoBuoi: tongbuoi, Buoi1: buoi1, Buoi2: buoi2 },
+                type: 'GET',
+                contentType: 'application/json',
+                success: function (rs) {
+                    $('#NgayKetThuc').val(rs);
+                }
+            })
+        })
+    });
+    //function OnValueChangedNgayBatDauBL() {
+    //    var NGAY = Globalize.format(NGAYBATDAUBL.GetValue(), 'yyyy,MM,dd');
+    //    $.getJSON('/DangKyBaoLuu/LayNgayKetThuc2', $.param({ NgayBatDau: NGAY, SoBuoi: $('#SoBuoiBaoLuu').val(), Buoi1: buoi1, Buoi2: buoi2 }), function (data) {
+    //        //NGAY = Globalize.format(data, 'yyyy,MM,dd');
+    //        $('#NgayKetThuc').val(data);
+    //    })
+    //}
+    function LoadDSHocSinhDK() {
+        var TKTHS = TIMKIEMTENHOCSINH.GetValue();
+        var ArrDulieu = new DevExpress.data.CustomStore({
+            load: function (loadOptions) {
+                var deferred = $.Deferred(),
+                    args = {};
+
+                if (loadOptions.sort) {
+                    args.orderby = loadOptions.sort[0].selector;
+                    if (loadOptions.sort[0].desc)
+                        args.orderby += " desc";
+                }
+                args.take = loadOptions.take || 10;
+                args.page = (loadOptions.skip / args.take + 1);
+                args.tenhs = TKTHS;
+                $.ajax({
+                    url: "@Url.Action("LoadDSHocSinhDK", "DangKyBaoLuu")",
+                    data: args,
+                    success: function (result) {
+                        deferred.resolve(result.Result, { totalCount: result.Total });
+                    },
+                    error: function () {
+                        deferred.reject("Data Loading Error");
+                    },
+                    timeout: 20000
+                });
+
+                return deferred.promise();
+            }
+        });
+        $("#gridDanhSachHocSinh").dxDataGrid({
+            dataSource: {
+                store: ArrDulieu
+            },
+            remoteOperations: {
+                sorting: true,
+                paging: true
+            },
+            loadPanel: {
+                enabled: true
+            }, showRowLines: false,
+            rowAlternationEnabled: true,
+            showBorders: false,
+            hoverStateEnabled: true,
+            selection: {
+                mode: "single"
+            },
+            paging: {
+                pageSize: 10
+            },
+            pager: {
+                showPageSizeSelector: true,
+                allowedPageSizes: [5, 10],
+                showInfo: true
+            },
+            allowColumnResizing: true,
+            columnAutoWidth: true,
+            columns: [
+            {
+                dataField: 'A_HOSOKHACHHANG', caption: 'Chọn', allowEditing: false, width: 50,
+                cellTemplate: function (container, options) {
+                    var dt = options.data;
+                    $('<a class="btn btn-default btn-xs" onclick="LoadDanhSachLopDangHoc(' + dt.A_HOSOKHACHHANG + ')" class="text-green"><b>...</b></a>').appendTo(container);
+                }
+            },
+            {
+                dataField: "MAKH",
+                caption: "@{ViewContext.Writer.Write(ResourceManager.GetString("MAKH")); } ",
+                alignment: "center",
+                width: 120,
+            },
+            , {
+                dataField: "TENKHACHHANG",
+                caption: "@{ViewContext.Writer.Write(ResourceManager.GetString("TENKHACHHANG")); } ",
+                alignment: "center",
+                width: 200,
+            }, {
+                dataField: "TENLOPHOC",
+                caption: "@{ViewContext.Writer.Write(ResourceManager.GetString("TENLOPHOC")); } ",
+                alignment: "center",
+                width: 200,
+            },
+            {
+                dataField: "TRUNGTAM",
+                caption: "@{ViewContext.Writer.Write(ResourceManager.GetString("TRUNGTAM")); } ",
+                alignment: "center",
+                width: 150,
+            },
+            {
+                dataField: "TENCHUONGTRINH",
+                caption: "@{ViewContext.Writer.Write(ResourceManager.GetString("CHUONGTRINH")); } ",
+                alignment: "center",
+                width: 150,
+            },
+             {
+                 dataField: "TENPHUONGTHUC",
+                 caption: "Buổi 1",
+                 alignment: "center",
+                 width: 100,
+             },
+            {
+                dataField: "TENCONGCU",
+                caption: "Buổi 2",
+                alignment: "center",
+                width: 100,
+            },
+            {
+                dataField: "SOBUOI",
+                caption: "@{ViewContext.Writer.Write(ResourceManager.GetString("SOBUOI")); } ",
+                alignment: "center",
+                width: 100,
+            },
+            {
+                dataField: "DONGIA",
+                caption: "Đơn giá",
+                alignment: "center",
+                width: 100,
+            },
+            {
+                dataField: "NGAYBATDAU",
+                caption: "Ngày bắt đầu",
+                alignment: "center",
+                width: 100,
+            },
+
+            {
+                dataField: "NGAYKETTHUC",
+                caption: "Ngày kết thúc",
+                alignment: "center",
+                width: 100,
+            }
+            ]
+        });
+    }
+    var ngaybt = null,LopHoc=0;
+    function LoadDanhSachLopDangHoc(a) {
+        MaKhachHang = a;
+        $.ajax({
+            url: '@Url.Action("DanhSachKhachHangCanBaoLuu", "DangKyBaoLuu")',
+            data: { MaKhachHang: a },
+            type: 'GET',
+            contentType: 'application/json',
+            success: function (rs) {
+                MaKeHoach = rs[0].J_HOSOKHACHHANG;
+                LopHoc = rs[0].A_KEHOACH;
+                SoLuongBuoiDaLuu(MaKhachHang, MaKeHoach);
+                //$('#MaHocSinh').val(rs[0].MAKH);
+                $('#TenHocSinh').val(rs[0].TENKHACHHANG);
+                $('#MaHocSinh').val(rs[0].MAKH);
+                $('#TenLop').val(rs[0].TENLOAIKEHOACH);
+                $('#TrungTam').val(rs[0].TRUNGTAM);
+                $('#ChuongTrinh').val(rs[0].TENLOAIKEHOACH);
+                $('#SoBuoi').val(rs[0].SOLUONG);
+                $('#Buoi1').val(rs[0].BUOI1);
+                $('#Buoi2').val(rs[0].BUOI2);
+                $('#NgayBatDau').val(rs[0].NGAYBATDAUHOC);
+                ngaybt = rs[0].NGAYBATDAUHOC;
+                $('#NgayKetThuc').val(rs[0].NGAYKETTHUCHOC);
+                buoi1 = rs[0].ID_PHUONGTHUC;
+                buoi2 = rs[0].ID_CONGCU;
+            }
+        });
+        $('#DanhSachHocSinh').modal('hide');
+    }
+    function SoLuongBuoiDaLuu(a, b) {
+        $.ajax({
+            url: '@Url.Action("SoBuoiDaBaoLuu", "DangKyBaoLuu")',
+            data: { MaKhachHang: a, MaKeHoach: b },
+            type: 'GET',
+            contentType: 'application/json',
+            success: function (rs) {
+                if (rs[0].SoBuoiDaBaoLuu == null) {
+                    DaBaoLuu = 0;
+                }
+                else {
+                    DaBaoLuu = rs[0].SoBuoiDaBaoLuu;
+                }
+            }
+        });
+    }
+    function ThemMoi() {
+        self.location = "/DangKyBaoLuu/DangKyBaoLuu";
+    }
+    function LuuDangKy() {
+        //TongSoBuoi = Number($('#SoBuoi').val()) + Number($('#SoBuoiBaoLuu').val()) + Number(DaBaoLuu);
+        $.ajax({
+            url: '@Url.Action("CapNhatBaoLuuKetQua", "DangKyBaoLuu")',
+            data: { MaKhachHang: MaKhachHang, NgayBaoLuu: Globalize.format(NGAYBATDAUBL.GetValue(), 'yyyy,MM,dd'), SoNgayBaoLuu: Number($('#SoBuoiBaoLuu').val()), NgayKetThuc: $('#NgayKetThuc').val(), LopHoc: LopHoc },
+            type: 'GET',
+            contentType: 'application/json',
+            success: function (sc) {
+                if (sc > 0) {
+                    DevExpress.ui.notify('Cập nhật thành công!', 'success', 2000);
+                    ThemMoi();
+                }
+                else {
+                    if (sc == -1)
+                        DevExpress.ui.notify('Số buổi bảo lưu vượt quá quy định!', 'error', 2000);
+                    else
+                        DevExpress.ui.notify('Lỗi hệ thống!', 'error', 2000);
+                }
+                if (isNaN(sc)) DevExpress.ui.notify('Chưa cập nhật được!', 'error', 2000);
+            }
+        })
+        @*$.ajax({
+            url: '@Url.Action("LayNgayKetThuc2", "DangKyBaoLuu")',
+            data: { NgayBatDau: Globalize.format(NGAYBATDAUBL.GetValue(), 'yyyy,MM,dd'), SoBuoi: $('#SoBuoiBaoLuu').val(), Buoi1: buoi1, Buoi2: buoi2 },
+            type: 'GET',
+            contentType: 'application/json',
+            success: function (rs) {
+                
+            }
+        })*@
+
+    }
+    function LoadDSNghiPhep() {
+        var ArrDulieu2 = new DevExpress.data.CustomStore({
+            load: function (loadOptions) {
+                var deferred = $.Deferred(),
+                    args = {};
+
+                if (loadOptions.sort) {
+                    args.orderby = loadOptions.sort[0].selector;
+                    if (loadOptions.sort[0].desc)
+                        args.orderby += " desc";
+                }
+                args.take = loadOptions.take || 10;
+                args.page = (loadOptions.skip / args.take + 1);
+                $.ajax({
+                    url: "@Url.Action("GetDanhSachBaoLuu", "QLHocSinh")",
+                    data: args,
+                success: function (result) {
+                    deferred.resolve(result.Result, { totalCount: result.Total });
+                },
+                error: function () {
+                    deferred.reject("Data Loading Error");
+                },
+                timeout: 20000
+            });
+
+            return deferred.promise();
+            }
+        });
+        $("#gridDSBaoLuu").dxDataGrid({
+            dataSource: {
+                store: ArrDulieu2,
+                key: 'A_TH_DUBAO'
+            },
+            remoteOperations: {
+                sorting: true,
+                paging: true
+            },
+            loadPanel: {
+                enabled: true
+            }, showRowLines: false,
+            rowAlternationEnabled: true,
+            showBorders: false,
+            hoverStateEnabled: true,
+            selection: {
+                mode: "single"
+            },
+            paging: {
+                pageSize: 5
+            },
+            pager: {
+                showPageSizeSelector: true,
+                allowedPageSizes: [5, 10],
+                showInfo: true
+            },
+            allowColumnResizing: true,
+            columnAutoWidth: true,
+            columns: [
+
+             {
+                 dataField: "TENHS",
+                 caption: "@{ViewContext.Writer.Write(ResourceManager.GetString("TENHOCSINH")); } ",
+
+             },
+             {
+                 dataField: "TENLOPHOC",
+                 caption: "@{ViewContext.Writer.Write(ResourceManager.GetString("TENLOPHOC")); } ",
+
+             },
+             {
+                 dataField: "TRUNGTAM",
+                 caption: "@{ViewContext.Writer.Write(ResourceManager.GetString("TRUNGTAM")); } ",
+
+             },
+             {
+                 dataField: "CHUONGTRINH",
+                 caption: "@{ViewContext.Writer.Write(ResourceManager.GetString("CHUONGTRINH")); } ",
+
+             },
+             {
+                 dataField: "SOBUOIBAOLUU",
+                 caption: "@{ViewContext.Writer.Write(ResourceManager.GetString("SOBUOIBAOLUU")); } ",
+                 alignment: "center"
+             },
+            {
+                dataField: "TUNGAY",
+                caption: "@{ViewContext.Writer.Write(ResourceManager.GetString("TUNGAY")); }",
+                alignment: "right"
+            }
+            ]
+        });
+    }
+</script>

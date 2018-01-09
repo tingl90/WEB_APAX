@@ -1,0 +1,174 @@
+﻿@{
+    ViewBag.Title = "DanhSachLopHocChiTiet";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<style>
+    .dx-data-row td.center {
+        text-align: center !important;
+    }
+
+    .dx-data-row td.left {
+        text-align: left !important;
+    }
+
+    .dx-data-row td.right {
+        text-align: right !important;
+    }
+    .dx-header-row td {
+        text-align: center !important;
+    }
+</style>
+<script src="~/Content/js/bootbox.min.js"></script>
+<div class="box box-danger">
+    <div class="box-header with-border">
+        <h3 class="box-title">DANH SÁCH LỚP HỌC</h3>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <div id="gridDanhSachLopHoc"></div>
+        </div>
+    </div>
+</div>
+<script>
+    var bootBox;
+    $(document).ready(function () {
+        LoadDanhSachLopHoc();
+    })
+    function LoadDanhSachLopHoc() {
+        $.ajax({
+            url: '@Url.Action("GetDanhSachLopHoc", "DanhSachLop")',
+            type: 'GET',
+            contentType: 'application/json',
+            success: function (rs) {
+                var dataGrid = $("#gridDanhSachLopHoc").dxDataGrid({
+                    dataSource: rs,
+                    allowColumnReordering: false,
+                    allowColumnResizing: false,
+                    columnAutoWidth: false,
+                    columnFixing: {
+                        enabled: true
+                    },
+                    "export": {
+                        enabled: true,
+                        fileName: "DANH SÁCH LỚP HỌC",
+                    },
+
+                    paging: {
+                        pageSize: 10
+                    },
+                    pager: {
+                        showPageSizeSelector: true,
+                        allowedPageSizes: [10, 20, 50],
+                        showInfo: true
+                    },
+                    showColumnLines: true,
+                    showRowLines: true,
+                    filterRow: {
+                        visible: true,
+                        applyFilter: "auto"
+                    },
+                    selection: {
+                        mode: "single"
+                    },
+                    columns: [{
+                        dataField: "STT",
+                        caption: "STT",
+                        width: 50,
+                        cssClass: "center"
+                    }, {
+                        dataField: "TENLOP",
+                        caption: "Tên lớp",
+                        width: 250,
+                    }, {
+                        caption: "Trung tâm",
+                        dataField: "TRUNGTAM",
+                        width: 200,
+                    }, {
+                        caption: "Số buổi",
+                        dataField: "SOBUOI",
+                        width: 0,
+                        cssClass: "center"
+                    }, {
+                        dataField: "BUOI1",
+                        caption: "Buổi 1",
+                        width: 100,
+                        cssClass: "center"
+                    }, {
+                        dataField: "BUOI2",
+                        caption: "Buổi 2",
+                        width: 100,
+                        cssClass: "center"
+                    }, {
+                        dataField: "NGAYBATDAU",
+                        caption: "Ngày bắt đầu",
+                        width: 150,
+                        cssClass: "center"
+                    }, {
+                        dataField: "NGAYKETTHUC",
+                        caption: "Ngày kết thúc",
+                        width: 150,
+                        cssClass: "center"
+                    }, {
+                        caption: "Sản phẩm",
+                        dataField: "TENNHOMSANPHAM",
+                        width: 120,
+                    }, {
+                        caption: "Chương trình",
+                        dataField: "CHUONGTRINH",
+                        width: 120,
+                    }, {
+                        caption: "Đơn giá",
+                        dataField: "DONGIA",
+                        width: 0,
+                        cssClass: "center"
+                    }, {
+                        caption: "A_KEHOACH",
+                        dataField: "A_KEHOACH",
+                        width: 0,
+                    }
+                    ],
+                    onCellClick: function (e) {
+                        var component = e.component,
+                            prevClickTime = component.lastClickTime;
+                        component.lastClickTime = new Date();
+                        if (prevClickTime && (component.lastClickTime - prevClickTime < 300)) {
+                            var dataGrid2 = $('#gridDanhSachLopHoc').dxDataGrid('instance');
+                            var row = dataGrid2.getSelectedRowsData();
+                            $('#iconMoCT').css({ top: -41, left: -12 }).removeClass("fa-floppy-o").addClass('fa-spinner fa-pulse fa-fw');
+                            $('#spaniconMoCT').removeClass('hidden'); $('#spanMoCT').addClass('hidden');
+                            $.when(
+                                $.ajax({
+                                    method: 'GET',
+                                    url: '/DanhSachLop/ChiTietLopHoc',
+                                    data: { A_KEHOACH: row[0].A_KEHOACH },
+                                    dataType: 'html',
+                                    success: function (data) {
+                                        bootBox = bootbox.dialog({
+                                            size: 'large',
+                                            title: 'Thông tin chi tiết lớp học',
+                                            message: data
+                                        });
+                                    }
+                                })
+                            ).done(function () {
+                                setTimeout(function () {
+                                }, 500);
+                                $('#iconMoCT').removeAttr('style').removeClass('fa-spinner fa-pulse fa-fw').addClass("fa-floppy-o");
+                                $('#spaniconMoCT').addClass('hidden'); $('#spanMoCT').closest('hidden');
+                            });
+                        }
+                        else {
+                            ss = [];
+                        }
+                    }
+                }).dxDataGrid('instance');
+            },
+            error: function (a, b, c) {
+                DevExpress.ui.notify('Error ' + a.status + ': ' + a.statusText, 'error', 2000);
+            }
+        });
+    }
+</script>
+
+
+

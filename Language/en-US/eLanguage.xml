@@ -1,0 +1,1704 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<eLanguage>
+  <item>
+    <sKey>CompanyName</sKey>
+    <sValue>Vpars</sValue>
+  </item>
+  <item>
+    <sKey>Welcome</sKey>
+    <sValue>Xin chào</sValue>
+  </item>
+  <item>
+    <sKey>Settings</sKey>
+    <sValue>Tùy chỉnh</sValue>
+  </item>
+  <item>
+    <sKey>Profile</sKey>
+    <sValue>Hồ sơ</sValue>
+  </item>
+  <item>
+    <sKey>Ngay</sKey>
+    <sValue>Ngày</sValue>
+  </item>
+  <item>
+    <sKey>LoaiHienThi</sKey>
+    <sValue>Loại hiển thị</sValue>
+  </item>
+  <item>
+    <sKey>QuenMatKhau</sKey>
+    <sValue>Quên mật khẩu</sValue>
+  </item>
+  <item>
+    <sKey>DoiMatKhau</sKey>
+    <sValue>Đổi mật khẩu</sValue>
+  </item>
+  <item>
+    <sKey>MatKhauCu</sKey>
+    <sValue>Mật khẩu cũ</sValue>
+  </item>
+  <item>
+    <sKey>MatKhauMoi</sKey>
+    <sValue>Mật khẩu mới</sValue>
+  </item>
+  <item>
+    <sKey>NhapLaiMatKhau</sKey>
+    <sValue>Nhập lại mật khẩu</sValue>
+  </item>
+  <item>
+    <sKey>Logout</sKey>
+    <sValue>Đăng xuất</sValue>
+  </item>
+  <item>
+    <sKey>Dashboard</sKey>
+    <sValue>Dashboard</sValue>
+  </item>
+  <item>
+    <sKey>SanPham</sKey>
+    <sValue>Sản phẩm</sValue>
+  </item>
+  <item>
+    <sKey>Store</sKey>
+    <sValue>Store</sValue>
+  </item>
+  <item>
+    <sKey>ChiTietHoSoStore</sKey>
+    <sValue>Chi tiết thông tin store</sValue>
+  </item>
+  <item>
+    <sKey>StoreLich</sKey>
+    <sValue>Store lịch</sValue>
+  </item>
+  <item>
+    <sKey>StoreDoi</sKey>
+    <sValue>Store đổi</sValue>
+  </item>
+  <item>
+    <sKey>BaoCao</sKey>
+    <sValue>Báo cáo</sValue>
+  </item>
+  <item>
+    <sKey>KeHoach</sKey>
+    <sValue>Kế hoạch</sValue>
+  </item>
+  <item>
+    <sKey>KeHoachDoanhSo</sKey>
+    <sValue>Kế hoạch doanh số</sValue>
+  </item>
+  <item>
+    <sKey>KeHoachKhachHang</sKey>
+    <sValue>Kế hoạch khách hàng</sValue>
+  </item>
+  <item>
+    <sKey>KeHoachKhachHang</sKey>
+    <sValue>Kế hoạch khách hàng</sValue>
+  </item>
+  <item>
+    <sKey>FormKhachHang</sKey>
+    <sValue>Khách hàng</sValue>
+  </item>
+  <item>
+    <sKey>FormDoanhSo</sKey>
+    <sValue>Doanh số</sValue>
+  </item>
+  <item>
+    <sKey>CauHinhHeThong</sKey>
+    <sValue>Cấu hình hệ thống</sValue>
+  </item>
+  <item>
+    <sKey>ThongKeHinhAnh</sKey>
+    <sValue>Thống kê hình ảnh</sValue>
+  </item>
+  <item>
+    <sKey>ThongKeTrungBay</sKey>
+    <sValue>Thống kê trưng bày</sValue>
+  </item>
+  <item>
+    <sKey>ThongKePOSM</sKey>
+    <sValue>Thống kê POSM</sValue>
+  </item>
+  <item>
+    <sKey>ThongKeNhanSu</sKey>
+    <sValue>Thống kê nhân sự</sValue>
+  </item>
+  <item>
+    <sKey>ThongKeNhanSuDiLam</sKey>
+    <sValue>Thống kê nhân sự đi làm</sValue>
+  </item>
+  <item>
+    <sKey>ThongKeNhanSuDongPhuc</sKey>
+    <sValue>Thống kê nhân sự đồng phục</sValue>
+  </item>
+  <item>
+    <sKey>ChiPhi</sKey>
+    <sValue>Chi phí</sValue>
+  </item>
+  <item>
+    <sKey>Tong</sKey>
+    <sValue>Tổng</sValue>
+  </item>
+  <item>
+    <sKey>Nam</sKey>
+    <sValue>Nam</sValue>
+  </item>
+  <item>
+    <sKey>Nu</sKey>
+    <sValue>Nữ</sValue>
+  </item>
+  <item>
+    <sKey>NACode</sKey>
+    <sValue>Mã NA</sValue>
+  </item>
+  <item>
+    <sKey>TLCode</sKey>
+    <sValue>Mã Team Leader</sValue>
+  </item>
+  <item>
+    <sKey>Total</sKey>
+    <sValue>Tổng cộng</sValue>
+  </item>
+  <!--HỆ THỐNG-->
+  <item>
+    <sKey>Username</sKey>
+    <sValue>Tài khoản</sValue>
+  </item>
+  <item>
+    <sKey>Password</sKey>
+    <sValue>Mật khẩu</sValue>
+  </item>
+  <item>
+    <sKey>RememberMe</sKey>
+    <sValue>Ghi nhớ</sValue>
+  </item>
+  <item>
+    <sKey>SignIn</sKey>
+    <sValue>Đăng nhập</sValue>
+  </item>
+  <item>
+    <sKey>HeThong</sKey>
+    <sValue>Hệ Thống</sValue>
+  </item>
+  <item>
+    <sKey>Login</sKey>
+    <sValue>Đăng nhập hệ thống</sValue>
+  </item>
+  <item>
+    <sKey>TrangQuanTri</sKey>
+    <sValue>Trang quản trị</sValue>
+  </item>
+  <item>
+    <sKey>QuanTriHeThong</sKey>
+    <sValue>Quản trị hệ thống</sValue>
+  </item>
+  <item>
+    <sKey>NhomNguoiDung</sKey>
+    <sValue>Nhóm người dùng</sValue>
+  </item>
+  <item>
+    <sKey>NguoiDung</sKey>
+    <sValue>Người dùng</sValue>
+  </item>
+  <item>
+    <sKey>HoSoNhanSu</sKey>
+    <sValue>Hồ sơ nhân viên</sValue>
+  </item>
+  <item>
+    <sKey>NgonNgu</sKey>
+    <sValue>Ngôn ngữ</sValue>
+  </item>
+  <item>
+    <sKey>TiengViet</sKey>
+    <sValue>Tiếng Việt</sValue>
+  </item>
+  <item>
+    <sKey>TiengAnh</sKey>
+    <sValue>Tiếng Anh</sValue>
+  </item>
+  <item>
+    <sKey>ThongTinNguoiDung</sKey>
+    <sValue>Thông tin người dùng</sValue>
+  </item>
+  <item>
+    <sKey>Nhom</sKey>
+    <sValue>Nhóm</sValue>
+  </item>
+  <item>
+    <sKey>TrangThai</sKey>
+    <sValue>Trạng thái</sValue>
+  </item>
+  <item>
+    <sKey>ThongTinNhanSu</sKey>
+    <sValue>Thông tin nhân viên</sValue>
+  </item>
+  <item>
+    <sKey>NhanSu</sKey>
+    <sValue>Nhân viên</sValue>
+  </item>
+  <item>
+    <sKey>ChiNhanh</sKey>
+    <sValue>Chi nhánh</sValue>
+  </item>
+  <item>
+    <sKey>NgaySinh</sKey>
+    <sValue>Ngày sinh</sValue>
+  </item>
+  <item>
+    <sKey>DiDong</sKey>
+    <sValue>Di động</sValue>
+  </item>
+  <!-- ## HỒ SƠ NHÂN VIÊN ## -->
+  <item>
+    <sKey>ChiTietHoSoNhanSu</sKey>
+    <sValue>Chi tiết hồ sơ nhân viên</sValue>
+  </item>
+  <item>
+    <sKey>NguoiTao</sKey>
+    <sValue>Người tạo</sValue>
+  </item>
+  <item>
+    <sKey>NgayTao</sKey>
+    <sValue>Ngày tạo</sValue>
+  </item>
+  <item>
+    <sKey>HoTen</sKey>
+    <sValue>Họ tên</sValue>
+  </item>
+  <item>
+    <sKey>Male</sKey>
+    <sValue>Nam</sValue>
+  </item>
+  <item>
+    <sKey>Female</sKey>
+    <sValue>Nữ</sValue>
+  </item>
+  <item>
+    <sKey>TinhThanhPho</sKey>
+    <sValue>Tỉnh/Thành phố</sValue>
+  </item>
+  <item>
+    <sKey>GioiTinh</sKey>
+    <sValue>Giới tính</sValue>
+  </item>
+  <item>
+    <sKey>QuanHuyen</sKey>
+    <sValue>Quận/Huyện</sValue>
+  </item>
+  <item>
+    <sKey>DiaChiLienHe</sKey>
+    <sValue>Địa chỉ liên hệ</sValue>
+  </item>
+  <item>
+    <sKey>ChucVu</sKey>
+    <sValue>Chức vụ</sValue>
+  </item>
+  <item>
+    <sKey>DiDong</sKey>
+    <sValue>Di động</sValue>
+  </item>
+  <item>
+    <sKey>SoCMND</sKey>
+    <sValue>Số CMND</sValue>
+  </item>
+  <item>
+    <sKey>NgayCap</sKey>
+    <sValue>Ngày cấp</sValue>
+  </item>
+  <item>
+    <sKey>NoiCap</sKey>
+    <sValue>Nơi cấp</sValue>
+  </item>
+  <item>
+    <sKey>TinhTrangGiaDinh</sKey>
+    <sValue>TT Gia đình</sValue>
+  </item>
+  <item>
+    <sKey>HoKhauThuongTru</sKey>
+    <sValue>HK Thường trú</sValue>
+  </item>
+  <item>
+    <sKey>GhiChu</sKey>
+    <sValue>Ghi chú</sValue>
+  </item>
+  <item>
+    <sKey>SoThich</sKey>
+    <sValue>Sở thích</sValue>
+  </item>
+  <item>
+    <sKey>MaNhanSu</sKey>
+    <sValue>Mã nhân sự</sValue>
+  </item>
+  <item>
+    <sKey>QuocTich</sKey>
+    <sValue>Quốc tịch</sValue>
+  </item>
+  <!-- ## /HỒ SƠ NHÂN VIÊN ## -->
+  <!--/HỆ THỐNG-->
+  <!--STORE-->
+  <!-- ## HỒ SƠ STORE ## -->
+  <item>
+    <sKey>TenNPP</sKey>
+    <sValue>Tên NPP</sValue>
+  </item>
+  <item>
+    <sKey>CodeCuaHang</sKey>
+    <sValue>Code cửa hàng</sValue>
+  </item>
+  <item>
+    <sKey>TenCuaHang</sKey>
+    <sValue>Tên cửa hàng</sValue>
+  </item>
+  <item>
+    <sKey>TenChuShop</sKey>
+    <sValue>Tên chủ shop</sValue>
+  </item>
+  <item>
+    <sKey>TenTL</sKey>
+    <sValue>Tên TL</sValue>
+  </item>
+  <item>
+    <sKey>TenNA</sKey>
+    <sValue>Tên NA</sValue>
+  </item>
+  <item>
+    <sKey>DDCuaHang</sKey>
+    <sValue>ĐĐ cửa hàng</sValue>
+  </item>
+  <item>
+    <sKey>DDChuCuaHang</sKey>
+    <sValue>ĐĐ chủ cửa hàng</sValue>
+  </item>
+  <item>
+    <sKey>SoluongNA</sKey>
+    <sValue>Số lượng NA</sValue>
+  </item>
+  <item>
+    <sKey>trưng bàyKUDangKy</sKey>
+    <sValue>Số SKU đăng ký</sValue>
+  </item>
+  <item>
+    <sKey>QuanLyStore</sKey>
+    <sValue>Quản lý store</sValue>
+  </item>
+  <item>
+    <sKey>ChiTietHotrưng bàytore</sKey>
+    <sValue>Chi tiết hồ sơ store</sValue>
+  </item>
+  <item>
+    <sKey>MaStore</sKey>
+    <sValue>Mã store</sValue>
+  </item>
+  <item>
+    <sKey>TenStore</sKey>
+    <sValue>Tên store</sValue>
+  </item>
+  <item>
+    <sKey>LoaiStore</sKey>
+    <sValue>Loại store</sValue>
+  </item>
+  <item>
+    <sKey>LoaiStore</sKey>
+    <sValue>Loại store</sValue>
+  </item>
+  <item>
+    <sKey>NguoiQuanLy</sKey>
+    <sValue>Chủ cửa hàng</sValue>
+  </item>
+  <item>
+    <sKey>DienThoai</sKey>
+    <sValue>Điện thoại</sValue>
+  </item>
+  <item>
+    <sKey>DiaChi</sKey>
+    <sValue>Địa chỉ</sValue>
+  </item>
+  <item>
+    <sKey>MoTa</sKey>
+    <sValue>Mô tả</sValue>
+  </item>
+  <item>
+    <sKey>NhanHang</sKey>
+    <sValue>Nhãn hàng</sValue>
+  </item>
+  <item>
+    <sKey>TeamLeader</sKey>
+    <sValue>Team Leader</sValue>
+  </item>
+  <item>
+    <sKey>NA</sKey>
+    <sValue>NA</sValue>
+  </item>
+  <item>
+    <sKey>DacDiemCuaHang</sKey>
+    <sValue>Đ.điểm cửa hàng</sValue>
+  </item>
+  <item>
+    <sKey>DacDiemChuCuaHang</sKey>
+    <sValue>Đ.điểm chủ cửa hàng</sValue>
+  </item>
+  <item>
+    <sKey>Flagship</sKey>
+    <sValue>Flagship</sValue>
+  </item>
+  <item>
+    <sKey>NgayBatDau</sKey>
+    <sValue>Ngày bắt đầu</sValue>
+  </item>
+  <item>
+    <sKey>NgayKetThuc</sKey>
+    <sValue>Ngày kết thúc</sValue>
+  </item>
+  <item>
+    <sKey>SoLuongNA</sKey>
+    <sValue>S.lượng NA</sValue>
+  </item>
+  <item>
+    <sKey>SoLuongSKUDangKy</sKey>
+    <sValue>S.lượng SKU ĐK</sValue>
+  </item>
+  <item>
+    <sKey>MaKieuStore</sKey>
+    <sValue>Kiểu Store</sValue>
+  </item>
+  <item>
+    <sKey>SoLuongTrungBay</sKey>
+    <sValue>S.lượng trưng bày</sValue>
+  </item>
+  <item>
+    <sKey>KieuStore</sKey>
+    <sValue>Kiểu Store</sValue>
+  </item>
+  <item>
+    <sKey>TenKieuStore</sKey>
+    <sValue>Tên Kiểu Store</sValue>
+  </item>
+  <item>
+    <sKey>NgayThamGia</sKey>
+    <sValue>S.I Starting Date</sValue>
+  </item>
+  <item>
+    <sKey>LichSuThayDoiNhanVien</sKey>
+    <sValue>Lịch sử thay đổi nhân viên</sValue>
+  </item>
+  <item>
+    <sKey>NgayBatDau</sKey>
+    <sValue>Ngày bắt đầu</sValue>
+  </item>
+  <item>
+    <sKey>NgayKetThuc</sKey>
+    <sValue>Ngày kết thúc</sValue>
+  </item>
+  <item>
+    <sKey>DoanhSo</sKey>
+    <sValue>Doanh số</sValue>
+  </item>
+  <item>
+    <sKey>DoanhSoTF</sKey>
+    <sValue>Doanh số Friso</sValue>
+  </item>
+  <item>
+    <sKey>DoanhSoTTF</sKey>
+    <sValue>Doanh số thùng Friso</sValue>
+  </item>
+  <item>
+    <sKey>DoanhSoTD</sKey>
+    <sValue>Doanh số DL</sValue>
+  </item>
+  <item>
+    <sKey>DoanhSoTTD</sKey>
+    <sValue>Doanh số thùng DL</sValue>
+  </item>
+  <item>
+    <sKey>KhachHang</sKey>
+    <sValue>Khách hàng</sValue>
+  </item>
+  <item>
+    <sKey>NhaPhanPhoi</sKey>
+    <sValue>Nhà phân phối</sValue>
+  </item>
+  <item>
+    <sKey>IsNhaPhanPhoi</sKey>
+    <sValue>Là nhà phân phối</sValue>
+  </item>
+  <item>
+    <sKey>Thu2</sKey>
+    <sValue>Thứ 2</sValue>
+  </item>
+  <item>
+    <sKey>Thu3</sKey>
+    <sValue>Thứ 3</sValue>
+  </item>
+  <item>
+    <sKey>Thu4</sKey>
+    <sValue>Thứ 4</sValue>
+  </item>
+  <item>
+    <sKey>Thu5</sKey>
+    <sValue>Thứ 5</sValue>
+  </item>
+  <item>
+    <sKey>Thu6</sKey>
+    <sValue>Thứ 6</sValue>
+  </item>
+  <item>
+    <sKey>Thu7</sKey>
+    <sValue>Thứ 7</sValue>
+  </item>
+  <item>
+    <sKey>BatDauCaSang</sKey>
+    <sValue>Bắt đầu ca sáng</sValue>
+  </item>
+  <item>
+    <sKey>BatDauCaChieu</sKey>
+    <sValue>Bắt đầu ca chiều</sValue>
+  </item>
+  <item>
+    <sKey>KetThucCaSang</sKey>
+    <sValue>Kết thúc ca sáng</sValue>
+  </item>
+  <item>
+    <sKey>KetThucCaChieu</sKey>
+    <sValue>Kết thúc ca chiều</sValue>
+  </item>
+  <!-- ## /HỒ SƠ STORE ## -->
+  <!--/STORE-->
+  <!--SẢN PHẨM-->
+  <!--## QUẢN LÝ SẢN PHẨM ##-->
+  <item>
+    <sKey>ChiTietHoSoSanPham</sKey>
+    <sValue>Chi tiết hồ sơ sản phẩm</sValue>
+  </item>
+  <item>
+    <sKey>QLSanPham</sKey>
+    <sValue>Quản lý sản phẩm</sValue>
+  </item>
+  <item>
+    <sKey>MaSanPham</sKey>
+    <sValue>Mã sản phẩm</sValue>
+  </item>
+  <item>
+    <sKey>TenSanPham</sKey>
+    <sValue>Dòng sản phẩm</sValue>
+  </item>
+  <item>
+    <sKey>DonViTinh</sKey>
+    <sValue>Đơn vị tính</sValue>
+  </item>
+  <item>
+    <sKey>NhomSanPham</sKey>
+    <sValue>Nhóm sản phẩm</sValue>
+  </item>
+  <item>
+    <sKey>TrongLuong</sKey>
+    <sValue>Trọng lượng</sValue>
+  </item>
+  <item>
+    <sKey>DonGia</sKey>
+    <sValue>Đơn giá</sValue>
+  </item>
+  <item>
+    <sKey>DoiThu</sKey>
+    <sValue>Đối thủ</sValue>
+  </item>
+  <!--## /QUẢN LÝ SẢN PHẨM ##-->
+  <!--## CHI TIẾT HÔ SƠ SẢN PHẨM ##-->
+  <item>
+    <sKey>ChiTietHotrưng bàyanPham</sKey>
+    <sValue>Chi tiết hồ sơ sản phẩm</sValue>
+  </item>
+  <item>
+    <sKey>IsKhaoSat</sKey>
+    <sValue>Khảo sát</sValue>
+  </item>
+  <item>
+    <sKey>IsKiemTon</sKey>
+    <sValue>Kiểm tồn</sValue>
+  </item>
+  <item>
+    <sKey>IsTinhLuong</sKey>
+    <sValue>Tính lương</sValue>
+  </item>
+  <item>
+    <sKey>IsKhachHang</sKey>
+    <sValue>Nhập khách hàng</sValue>
+  </item>
+  <!--## /CHI TIẾT HÔ SƠ SẢN PHẨM ##-->
+  <!--/SẢN PHẨM-->
+  <!--THỐNG KÊ HÌNH ẢNH-->
+  <item>
+    <sKey>TKHinhAnh</sKey>
+    <sValue>Thống kê hình ảnh</sValue>
+  </item>
+  <item>
+    <sKey>HinhAnh</sKey>
+    <sValue>Hình ảnh</sValue>
+  </item>
+  <item>
+    <sKey>DKTimKiem</sKey>
+    <sValue>Điều kiện tìm kiếm</sValue>
+  </item>
+  <item>
+    <sKey>KhuVuc</sKey>
+    <sValue>Khu Vực</sValue>
+  </item>
+  <item>
+    <sKey>TuNgay</sKey>
+    <sValue>Từ ngày</sValue>
+  </item>
+  <item>
+    <sKey>DenNgay</sKey>
+    <sValue>Đến ngày</sValue>
+  </item>
+  <item>
+    <sKey>NhomHinhAnh</sKey>
+    <sValue>Nhóm hình ảnh</sValue>
+  </item>
+  <item>
+    <sKey>ThongKeKhaoSatGia</sKey>
+    <sValue>Thống kê khảo sát giá</sValue>
+  </item>
+  <item>
+    <sKey>Today</sKey>
+    <sValue>Ngày hôm nay</sValue>
+  </item>
+  <item>
+    <sKey>ThemLichLamViecAllday</sKey>
+    <sValue>Thêm lịch làm việc suốt ngày</sValue>
+  </item>
+  <!--/THỐNG KÊ HÌNH ẢNH-->
+  <!--KẾ HOẠCH-->
+  <item>
+    <sKey>KoTacDongLLV</sKey>
+    <sValue>Bạn không thể tác động tới lịch làm việc!</sValue>
+  </item>
+  <item>
+    <sKey>DaCheckInKTD</sKey>
+    <sValue>Đã được check in - Không được tác động đến lịch!</sValue>
+  </item>
+  <item>
+    <sKey>KetQuaLamViec</sKey>
+    <sValue>Kết quả làm việc</sValue>
+  </item>
+  <item>
+    <sKey>TieuDe</sKey>
+    <sValue>Tiêu đề</sValue>
+  </item>
+  <item>
+    <sKey>IsRead</sKey>
+    <sValue>Đã đọc</sValue>
+  </item>
+  <item>
+    <sKey>NoiDung</sKey>
+    <sValue>Nội dung</sValue>
+  </item>
+  <item>
+    <sKey>ChiTietThongBaoChuongTrinh</sKey>
+    <sValue>Chi tiết thông báo chương trình</sValue>
+  </item>
+  <item>
+    <sKey>SoLuongMoi</sKey>
+    <sValue>Số lượng mới</sValue>
+  </item>
+  <item>
+    <sKey>SoLuongThanThiet</sKey>
+    <sValue>Số lượng thân thiết</sValue>
+  </item>
+  <item>
+    <sKey>ChiTiet</sKey>
+    <sValue>Chi tiết</sValue>
+  </item>
+  <item>
+    <sKey>HoSo</sKey>
+    <sValue>Hồ sơ</sValue>
+  </item>
+  <item>
+    <sKey>LichLamViec</sKey>
+    <sValue>Lịch làm việc</sValue>
+  </item>
+  <item>
+    <sKey>LichLamViecTeamLeader</sKey>
+    <sValue>Lịch làm việc Team Leader</sValue>
+  </item>
+  <item>
+    <sKey>XepLichTeamLeader</sKey>
+    <sValue>Xếp lịch Team Leader</sValue>
+  </item>
+  <item>
+    <sKey>LichLamViecNA</sKey>
+    <sValue>Lịch làm việc NA</sValue>
+  </item>
+  <item>
+    <sKey>XepLichNA</sKey>
+    <sValue>Xếp lịch NA</sValue>
+  </item>
+  <item>
+    <sKey>SKUThucTe</sKey>
+    <sValue>SKU thực tế</sValue>
+  </item>
+  <item>
+    <sKey>NhapHangLoat</sKey>
+    <sValue>Nhập hàng loạt</sValue>
+  </item>
+  <item>
+    <sKey>LoaiSanPham</sKey>
+    <sValue>Loại sản phẩm</sValue>
+  </item>
+  <item>
+    <sKey>KeHoachTrungBay</sKey>
+    <sValue>Kế hoạch trưng bày</sValue>
+  </item>
+  <item>
+    <sKey>SoLuong</sKey>
+    <sValue>Số lượng</sValue>
+  </item>
+  <item>
+    <sKey>ThongBaoChuongTrinh</sKey>
+    <sValue>Thông báo chương trình</sValue>
+  </item>
+  <!--/KẾ HOẠCH-->
+  <!--CẤU HÌNH HỆ THỐNG-->
+  <item>
+    <sKey>TenCoQuan</sKey>
+    <sValue>Tên cơ quan</sValue>
+  </item>
+  <item>
+    <sKey>DiaDiem</sKey>
+    <sValue>Địa điểm</sValue>
+  </item>
+  <item>
+    <sKey>COQUANCHUQUAN</sKey>
+    <sValue>Cơ quan chủ quản</sValue>
+  </item>
+  <item>
+    <sKey>NoiSinh</sKey>
+    <sValue>Nơi sinh</sValue>
+  </item>
+  <item>
+    <sKey>NguyenQuan</sKey>
+    <sValue>Nguyên quán</sValue>
+  </item>
+  <item>
+    <sKey>NgayCapCMND</sKey>
+    <sValue>Ngày cấp CMND</sValue>
+  </item>
+  <item>
+    <sKey>NoiCapCMND</sKey>
+    <sValue>Nơi cấp CMND</sValue>
+  </item>
+  <item>
+    <sKey>TonGiao</sKey>
+    <sValue>Tôn giáo</sValue>
+  </item>
+  <item>
+    <sKey>DanToc</sKey>
+    <sValue>Dân tộc</sValue>
+  </item>
+  <item>
+    <sKey>TrinhDoHocVan</sKey>
+    <sValue>Trình độ học vấn</sValue>
+  </item>
+  <item>
+    <sKey>TrinhDoNgoaiNgu</sKey>
+    <sValue>Trình độ ngoại ngữ</sValue>
+  </item>
+  <item>
+    <sKey>PhongBan</sKey>
+    <sValue>Phòng ban</sValue>
+  </item>
+  <item>
+    <sKey>SoTaiKhoan</sKey>
+    <sValue>Số tài khoản</sValue>
+  </item>
+  <item>
+    <sKey>MaNganHang</sKey>
+    <sValue>Mã ngân hàng</sValue>
+  </item>
+  <item>
+    <sKey>MaSoThue</sKey>
+    <sValue>Mã số thuế</sValue>
+  </item>
+  <item>
+    <sKey>DiaChiLienLac</sKey>
+    <sValue>Địa chỉ liên lạc</sValue>
+  </item>
+  <item>
+    <sKey>ChuyenNganh</sKey>
+    <sValue>Chuyên ngành</sValue>
+  </item>
+  <!--/CẤU HÌNH HỆ THỐNG-->
+  <!--THÔNG TIN CÁ NHÂN-->
+  <item>
+    <sKey>ThongTinCaNhan</sKey>
+    <sValue>Thông tin cá nhân</sValue>
+  </item>
+  <!--/THÔNG TIN CÁ NHÂN-->
+  <!--DANH MỤC-->
+  <item>
+    <sKey>MaChucVu</sKey>
+    <sValue>Mã chức vụ</sValue>
+  </item>
+  <item>
+    <sKey>MaNhanHang</sKey>
+    <sValue>Mã nhãn hàng</sValue>
+  </item>
+  <item>
+    <sKey>TenNhanHang</sKey>
+    <sValue>Tên nhãn hàng</sValue>
+  </item>
+  <!--/DANH MỤC-->
+  <!--COMMAND-->
+  <item>
+    <sKey>LocKetQua</sKey>
+    <sValue>Lọc kết quả</sValue>
+  </item>
+  <item>
+    <sKey>New</sKey>
+    <sValue>Thêm mới</sValue>
+  </item>
+  <item>
+    <sKey>Save</sKey>
+    <sValue>Lưu</sValue>
+  </item>
+  <item>
+    <sKey>Delete</sKey>
+    <sValue>Xóa</sValue>
+  </item>
+  <item>
+    <sKey>Refresh</sKey>
+    <sValue>Làm mới</sValue>
+  </item>
+  <item>
+    <sKey>Back</sKey>
+    <sValue>Quay lại</sValue>
+  </item>
+  <item>
+    <sKey>Edit</sKey>
+    <sValue>Chỉnh sửa</sValue>
+  </item>
+  <item>
+    <sKey>Cancel</sKey>
+    <sValue>Hủy</sValue>
+  </item>
+  <item>
+    <sKey>Open</sKey>
+    <sValue>Mở</sValue>
+  </item>
+  <item>
+    <sKey>ExcelExport</sKey>
+    <sValue>Xuất excel</sValue>
+  </item>
+  <item>
+    <sKey>ExportReport</sKey>
+    <sValue>In report</sValue>
+  </item>
+  <item>
+    <sKey>ResetMatKhau</sKey>
+    <sValue>Reset mật khẩu</sValue>
+  </item>
+  <item>
+    <sKey>Send</sKey>
+    <sValue>Gửi</sValue>
+  </item>
+  <item>
+    <sKey>Nhap</sKey>
+    <sValue>Nhập</sValue>
+  </item>
+  <item>
+    <sKey>ThemLichLamViec</sKey>
+    <sValue>Thêm lịch làm việc</sValue>
+  </item>
+  <!--/COMMAND-->
+  <!--ALERT-->
+  <item>
+    <sKey>AlertDelete</sKey>
+    <sValue>Bạn có muốn xóa dữ liệu này không?</sValue>
+  </item>
+  <item>
+    <sKey>SaiMatKhau</sKey>
+    <sValue>Sai mật khẩu</sValue>
+  </item>
+  <item>
+    <sKey>ChonDuLieu</sKey>
+    <sValue>Vui lòng chọn dữ liệu!</sValue>
+  </item>
+  <!--/ALERT-->
+  <item>
+    <sKey>MaKH</sKey>
+    <sValue>Mã KH</sValue>
+  </item>
+  <item>
+    <sKey>TenKH</sKey>
+    <sValue>Tên KH</sValue>
+  </item>
+  <item>
+    <sKey>MaQuanHuyen</sKey>
+    <sValue>Mã Quận Huyện</sValue>
+  </item>
+  <item>
+    <sKey>NhomKhachHang</sKey>
+    <sValue>Nhóm Khách Hàng</sValue>
+  </item>
+  <item>
+    <sKey>NguoiLienHe</sKey>
+    <sValue>Người Liên Hệ</sValue>
+  </item>
+  <item>
+    <sKey>SoHD</sKey>
+    <sValue>Số HĐ</sValue>
+  </item>
+  <item>
+    <sKey>NhomKH</sKey>
+    <sValue>Nhóm Khách Hàng</sValue>
+  </item>
+  <item>
+    <sKey>MST</sKey>
+    <sValue>Mã Số Thuế</sValue>
+  </item>
+  <item>
+    <sKey>TenNganHang</sKey>
+    <sValue>Tên Ngân Hàng</sValue>
+  </item>
+  <item>
+    <sKey>STK</sKey>
+    <sValue>Số Tài Khoản</sValue>
+  </item>
+  <item>
+    <sKey>LinhVucHD</sKey>
+    <sValue>Lĩnh Vực Hoạt Động</sValue>
+  </item>
+  <item>
+    <sKey>DienThoaiNguoiLH</sKey>
+    <sValue>Điện Thoại Người Liên Hệ</sValue>
+  </item>
+  <item>
+    <sKey>CTHSKH</sKey>
+    <sValue>Chi tiết hồ sơ khách hàng</sValue>
+  </item>
+
+  <item>
+    <sKey>HSNV</sKey>
+    <sValue>Employee profile</sValue>
+  </item>
+  <item>
+    <sKey>DSNV</sKey>
+    <sValue>Employee List</sValue>
+  </item>
+  <item>
+    <sKey>NSNVDSNV</sKey>
+    <sValue>EMPLOYEES PROFILE</sValue>
+  </item>
+  <item>
+    <sKey>NSNVDSNV</sKey>
+    <sValue>EMPLOYEES PROFILE</sValue>
+  </item>
+  <item>
+    <sKey>TTDK</sKey>
+    <sValue>REGISTER</sValue>
+  </item>
+  <item>
+    <sKey>DKNP</sKey>
+    <sValue>Absent</sValue>
+  </item>
+  <item>
+    <sKey>DKDMVS</sKey>
+    <sValue>Work late</sValue>
+  </item>
+  <item>
+    <sKey>BCTK</sKey>
+    <sValue>TIMEKEEPING</sValue>
+  </item>
+  <item>
+    <sKey>BCST</sKey>
+    <sValue>Synthetic timekeeping</sValue>
+  </item>
+  <item>
+    <sKey>BPH</sKey>
+    <sValue>BOOK ROOM</sValue>
+  </item>
+  <item>
+    <sKey>BOOKPHONG</sKey>
+    <sValue>Book room</sValue>
+  </item>
+  <item>
+    <sKey>QLCHUNG</sKey>
+    <sValue>EMPLOYEES</sValue>
+  </item>
+  <item>
+    <sKey>MaNhanVien</sKey>
+    <sValue>ID</sValue>
+  </item>
+  <item>
+    <sKey>TENNV</sKey>
+    <sValue>Name</sValue>
+  </item>
+  <!--HO SO CA NHAN-->
+  <item>
+    <sKey>CONGTY</sKey>
+    <sValue>Company</sValue>
+  </item>
+  <item>
+    <sKey>QUOCGIA</sKey>
+    <sValue>Country</sValue>
+  </item>
+  <item>
+    <sKey>CHINHANH</sKey>
+    <sValue>Office</sValue>
+  </item>
+  <item>
+    <sKey>PHONGBAN</sKey>
+    <sValue>Department</sValue>
+  </item>
+  <item>
+    <sKey>TOQUANLY</sKey>
+    <sValue>Group</sValue>
+  </item>
+  <item>
+    <sKey>CHUCVU</sKey>
+    <sValue>Position</sValue>
+  </item>
+  <item>
+    <sKey>NGUOIQUANLY</sKey>
+    <sValue>Manager</sValue>
+  </item>
+  <item>
+    <sKey>NGAYVAO</sKey>
+    <sValue>Joining date</sValue>
+  </item>
+  <item>
+    <sKey>NGAYCHINHTHUC</sKey>
+    <sValue>Official date</sValue>
+  </item>
+  <item>
+    <sKey>SOTHANG</sKey>
+    <sValue>Number of months</sValue>
+  </item>
+  <item>
+    <sKey>EMAILCANHAN</sKey>
+    <sValue>Private emaiL</sValue>
+  </item>
+  <item>
+    <sKey>DIDONG</sKey>
+    <sValue>Telephone (home)</sValue>
+  </item>
+  <item>
+    <sKey>SKYPE</sKey>
+    <sValue>Skype</sValue>
+  </item>
+  <item>
+    <sKey>DIENTHOAI1</sKey>
+    <sValue>Mobile phone 1</sValue>
+  </item>
+  <item>
+    <sKey>DIENTHOAI2</sKey>
+    <sValue>Mobile phone 1</sValue>
+  </item>
+  <item>
+    <sKey>DIACHI</sKey>
+    <sValue>Address (Permanent)</sValue>
+  </item>
+  <item>
+    <sKey>DIACHICUTRU</sKey>
+    <sValue>Address (Temporary)</sValue>
+  </item>
+  <!--/HO SO CA NHAN-->
+
+
+
+
+
+  <!--HO SO CA NHAN 1-->
+  <item>
+    <sKey>THONGTINCANHAN</sKey>
+    <sValue>PERSONAL</sValue>
+  </item>
+  <item>
+    <sKey>THONGTINHOPDONG</sKey>
+    <sValue>LABOR CONTRACTS</sValue>
+  </item>
+  <item>
+    <sKey>NGUOILIENHE</sKey>
+    <sValue>CONTACT</sValue>
+  </item>
+  <item>
+    <sKey>QUYETDINHLUONG</sKey>
+    <sValue>SALARY</sValue>
+  </item>
+  <item>
+    <sKey>TTCN</sKey>
+    <sValue>Personal information</sValue>
+  </item>
+  <item>
+    <sKey>NGAYSINH</sKey>
+    <sValue>Date of Birth</sValue>
+  </item>
+  <item>
+    <sKey>SOCMTND</sKey>
+    <sValue>ID number</sValue>
+  </item>
+  <item>
+    <sKey>NOICAP</sKey>
+    <sValue>Place of</sValue>
+  </item>
+  <item>
+    <sKey>SOHOCHIEU</sKey>
+    <sValue>Passport Number</sValue>
+  </item>
+  <item>
+    <sKey>NOICAPHOCHIEU</sKey>
+    <sValue>Authority</sValue>
+  </item>
+  <item>
+    <sKey>NOISINH</sKey>
+    <sValue>Place of Birth</sValue>
+  </item>
+  <item>
+    <sKey>NGAYCAP</sKey>
+    <sValue>Date of Issue</sValue>
+  </item>
+  <item>
+    <sKey>NGAYCAPHC</sKey>
+    <sValue>Date of Insuance</sValue>
+  </item>
+  <item>
+    <sKey>QUOCTICH</sKey>
+    <sValue>Nationality</sValue>
+  </item>
+  <item>
+    <sKey>GIOITINH</sKey>
+    <sValue>Gender</sValue>
+  </item>
+  <item>
+    <sKey>HANCAPHC</sKey>
+    <sValue>Date of Expiry</sValue>
+  </item>
+  <item>
+    <sKey>HONHAN</sKey>
+    <sValue>Single - Married</sValue>
+  </item>
+
+  <item>
+    <sKey>THONGTINHOSO</sKey>
+    <sValue>Application resume</sValue>
+  </item>
+  <item>
+    <sKey>SOYEU</sKey>
+    <sValue>background</sValue>
+  </item>
+  <item>
+    <sKey>GIAYKHAMSK</sKey>
+    <sValue>Health Certification</sValue>
+  </item>
+  <item>
+    <sKey>ANH34</sKey>
+    <sValue>Photo card</sValue>
+  </item>
+  <item>
+    <sKey>DONXINVIEC</sKey>
+    <sValue>Job application</sValue>
+  </item>
+  <item>
+    <sKey>CMT</sKey>
+    <sValue>ID number photto</sValue>
+  </item>
+  <item>
+    <sKey>BANGTOTNGHIEP</sKey>
+    <sValue>diploma</sValue>
+  </item>
+  <item>
+    <sKey>CHUYENNGANH</sKey>
+    <sValue>Specialize</sValue>
+  </item>
+  <item>
+    <sKey>TRINHDO</sKey>
+    <sValue>Literacy</sValue>
+  </item>
+  <item>
+    <sKey>THONGTINBHXH</sKey>
+    <sValue>Social Insurance</sValue>
+  </item>
+  <item>
+    <sKey>MASOTHUECANHAN</sKey>
+    <sValue>Personal tax code</sValue>
+  </item>
+  <item>
+    <sKey>MASOTHUE</sKey>
+    <sValue>Tax code</sValue>
+  </item>
+  <item>
+    <sKey>NGAYCAPMST</sKey>
+    <sValue>Date of issue</sValue>
+  </item>
+  <item>
+    <sKey>THONGTINTKNH</sKey>
+    <sValue>Bank account</sValue>
+  </item>
+  <item>
+    <sKey>SOTAIKHOAN</sKey>
+    <sValue>Account number</sValue>
+  </item>
+  <item>
+    <sKey>TENTAIKHOAN</sKey>
+    <sValue>Account name</sValue>
+  </item>
+  <item>
+    <sKey>NGANHANG</sKey>
+    <sValue>Bank</sValue>
+  </item>
+  <item>
+    <sKey>HSNVCODE</sKey>
+    <sValue>Vpars</sValue>
+  </item>
+  <item>
+    <sKey>SoHoKhau</sKey>
+    <sValue>Household registration book</sValue>
+  </item>
+  <item>
+    <sKey>SoBaoHiem</sKey>
+    <sValue> S.I Number</sValue>
+  </item>
+  <item>
+    <sKey>MucDongBH</sKey>
+    <sValue>Salary forS.I</sValue>
+  </item>
+  <item>
+    <sKey>NgayDongTaiESiA</sKey>
+    <sValue>S.I Starting Date in Easia</sValue>
+  </item>
+  <item>
+    <sKey>NgayThamGia</sKey>
+    <sValue>S.I Starting Date</sValue>
+  </item>
+  
+  <item>
+    <sKey>SoHopDong</sKey>
+    <sValue>Contract Number</sValue>
+  </item>
+  <item>
+    <sKey>TenLoaiHopDong</sKey>
+    <sValue>Contract Type</sValue>
+  </item>
+  <item>
+    <sKey>ThoiHanHopDong</sKey>
+    <sValue>Deadline</sValue>
+  </item>
+  <item>
+    <sKey>NgayKyHopDong</sKey>
+    <sValue>Signing date</sValue>
+  </item>
+  <item>
+    <sKey>NgayHetHieuLuc</sKey>
+    <sValue>Deadline date</sValue>
+  </item>
+  <item>
+    <sKey>MucLuong</sKey>
+    <sValue>Salary</sValue>
+  </item>
+  <item>
+    <sKey>PhanTramLuong</sKey>
+    <sValue>% Salary level</sValue>
+  </item>
+  <item>
+    <sKey>DanhSachNguoiLienHe</sKey>
+    <sValue>Contact list</sValue>
+  </item>
+  
+  <item>
+    <sKey>IDMa</sKey>
+    <sValue>ID</sValue>
+  </item>
+  <item>
+    <sKey>TenNLH</sKey>
+    <sValue>Name</sValue>
+  </item>
+  <item>
+    <sKey>LoaiNLH</sKey>
+    <sValue>Relation</sValue>
+  </item>
+  <item>
+    <sKey>NgaySinhNLH</sKey>
+    <sValue>Date of Birth</sValue>
+  </item>
+  <item>
+    <sKey>DiDong</sKey>
+    <sValue>Phone</sValue>
+  </item>
+  <item>
+    <sKey>NgayNhap</sKey>
+    <sValue>Date</sValue>
+  </item>
+  <item>
+    <sKey>TenQuocGia</sKey>
+    <sValue>Country</sValue>
+  </item>
+  <item>
+    <sKey>TenChiNhanh</sKey>
+    <sValue>Office/Work Place</sValue>
+  </item>
+  <item>
+    <sKey>TenPhongBan</sKey>
+    <sValue>Department</sValue>
+  </item>
+  <item>
+    <sKey>ToQuanLy</sKey>
+    <sValue>Team</sValue>
+  </item>
+  <item>
+    <sKey>TenChucVu</sKey>
+    <sValue>Position/Title</sValue>
+  </item>
+  <item>
+    <sKey>NguoiQuanLy</sKey>
+    <sValue>Manager</sValue>
+  </item>
+  <item>
+    <sKey>NgayVaoCongTy</sKey>
+    <sValue>Joining</sValue>
+  </item>
+  <item>
+    <sKey>NgayKyHDCT</sKey>
+    <sValue>Official date</sValue>
+  </item>
+  <!--/HO SO CA NHAN-->
+  <!--MENU-->
+  <item>
+    <sKey>SDTC</sKey>
+    <sValue>ORGANIZATIONAL CHART</sValue>
+  </item>
+  <item>
+    <sKey>SDTCT</sKey>
+    <sValue>Organizational chart</sValue>
+  </item>
+  <item>
+    <sKey>DKHTCT</sKey>
+    <sValue>Go on business</sValue>
+  </item>
+  <item>
+    <sKey>DKDTLT</sKey>
+    <sValue>Holiday / Lunar Tet Duty</sValue>
+  </item>
+  <item>
+    <sKey>DKCLV</sKey>
+    <sValue>Register shift</sValue>
+  </item>
+  <item>
+    <sKey>SoNgayNghiPhep</sKey>
+    <sValue>Absent</sValue>
+  </item>
+  <item>
+    <sKey>DanhSachChoDuyet</sKey>
+    <sValue>Browse list</sValue>
+  </item>
+  <item>
+    <sKey>SoNgayDKDiMuon</sKey>
+    <sValue>The number is late</sValue>
+  </item>
+  <!--/MENU-->
+  
+  <!--QUAN LY DANG KY-->
+  <item>
+    <sKey>DSNGHIPHEP</sKey>
+    <sValue>List absent</sValue>
+  </item>
+  
+  <item>
+    <sKey>NghiTuNgay</sKey>
+    <sValue>From day</sValue>
+  </item>
+  <item>
+    <sKey>NghiDenNgay</sKey>
+    <sValue>To day</sValue>
+  </item>
+  <item>
+    <sKey>SoNgayNghi</sKey>
+    <sValue>Number</sValue>
+  </item>
+  <item>
+    <sKey>LyDoNghi</sKey>
+    <sValue>Reason</sValue>
+  </item>
+  <item>
+    <sKey>TrangThaiDuyet</sKey>
+    <sValue>Approval</sValue>
+  </item>
+  <item>
+    <sKey>NgayDuyet</sKey>
+    <sValue>Date</sValue>
+  </item>
+  <item>
+    <sKey>Ngay1</sKey>
+    <sValue>Date</sValue>
+  </item>
+  
+  <item>
+    <sKey>DangKyNghiPhep</sKey>
+    <sValue>Register absent</sValue>
+  </item>
+  <item>
+    <sKey>LoaiNghiPhep</sKey>
+    <sValue>Type of registration</sValue>
+  </item>
+  <item>
+    <sKey>LyDoNghi</sKey>
+    <sValue>reason</sValue>
+  </item>
+  <item>
+    <sKey>NghiPhepTuNgay</sKey>
+    <sValue>From day</sValue>
+  </item>
+  <item>
+    <sKey>NghiPhepDenNGay</sKey>
+    <sValue>To day</sValue>
+  </item>
+  <item>
+    <sKey>SoNgayNghi</sKey>
+    <sValue>Number</sValue>
+  </item>
+  <item>
+    <sKey>NguoiPheDuyet</sKey>
+    <sValue>Manager</sValue>
+  </item>
+  <item>
+    <sKey>EMailNguoiDuyet</sKey>
+    <sValue>Email</sValue>
+  </item>
+  <item>
+    <sKey>DinhKem</sKey>
+    <sValue>Đính kèm</sValue>
+  </item>
+  <item>
+    <sKey>HinhThucDangKy</sKey>
+    <sValue>Hinh thức đăng ký</sValue>
+  </item>
+  <item>
+    <sKey>Ngay</sKey>
+    <sValue>Day</sValue>
+  </item>
+  <item>
+    <sKey>CaLamViec</sKey>
+    <sValue>shift</sValue>
+  </item>
+  <item>
+    <sKey>DangKyCaLamViec</sKey>
+    <sValue>Register shift</sValue>
+  </item>
+  <item>
+    <sKey>Registershift</sKey>
+    <sValue>Register shift list</sValue>
+  </item>
+  <item>
+    <sKey>DanhSachDKHTCT</sKey>
+    <sValue>Go on business list</sValue>
+  </item>
+  <item>
+    <sKey>DangKyHocTapCongTac</sKey>
+    <sValue>Go on business</sValue>
+  </item>
+  <item>
+    <sKey>DanhSachDiSomVeMuon</sKey>
+    <sValue>Work late list</sValue>
+  </item>
+  <item>
+    <sKey>DanhSachDangKyDT</sKey>
+    <sValue>Holiday / Lunar tet duty list</sValue>
+  </item>
+  <item>
+    <sKey>DSDLM</sKey>
+    <sValue>Work late list</sValue>
+  </item>
+  
+  <item>
+    <sKey>SoNam</sKey>
+    <sValue>Seniority (Year)</sValue>
+  </item>
+  <item>
+    <sKey>SoThang</sKey>
+    <sValue>Seniority (Month)</sValue>
+  </item>
+  <item>
+    <sKey>SoNgay</sKey>
+    <sValue>Seniority (Date)</sValue>
+  </item>
+  <item>
+    <sKey>PhepTonNamTruoc</sKey>
+    <sValue>Annual Leave Remainings from 2016</sValue>
+  </item>
+  <item>
+    <sKey>SoNGayPhep</sKey>
+    <sValue>Annual Leave by TODAY  based on seniority</sValue>
+  </item>
+  <item>
+    <sKey>SoNgayPhepCuoiNam</sKey>
+    <sValue>Annual Leave by Dec 2017 based on seniority</sValue>
+  </item>
+  <item>
+    <sKey>TongNgayPhep</sKey>
+    <sValue>Total Annual Leave in 2017</sValue>
+  </item>
+  <item>
+    <sKey>NgayPhep</sKey>
+    <sValue>Day off in month</sValue>
+  </item>
+  <item>
+    <sKey>NgayPhepConLai</sKey>
+    <sValue>Annual Leave Remaings in 2017 (4)=(3) - Day off in month</sValue>
+  </item>
+  <item>
+    <sKey>MaNguoiLienHe</sKey>
+    <sValue>ID</sValue>
+  </item>
+  <item>
+    <sKey>TenNguoiLienHe</sKey>
+    <sValue>Name</sValue>
+  </item>
+  <item>
+    <sKey>LoaiNLH</sKey>
+    <sValue>Relation</sValue>
+  </item>
+  <item>
+    <sKey>NgaySinh</sKey>
+    <sValue>Date of Birth</sValue>
+  </item>
+  <!--/QUAN LY DANG KY-->
+  <!--BUTTON-->
+   <item>
+    <sKey>ThemMoi</sKey>
+    <sValue>Add</sValue>
+  </item>
+  <item>
+    <sKey>Luu</sKey>
+    <sValue>Save</sValue>
+  </item>
+  <item>
+    <sKey>Xoa</sKey>
+    <sValue>Delete</sValue>
+  </item>
+  <item>
+    <sKey>Sua</sKey>
+    <sValue>Edit</sValue>
+  </item>
+  <item>
+    <sKey>DangNhap</sKey>
+    <sValue>Login</sValue>
+  </item>
+  <item>
+    <sKey>TaiKhoan</sKey>
+    <sValue>Acount</sValue>
+  </item>
+  <item>
+    <sKey>MatKhau</sKey>
+    <sValue>Password</sValue>
+  </item>
+  <item>
+    <sKey>ThongTinNguoiLienHe</sKey>
+    <sValue>Contact</sValue>
+  </item>
+  <!--/BUTTON-->
+  <!--BOOK PHONG-->
+  <item>
+    <sKey>PhongHop</sKey>
+    <sValue>Room name</sValue>
+  </item>
+  <item>
+    <sKey>SoGio</sKey>
+    <sValue>Hours</sValue>
+  </item>
+  <item>
+    <sKey>ThoiGianBatDau</sKey>
+    <sValue>Start time</sValue>
+  </item>
+  <item>
+    <sKey>ThoiGianKetThuc</sKey>
+    <sValue>Finish time</sValue>
+  </item>
+  <item>
+    <sKey>NoiDungHop</sKey>
+    <sValue>Content</sValue>
+  </item>
+  <item>
+    <sKey>NguoiDat</sKey>
+    <sValue>Account</sValue>
+  </item>
+  <item>
+    <sKey>DienThoaiDat</sKey>
+    <sValue>Phone</sValue>
+  </item>
+  <item>
+    <sKey>BoPhanDat</sKey>
+    <sValue>Department</sValue>
+  </item>
+  <!--/BOOK PHONG-->
+  <!--DUYET THUC HIEN-->
+  <item>
+    <sKey>TrangThaiDuyet</sKey>
+    <sValue>Status</sValue>
+  </item>
+  <item>
+    <sKey>NguoiDuyet</sKey>
+    <sValue>Account</sValue>
+  </item>
+  <item>
+    <sKey>YKienDuyet</sKey>
+    <sValue>Note</sValue>
+  </item>
+  <item>
+    <sKey>DuyetThucHien</sKey>
+    <sValue>Approval</sValue>
+  </item>
+  <!--/DUYET THUC HIEN-->
+  <!--BOOK PHONG-->
+  <item>
+    <sKey>XACNHANXOA</sKey>
+    <sValue>Delete ?</sValue>
+  </item>
+  <item>
+    <sKey>TuyChon</sKey>
+    <sValue>Option</sValue>
+  </item>
+  <item>
+    <sKey>LapLaiMotLan</sKey>
+    <sValue>Only once</sValue>
+  </item>
+  <item>
+    <sKey>LapLaiNhieuLan</sKey>
+    <sValue>Repeatedly</sValue>
+  </item>
+  <item>
+    <sKey>T2</sKey>
+    <sValue>Monday</sValue>
+  </item>
+  <item>
+    <sKey>T3</sKey>
+    <sValue>Tuesday</sValue>
+  </item>
+  <item>
+    <sKey>T4</sKey>
+    <sValue>Wednesday</sValue>
+  </item>
+  <item>
+    <sKey>T5</sKey>
+    <sValue>Thursday</sValue>
+  </item>
+  <item>
+    <sKey>T6</sKey>
+    <sValue>Friday</sValue>
+  </item>
+  <item>
+    <sKey>T7</sKey>
+    <sValue>Saturday</sValue>
+  </item>
+  <item>
+    <sKey>CN</sKey>
+    <sValue>Sunday</sValue>
+  </item>
+  <item>
+    <sKey>NguoiDat</sKey>
+    <sValue>Account</sValue>
+  </item>
+  <item>
+    <sKey>ThoiGianHop</sKey>
+    <sValue>Time</sValue>
+  </item>
+  <item>
+    <sKey>NoiDung</sKey>
+    <sValue>Content</sValue>
+  </item>
+  <!--/BOOK PHONG-->
+</eLanguage>

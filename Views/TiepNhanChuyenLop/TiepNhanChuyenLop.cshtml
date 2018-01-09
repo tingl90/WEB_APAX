@@ -1,0 +1,824 @@
+﻿
+@{
+    ViewBag.Title = "Tiếp nhận chuyển lớp";
+    Layout = "~/Views/Shared/_Newlayout.cshtml";
+    //string hocvien = ViewBag.HocVien;
+}
+@using APAX.Models;
+<script src="~/Content/plugins/jQuery/dx.all.js"></script>
+<script src="~/Content/plugins/jQuery/jszip.min.js"></script>
+<style>
+    #horz-list li {
+        width: 80px;
+        background: none;
+    }
+
+        #horz-list li:before {
+            content: none;
+        }
+
+    #horz-list1 li {
+        background: none;
+    }
+
+        #horz-list1 li:before {
+            content: none;
+        }
+
+    #menutop {
+        padding-right: 0px;
+        padding-left: 0px;
+    }
+</style>
+<section class="content">
+    <div class="box box-danger">
+        <style>
+            .dx-header-row {
+                background-color: #BF1E2D;
+                color: #fff;
+            }
+
+            .dx-datagrid .dx-header-filter {
+                color: #fff;
+            }
+        </style>
+        <div class="box-header with-border">
+            <h3 class="box-title">Danh sách đề nghị chuyển lớp từ trung tâm khác </h3>
+
+        </div>
+        <div class="box-body">
+            <div id="gridTiepNhanChuyenLop">
+            </div>
+        </div>
+    </div>
+</section>
+<section class="content">
+    <div class="box box-danger">
+        <div class="box-header with-border">
+            <h3 class="box-title">Tiếp nhận học viên,đăng ký lớp mới cho học viên</h3>
+        </div>
+        <div class="box-body">
+            <form method="post" id="frChiTietDangKyChuyenLop" class="form-horizontal" role="form" data-parsley-validate>
+                <div class="row">
+                    <div class="col-md-6">
+                        <form class="form-horizontal">
+                            <div class="box-body">
+                                @*<div class="form-group">
+                                        <label for="inputEmail3" class="col-sm-3 control-label">Tìm học viên</label>
+                                        <div class="col-sm-9">
+                                            <div class="input-group input-group-sm">
+                                                <input type="text" id="MaHocVien" class="form-control">
+                                                <span class="input-group-btn">
+                                                    <button type="button" class="btn btn-block btn-danger">Tìm kiếm</button>
+                                                </span>
+                                            </div>
+                                        </div>
+                                    </div>*@
+                                <div class="form-group">
+                                    <label for="inputPassword3" class="col-sm-3 control-label">Tên học viên</label>
+                                    <div class="col-sm-9">
+                                        <input type="text" class="form-control" id="TenHocVien">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="inputPassword3" class="col-sm-3 control-label">Số điện thoại</label>
+                                    <div class="col-sm-9">
+                                        <input type="text" class="form-control" id="SoDienThoai">
+                                    </div>
+                                </div>
+                                <div class="box-header">
+                                    <h3 class="box-title" style="font-weight: bold;">THÔNG TIN LỚP ĐANG HỌC</h3>
+                                </div>
+                                <div class="form-group">
+
+                                </div>
+                                <div class="form-group">
+                                    <label for="inputPassword3" class="col-sm-3 control-label">@ResourceManager.GetString("TENLOPHOC")</label>
+                                    <div class="col-sm-9">
+                                        <input type="text" class="form-control" id="TenLop">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="inputPassword3" class="col-sm-3 control-label">Trung Tâm</label>
+                                    <div class="col-sm-9">
+                                        <input type="text" class="form-control" id="TrungTam">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="inputPassword3" class="col-sm-3 control-label">@ResourceManager.GetString("CHUONGTRINH")</label>
+                                    <div class="col-sm-9">
+                                        <input type="text" class="form-control" id="ChuongTrinh">
+                                    </div>
+                                </div>
+                                <div class="form-group" style="margin-bottom: 0px;">
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label for="inputPassword3" class="col-sm-6 control-label">@ResourceManager.GetString("BUOI1")</label>
+                                            <div class="col-sm-6" style="padding-right: 0px;">
+                                                <input type="text" class="form-control" id="Buoi1">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label for="inputPassword3" class="col-sm-5 control-label">@ResourceManager.GetString("BUOI2")</label>
+                                            <div class="col-sm-7">
+                                                <input type="text" class="form-control" id="Buoi2">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group" style="margin-bottom: 0px;">
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label for="inputPassword3" class="col-sm-6 control-label">Số buổi</label>
+                                            <div class="col-sm-6" style="padding-right: 0px;">
+                                                <input type="text" class="form-control" id="SoBuoi">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label for="inputPassword3" class="col-sm-5 control-label">Đơn giá</label>
+                                            <div class="col-sm-7">
+                                                <input type="text" class="form-control" id="DonGia">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                @*<div class="form-group" style="margin-bottom: 0px;">
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label for="inputPassword3" class="col-sm-6 control-label" style="padding-right: 0px;">@ResourceManager.GetString("NGAYBATDAU")</label>
+                                                <div class="col-sm-6" style="padding-right: 0px;">
+                                                    <input type="text" class="form-control" id="NgayBatDau">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label for="inputPassword3" class="col-sm-5 control-label" style="padding-right: 0px!important">@ResourceManager.GetString("NGAYKETTHUC")</label>
+                                                <div class="col-sm-7">
+                                                    <input type="text" class="form-control" id="NgayKetThuc">
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>*@
+                                @*<div class="form-group">
+                                        <label for="inputEmail3" class="col-sm-3 control-label">Ghi chú</label>
+                                        <div class="col-sm-9">
+                                            <input type="text" class="form-control" id="GhiChu">
+                                        </div>
+                                    </div>*@
+                                @*<div class="form-group" style="margin-bottom: 0px;">
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label for="inputPassword3" class="col-sm-6 control-label" style="padding-right: 0px;">Số buổi còn</label>
+                                                <div class="col-sm-6" style="padding-right: 0px;">
+                                                    <input type="text" class="form-control" id="SoBuoiConLai">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label for="inputPassword3" class="col-sm-5 control-label" style="padding-right: 0px!important">Đơn giá</label>
+                                                <div class="col-sm-7">
+                                                    <input type="text" class="form-control" id="DonGia2">
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>*@
+                                <div class="form-group" style="margin-bottom: 0px;">
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label for="inputPassword3" class="col-sm-6 control-label" style="padding-right: 0px;">Thành Tiền</label>
+                                            <div class="col-sm-6" style="padding-right: 0px;">
+                                                <input type="text" class="form-control" id="ThanhTien">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    @*<div class="col-md-6">
+                                            <div class="form-group">
+                                                <label for="inputPassword3" class="col-sm-5 control-label" style="padding-right: 0px!important">Ngày học cuối</label>
+                                                <div class="col-sm-7">
+                                                    <input type="text" class="form-control" id="NgayCuoiHoc">
+                                                </div>
+                                            </div>
+                                        </div>*@
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label for="inputPassword3" class="col-sm-5 control-label" style="padding-right: 0px!important">@ResourceManager.GetString("NGAYKETTHUC")</label>
+                                            <div class="col-sm-7">
+                                                @Html.DevExpress().DateEdit(
+                                                settings =>
+                                                {
+                                                    settings.Name = "NgayHocCuoi";
+                                                    settings.Width = Unit.Percentage(100);
+                                                    settings.Properties.ValidationSettings.Display = Display.Dynamic;
+                                                    settings.Properties.ValidationSettings.ValidateOnLeave = true;
+                                                    settings.ControlStyle.CssClass = "form-control";
+                                                }).GetHtml()
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="col-md-6">
+                        <form class="form-horizontal">
+                            <div class="box-body">
+                                <div class="form-group">
+
+                                </div>
+                                <div class="form-group">
+                                    <label for="inputEmail3" class="col-sm-3 control-label">Email</label>
+                                    <div class="col-sm-9">
+                                        <input type="email" class="form-control" id="Email">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="inputEmail3" class="col-sm-3 control-label">Địa chỉ</label>
+                                    <div class="col-sm-9">
+                                        <input type="text" class="form-control" id="DiaChi">
+                                    </div>
+                                </div>
+                                <div class="box-header">
+                                    <h3 class="box-title" style="font-weight: bold;">THÔNG TIN LỚP CHUYỂN ĐẾN</h3>
+                                </div>
+                                <div class="form-group">
+                                    <label for="inputEmail3" class="col-sm-3 control-label">Tìm lớp học</label>
+                                    @*<div class="col-sm-9">*@
+                                    <div class="input-group input-group-sm">
+                                        <div class="col-sm-9">
+                                            <div class="input-group input-group-sm">
+                                                @Html.DevExpress().TextBox(
+                                                    DateEditProperties =>
+                                                    {
+                                                        DateEditProperties.Name = "TIMKIEMTENLOPHOC";
+                                                        DateEditProperties.Width = Unit.Percentage(100);
+                                                        DateEditProperties.Properties.MaxLength = 500;
+                                                        DateEditProperties.ControlStyle.CssClass = "form-control";
+                                                    }
+                                                    ).GetHtml()
+                                                <span class="input-group-btn">
+                                                    <button type="button" class="btn btn-block btn-danger" onclick="TimKiemTenLopHoc()">Tìm kiếm lớp</button>
+                                                </span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    @*</div>*@
+                                </div>
+                                <div class="form-group">
+                                    <label for="inputEmail3" class="col-sm-3 control-label">Tên lớp học</label>
+                                    <div class="col-sm-9">
+                                        <input type="email" class="form-control" id="TenLopHocChuyenDen">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="inputPassword3" class="col-sm-3 control-label">Trung Tâm</label>
+                                    <div class="col-sm-9">
+                                        <input type="text" class="form-control" id="TrungTamChuyenDen">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="inputPassword3" class="col-sm-3 control-label">Chương trình</label>
+                                    <div class="col-sm-9">
+                                        <input type="text" class="form-control" id="ChuongTrinhChuyenDen">
+                                    </div>
+                                </div>
+                                <div class="form-group" style="margin-bottom: 0px;">
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label for="inputPassword3" class="col-sm-6 control-label">@ResourceManager.GetString("BUOI1")</label>
+                                            <div class="col-sm-6" style="padding-right: 0px;">
+                                                @Html.Action("Buoi1Partial", "DanhMuc")
+                                                @*<input type="text" class="form-control" id="Buoi1ChuyenDen">*@
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label for="inputPassword3" class="col-sm-5 control-label">@ResourceManager.GetString("BUOI2")</label>
+                                            <div class="col-sm-7">
+                                                @*<input type="text" class="form-control" id="Buoi2ChuyenDen">*@
+                                                @Html.Action("Buoi2Partial", "DanhMuc")
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group" style="margin-bottom: 0px;">
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label for="inputPassword3" class="col-sm-6 control-label">Số buổi</label>
+                                            <div class="col-sm-6" style="padding-right: 0px;">
+                                                <input type="text" class="form-control" id="SoBuoiChuyenDen">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label for="inputPassword3" class="col-sm-5 control-label" style="padding-right: 0px!important">Đơn giá</label>
+                                            <div class="col-sm-7">
+                                                <input type="text" class="form-control" id="DonGiaChuyenDen">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                @*<div class="form-group" style="margin-bottom: 0px;">
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label for="inputPassword3" class="col-sm-6 control-label" style="padding-right: 0px;">@ResourceManager.GetString("NGAYBATDAU")</label>
+                                                <div class="col-sm-6" style="padding-right: 0px;">
+                                                    <input type="text" class="form-control" id="NgayBatDauChuyenDen">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label for="inputPassword3" class="col-sm-5 control-label" style="padding-right: 0px!important">@ResourceManager.GetString("NGAYKETTHUC")</label>
+                                                <div class="col-sm-7">
+                                                    <input type="text" class="form-control" id="NgayKetThucChuyenDen">
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>*@
+                                @*<div class="form-group">
+                                        <label for="inputEmail3" class="col-sm-3 control-label">Ghi chú</label>
+                                        <div class="col-sm-9">
+                                            <input type="text" class="form-control" id="GhiChuChuyenDen">
+                                        </div>
+                                    </div>*@
+                                @*<div class="form-group" style="margin-bottom: 0px;">
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label for="inputPassword3" class="col-sm-6 control-label" style="padding-right: 0px;">Số buổi chuyển sang</label>
+                                                <div class="col-sm-6" style="padding-right: 0px;">
+                                                    <input type="text" class="form-control" id="SoBuoiChuyenSang">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+
+                                        </div>
+                                    </div>*@
+                                <div class="form-group" style="margin-bottom: 0px;">
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label for="inputPassword3" class="col-sm-6 control-label" style="padding-right: 0px;">Thành tiền</label>
+                                            <div class="col-sm-6" style="padding-right: 0px;">
+                                                <input type="text" class="form-control" id="ThanhTienChuyenSan">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    @*<div class="col-md-6">
+                                            <div class="form-group">
+                                                <label for="inputPassword3" class="col-sm-5 control-label" style="padding-right: 0px;">Ngày học cuối</label>
+                                                <div class="col-sm-7" style="padding-right: 0px;">
+                                                    <input type="text" class="form-control" id="NgayHocCuoi">
+                                                </div>
+                                            </div>
+                                        </div>*@
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label for="inputPassword3" class="col-sm-5 control-label" style="padding-right: 0px!important">@ResourceManager.GetString("Ngày bắt đầu")</label>
+                                            <div class="col-sm-7">
+                                                @Html.DevExpress().DateEdit(
+                                                settings =>
+                                                {
+                                                    settings.Name = "NgayBatDauChuyenLop";
+                                                    settings.Width = Unit.Percentage(100);
+                                                    settings.Properties.ValidationSettings.Display = Display.Dynamic;
+                                                    settings.Properties.ValidationSettings.ValidateOnLeave = true;
+                                                    settings.ControlStyle.CssClass = "form-control";
+                                                    settings.Properties.ClientSideEvents.ValueChanged = "function(e,c){OnValueChanged(e)}";
+                                                }).GetHtml()
+                                            </div>
+                                        </div>
+                                    </div>
+
+
+                                </div>
+                                <div class="form-group" style="margin-bottom: 0px;">
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label for="inputPassword3" class="col-sm-6 control-label" style="padding-right: 0px!important">Số tiền chênh</label>
+                                            <div class="col-sm-6" style="padding-right: 0px;">
+                                                <input type="text" class="form-control" id="SoTienChenh">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label for="inputPassword3" class="col-sm-5 control-label" style="padding-right: 0px!important">@ResourceManager.GetString("NGAYKETTHUC")</label>
+                                            <div class="col-sm-7">
+                                                @Html.DevExpress().DateEdit(
+                                                settings =>
+                                                {
+                                                    settings.Name = "NgayHocCuoiChuyenLop";
+                                                    settings.Width = Unit.Percentage(100);
+                                                    settings.Properties.ValidationSettings.Display = Display.Dynamic;
+                                                    settings.Properties.ValidationSettings.ValidateOnLeave = true;
+                                                    settings.ControlStyle.CssClass = "form-control";
+                                                }).GetHtml()
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="col-md-12">
+                        <div class="col-md-4"></div>
+                        <div class="col-md-4">
+                            <div class="col-md-2"></div>
+                            <div class="col-md-6"><button id="btnSuaTTCN" type="button" class="btn btn-block btn-danger pull-center" onclick="ChuyenLop()">Chuyển lớp</button></div>
+                            <div class="col-md-2"></div>
+                        </div>
+                        <div class="col-md-4"></div>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</section>
+<div id="DanhSachLopHoc" class="modal face" role="dialog">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">@ResourceManager.GetString("TimLopHoc").</h4>
+            </div>
+            <div class="modal-body">
+                <div class="content">
+                    <div class="box box-danger">
+                        <div class="box-body">
+                            <div id="gridDanhSachLopHoc">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- /.modal-content -->
+    </div>
+    <!-- /.modal-dialog -->
+</div>
+<script type="text/javascript">
+    var MaKhachHang = null, buoi1 = 0, buoi2 = 0, sobuoichuyen = 0, THDuBao = null, KeHoach = null, NgayBatDauHoc = null, idloaikehoach = null, tenbophan = null, thanhtiendetinh = 0;
+
+    $(document).ready(function () {
+        $.ajax({
+            url: '@Url.Action("GETDANHSACHCHUYENLOPTUTTKHAC", "TiepNhanChuyenLop")',
+            data: {HocVien: 0, LopHoc: 0},
+            type: 'POST',
+            contentType: 'application/json',
+            success: function (rs) {
+                alert(rs);
+            }
+        })
+        LoadDSDeNghiChuyenLop();
+    })
+    function TimKiemTenLopHoc() {
+        LoadDSLopHocDK();
+        $('#DanhSachLopHoc').modal('show');
+    }
+    function OnValueChanged(e) {
+        $.ajax({
+            url: '@Url.Action("LayNgayKetThuc1", "DangKyBaoLuu")',
+            data: {
+                NgayBatDau: Globalize.format(NgayBatDauChuyenLop.GetValue(), 'yyyy,MM,dd'), SoBuoi: sobuoichuyen, Buoi1: buoi1, Buoi2: buoi2
+            },
+            type: 'GET',
+            contentType: 'application/json',
+            success: function (rs) {
+                NgayHocCuoiChuyenLop.SetDate(new Date(parseInt(rs.substr(6, 13))));
+            }
+        })
+    }
+    function LoadDSLopHocDK() {
+        var TKTHS = TIMKIEMTENLOPHOC.GetValue();
+        var ArrDulieu = new DevExpress.data.CustomStore({
+            load: function (loadOptions) {
+                var deferred = $.Deferred(),
+                    args = {};
+
+                if (loadOptions.sort) {
+                    args.orderby = loadOptions.sort[0].selector;
+                    if (loadOptions.sort[0].desc)
+                        args.orderby += " desc";
+                }
+                args.take = loadOptions.take || 10;
+                args.page = (loadOptions.skip / args.take + 1);
+                args.tenhs = TKTHS;
+                args.athdubao = THDuBao;
+                $.ajax({
+                    url: "@Url.Action("LoadDSLopHocTiepNhanChuyenLop", "QLHocSinh")",
+                    data: args,
+                    success: function (result) {
+                        deferred.resolve(result.Result, { totalCount: result.Total });
+                    },
+                    error: function () {
+                        deferred.reject("Data Loading Error");
+                    },
+                    timeout: 20000
+                });
+
+                return deferred.promise();
+            }
+        });
+        $("#gridDanhSachLopHoc").dxDataGrid({
+            dataSource: {
+                store: ArrDulieu
+            },
+            remoteOperations: {
+                sorting: true,
+                paging: true
+            },
+            loadPanel: {
+                enabled: true
+            }, showRowLines: false,
+            rowAlternationEnabled: true,
+            showBorders: false,
+            hoverStateEnabled: true,
+            selection: {
+                mode: "single"
+            },
+            paging: {
+                pageSize: 10
+            },
+            pager: {
+                showPageSizeSelector: true,
+                allowedPageSizes: [5, 10],
+                showInfo: true
+            },
+            allowColumnResizing: true,
+            columnAutoWidth: true,
+            columns: [
+                {
+                    dataField: 'A_KEHOACH', caption: 'Chọn', allowEditing: false,
+                    cellTemplate: function (container, options) {
+                        var dt = options.data;
+                        $('<a class="btn btn-default btn-xs" onclick="OnValueChangedLop(' + dt.A_KEHOACH + ')" class="text-green"><b>...</b></a>').appendTo(container);
+                    }
+                },
+            , {
+                dataField: "TENKEHOACH",
+                caption: "@{ViewContext.Writer.Write(ResourceManager.GetString("TENKEHOACH")); } ",
+                alignment: "center"
+            },
+        , {
+            dataField: "TRUNGTAM",
+            caption: "@{ViewContext.Writer.Write(ResourceManager.GetString("TRUNGTAM")); } ",
+            alignment: "center"
+        }, {
+            dataField: "CHUONGTRINH",
+            caption: "@{ViewContext.Writer.Write(ResourceManager.GetString("CHUONGTRINH")); } ",
+            alignment: "center"
+        },
+            {
+                dataField: "TONGDOANHSOMUCTIEU",
+                caption: "@{ViewContext.Writer.Write(ResourceManager.GetString("TONGDOANHSOMUCTIEU")); } ",
+                alignment: "center"
+            },
+            {
+                dataField: "BUOI1",
+                caption: "@{ViewContext.Writer.Write(ResourceManager.GetString("BUOI1")); } ",
+                alignment: "center"
+            },
+            {
+                dataField: "BUOI2",
+                caption: "@{ViewContext.Writer.Write(ResourceManager.GetString("BUOI2")); } ",
+                alignment: "center"
+            },
+            {
+                dataField: "NGAYKEHOACHTU",
+                caption: "@{ViewContext.Writer.Write(ResourceManager.GetString("NGAYKEHOACHTU")); } ",
+                alignment: "center"
+            },
+            {
+                dataField: "NGAYKEHOACHDEN",
+                caption: "@{ViewContext.Writer.Write(ResourceManager.GetString("NGAYKEHOACHDEN")); } ",
+                alignment: "center"
+            }
+            ],
+            onSelectionChanged: function (selectedItems) {
+                var data = selectedItems.selectedRowsData[0];
+                if (data) {
+
+                } else {
+
+                }
+            }
+
+        });
+    }
+    function LoadDSDeNghiChuyenLop() {
+        var ArrDulieu = new DevExpress.data.CustomStore({
+            load: function (loadOptions) {
+                var deferred = $.Deferred(),
+                    args = {};
+
+                if (loadOptions.sort) {
+                    args.orderby = loadOptions.sort[0].selector;
+                    if (loadOptions.sort[0].desc)
+                        args.orderby += " desc";
+                }
+                args.take = loadOptions.take || 10;
+                args.page = (loadOptions.skip / args.take + 1);
+                $.ajax({
+                    url: "@Url.Action("DanhSachDeNghiChuyenLop", "TiepNhanChuyenLop")",
+                    data: args,
+                    success: function (result) {
+                        deferred.resolve(result.Result, { totalCount: result.Total });
+                    },
+                    error: function () {
+                        deferred.reject("Data Loading Error");
+                    },
+                    timeout: 20000
+                });
+
+                return deferred.promise();
+            }
+        });
+        $("#gridTiepNhanChuyenLop").dxDataGrid({
+            dataSource: {
+                store: ArrDulieu
+            },
+            remoteOperations: {
+                sorting: true,
+                paging: true
+            },
+            loadPanel: {
+                enabled: true
+            }, showRowLines: false,
+            rowAlternationEnabled: true,
+            showBorders: false,
+            hoverStateEnabled: true,
+            selection: {
+                mode: "single"
+            },
+            paging: {
+                pageSize: 10
+            },
+            pager: {
+                showPageSizeSelector: true,
+                allowedPageSizes: [5, 10],
+                showInfo: true
+            },
+            allowColumnResizing: true,
+            columnAutoWidth: true,
+            columns: [
+                        {
+                            dataField: 'ID_LYDOHV', caption: 'Tiếp nhận', width: 100, allowEditing: false, cellTemplate: function (container, options) {
+                                container.height(22);
+                                if (options.value == 2)
+                                    $('<i class="fa fa-check-square-o green"></i>').appendTo(container);
+                                else
+                                    $('<i class="fa fa-times red"></i>').appendTo(container);
+                            }
+                        },
+
+                        {
+                            dataField: "TENKHACHHANG",
+                            caption: "@{ViewContext.Writer.Write(ResourceManager.GetString("Tên học sinh")); } ",
+                            alignment: "center"
+                        },
+
+                    {
+                        dataField: "TONGDOANHSOMUCTIEU",
+                        caption: "@{ViewContext.Writer.Write(ResourceManager.GetString("Số buổi")); } ",
+                        alignment: "center"
+                    },
+                    {
+                        dataField: "TENKEHOACH",
+                        caption: "@{ViewContext.Writer.Write(@ResourceManager.GetString("Tên lớp")); } ",
+                        alignment: "center"
+                    },
+                    {
+                        dataField: "TENBOPHAN",
+                        caption: "@{ViewContext.Writer.Write(ResourceManager.GetString("Trung tâm")); } ",
+                        alignment: "center"
+                    },
+                    {
+                        dataField: "TENLOAIKEHOACH",
+                        caption: "@{ViewContext.Writer.Write(ResourceManager.GetString("Chương trình")); } ",
+                        alignment: "center"
+                    },
+                    {
+                        dataField: "NGAYLAM",
+                        caption: "@{ViewContext.Writer.Write(ResourceManager.GetString("Ngày đề nghị")); } ",
+                        alignment: "center"
+                    },
+                    {
+                        dataField: "TENLYDOHV",
+                        caption: "@{ViewContext.Writer.Write(ResourceManager.GetString("Lý do")); } ",
+                        alignment: "center"
+                    }
+            ],
+            onSelectionChanged: function (selectedItems) {
+                var data = selectedItems.selectedRowsData[0];
+                if (data) {
+                    THDuBao = data.A_TH_DUBAO;
+                    MaKhachHang = data.A_HOSOKHACHHANG;
+                    LoadDanhSachLopDangHoc(data.A_TH_DUBAO);
+                } else {
+
+                }
+            }
+
+        });
+    }
+    function LoadDanhSachLopDangHoc(thdubao) {
+        $.ajax({
+            url: '@Url.Action("DanhSachLopDangHoc", "TiepNhanChuyenLop")',
+            data: { THDUBAO: thdubao },
+            type: 'GET',
+            contentType: 'application/json',
+            success: function (rs) {
+                sobuoichuyen = rs[0].SoBuoiConLai;
+                $('#TenHocVien').val(rs[0].TENKHACHHANG);
+                $('#SoDienThoai').val(rs[0].DIENTHOAI1);
+                $('#TenLop').val(rs[0].TENKEHOACH);
+                $('#TrungTam').val(rs[0].TENBOPHAN);
+                $('#ChuongTrinh').val(rs[0].TENLOAIKEHOACH);
+                $('#SoBuoi').val(rs[0].SoBuoiConLai);
+                $('#DonGia').val((Globalize.format(rs[0].DONGIA)));
+                $('#Buoi1').val(rs[0].TENPHUONGTHUC);
+                $('#Buoi2').val(rs[0].TENCONGCU);
+                $('#ThanhTien').val(Globalize.format(rs[0].ThanhTienConLai));
+                thanhtiendetinh = rs[0].ThanhTienConLai;
+                $('#DiaChi').val(rs[0].DIACHI);
+                $('#Email').val(rs[0].EMAIL);
+                NgayHocCuoi.SetDate(new Date(parseInt(rs[0].NGAYKETTHUCLOPHOC.substr(6, 13))));
+            }
+        });
+
+    }
+    function OnValueChangedLop(e) {
+        $.getJSON('/TiepNhanChuyenLop/LoadLopInfoTiepNhan', $.param({ ID: e }, true), function (data) {
+            NgayBatDauHoc = Globalize.format(data[0].NGAYKEHOACHTU, 'yyyy,MM,dd');
+            KeHoach = data[0].A_KEHOACH;
+            idloaikehoach = data[0].ID_LOAIKEHOACH;
+            buoi1 = data[0].ID_PHUONGTHUC;
+            buoi2 = data[0].ID_CONGCU;
+            $('#A_KEHOACH').val(data[0].A_KEHOACH);
+            $('#TenLopHocChuyenDen').val(data[0].TENKEHOACH);
+            $('#TrungTamChuyenDen').val(data[0].TENBOPHAN);
+            $('#ChuongTrinhChuyenDen').val(data[0].TENLOAIKEHOACH);
+            $('#SoBuoiChuyenDen').val(sobuoichuyen);
+            $('#DonGiaChuyenDen').val(GetNum(data[0].TONGKHACHHANGMUCTIEU));
+            ID_PHUONGTHUC.SetValue(data[0].ID_PHUONGTHUC);
+            ID_CONGCU.SetValue(data[0].ID_CONGCU);
+            $('#DonGiaChuyenDen').val(GetNum(data[0].TONGKHACHHANGMUCTIEU));
+            $('#ThanhTienChuyenSan').val(GetNum((Globalize.format(Number(sobuoichuyen) * Number(data[0].TONGKHACHHANGMUCTIEU)))));
+            $('#SoTienChenh').val((Globalize.format((((sobuoichuyen) * Number(data[0].TONGKHACHHANGMUCTIEU))) - (Number(thanhtiendetinh)))));
+        });
+        $('#DanhSachLopHoc').modal('hide');
+    }
+    function ChuyenLop() {
+        $("#btnSuaTTCN").prop("disabled", true);
+        $.ajax({
+            url: '@Url.Action("TiepNhanLopHocCanChuyen", "TiepNhanChuyenLop")',
+            data: { MaThDuBao: THDuBao, MaKhachHang: MaKhachHang, MaKeHoach: KeHoach, NgayBatDauHoc: Globalize.format(NgayBatDauChuyenLop.GetValue(), 'yyyy,MM,dd'), NgayKetThucHoc: Globalize.format(NgayHocCuoiChuyenLop.GetValue(), 'yyyy,MM,dd'), SoBuoi: sobuoichuyen, DonGia: $('#DonGiaChuyenDen').val(), tenlop: $('#TenLopHocChuyenDen').val(), chuongtrinh: idloaikehoach },
+            type: 'GET',
+            contentType: 'application/json',
+            success: function (rs) {
+                $("#btnSuaTTCN").prop("disabled", false);
+                if (rs > 0) {
+                    DevExpress.ui.notify('Cập nhật thành công!', 'success', 2000);
+                    LoadDSDeNghiChuyenLop();
+                }
+                if (isNaN(rs)) DevExpress.ui.notify('Chưa cập nhật được!', 'error', 2000);
+            }
+        })
+    }
+    function GetNum(number, decimals, dec_point, thousands_sep) {
+        thousands_sep = (typeof thousands_sep === 'undefined') ? ',' : thousands_sep;
+        dec_point = (typeof dec_point === 'undefined') ? '.' : dec_point;
+        decimals = !isFinite(+decimals) ? 0 : Math.abs(decimals);
+        var u_dec = ('\\u' + ('0000' + (dec_point.charCodeAt(0).toString(16))).slice(-4));
+        var u_sep = ('\\u' + ('0000' + (thousands_sep.charCodeAt(0).toString(16))).slice(-4));
+        number = (number + '')
+            .replace('\.', dec_point)
+            .replace(new RegExp(u_sep, 'g'), '')
+            .replace(new RegExp(u_dec, 'g'), '.')
+            .replace(new RegExp('[^0-9+\-Ee.]', 'g'), '');
+        var n = !isFinite(+number) ? 0 : +number,
+            s = '',
+            toFixedFix = function (n, decimals) {
+                var k = Math.pow(10, decimals);
+                return '' + Math.round(n * k) / k;
+            };
+        s = (decimals ? toFixedFix(n, decimals) : '' + Math.round(n)).split('.');
+        if (s[0].length > 3) {
+            s[0] = s[0].replace(/\B(?=(?:\d{3})+(?!\d))/g, thousands_sep);
+        }
+        if ((s[1] || '').length < decimals) {
+            s[1] = s[1] || '';
+            s[1] += new Array(decimals - s[1].length + 1).join('0');
+        }
+        return s.join(dec_point);
+    }
+</script>

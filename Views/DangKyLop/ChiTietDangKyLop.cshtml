@@ -1,0 +1,1135 @@
+﻿@{
+    ViewBag.Title = "ChiTietDangKyLop";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<style>
+    .btn {
+        min-width: 80px;
+    }
+</style>
+<script src="~/Content/js/bootbox.min.js"></script>
+<div class="box box-danger">
+    <div class="box-header with-border">
+        <h3 class="box-title">Đăng ký lớp học</h3>
+    </div>
+    <form class="form-horizontal">
+        <div class="margin text-right">
+            <div id="divInsert" class="btn-group"><button type="button" onclick="Insert()" class="btn btn-block btn-danger">Thêm mới</button></div>
+            <div class="btn-group"><button id="btnSave" type="button" onclick="Save()" class="btn btn-block btn-danger">Lưu</button></div>
+            <div class="btn-group"><button type="button" onclick="Huy()" class="btn btn-block btn-danger">Hủy</button></div>
+            <div class="btn-group"><button type="button" onclick="XepLop()" class="btn btn-block btn-danger">Xếp lớp</button></div>
+            <div class="btn-group"><button type="button" onclick="ThuPhi()" class="btn btn-block btn-danger">Thu phí</button></div>
+            <div class="btn-group"><button type="button" class="btn btn-block btn-danger">In</button></div>
+        </div>
+        <div class="box-body">
+            <div class="col-md-6">
+                <div class="form-group">
+                    <h5><label class="col-sm-12 control-label text-bold" style="text-align:left">THÔNG TIN HỌC SINH</label></h5>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-2 control-label" style="padding-left:0px">Tên học sinh</label>
+                    <div class="col-sm-10">
+                        <div class="input-group">
+                            <input type="text" class="form-control" disabled id="TIMKIEMHOCVIEN" data-foo>
+                            <span class="input-group-btn">
+                                <button type="button" class="btn btn-block btn-danger" onclick="TimKiemHocSinh()" data-toggle="modal" data-target="#TimHocVien">Tìm kiếm</button>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-2 control-label" style="padding-left: 0px!important">Mã học sinh</label>
+                    <div class="col-sm-4">
+                        <input id="MAHOCVIEN" type="text" disabled class="form-control" data-foo>
+                    </div>
+                    <label class="col-sm-2 control-label">Mã LMS</label>
+                    <div class="col-sm-4">
+                        <input id="MALMS" type="text" disabled class="form-control" data-foo>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="col-sm-2 control-label">Phụ huynh</label>
+                    <div class="col-sm-10">
+                        <input id="PHUHUYNH" type="text" disabled class="form-control" data-foo>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-2 control-label">Email</label>
+                    <div class="col-sm-4">
+                        <input id="EMAIL" type="text" disabled class="form-control" data-foo>
+                    </div>
+                    <label class="col-sm-2 control-label">Di động</label>
+                    <div class="col-sm-4">
+                        <input id="DIDONG" type="text" disabled class="form-control" data-foo>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-12 control-label text-bold" style="text-align:left">EC phụ trách</label>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-2 control-label">Trung tâm</label>
+                    <div class="col-sm-10">
+                        <input id="TRUNGTAM" type="text" disabled class="form-control" data-foo>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-2 control-label" style="padding:7px 0px!important">EC phụ trách</label>
+                    <div class="col-sm-4">
+                        <input id="SALEPHUTRACH" type="text" disabled class="form-control" data-foo>
+                    </div>
+                    <label class="col-sm-2 control-label">EC leader</label>
+                    <div class="col-sm-4">
+                        <input id="SALELEADER" type="text" disabled class="form-control" data-foo>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-2 control-label" style="padding:7px 0px!important">GĐ trung tâm</label>
+                    <div class="col-sm-4">
+                        <input id="GDTRUNGTAM" type="text" disabled class="form-control" data-foo>
+                    </div>
+                    <label class="col-sm-2 control-label">GĐ vùng</label>
+                    <div class="col-sm-4">
+                        <input id="GDVUNG" type="text" disabled class="form-control" data-foo>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-2 control-label">CM</label>
+                    <div class="col-sm-4">
+                        <input id="CM" type="text" disabled class="form-control" data-foo />
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="form-group">
+                    <h5><label class="col-sm-12 control-label text-bold" style="text-align:left">THÔNG TIN ĐĂNG KỲ CHƯƠNG TRÌNH HỌC</label></h5>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-2 control-label" style="padding:7px 0px">Chương trình</label>
+                    <div class="col-sm-10">
+                        <div class="input-group">
+                            <input type="text" class="form-control" disabled id="TIMKIEMCHUONGTRINH" data-foo>
+                            <span class="input-group-btn">
+                                <button type="button" class="btn btn-block btn-danger" onclick="TimKiemChuongTrinh()" data-toggle="modal" data-target="#TimChuongTrinh">Tìm kiếm</button>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-2 control-label">Loại KH</label>
+                    <div class="col-sm-10">
+                        <div id="LoaiKhachHang" title="Loại khách hàng" style="width:100%"></div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-2 control-label">Gói phí</label>
+                    <div class="col-sm-10">
+                        <div id="GoiPhi" style="width:100%"></div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-2 control-label">Số buổi</label>
+                    <div class="col-sm-4">
+                        <input id="SOBUOI" type="text" disabled class="form-control" data-foo>
+                    </div>
+                    <label class="col-sm-2 control-label">Giá trị gói</label>
+                    <div class="col-sm-4">
+                        <input id="GIATRIGOI" type="text" disabled class="form-control" data-foo />
+                        <input id="DONGIA" type="text" disabled class="hidden" data-foo>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-2 control-label">Chiết khấu</label>
+                    <div class="col-sm-4">
+                        <input id="CHIETKHAU" type="number" min="0" class="form-control" data-foo>
+                    </div>
+                    <label class="col-sm-2 control-label">Thành tiền</label>
+                    <div class="col-sm-4">
+                        <input id="THANHTIEN" type="text" disabled class="form-control" data-foo>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-2 control-label" style="padding:7px 0px!important">Ngày dự kiến</label>
+                    <div class="col-sm-4">
+                        <div id="NgayDuKienHoc" style="width:100%"></div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-2 control-label">Ghi chú</label>
+                    <div class="col-sm-10">
+                        <textarea id="GHICHUCHUONGTRINH" class="form-control" rows="3" placeholder="Nội dung ..." data-foo></textarea>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+<input type="hidden" value="@ViewBag.HocVien" id="HocVien" />
+<div class="box box-danger">
+    <div class="box-header with-border">
+        <h3 class="box-title">Lịch sử đăng ký</h3>
+    </div>
+    <form class="form-horizontal">
+        <div class="row">
+            <div class="col-md-12">
+                <div id="gridLichSuDangKy"></div>
+            </div>
+        </div>
+    </form>
+</div>
+<div class="modal fade" id="DanhSachChuongTrinh" role="dialog">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header bg-red">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+                <h4 class="modal-title">Danh sách chương trình</h4>
+            </div>
+            <div class="modal-body">
+                <div id="gridDanhSachChuongTrinh"></div>
+            </div>
+        </div>
+    </div>
+</div>
+<div id="modalDanhSachHocSinh" class="modal face" role="dialog">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header bg-red">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+                <h4 class="modal-title">Danh sách học sinh</h4>
+            </div>
+            <div class="modal-body">
+                <div style="width:100%;margin-bottom:5px;" class="input-group">
+                    <div style="width:300px;float:left"><input type="text" class="form-control" placeholder="Nhập tên học viên" onKeydown="Javascript: if (event.keyCode == 13) TimHocVienTheoTuKhoa();" id="TuKhoaTimHocVien" data-foo></div>
+                    <div style="width:100px;float:left;margin-left:5px;"><button type="button" class="btn btn-block btn-danger" onclick="TimHocVienTheoTuKhoa()">Tìm kiếm</button></div>
+                </div>
+                <div id="gridDanhSachHocSinh"></div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal fade" id="DuyetTiepNhan" style="display: none;">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header bg-red">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">×</span>
+                </button>
+                <h4 class="modal-title">Duyệt thực hiện</h4>
+            </div>
+            <div class="modal-body">
+                <div class="box-body">
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label class="col-sm-4 control-label">Tên người dùng</label>
+                            <div class="col-sm-8">
+                                <input type="text" id="TenNguoiDung" readonly class="form-control">
+                            </div>
+                        </div>
+                        <div class="form-group" style="margin-top:40px;">
+                            <label class="col-sm-4 control-label" style="padding-left:0px">Nội dung/Ghi chú</label>
+                            <div class="col-sm-8">
+                                <textarea class="form-control" rows="3" id="GhiChuDuyet" placeholder="Nội dung ..."></textarea>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label class="col-sm-4 control-label">ý kiến duyệt<span style="color:red">*</span></label>
+                            <div class="col-sm-8">
+                                <div id="YKienDuyet" style="width:100%"></div>
+                            </div>
+                        </div>
+                        <div class="form-group" style="margin-top:40px;">
+                            <div class="col-sm-8">
+                                <button id="LuuDuyet" style="width:90px;height:90px;border-radius:10px;border-color:red" onclick="LuuDuyetTiepNhanChuyenLop()" class="btn-danger">Duyệt</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div id="gridDanhSachLichSuDuyet">
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    var a_hosokhachhang;
+    var a_sanpham;
+    var j_th_hopdong;
+    var chuongtrinh;
+    var trungtam;
+    var sobuoi = 0;
+    var chietkhau = 0;
+    var J_SALE_LEADER;
+    var J_GD_TRUNGTAM;
+    var J_GD_VUNG;
+    var thanhtien = 0;
+    var ID_DTTC;
+    var id_bophan;
+    var a_th_baogia_goiphi;
+    var ec;
+    var id_j_hopdong = 0;
+    var giatrigoi = 0;
+    var giamdoctrungtam;
+    var giamdocvung;
+    var xemlichsu = false;
+    $(document).ready(function () {
+        LoadDanhMucDuyet();
+        loadtrungtam();
+        LoadTrangThai();
+        $("#NgayDuKienHoc").dxDateBox({
+            value: new Date(),
+            formatString: 'dd/MM/yyyy',
+            hint: 'dd/MM/yyyy',
+            onChange: function (data) {
+                var dateBox = $("#NgayDuKienHoc").dxDateBox("instance");
+                var dateBoxValue = dateBox.option('text');
+                $("#NgayDuKienHoc").dxDateBox('instance').option('value', ConvertDate(dateBoxValue));
+            },
+            onValueChanged: function (data) {
+            },
+        }).dxDateBox("instance");
+        if ($('#HocVien').val() != null && $('#HocVien').val() != "")
+            LoadDanhSachHocSinh($('#HocVien').val());
+        LoaiKhachHang();
+        $('#CHIETKHAU').keyup(function () {
+            if (!xemlichsu) {
+                var giatrigoi = Number($('#GIATRIGOI').val().toString().replace(/,/g, ''));
+                var chietkhau = Number($('#CHIETKHAU').val());
+                thanhtien = giatrigoi * (100 - chietkhau) / 100;
+                $('#THANHTIEN').val(thanhtien.toString().replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1,"));
+            }
+        })
+    });
+    function LoaiKhachHang() {
+        $.ajax({
+            url: '@Url.Action("LoaiKhachHang", "DangKyLop")',
+            success: function (rs) {
+                $("#LoaiKhachHang").dxSelectBox({
+                    items: rs,
+                    showPopupTitle: false,
+                    displayExpr: "TENLOAIHOPDONG",
+                    valueExpr: "ID_LOAIHOPDONG",
+                    searchEnabled: true,
+                    onValueChanged: function (e) {
+                        if (!xemlichsu) {
+                            ShowHideInput(e.value);
+                        }
+                    },
+                });
+            }
+        });
+    }
+    function ShowHideInput(obj) {
+        $('#SOBUOI').val("");
+        $('#GIATRIGOI').val("");
+        $('#CHIETKHAU').val("");
+        $('#THANHTIEN').val("");
+        $("#GoiPhi").dxSelectBox('instance').option('value', null);
+        thanhtien = 0;
+        if (obj == 29) // hoc thu
+        {
+            $('#SOBUOI').val(3);
+            $('#GIATRIGOI').prop('readOnly', true);
+            $('#CHIETKHAU').prop('readOnly', true);
+            $('#THANHTIEN').prop('readOnly', true);
+            $('#GoiPhi').dxSelectBox({ readOnly: true });
+        }
+        else { // chinh thuc
+            $('#GIATRIGOI').prop('readOnly', false);
+            $('#CHIETKHAU').prop('readOnly', false);
+            $('#THANHTIEN').prop('readOnly', false);
+            $('#GoiPhi').dxSelectBox({ readOnly: false });
+        }
+    }
+    function GoiPhi() {
+        $.ajax({
+            url: '@Url.Action("GoiPhi", "DangKyLop")',
+            data: { TenTrungTam: trungtam, TenChuongTrinh: chuongtrinh },
+            success: function (rs) {
+                $("#GoiPhi").dxSelectBox({
+                    items: rs,
+                    showPopupTitle: false,
+                    displayExpr: "TENGOIPHI",
+                    valueExpr: "ID_GOIPHI",
+                    searchEnabled: true,
+                    onValueChanged: function (e) { },
+                });
+            }
+        });
+    }
+    function TimKiemHocSinh() {
+        $('#modalDanhSachHocSinh').modal('show');
+        document.getElementById("TuKhoaTimHocVien").focus();
+    }
+    function TimKiemChuongTrinh() {
+        LoadDSChuongTrinh();
+        $('#DanhSachChuongTrinh').modal('show');
+    }
+    function LoadDSChuongTrinh() {
+        $.ajax({
+            url: '@Url.Action("GetDanhSachChuongTrinh", "DangKyLop")',
+            type: 'GET',
+            contentType: 'application/json',
+            success: function (rs) {
+                $("#gridDanhSachChuongTrinh").dxDataGrid({
+                    dataSource: rs,
+                    allowColumnReordering: false,
+                    allowColumnResizing: false,
+                    columnAutoWidth: false,
+                    columnFixing: {
+                        enabled: true
+                    },
+                    paging: {
+                        pageSize: 10
+                    },
+                    showColumnLines: true,
+                    showRowLines: true,
+                    filterRow: {
+                        visible: true,
+                        applyFilter: "auto"
+                    },
+                    columns: [
+                        {
+                            caption: "Chọn", alignment: 'center',
+                            width: 100,
+                            cellTemplate: function (container, options) {
+                                var dt = options.data;
+                                $('<a href="javascript:" onclick="LoadDanhSachChuongTrinh(\'' + dt.A_SANPHAM + '\')"  class="text-green"><b>...</b></a>').appendTo(container);
+                            }
+                        },
+                          {
+                              dataField: "CHUONGTRINH",
+                              caption: "Chương trình",
+                              width: 120,
+                          }, {
+                              caption: "Đơn giá",
+                              dataField: "DONGIA",
+                              width: 120,
+                              dataType: "number",
+                              format: 'fixedPoint',
+                              precision: 2,
+                              customizeText: function (ctrl) {
+                                  var giatri = ctrl.value > 0 ? ctrl.value : 0;
+                                  return customizeNumber(giatri.toFixed(0));
+                              }
+                          }, {
+                              caption: "Ghi chú",
+                              dataField: "GHICHUSANPHAM",
+                              width: 120,
+                          }, {
+                              dataField: "TENNHOMSANPHAM",
+                              caption: "Sản phẩm",
+                              width: 200,
+                          }
+                    ],
+
+                }).dxDataGrid('instance');
+            },
+            error: function (a, b, c) {
+                DevExpress.ui.notify('Error ' + a.status + ': ' + a.statusText, 'error', 2000);
+            }
+        });
+    }
+    function LoadDSHocSinhDK() {
+        $.ajax({
+            url: '@Url.Action("GetDanhSachHocSinh", "DangKyLop")',
+            type: 'GET',
+            contentType: 'application/json',
+            success: function (rs) {
+                $("#gridDanhSachHocSinh").dxDataGrid({
+                    dataSource: rs,
+                    allowColumnReordering: false,
+                    allowColumnResizing: false,
+                    columnAutoWidth: false,
+                    columnFixing: {
+                        enabled: true
+                    },
+                    paging: {
+                        pageSize: 10
+                    },
+                    showColumnLines: true,
+                    showRowLines: true,
+                    filterRow: {
+                        visible: true,
+                        applyFilter: "auto"
+                    },
+                    columns: [{
+                        caption: "Chọn", alignment: 'center',
+                        width: 100,
+                        cellTemplate: function (container, options) {
+                            var dt = options.data;
+                            $('<a href="javascript:" onclick="LoadDanhSachHocSinh(\'' + dt.A_HOSOKHACHHANG + '\')"  class="text-green"><b>...</b></a>').appendTo(container);
+                        }
+                    }, {
+                        dataField: "MaHocSinh",
+                        caption: "Mã học sinh",
+                        width: 250,
+                    }, {
+                        caption: "Mã Effect",
+                        dataField: "MaEfffect",
+                        width: 120,
+                    }, {
+                        caption: "Mã LMS",
+                        dataField: "Ma_LMS",
+                        width: 120,
+                    }, {
+                        dataField: "TenHocSinh",
+                        caption: "Tên học sinh",
+                        width: 200,
+                    }, {
+                        dataField: "TenTrungTam",
+                        caption: "Trung tâm",
+                        width: 200,
+                    }, {
+                        caption: "Phụ huynh 1",
+                        dataField: "PhuHuynh",
+                        width: 200,
+                    }, {
+                        caption: "Điện thoại",
+                        dataField: "DD_phuHuynh",
+                        width: 120,
+                    }, {
+                        caption: "Email",
+                        dataField: "Email_Phuhuynh",
+                        width: 120,
+                    }, {
+                        caption: "EC phụ trách",
+                        dataField: "SaleQuanLy",
+                        width: 120,
+                    }, {
+                        caption: "Mã CM phụ trách",
+                        dataField: "SaleLeader",
+                        width: 120,
+                    }, ],
+
+                }).dxDataGrid('instance');
+            },
+            error: function (a, b, c) {
+                DevExpress.ui.notify('Error ' + a.status + ': ' + a.statusText, 'error', 2000);
+            }
+        });
+    }
+    function LoadDanhSachHocSinh(e) {
+        $('#modalDanhSachHocSinh').modal('hide');
+        LoadGridHocSinh(e);
+        $.getJSON('/DangKyLop/LoadHocSinhInfo',
+            $.param({ ID: e }, true),
+            function (data) {
+                $('#TIMKIEMHOCVIEN').val(data.TenHocSinh);
+                $('#MAHOCVIEN').val(data.MaHocSinh);
+                $('#MALMS').val(data.Ma_LMS);
+                $('#PHUHUYNH').val(data.PhuHuynh);
+                $('#DIDONG').val(data.DD_phuHuynh);
+                $('#GDVUNG').val(data.GiamDocVung);
+                $('#SALEPHUTRACH').val(data.SaleQuanLy);
+                $('#GDTRUNGTAM').val(data.GiamDocTT);
+                $('#SALELEADER').val(data.SaleLeader);
+                $('#TRUNGTAM').val(data.TenTrungTam);
+                $("#CM").val(data.CM);
+                a_hosokhachhang = data.A_HOSOKHACHHANG;
+                trungtam = data.TenTrungTam;
+                J_SALE_LEADER = data.ID_SaleLeader;
+                J_GD_TRUNGTAM = data.ID_GiamDocTT;
+                J_GD_VUNG = data.ID_GiamDocVung;
+                ID_DTTC = data.ID_SaleQuanLy;
+                id_bophan = data.ID_BOPHAN;
+                ec = data.EC;
+                ec_leader = data.EC_LEADER;
+                cm = data.CM;
+                om = data.OM;
+                giamdoctrungtam = data.GDTT;
+                giamdocvung = data.GDV;
+            });
+    }
+    function LoadDanhSachChuongTrinh(e) {
+        $('#DanhSachChuongTrinh').modal('hide');
+        $.getJSON('/DangKyLop/LoadChuongTrinhInfo', $.param({ ID: e }, true), function (data) {
+            $('#TIMKIEMCHUONGTRINH').val(data.CHUONGTRINH);
+            a_sanpham = data.A_SANPHAM;
+            chuongtrinh = data.CHUONGTRINH;
+            $.ajax({
+                url: '@Url.Action("GoiPhi", "DangKyLop")',
+                data: { TenTrungTam: $('#TRUNGTAM').val(), TenChuongTrinh: $('#TIMKIEMCHUONGTRINH').val() },
+                success: function (rs) {
+                    LoadGoiPhi(rs);
+                }
+            });
+        });
+    }
+    function LoadGoiPhi(rs) {
+        $("#GoiPhi").dxSelectBox({
+            items: rs,
+            showPopupTitle: false,
+            displayExpr: "TENGOIPHI",
+            valueExpr: "ID_GOIPHI",
+            searchEnabled: true,
+            onValueChanged: function (e) {
+                $.ajax({
+                    url: '@Url.Action("GetThongTinGoiPhi", "DangKyLop")',
+                    data: { TenTrungTam: $('#TRUNGTAM').val(), TenChuongTrinh: $('#TIMKIEMCHUONGTRINH').val(), ID_GOIPHI: e.value },
+                    success: function (data) {
+                        var ck = (data.CHIETKHAU == null || data.CHIETKHAU == "") ? 0 : Number(data.CHIETKHAU);
+                        var gtg = Number(data.GIATRIGOI);
+                        var tt = (gtg * (100 - ck) / 100);
+                        if (ck > 0)
+                            $('#CHIETKHAU').val(ck);
+                        $('#THANHTIEN').val(tt.toString().replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1,"));
+                        $('#DONGIA').val(data.DONGIA);
+                        $('#SOBUOI').val(data.SOBUOI);
+                        $('#GIATRIGOI').val(data.GIATRIGOI.toString().replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1,"));
+                        thanhtien = tt;
+                        chietkhau = data.CHIETKHAU;
+                        giatrigoi = data.GIATRIGOI;
+                        a_th_baogia_goiphi = data.A_TH_BAOGIA;
+                    }
+                });
+            },
+        });
+    }
+    function Insert() {
+        xemlichsu = false;
+        ActiveButtonSave(false);
+        $("#NgayDuKienHoc").dxDateBox('instance').option('value', new Date());
+        var elements = document.querySelectorAll('[data-foo]');
+        for (var i = 0; i < elements.length; i++) {
+            elements[i].value = "";
+        }
+        $("#LoaiKhachHang").dxSelectBox('instance').option('value', null);
+        //$("#GoiPhi").dxSelectBox('instance').option('value', null);
+    }
+    function Save() {
+        var ngaydukien = $("#NgayDuKienHoc").dxDateBox('instance').option('value');
+        if (ngaydukien == null || ngaydukien == "") {
+            DevExpress.ui.notify('Ngày dự kiến không được để trống !', 'warning', 2000);
+            document.querySelector('.dx-toast-warning').style.transform = "translate(720px, 30px)";
+            return
+        }
+
+        if ($('#TIMKIEMHOCVIEN').val().trim().length == 0) {
+            DevExpress.ui.notify('Chưa chọn học sinh!', 'warning', 2000);
+            document.querySelector('.dx-toast-warning').style.transform = "translate(720px, 30px)";
+            return
+        }
+
+        if ($('#TIMKIEMCHUONGTRINH').val().trim().length == 0) {
+            DevExpress.ui.notify('Chưa chọn Chương trình!', 'warning', 2000);
+            document.querySelector('.dx-toast-warning').style.transform = "translate(720px, 30px)";
+            return
+        }
+
+        var loaiKH = $('#LoaiKhachHang').dxSelectBox('instance').option('value');
+        if (loaiKH == null) {
+            DevExpress.ui.notify('Chưa chọn Loại khách hàng!', 'warning', 2000);
+            document.querySelector('.dx-toast-warning').style.transform = "translate(720px, 30px)";
+            return
+        }
+
+        var loaiGP = $('#GoiPhi').dxSelectBox('instance').option('value');
+        if (loaiKH == 33 && loaiGP == null) {
+            DevExpress.ui.notify('Chưa chọn Gói phí!', 'warning', 2000);
+            document.querySelector('.dx-toast-warning').style.transform = "translate(720px, 30px)";
+            return
+        }
+
+        var result = DevExpress.ui.dialog.confirm('Bạn có muốn lưu kết quả không?', "Xác nhận");
+        var tengoiphi = $('#GoiPhi').dxSelectBox('instance').option('text');
+
+        result.done(function (dialogResult) {
+            if (dialogResult) {
+                $.ajax({
+                    url: '@Url.Action("CapNhatHopDong", "DangKyLop")',
+                    data: {
+                        J_HOSOKHACHHANG: a_hosokhachhang,
+                        NGAYKYHOPDONG: Globalize.format(new Date(), 'yyyy-MM-dd'),
+                        NGAYBATDAU: Globalize.format($("#NgayDuKienHoc").dxDateBox('instance').option('value'), 'yyyy-MM-dd'),
+                        TONGTIEN_HD: thanhtien,
+                        ID_LOAIHOPDONG: $('#LoaiKhachHang').dxSelectBox('instance').option('value'),
+                        J_SANPHAM: a_sanpham,
+                        SOLUONG: $('#SOBUOI').val(),
+                        DONGIA: $('#DONGIA').val(),
+                        CHIETKHAU: Number($('#CHIETKHAU').val()),
+                        THANHTIEN: thanhtien,
+                        J_SALE_LEADER: J_SALE_LEADER,
+                        J_GD_TRUNGTAM: J_GD_TRUNGTAM,
+                        J_GD_VUNG: J_GD_VUNG,
+                        J_TH_BAOGIA: a_th_baogia_goiphi == null ? 1 : a_th_baogia_goiphi,
+                        TENGOIPHI: tengoiphi,
+                        EC: ec,
+                        EC_LEADER: ec_leader,
+                        CM: cm,
+                        OM: om,
+                        GDTT: giamdoctrungtam,
+                        GDV: giamdocvung,
+                        GHICHU: $('#GHICHUCHUONGTRINH').val(),
+                        ID_BOPHAN: id_bophan,
+                    },
+                    success: function (rs) {
+                        if (rs == -1) {
+                            DevExpress.ui.notify('Không thể tái phí cho học viên này', 'error', 2000);
+                            document.querySelector('.dx-toast-error').style.transform = "translate(720px, 30px)";
+                        }
+                        else if (rs > 0) {
+                            ActiveButtonSave(true);
+                            LoadGridHocSinh(a_hosokhachhang);
+                            j_th_hopdong = rs;
+                            DevExpress.ui.notify('Cập nhật thành công', 'success', 2000);
+                            document.querySelector('.dx-toast-success').style.transform = "translate(720px, 30px)";
+                        }
+                        else {
+                            DevExpress.ui.notify('Cập nhật thất bại', 'error', 2000);
+                            document.querySelector('.dx-toast-error').style.transform = "translate(720px, 30px)";
+                        }
+                    }
+                })
+            }
+            else {
+            }
+        });
+    }
+    function XepLop() {
+        self.location = '@Url.Action("ChiTietXepLop", "XepLop")'
+    }
+    function ThuPhi() {
+        self.location = '@Url.Action("ThuHocPhi", "ThuPhi")'
+    }
+    function ActiveButtonSave(choose) {
+        $("#btnSave").prop("disabled", choose);
+    }
+    function LoadTrangThai() {
+        $.ajax({
+            url: '@Url.Action("GetTrangThaiHoc", "DanhMuc")',
+            type: 'GET',
+            contentType: 'application/json',
+            success: function (rs) {
+                $("#TrangThai").dxSelectBox({
+                    items: rs,
+                    showPopupTitle: false,
+                    displayExpr: "TENLOAIHOPDONG",
+                    valueExpr: "ID_LOAIHOPDONG",
+                    searchEnabled: true,
+                    onValueChanged: function (e) {
+                    },
+                });
+            }
+        })
+    }
+    function loadtrungtam() {
+        $.getJSON('@Url.Action("GetTrungTam", "DanhMuc")', function (items) {
+            $("#TRUNGTAM").dxSelectBox({
+                items: items,
+                showPopupTitle: false,
+                displayExpr: "TENTRUNGTAM",
+                valueExpr: "ID_TRUNGTAM",
+                searchEnabled: true,
+                onValueChanged: function (e) {
+                },
+            });
+        });
+    }
+
+    function customizeNumber(valFirst) {
+        y = valFirst.split('.');
+        if (y.length > 1)
+            val = y[0];
+        else
+            val = valFirst;
+        val = val.replace(/,/g, "")
+        val += '';
+        x = val.split('.');
+        x1 = x[0];
+        x2 = x.length > 1 ? '.' + x[1] : '';
+
+        var rgx = /(\d+)(\d{3})/;
+
+        while (rgx.test(x1)) {
+            x1 = x1.replace(rgx, '$1' + '.' + '$2');
+        }
+        if (y.length > 1)
+            return x1 + x2 + ',' + y[1];
+        else
+            return x1 + x2;
+    }
+    function TimHocVienTheoTuKhoa() {
+        $.ajax({
+            url: '@Url.Action("GetDanhSachHocVienTheoTuKhoa", "DangKyLop")',
+            type: 'GET',
+            data: { TuKhoa: $('#TuKhoaTimHocVien').val().trim() },
+            contentType: 'application/json',
+            success: function (rs) {
+                $("#gridDanhSachHocSinh").dxDataGrid({
+                    dataSource: rs,
+                    allowColumnReordering: false,
+                    allowColumnResizing: false,
+                    columnAutoWidth: false,
+                    columnFixing: {
+                        enabled: true
+                    },
+                    paging: {
+                        pageSize: 10
+                    },
+                    showColumnLines: true,
+                    showRowLines: true,
+                    filterRow: {
+                        visible: true,
+                        applyFilter: "auto"
+                    },
+                    columns: [
+                        {
+                            caption: "Chọn", alignment: 'center',
+                            width: 100,
+                            cellTemplate: function (container, options) {
+                                var dt = options.data;
+                                $('<a href="javascript:" onclick="LoadDanhSachHocSinh(\'' + dt.A_HOSOKHACHHANG + '\')"  class="text-green"><b>...</b></a>').appendTo(container);
+                            }
+                        },
+                          {
+                              dataField: "MaHocSinh",
+                              caption: "Mã học sinh",
+                              width: 250,
+                          }, {
+                              caption: "Mã Effect",
+                              dataField: "MaEfffect",
+                              width: 120,
+                          }, {
+                              caption: "Mã LMS",
+                              dataField: "Ma_LMS",
+                              width: 120,
+                          }, {
+                              dataField: "TenHocSinh",
+                              caption: "Tên học sinh",
+                              width: 200,
+                          },
+                           {
+                               dataField: "TenTrungTam",
+                               caption: "Trung tâm",
+                               width: 200,
+                           },
+                          {
+                              caption: "Phụ huynh 1",
+                              dataField: "PhuHuynh",
+                              width: 200,
+                          },
+                          {
+                              caption: "Điện thoại",
+                              dataField: "DD_phuHuynh",
+                              width: 120,
+                          },
+                          {
+                              caption: "Email",
+                              dataField: "Email_Phuhuynh",
+                              width: 120,
+                          },
+                          {
+                              caption: "EC phụ trách",
+                              dataField: "SaleQuanLy",
+                              width: 120,
+                          },
+                          {
+                              caption: "Mã CM phụ trách",
+                              dataField: "SaleLeader",
+                              width: 120,
+                          },
+                    ],
+
+                }).dxDataGrid('instance');
+            },
+            error: function (a, b, c) {
+                DevExpress.ui.notify('Error ' + a.status + ': ' + a.statusText, 'error', 2000);
+            }
+        });
+    }
+
+    function LoadDanhMucDuyet() {
+        $.ajax({
+            url: '@Url.Action("DM_DuyetThucHien", "DanhMuc")',
+            type: 'GET',
+            contentType: 'application/json',
+            success: function (rs) {
+                $("#YKienDuyet").dxSelectBox({
+                    items: rs,
+                    showPopupTitle: false,
+                    displayExpr: "TENDUYET",
+                    valueExpr: "ID_DUYET",
+                    searchEnabled: true,
+                    onValueChanged: function (e) {
+                        id_duyet = e.value;
+                    },
+                });
+            }
+        })
+    }
+
+    function XemChiTietLichSu(obj) {
+        ActiveButtonSave(true);
+        $.ajax({
+            url: '@Url.Action("LoadChiTietLichSuDangKyLop", "DangKyLop")',
+            type: 'GET',
+            data: { J_TH_HOPDONG: obj },
+            contentType: 'application/json',
+            success: function (rs) {
+                if (rs.length > 0) {
+                    xemlichsu = true;
+                    $('#TIMKIEMHOCVIEN').val(rs[0].TenHocVien);
+                    $('#MAHOCVIEN').val(rs[0].MaHocSinh);
+                    $('#MALMS').val(rs[0].MaLMS);
+                    $('#PHUHUYNH').val(rs[0].PhuHuynh);
+                    $('#EMAIL').val(rs[0].Email_Phuhuynh);
+                    $('#DIDONG').val(rs[0].DD_phuHuynh);
+                    $('#TRUNGTAM').val(rs[0].TenTrungTam);
+                    $('#SALEPHUTRACH').val(rs[0].SaleQuanLy);
+                    $('#SALELEADER').val(rs[0].SaleLeader);
+                    $('#GDTRUNGTAM').val(rs[0].GiamDocTT);
+                    $('#GDVUNG').val(rs[0].GiamDocVung);
+                    $("#CM").val(rs[0].CM);
+                    $('#TIMKIEMCHUONGTRINH').val(rs[0].ChuongTrinh);
+                    $('#GHICHUCHUONGTRINH').val(rs[0].GHICHU);
+                    $("#LoaiKhachHang").dxSelectBox('instance').option('value', rs[0].LOAIKH);
+                    id_j_hopdong = rs[0].J_TH_HOPDONG;
+                    $.ajax({
+                        url: '@Url.Action("GoiPhi", "DangKyLop")',
+                        data: { TenTrungTam: rs[0].TenTrungTam, TenChuongTrinh: rs[0].ChuongTrinh },
+                        success: function (data) {
+                            $("#GoiPhi").dxSelectBox({
+                                items: data,
+                                showPopupTitle: false,
+                                displayExpr: "TENGOIPHI",
+                                valueExpr: "ID_GOIPHI",
+                                searchEnabled: true,
+                                value: Number(rs[0].GOIPHI),
+                                onValueChanged: function (e) {
+                                },
+                            });
+                        }
+                    });
+                    $('#SOBUOI').val(rs[0].SoBuoiHoc);
+                    $('#DONGIA').val(rs[0].DONGIA);
+                    var gtg = rs[0].THANHTIEN * 100 / (100 - rs[0].CHIETKHAU);
+                    $('#GIATRIGOI').val(gtg.toString().replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1,"));
+                    $('#CHIETKHAU').val(rs[0].CHIETKHAU);
+                    $("#NgayDuKienHoc").dxDateBox('instance').option('value', rs[0].NgayDuKienHoc);
+                    $('#THANHTIEN').val(rs[0].THANHTIEN.toString().replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1,"));
+                }
+            }
+        })
+    }
+
+    function LoadDanhSachHocVien(obj) {
+        $.ajax({
+            url: '@Url.Action("GetDanhSachLichSuDuyet", "DangKyLop")',
+            type: 'GET',
+            data: { DuBao: obj },
+            contentType: 'application/json',
+            success: function (rs) {
+                var dataGrid = $("#gridDanhSachLichSuDuyet").dxDataGrid({
+                    dataSource: rs,
+                    allowColumnReordering: false,
+                    allowColumnResizing: false,
+                    columnAutoWidth: false,
+                    columnFixing: {
+                        enabled: true
+                    },
+                    paging: {
+                        pageSize: 10
+                    },
+                    showColumnLines: true,
+                    showRowLines: true,
+                    filterRow: {
+                        visible: true,
+                        applyFilter: "auto"
+                    },
+                    columns: [
+                        {
+                            caption: "Ngày duyệt",
+                            dataField: "NGAYDUYET",
+                            width: 200,
+                        }, {
+                            caption: "Người duyệt",
+                            dataField: "TENDTTC",
+                            width: 200,
+                        }, {
+                            dataField: "TENDUYET",
+                            caption: "Trạng thái",
+                            width: 200,
+                        },
+                        {
+                            dataField: "YKIENBOSUNG",
+                            caption: "Ý kiến duyệt",
+                            width: 200,
+                        },
+                    ],
+
+                }).dxDataGrid('instance');
+            },
+            error: function (a, b, c) {
+                DevExpress.ui.notify('Error ' + a.status + ': ' + a.statusText, 'error', 2000);
+            }
+
+        });
+    }
+    function Huy() {
+        if (id_j_hopdong > 0) {
+            $.getJSON('/DangKyLop/LoadNguoiDung', $.param({ DuBao: id_j_hopdong }), function (rs) {
+                if (rs.TENDTTC == undefined) {
+                    $('#TenNguoiDung').val(rs);
+                }
+                else {
+                    $('#TenNguoiDung').val(rs.TENDTTC);
+                }
+                $('#GhiChuDuyet').val(rs.YKIENBOSUNG);
+                $("#YKienDuyet").dxSelectBox('instance').option('value', rs.ID_DUYET);
+                if (rs.ID_DUYET > 0) {
+                    $("#LuuDuyet").prop("disabled", true);
+                }
+                else {
+                    $("#LuuDuyet").prop("disabled", false);
+                }
+            })
+            LoadDanhSachHocVien(id_j_hopdong);
+            $('#DuyetTiepNhan').modal('show');
+        }
+        else {
+            DevExpress.ui.notify('Chưa chọn học viên để hủy đăng ký', 'error', 2000);
+            return;
+        }
+    }
+    function LuuDuyetTiepNhanChuyenLop() {
+        var formData = new FormData();
+        formData.append("A_THHOPDONG", id_j_hopdong);
+        formData.append("IDDuyet", $("#YKienDuyet").dxSelectBox('instance').option('value'));
+        formData.append("NoiDung", $('#GhiChuDuyet').val());
+        var result = DevExpress.ui.dialog.confirm('Bạn có chắc chắn lưu không?', "Confirm changes");
+        result.done(function (dialogResult) {
+            if (dialogResult) {
+                $.ajax({
+                    type: "POST",
+                    url: '@Url.Action("SaveDuyetHuyDangKy", "DangKyLop")',
+                    dataType: 'json',
+                    contentType: false,
+                    processData: false,
+                    data: formData,
+                    success: function (data) {
+                        if (data > 0) {
+                            $("#btnLuu").prop("disabled", true);
+                            DevExpress.ui.notify('Cập nhật thành công', 'success', 2000);
+                            LoadDanhSachHocVien(id_j_hopdong);
+                        }
+                        else {
+                            DevExpress.ui.notify('Chưa cập nhật được', 'error', 2000);
+                        }
+                    }
+                })
+            }
+        });
+    }
+    function LoadGridHocSinh(hv) {
+        $.ajax({
+            url: '@Url.Action("LoadLichSuDangKy", "DangKyLop")',
+            type: 'GET',
+            data: { HocVien: hv },
+            contentType: 'application/json',
+            success: function (rs) {
+                var dataGrid = $("#gridLichSuDangKy").dxDataGrid({
+                    dataSource: rs,
+                    allowColumnReordering: false,
+                    allowColumnResizing: false,
+                    columnAutoWidth: false,
+                    columnFixing: {
+                        enabled: true
+                    },
+                    paging: {
+                        pageSize: 10
+                    },
+                    pager: {
+                        showPageSizeSelector: true,
+                        allowedPageSizes: [10, 20, 50],
+                        showInfo: true
+                    },
+                    showColumnLines: true,
+                    showRowLines: true,
+                    filterRow: {
+                        visible: true,
+                        applyFilter: "auto"
+                    },
+                    selection: {
+                        mode: "single"
+                    },
+                    columns: [
+                    {
+                        caption: "Xem", alignment: 'center',
+                        dataField: "J_TH_HOPDONG",
+                        width: 100,
+                        cellTemplate: function (container, options) {
+                            var dt = options.data;
+                            $('<a href="javascript:" onclick="XemChiTietLichSu(' + options.value + ')"  class="text-green"><b>...</b></a>').appendTo(container);
+                        }
+                    },
+                    {
+                        dataField: "MaHocSinh",
+                        caption: "Mã học sinh",
+                        width: 150
+                    }, {
+                        dataField: "TenHocVien",
+                        caption: "Tên học sinh",
+                        width: 200
+                    }, {
+                        dataField: "MaEffect",
+                        caption: "Mã EFFECT",
+                        width: 150
+                    }, {
+                        dataField: "MaLMS",
+                        caption: "Mã LMS",
+                        width: 100
+                    }, {
+                        dataField: "ChuongTrinh",
+                        caption: "Chương trình",
+                        width: 200
+                    }, {
+                        dataField: "NgayDuKienHoc",
+                        caption: "Ngày dự kiến học",
+                        width: 150
+                    }, {
+                        dataField: "LOAIKH",
+                        caption: "Loại khách hàng",
+                        width: 150
+                    }, {
+                        dataField: "TENGOIPHI",
+                        caption: "Gói phí",
+                        width: 150
+                    }, {
+                        dataField: "CHIETKHAU",
+                        caption: "Chiết khấu",
+                        width: 150
+                    }, {
+                        dataField: "THANHTIEN",
+                        caption: "Thành tiền",
+                        width: 150,
+                        dataType: "number",
+                        format: 'decimal fixedPoint'
+                    }],
+                    onCellClick: function (e) {
+                        var component = e.component,
+                            prevClickTime = component.lastClickTime;
+                        component.lastClickTime = new Date();
+                        if (prevClickTime && (component.lastClickTime - prevClickTime < 300)) {
+                            var dataGrid2 = $('#gridLichSuDangKy').dxDataGrid('instance');
+                            var row = dataGrid2.getSelectedRowsData();
+                            XemChiTietLichSu(row[0].J_TH_HOPDONG);
+                        }
+                        else {
+                            ss = [];
+                        }
+                    }
+                }).dxDataGrid('instance');
+            },
+            error: function (a, b, c) {
+                DevExpress.ui.notify('Error ' + a.status + ': ' + a.statusText, 'error', 2000);
+            }
+
+        });
+    }
+    function ConvertDate(obj) {
+        var lstngay = obj.split("/");
+        return lstngay[2] + "-" + lstngay[0] + "-" + lstngay[1];
+    }
+</script>

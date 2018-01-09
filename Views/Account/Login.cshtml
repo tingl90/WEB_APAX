@@ -1,0 +1,44 @@
+﻿
+@{
+    ViewBag.Title = "Login";
+    Layout = "~/Views/Shared/_LayoutLogin.cshtml";
+}
+
+<div class="login-box-body">
+    <div class="login-logo">
+        <b style="color:#bf1e2d">ĐĂNG NHẬP</b>
+    </div>
+    <form method="post">
+        @using (Html.BeginForm("Login", "Account", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { @id = "frLogin", @class = "login__form", role = "form" }))
+        {
+            <div class="form-group has-feedback">
+                <input type="text" class="form-control" id="Username" name="Username"  placeholder="Username">
+                <span class="glyphicon glyphicon-envelope form-control-feedback"></span>
+            </div>
+            <div class="form-group has-feedback">
+                <input type="password" class="form-control" id="Password" name="Password" placeholder="Password">
+                <span class="glyphicon glyphicon-lock form-control-feedback"></span>
+            </div>
+            <div class="row">
+                <div class="col-xs-8">
+                    <div class="checkbox icheck">
+                        <label>
+                            <input type="checkbox"> Ghi nhớ
+                        </label>
+                    </div>
+                </div>
+                <!-- /.col -->
+                <div class="col-xs-4">
+                    <button type="submit" class="btn btn-block btn-danger">Sign In</button>
+                </div>
+                <!-- /.col -->
+            </div>
+        }
+        
+    </form>
+    <div class="social-auth-links text-center">
+        @Html.ValidationSummary(true, "", new { @class = "text-danger toCenter" })
+    </div>
+    <!-- /.social-auth-links -->
+    <a href="#">I forgot my password</a>    
+</div>

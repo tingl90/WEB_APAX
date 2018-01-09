@@ -1,0 +1,110 @@
+﻿<aside class="main-sidebar">
+    <section class="sidebar">
+        <div class="user-panel">
+        </div>
+        <ul class="sidebar-menu">
+            <li id="hosohocvien" class="treeview">
+                <a href="#">
+                    <i class="fa fa-th"></i><span>Quản lý thông tin hồ sơ</span>
+                    <span class="pull-right-container">
+                        <i class="fa fa-angle-left pull-right"></i>
+                    </span>
+                </a>
+                <ul class="treeview-menu">
+                    <li id="QuanLyHocVien"><a href="@Url.Action("QuanLyHocVien", "HoSoHocVien")"><i class="fa fa-circle-o"></i> Hồ sơ học sinh</a></li>
+                    <li id="QuanLyGiaoDich"><a href="@Url.Action("QuanLyGiaoDich", "GiaoDich")"><i class="fa fa-circle-o"></i> Chăm sóc khách hàng</a></li>
+                    <li id="ChiTietDangKyLop"><a href="@Url.Action("ChiTietDangKyLop", "DangKyLop")"><i class="fa fa-circle-o"></i> Đăng ký lớp học</a></li>
+                </ul>
+            </li>
+            <li id="quanlylophoc" class="treeview">
+                <a href="#">
+                    <i class="fa fa-laptop"></i><span>Quản lý lớp học</span>
+                    <span class="pull-right-container">
+                        <i class="fa fa-angle-left pull-right"></i>
+                    </span>
+                </a>
+                <ul class="treeview-menu">
+                    <li id="DanhSachLopHocChiTiet"><a href="@Url.Action("DanhSachLopHocChiTiet", "DanhSachLop")"><i class="fa fa-circle-o"></i> Danh sách lớp học</a></li>
+                    <li id="ChiTietXepLop"><a href="@Url.Action("ChiTietXepLop", "XepLop")"><i class="fa fa-circle-o"></i> Xếp lớp</a></li>
+                    <li id="ChiTietBaoLuu"><a href="@Url.Action("ChiTietBaoLuu", "DangKyBaoLuu")"><i class="fa fa-circle-o"></i> Đăng ký bảo lưu</a></li>
+                    <li id="ChiTietChuyenPhi"><a href="@Url.Action("ChiTietChuyenPhi", "DangKyChuyenPhi")"><i class="fa fa-circle-o"></i> Đăng ký chuyển phí</a></li>
+                    <li id="ChiTietChuyenLop"><a href="@Url.Action("ChiTietChuyenLop", "DangKyChuyenLop")"><i class="fa fa-circle-o"></i> Đăng ký chuyển lớp</a></li>
+                    <li id="DanhSachTiepNhan"><a href="@Url.Action("DanhSachTiepNhan", "TiepNhanChuyenLop")"><i class="fa fa-circle-o"></i>Danh sách chuyển trung tâm</a></li>
+                    <li id="ChiTietTamDung"><a href="@Url.Action("ChiTietTamDung", "DangKyTamDung")"><i class="fa fa-circle-o"></i> Đăng ký tạm dừng</a></li>
+                </ul>
+            </li>
+            <li id="quanlyhocphi" class="treeview menu">
+                <a href="#">
+                    <i class="fa fa-edit"></i> <span>Quản lý học phí</span>
+                    <span class="pull-right-container">
+                        <i class="fa fa-angle-left pull-right"></i>
+                    </span>
+                </a>
+                <ul class="treeview-menu">
+                    <li id="ThuHocPhi"><a href="@Url.Action("ThuHocPhi", "ThuPhi")"><i class="fa fa-circle-o"></i> Thu học phí</a></li>
+                    @*<li id="ChiTietTaiPhi"><a href="@Url.Action("ChiTietTaiPhi", "TaiPhi")"><i class="fa fa-circle-o"></i> Tái phí</a></li>*@
+                </ul>
+            </li>
+            <li id="thietlaplichhoc" class="treeview">
+                <a href="#">
+                    <i class="fa fa-calendar"></i> <span>Thiết lập lịch học</span>
+                    <span class="pull-right-container">
+                        <i class="fa fa-angle-left pull-right"></i>
+                    </span>
+                </a>
+                @*<ul class="treeview-menu">
+                        <li><a href="../tables/simple.html"><i class="fa fa-circle-o"></i> Simple tables</a></li>
+                        <li><a href="../tables/data.html"><i class="fa fa-circle-o"></i> Data tables</a></li>
+                    </ul>*@
+            </li>
+            <li id="baocao" class="treeview">
+                <a href="#">
+                    <i class="fa fa-dashboard"></i><span>Báo cáo</span>
+                    <span class="pull-right-container">
+                        <i class="fa fa-angle-left pull-right"></i>
+                    </span>
+                </a>
+                <ul class="treeview-menu">
+                    <li id="HocSinhMoi"><a href="@Url.Action("HocSinhMoi", "BaoCao")"><i class="fa fa-circle-o"></i> Học sinh mới</a></li>
+                    <li id="HocSinh"><a href="@Url.Action("HocSinh", "BaoCao")"><i class="fa fa-circle-o"></i> Học sinh</a></li>
+                    <li id="ChoXepLop"><a href="@Url.Action("ChoXepLop", "BaoCao")"><i class="fa fa-circle-o"></i> Chờ xếp lớp</a></li>
+                </ul>
+            </li>
+            <li id="hethong" class="treeview">
+                <a href="#">
+                    <i class="fa fa-gears"></i><span>Hệ thống</span>
+                    <span class="pull-right-container">
+                        <i class="fa fa-angle-left pull-right"></i>
+                    </span>
+                </a>
+                <ul class="treeview-menu">
+                    <li id="PhanQuyen"><a href="@Url.Action("PhanQuyen", "HeThong")"><i class="fa fa-circle-o"></i> Phân quyền</a></li>
+                </ul>
+            </li>
+        </ul>
+    </section>
+</aside>
+<script type="text/javascript">
+    $(document).ready(function () {
+        var url = window.location.href;
+        url = url.substring(url.lastIndexOf('/') + 1);
+        $('#' + url).addClass('active');
+        if (url == "" || url == "QuanLyGiaoDich" || url == "ChiTietDangKyLop")
+            $('#hosohocvien').removeClass('treeview').removeClass('active').addClass('treeview active');
+        else {
+            if (url == "ThuHocPhi") {
+                $('#quanlyhocphi').removeClass('treeview').removeClass('active').addClass('treeview active');
+            }else{
+                if (url == "HocSinhMoi" || url == "HocSinh" || url == "ChoXepLop") {
+                    $('#baocao').removeClass('treeview').removeClass('active').addClass('treeview active');
+                } else {
+                    if (url == "PhanQuyen") {
+                        $('#hethong').removeClass('treeview').removeClass('active').addClass('treeview active');
+                    } else {
+                        $('#quanlylophoc').removeClass('treeview').removeClass('active').addClass('treeview active');
+                    }
+                }
+            }
+        }
+    });
+</script>

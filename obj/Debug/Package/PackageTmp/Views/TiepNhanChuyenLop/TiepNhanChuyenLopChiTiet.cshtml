@@ -1,0 +1,372 @@
+﻿@{
+    ViewBag.Title = "ChiTietTiepNhanChuyen";
+    Layout = "~/Views/Shared/_Newlayout.cshtml";
+    
+}
+@using APAX.Models;
+<script src="~/Content/plugins/jQuery/dx.all.js"></script>
+<script src="~/Content/plugins/jQuery/jszip.min.js"></script>
+<input type="hidden" value="@ViewBag.MaKhachHang" />
+<style>
+    #horz-list li {
+        width: 80px;
+        background: none;
+    }
+
+        #horz-list li:before {
+            content: none;
+        }
+
+    #horz-list1 li {
+        background: none;
+    }
+
+        #horz-list1 li:before {
+            content: none;
+        }
+
+    #menutop {
+        padding-right: 0px;
+        padding-left: 0px;
+    }
+
+    .form-horizontal .form-group {
+        margin-right: -15px;
+        margin-left: -15px;
+        margin-bottom: 10px;
+    }
+</style>
+<section class="content">
+    <div class="box box-danger">
+        <div class="box-header with-border">
+            <h3 class="box-title">Tiếp nhận học viên,đăng ký lớp mới cho học viên</h3>
+        </div>
+        <div class="box-body">
+            <form method="post" id="frChiTietDangKyChuyenLop" class="form-horizontal" role="form" data-parsley-validate>
+                <div class="row">
+                    <div class="col-md-6">
+                        <form class="form-horizontal">
+                            <div class="box-body">
+                                @*<div class="form-group">
+                                    <label for="inputEmail3" class="col-sm-3 control-label">Tìm học viên</label>
+                                    <div class="col-sm-9">
+                                        <div class="input-group input-group-sm">
+                                            <input type="text" id="MaHocVien" class="form-control">
+                                            <span class="input-group-btn">
+                                                <button type="button" class="btn btn-block btn-danger">Tìm kiếm</button>
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div>*@     
+                                <div class="form-group">
+                                    <label for="inputPassword3" class="col-sm-3 control-label">Tên học viên</label>
+                                    <div class="col-sm-9">
+                                        <input type="text" class="form-control" id="TenHocVien">
+                                    </div>
+                                </div>                         
+                                <div class="form-group">
+                                    <label for="inputPassword3" class="col-sm-3 control-label">Số điện thoại</label>
+                                    <div class="col-sm-9">
+                                        <input type="text" class="form-control" id="SoDienThoai">
+                                    </div>
+                                </div>
+                                <div class="box-header">
+                                    <h3 class="box-title" style="font-weight: bold;">THÔNG TIN LỚP ĐANG HỌC</h3>
+                                </div>
+                                <div class="form-group">
+
+                                </div>
+                                <div class="form-group">
+                                    <label for="inputPassword3" class="col-sm-3 control-label">@ResourceManager.GetString("TENLOPHOC")</label>
+                                    <div class="col-sm-9">
+                                        <input type="text" class="form-control" id="TenLop">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="inputPassword3" class="col-sm-3 control-label">Trung Tâm</label>
+                                    <div class="col-sm-9">
+                                        <input type="text" class="form-control" id="TrungTam">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="inputPassword3" class="col-sm-3 control-label">@ResourceManager.GetString("CHUONGTRINH")</label>
+                                    <div class="col-sm-9">
+                                        <input type="text" class="form-control" id="ChuongTrinh">
+                                    </div>
+                                </div>
+
+                                <div class="form-group" style="margin-bottom: 0px;">
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label for="inputPassword3" class="col-sm-6 control-label">Số buổi</label>
+                                            <div class="col-sm-6" style="padding-right: 0px;">
+                                                <input type="text" class="form-control" id="SoBuoi">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label for="inputPassword3" class="col-sm-5 control-label">Đơn giá</label>
+                                            <div class="col-sm-7">
+                                                <input type="text" class="form-control" id="DonGia">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group" style="margin-bottom: 0px;">
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label for="inputPassword3" class="col-sm-6 control-label">@ResourceManager.GetString("BUOI1")</label>
+                                            <div class="col-sm-6" style="padding-right: 0px;">
+                                                <input type="text" class="form-control" id="Buoi1">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label for="inputPassword3" class="col-sm-5 control-label">@ResourceManager.GetString("BUOI2")</label>
+                                            <div class="col-sm-7">
+                                                <input type="text" class="form-control" id="Buoi2">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group" style="margin-bottom: 0px;">
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label for="inputPassword3" class="col-sm-6 control-label" style="padding-right: 0px;">@ResourceManager.GetString("NGAYBATDAU")</label>
+                                            <div class="col-sm-6" style="padding-right: 0px;">
+                                                <input type="text" class="form-control" id="NgayBatDau">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label for="inputPassword3" class="col-sm-5 control-label" style="padding-right: 0px!important">@ResourceManager.GetString("NGAYKETTHUC")</label>
+                                            <div class="col-sm-7">
+                                                <input type="text" class="form-control" id="NgayKetThuc">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="inputEmail3" class="col-sm-3 control-label">Ghi chú</label>
+                                    <div class="col-sm-9">
+                                        <input type="text" class="form-control" id="GhiChu">
+                                    </div>
+                                </div>
+                                <div class="form-group" style="margin-bottom: 0px;">
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label for="inputPassword3" class="col-sm-6 control-label" style="padding-right: 0px;">Số buổi còn</label>
+                                            <div class="col-sm-6" style="padding-right: 0px;">
+                                                <input type="text" class="form-control" id="SoBuoiConLai">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label for="inputPassword3" class="col-sm-5 control-label" style="padding-right: 0px!important">Đơn giá</label>
+                                            <div class="col-sm-7">
+                                                <input type="text" class="form-control" id="DonGia">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group" style="margin-bottom: 0px;">
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label for="inputPassword3" class="col-sm-6 control-label" style="padding-right: 0px;">Thành Tiền</label>
+                                            <div class="col-sm-6" style="padding-right: 0px;">
+                                                <input type="text" class="form-control" id="ThanhTien">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label for="inputPassword3" class="col-sm-5 control-label" style="padding-right: 0px!important">Ngày học cuối</label>
+                                            <div class="col-sm-7">
+                                                <input type="text" class="form-control" id="NgayCuoiHoc">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="col-md-6">
+                        <form class="form-horizontal">
+                            <div class="box-body">
+                                <div class="form-group">
+
+                                </div>
+                                <div class="form-group">
+                                    <label for="inputEmail3" class="col-sm-3 control-label">Email</label>
+                                    <div class="col-sm-9">
+                                        <input type="email" class="form-control" id="Email">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="inputEmail3" class="col-sm-3 control-label">Địa chỉ</label>
+                                    <div class="col-sm-9">
+                                        <input type="text" class="form-control" id="DiaChi">
+                                    </div>
+                                </div>
+                                <div class="box-header">
+                                    <h3 class="box-title" style="font-weight: bold;">THÔNG TIN LỚP CHUYỂN ĐẾN</h3>
+                                </div>
+                                @*<div class="form-group">
+                                    <label for="inputEmail3" class="col-sm-3 control-label">Tìm lớp học</label>
+                                    <div class="col-sm-9">
+                                        <div class="input-group input-group-sm">
+                                            <input type="text" class="form-control">
+                                            <span class="input-group-btn">
+                                                <button type="button" class="btn btn-block btn-danger">Tìm kiếm lớp</button>
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div>*@
+                                <div class="form-group">
+                                    <label for="inputEmail3" class="col-sm-3 control-label">Tên lớp học</label>
+                                    <div class="col-sm-9">
+                                        <input type="email" class="form-control" id="TenLopHoc">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="inputPassword3" class="col-sm-3 control-label">Trung Tâm</label>
+                                    <div class="col-sm-9">
+                                        <input type="text" class="form-control" id="TrungTamLopChuyenDen">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="inputPassword3" class="col-sm-3 control-label">Chương trình</label>
+                                    <div class="col-sm-9">
+                                        <input type="text" class="form-control" id="ChuongTrinhLopChuyenDen">
+                                    </div>
+                                </div>
+
+                                <div class="form-group" style="margin-bottom: 0px;">
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label for="inputPassword3" class="col-sm-3 control-label">Số buổi</label>
+                                            <div class="col-sm-9">
+                                                <input type="text" class="form-control" id="SoBuoiLopChuyenDen">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label for="inputPassword3" class="col-sm-5 control-label" style="padding-right: 0px!important">Đơn giá</label>
+                                            <div class="col-sm-7">
+                                                <input type="text" class="form-control" id="DonGiaLopChuyenDen">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group" style="margin-bottom: 0px;">
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label for="inputPassword3" class="col-sm-6 control-label">@ResourceManager.GetString("BUOI1")</label>
+                                            <div class="col-sm-6" style="padding-right: 0px;">
+                                                <input type="text" class="form-control" id="Buoi1LopChuyenDen">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label for="inputPassword3" class="col-sm-5 control-label">@ResourceManager.GetString("BUOI2")</label>
+                                            <div class="col-sm-7">
+                                                <input type="text" class="form-control" id="Buoi2LopChuyenDen">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group" style="margin-bottom: 0px;">
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label for="inputPassword3" class="col-sm-6 control-label" style="padding-right: 0px;">@ResourceManager.GetString("NGAYBATDAU")</label>
+                                            <div class="col-sm-6" style="padding-right: 0px;">
+                                                <input type="text" class="form-control" id="NgayBatDauLopChuyenDen">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label for="inputPassword3" class="col-sm-5 control-label" style="padding-right: 0px!important">@ResourceManager.GetString("NGAYKETTHUC")</label>
+                                            <div class="col-sm-7">
+                                                <input type="text" class="form-control" id="NgayKetThucLopChuyenDen">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="inputEmail3" class="col-sm-3 control-label">Ghi chú</label>
+                                    <div class="col-sm-9">
+                                        <input type="text" class="form-control" id="GhiChuLopChuyenDen">
+                                    </div>
+                                </div>
+                                <div class="form-group" style="margin-bottom: 0px;">
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label for="inputPassword3" class="col-sm-6 control-label" style="padding-right: 0px;">Số buổi</label>
+                                            <div class="col-sm-6" style="padding-right: 0px;">
+                                                <input type="text" class="form-control" id="SoBuoiChuyenSang">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+
+                                    </div>
+                                </div>
+                                <div class="form-group" style="margin-bottom: 0px;">
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label for="inputPassword3" class="col-sm-6 control-label" style="padding-right: 0px;">Thành tiền</label>
+                                            <div class="col-sm-6" style="padding-right: 0px;">
+                                                <input type="text" class="form-control" id="ThanhTienChuyenSan">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label for="inputPassword3" class="col-sm-5 control-label" style="padding-right: 0px!important">Số tiền chênh</label>
+                                            <div class="col-sm-7">
+                                                <input type="text" class="form-control" id="SoTienChenh">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="col-md-12">
+                        <div class="col-md-4"></div>
+                        <div class="col-md-4">
+                            <div class="col-md-2"></div>
+                            <div class="col-md-6"><button type="button" class="btn btn-block btn-danger pull-center">Chuyển lớp</button></div>
+                            <div class="col-md-2"></div>
+                        </div>
+                        <div class="col-md-4"></div>
+                    </div>
+
+
+                </div>
+            </form>
+        </div>
+    </div>
+
+
+
+</section>
+
+
+
+<script>
+    $(document).ready(function () {
+    });
+    
+</script>
+
+
+
+

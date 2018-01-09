@@ -1,0 +1,541 @@
+﻿
+@{
+    ViewBag.Title = "PhanQuyen";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="box box-danger">
+    <div class="box-header with-border">
+        <h3 class="box-title">Quyền người dùng</h3>        
+    </div>
+    <!-- /.box-header -->
+    <!-- form start -->
+    <form class="form-horizontal">
+        <div class="box-body" style="padding-bottom:0px">
+            <div class="col-md-8"> </div>
+                <div class="col-md-4">
+                <div class="form-group">
+                    <label class="col-sm-4 control-label">Trung tâm</label>
+                    <div class="col-sm-8">
+                        <div id="TRUNGTAM"></div>
+                        <script>
+                            var ttam = '';
+                            $(function () {
+                                $.ajax({
+                                    url: '@Url.Action("Get_CB_TrungTam", "HeThong")',
+                                    type: 'GET',
+                                    contentType: 'application/json',
+                                    success: function (rs) {
+                                        $('#TRUNGTAM').dxSelectBox({
+                                            dataSource: rs,
+                                            displayExpr: 'TENTRUNGTAM',
+                                            valueExpr: 'MA_DVCS',
+                                            searchEnabled: true,
+                                            onValueChanged: function (data) {
+                                                ttam = data.value;
+                                                load_grid();
+                                                load_leader();
+                                            }
+                                        }).dxSelectBox("instance");
+                                    }, error: function (a, b, c) { DevExpress.ui.notify('Error ' + a.status + ': ' + a.statusText, 'error', 2000); }
+                                });
+                            })
+                        </script>
+                    </div>
+                </div>
+                </div>
+            </div>
+        <div class="row">
+            <div class="col-md-12">
+                <div id="gridDanhSachHocVien"></div>
+            </div>
+        </div>
+    </form>
+</div>
+<!-- /.box -->
+<div class="box box-danger">
+    <div class="box-header with-border">
+        <h3 class="box-title">PHÂN QUYỀN HỆ THỐNG</h3>
+    </div>
+    <!-- /.box-header -->
+    <!-- form start -->
+    <form class="form-horizontal">
+        @*<div class="margin text-right">
+                <div class="btn-group"><button type="button" class="btn btn-block btn-danger">Thêm mới</button></div>
+                <div class="btn-group"><button type="button" class="btn btn-block btn-danger">Cập nhật</button></div>
+            </div>*@
+        <div class="box-body">
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label class="col-sm-4 control-label">Mã nhân viên</label>
+                    <div class="col-sm-8">
+                        <input type="text" class="form-control" id="tt1">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-4 control-label">Tên nhân viên</label>
+                    <div class="col-sm-8">
+                        <input type="text" class="form-control" id="tt2">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-4 control-label">Di động</label>
+                    <div class="col-sm-8">
+                        <input type="text" class="form-control" id="tt3">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-4 control-label">Email</label>
+                    <div class="col-sm-8">
+                        <input type="text" class="form-control" id="tt4">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-4 control-label">ID nhân viên</label>
+                    <div class="col-sm-8">
+                        <input type="text" class="form-control" id="tt5">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-4 control-label">Mã vùng</label>
+                    <div class="col-sm-8">
+                        <input type="text" class="form-control" id="tt6">
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label class="col-sm-4 control-label">Mã Trung tâm</label>
+                    <div class="col-sm-8">
+                        <input type="text" class="form-control" id="tt7">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-4 control-label">Mã bộ phận</label>
+                    <div class="col-sm-8">
+                        <input type="text" class="form-control" id="tt8">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-4 control-label">Mã chức vụ</label>
+                    <div class="col-sm-8">
+                        <input type="text" class="form-control" id="tt9">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-4 control-label" style="padding-left:0px">Mã người quản lý</label>
+                    <div class="col-sm-8">
+                        <input type="text" class="form-control" id="tt10">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-4 control-label" style="padding-left:0px">Mã GĐ trung tâm</label>
+                    <div class="col-sm-8">
+                        <input type="text" class="form-control" id="tt11">
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label class="col-sm-4 control-label">Mã GĐ vùng</label>
+                    <div class="col-sm-8">
+                        <input type="text" class="form-control" id="tt12">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-4 control-label">Tên tài khoản</label>
+                    <div class="col-sm-8">
+                        <input type="text" class="form-control" id="tt13">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-4 control-label">Mật khẩu</label>
+                    <div class="col-sm-8">
+                        <input type="text" class="form-control" id="tt14">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-4 control-label">Ghi chú</label>
+                    <div class="col-sm-8">
+                        <input type="text" class="form-control" id="tt15">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-4 control-label">Ngày cập nhật</label>
+                    <div class="col-sm-8">
+                        <input type="text" class="form-control" id="tt16">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-sm-7"></div>
+                    <div class="col-sm-5">
+                        <button type="button" class="btn btn-block btn-danger" onclick="Save_PhanQuyen()">Cập nhật</button>
+                    </div>
+                </div>
+            </div>                              
+        </div>
+    </form>
+</div>
+<div class="box box-danger">
+    <div class="box-header">
+        <h3 class="box-title">PHÂN QUYỀN</h3>
+    </div>
+    <div class="box-body">
+        <div id="gridDanhSachLeader"></div>
+    </div>
+</div>
+
+
+<script>
+    var mald = "", maql = "";
+    function load_leader() {
+        $.ajax({
+            url: "@Url.Action("Get_DanhSachNhanSu_Leader", "HeThong")?trungtam="+ttam,
+            //data: args,
+            success: function (result) {
+                $("#gridDanhSachLeader").dxDataGrid({
+                    dataSource: {
+                        type: "odata",
+                        store: result,
+                        key: 'MaNV'
+                    }, remoteOperations: {
+                        sorting: true,
+                        paging: true
+                    },
+                    loadPanel: {
+                        enabled: true
+                    }, showRowLines: false,
+                    rowAlternationEnabled: true,
+                    showBorders: false,
+                    hoverStateEnabled: true,
+                    selection: {
+                        mode: "single",
+                        //deferred: true
+                    },
+                    paging: {
+                        pageSize: 5
+                    },
+                    pager: {
+                        showPageSizeSelector: true,
+                        allowedPageSizes: [20, 50, 100],
+                        showInfo: true
+                    },
+                    allowColumnReordering: true,
+                    allowColumnResizing: true,
+                    columnAutoWidth: true,
+                    filterRow: {
+                        visible: true,
+                        applyFilter: "auto"
+                    },
+                    headerFilter: {
+                        visible: true
+                    }, 
+                    //selectionFilter: ["MaNV", "=", maql],
+                    columns: [{
+                        dataField: 'MANhanSu', caption: '',
+                        cellTemplate: function (container, options) {
+                            var key = options.key;
+                            $("<div />").dxCheckBox({
+                                value: maql === options.data.MaNV ? true : false
+                            }).appendTo(container);
+                        },
+                    },
+                    {
+                        dataField: "MaNV",
+                        caption: "Mã NV",
+                    }, {
+                        dataField: "TenNV",
+                        caption: "Tên NV"
+                    },{
+                        dataField: "ChucVu",
+                        caption: "Mã chức vụ"
+                    }, {
+                        dataField: "MaTrungTam",
+                        caption: "Mã trung tâm"
+                    }, {
+                        dataField: "MaVung",
+                        caption: "Mã vùng"
+                    }],
+                    onSelectionChanged: function (selectedItems) {
+                        var data = selectedItems.selectedRowsData[0];
+                        if (data) {
+                            mald = data.MaNV;
+                        } else {
+
+                        }
+                    },
+                    //onLoadSuccess: function (data) {
+                    //    for (i = 0; i < data.rows.length; ++i) {
+                    //        if (data.rows[i]['MaNV'] == 'G2950') 
+                    //            alert(data.rows[i]['MaNV'])
+                    //        //$(this).dxdatagrid('checkRow', i);
+                    //    }
+                    //}
+                });
+            },
+        error: function () {
+            //deferred.reject("Data Loading Error");
+        },
+        timeout: 10000
+        });
+    }
+    function load_grid() {
+        $.ajax({
+            url: "@Url.Action("Get_DanhSachNhanSu", "HeThong")?trungtam="+ttam,
+            //data: args,
+            success: function (result) {
+                $("#gridDanhSachHocVien").dxDataGrid({
+                    dataSource: {
+                        store: result
+                    }, remoteOperations: {
+                        sorting: true,
+                        paging: true
+                    },
+                    loadPanel: {
+                        enabled: true
+                    }, showRowLines: false,
+                    rowAlternationEnabled: true,
+                    showBorders: false,
+                    hoverStateEnabled: true,
+                    selection: {
+                        mode: "single"
+                    },
+                    paging: {
+                        pageSize: 5
+                    },
+                    pager: {
+                        showPageSizeSelector: true,
+                        allowedPageSizes: [20, 50, 100],
+                        showInfo: true
+                    },
+                    allowColumnReordering: true,
+                    allowColumnResizing: true,
+                    columnAutoWidth: true,
+                    filterRow: {
+                        visible: true,
+                        applyFilter: "auto"
+                    },
+                    headerFilter: {
+                        visible: true
+                    },
+                    columns: [{
+                        dataField: 'MANhanSu', caption: '', allowEditing: false,
+                        cellTemplate: function (container, options) {
+                            var dt = options.data;
+                            $('<a href="javascript:" onclick="Load_TT(\'' + dt.MaNV + '\')"  class="text-blue"> View</a>').appendTo(container);
+                        }
+                    },
+                    {
+                        dataField: "MaNV",
+                        caption: "Mã NV"
+                    }, {
+                        dataField: "TenNV",
+                        caption: "Tên NV"
+                    }, {
+                        dataField: "TenTK",
+                        caption: "Tên TK"
+                    }, {
+                        dataField: "Password",
+                        caption: "Mật khẩu"
+                    }, {
+                        dataField: "DiDong",
+                        caption: "Di động"
+                    }, {
+                        dataField: "Email",
+                        caption: "Email"
+                    }, {
+                        dataField: "IDNhanVien",
+                        caption: "ID_Nhân viên"
+                    }, {
+                        dataField: "MaVung",
+                        caption: "Mã vùng"
+                    }, {
+                        dataField: "MaTrungTam",
+                        caption: "Mã trung tâm"
+                    }, {
+                        dataField: "BoPhan",
+                        caption: "Bộ phận"
+                    }, {
+                        dataField: "ChucVu",
+                        caption: "Mã chức vụ"
+                    }, {
+                        dataField: "MaNguoiQuanLy",
+                        caption: "Mã người quản lý"
+                    }, {
+                        dataField: "MaGDTrungTam",
+                        caption: "Mã GD trung tâm"
+                    }, {
+                        dataField: "MaGDVung",
+                        caption: "Mã GĐ vùng"
+                    }, {
+                        dataField: "GhiChu",
+                        caption: "Ghi chú"
+                    }, {
+                        dataField: "NgayCapNhat",
+                        caption: "Ngày cập nhật",
+                        alignment: 'right'
+                    }]
+                });
+            },
+            error: function () {
+                //deferred.reject("Data Loading Error");
+            },
+            timeout: 10000
+        });
+    }
+    function Load_TT(ma) {
+        manv = ma;
+        $.ajax({
+            url: '@Url.Action("Get_DanhSachNhanSu", "HeThong")?ma=' + ma,
+            success: function (data) {
+                maql = data[0].MaNguoiQuanLy.replace(new RegExp(' ', 'g'), '');
+                $('#tt1').val(data[0].MaNV); $('#tt2').val(data[0].TenNV);
+                $('#tt3').val(data[0].DiDong); $('#tt4').val(data[0].Email);
+                $('#tt5').val(data[0].IDNhanVien); $('#tt6').val(data[0].MaVung);
+                $('#tt7').val(data[0].MaTrungTam); $('#tt8').val(data[0].BoPhan);
+                $('#tt9').val(data[0].ChucVu); $('#tt10').val(data[0].MaNguoiQuanLy);
+                $('#tt11').val(data[0].MaGDTrungTam); $('#tt12').val(data[0].MaGDVung);
+                $('#tt13').val(data[0].TenTK); $('#tt14').val(data[0].Password);
+                $('#tt15').val(data[0].GhiChu); $('#tt16').val(data[0].NgayCapNhat);
+                load_leader();
+            }
+        });
+        @*$.ajax({
+            url: '@Url.Action("Get_Quyen", "HeThong")?ma=' + ma,
+            success: function (result) {
+                // alert(result);
+                $("#selection-treeview").dxTreeView({
+                    dataSource: [{
+                        id: "1_9",
+                        text: "Vùng Anh Tuấn",
+                    }]
+                });
+                //$('#selection-treeview input[type="checkbox"]').attr('checked', 'checked');
+                //$("#selection-treeview").find("INPUT[type='checkbox']").each(function () { $(this).attr("checked", true) });
+            }
+        });*@
+    }
+    $(function () {
+        var manv = null;
+        load_grid();
+        load_leader();
+        //load_tree();
+    });
+    function Save_PhanQuyen() {
+        if (mald == "") {
+            DevExpress.ui.notify('Chưa chọn dữ liệu để phân quyền!', 'error', 2000);
+        } else {
+            $.ajax({
+                url: '@Url.Action("Save_PhanQuyen", "HeThong")?ma=' + manv,
+                data: { quyen: mald },
+                success: function (data) {
+                    if (data > 0) {
+                        DevExpress.ui.notify('Cập nhật thành công', 'success', 2000);
+                        load_grid();
+                        load_leader();
+                    }
+                    else {
+                        DevExpress.ui.notify('Lỗi!', 'error', 2000);
+                    }
+                }
+            });
+        }
+        @*$.ajax({
+            url: '@Url.Action("Save_PhanQuyen", "HeThong")?ma=' + manv + '&quyen=' + $("#checked-items").text(),
+            success: function (data) {
+                if (data >= 0) DevExpress.ui.notify('Cập nhật thành công', 'success', 2000);
+                else DevExpress.ui.notify('Lỗi', 'error', 2000);
+            }
+        });*@
+    }
+
+    function load_tree(){
+        var checkedItems = [];
+        $.ajax({
+            url: "@Url.Action("Get_Tree", "HeThong")",
+            beforeSend :function(){
+                $('#iselection-treeview').html('<div style="text-align:center;padding-top:10px;"><i class="fa fa-spinner fa-pulse fa-3x fa-fw"></i><span class="sr-only">Loading...</span></div>');
+            },
+            success: function (result) {
+                $('#iselection-treeview').html('<div id="selection-treeview"></div>')
+                $("#selection-treeview").dxTreeView({
+                    items: result,
+                    width: 320,
+                    showCheckBoxesMode: "normal",
+                    onItemSelectionChanged: function (e) {
+                        var item = e.node;
+                        if (isProduct(item)) {
+                            processProduct($.extend({
+                                category: item.parent.text
+                            }, item));
+                        } else {
+                            $.each(item.items, function (index, product) {
+                                processProduct($.extend({
+                                    category: item.text
+                                }, product));
+                            });
+                        }
+                        checkedItemsList.option("items", checkedItems);
+                    },
+                    itemTemplate: function (data) {
+                        return data.text;
+                    }
+                });
+        }
+        });
+        var checkedItemsList = $("#checked-items").dxList({
+            width: 400,
+            items: checkedItems,
+            itemTemplate: function (data) {
+                return data.itemData.id + ',';
+            }
+        }).dxList("instance");
+
+        function isProduct(data) {
+            return !data.items.length;
+        }
+
+        function processProduct(product) {
+            var itemIndex = -1;
+
+            $.each(checkedItems, function (index, item) {
+                if (item.key === product.key) {
+                    itemIndex = index;
+                    return false;
+                }
+            });
+
+            if (product.selected && itemIndex === -1) {
+                checkedItems.push(product);
+            } else if (!product.selected) {
+                checkedItems.splice(itemIndex, 1);
+            }
+        }
+    };
+    //var products = [{
+    //    id: "-1",
+    //    text: "Apax",
+    //    items: [{
+    //        id: "1_1",
+    //        text: "Vùng 1",
+    //        items: [{
+    //            id: "1_22",
+    //            text: "Trung tâm 1",
+    //            items: [{
+    //                id: "1_1_1_1",
+    //                text: "Sale leader 1",
+
+    //            }, {
+    //                id: "1_1_1_2",
+    //                text: "CM leader"
+    //            }]
+    //        }, {
+    //            id: "1_1_2",
+    //            text: "Trung tâm 2"
+    //        }]
+    //    }, {
+    //        id: "1_2",
+    //        text: "Vùng 2"
+    //    }]
+    //}];
+</script>

@@ -1,0 +1,280 @@
+﻿
+@{
+    ViewBag.Title = "QuanLyHocVien";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<script src="~/Content/js/bootbox.min.js"></script>
+<div class="box box-danger">
+    <div class="box-header with-border">
+        <h3 class="box-title">Danh sách học sinh</h3>
+    </div>
+    <form class="form-horizontal">
+        <div class="margin text-right">
+            <div class="btn-group"><button type="button" class="btn btn-block btn-danger" onclick="ThemMoi()">Thêm mới</button></div>
+        </div>
+        <!--/Menu-->
+        @*<div class="box-body">
+                <div class="col-md-3">
+                        <div class="form-group" style="margin-bottom: 0px;">
+                            <div class="col-sm-12">
+                                <input type="text" class="form-control" id="HOTEN" placeholder="Họ tên">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="form-group" style="margin-bottom: 0px;">
+                            <div class="col-sm-12">
+                                <div id="TRUNGTAM"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="form-group" style="margin-bottom: 0px;">
+                            <div class="col-sm-12">
+                                <div id="CHUONGTRINH"></div>
+                            </div>
+                        </div>
+                    </div>
+                <div class="col-md-3">
+                    <div class="form-group">
+                        <div class="col-sm-6">
+                                <button type="button" class="btn btn-block btn-danger">Tìm kiếm</button>
+                            </div>
+                        <div class="col-sm-6">
+                            <button type="button" class="btn btn-block btn-danger" onclick="ThemMoi()">Thêm mới</button>
+                        </div>
+                    </div>
+                </div>
+            </div>*@
+        <div class="row">
+            <div class="col-md-12">
+                <div id="gridDanhSachHocVien"></div>
+            </div>
+        </div>
+    </form>
+</div>
+<!-- /.box -->
+
+<script>
+    var bootBox;
+    $(document).ready(function () {
+        LoadDanhSachHocVien();
+    });
+    function ThemMoi() {
+        $('#iconMoCT').css({ top: -41, left: -12 }).removeClass("fa-floppy-o").addClass('fa-spinner fa-pulse fa-fw');
+        $('#spaniconMoCT').removeClass('hidden'); $('#spanMoCT').addClass('hidden');
+        $.when(
+            $.ajax({
+                method: 'GET',
+                url: '/HoSoHocVien/ChiTietHocVien',
+                data: { HoSoKhachHang: 0 },
+                dataType: 'html',
+                success: function (data) {
+                    bootBox = bootbox.dialog({
+                        size: 'large',
+                        title: 'Thông tin chi tiết hồ sơ học sinh',
+                        message: data
+                    });
+                }
+            })
+        ).done(function () {
+            setTimeout(function () {
+            }, 500);
+            $('#iconMoCT').removeAttr('style').removeClass('fa-spinner fa-pulse fa-fw').addClass("fa-floppy-o");
+            $('#spaniconMoCT').addClass('hidden'); $('#spanMoCT').closest('hidden');
+        });
+
+    }
+    function LoadDanhSachHocVien() {
+        $.ajax({
+            url: '@Url.Action("GetHoSoHocVien", "HoSoHocVien")',
+            type: 'GET',
+            contentType: 'application/json',
+            success: function (rs) {
+                var dataGrid = $("#gridDanhSachHocVien").dxDataGrid({
+                    dataSource: rs,
+                    allowColumnReordering: false,
+                    allowColumnResizing: false,
+                    columnAutoWidth: false,
+                    columnFixing: {
+                        enabled: true
+                    },
+                    paging: {
+                        pageSize: 10
+                    },
+                    pager: {
+                        showPageSizeSelector: true,
+                        allowedPageSizes: [10, 20, 50],
+                        showInfo: true
+                    },
+                    showColumnLines: true,
+                    showRowLines: true,
+                    filterRow: {
+                        visible: true,
+                        applyFilter: "auto"
+                    },
+                    selection: {
+                        mode: "single"
+                    },
+                    columns: [{
+                            dataField: "STT",
+                            caption: "STT",
+                            width: 50
+                        },{
+                              dataField: "MAHOCSINH",
+                              caption: "Mã học sinh",
+                              width: 150,
+
+                          }, {
+                              caption: "Mã Effect",
+                              dataField: "ma_effect",
+                              width: 120,
+
+                          }, {
+                              caption: "Mã LMS",
+                              dataField: "ma_lms",
+                              width: 120,
+
+                          }, {
+                              dataField: "tenhocsinh",
+                              caption: "Tên học sinh",
+                              width: 200,
+                          }, {
+                              dataField: "TENTRUNGTAM",
+                              caption: "Trung tâm",
+                              width: 200,
+                          }, {
+                              caption: "Loại khách hàng",
+                              dataField: "LOAIHOCSINh",
+                              width: 120,
+
+                          }, {
+                              caption: "EC",
+                              dataField: "saleman",
+                              width: 200,
+                          },
+                          {
+                              caption: "CM phụ trách",
+                              dataField: "CM",
+                              width: 200,
+                          }, {
+                              caption: "Phụ huynh 1",
+                              dataField: "TENBO",
+                              width: 200,
+                          }, {
+                              dataField: "DIACHI",
+                              caption: "Địa chỉ",
+                              width: 200,
+                          }, {
+                              caption: "Email",
+                              dataField: "EMAIL",
+                              width: 120,
+                          }, {
+                              caption: "Điện thoại",
+                              dataField: "dienthoai",
+                              width: 120,
+                          }, {
+                              caption: "Số CMTND",
+                              dataField: "SOCMTND",
+                              width: 120,
+                          },
+                          //{
+                          //    dataField: "quanhuyen",
+                          //    caption: "Quận huyện",
+                          //    width: 120,
+                          //},
+                          //{
+                          //    caption: "Tỉnh thành",
+                          //    dataField: "tinhthanhpho",
+                          //    width: 120,
+                          //},
+                          //{
+                          //    caption: "Giới tính",
+                          //    dataField: "tengioitinh",
+                          //    width: 100,
+
+                          //},
+                          //{
+                          //    caption: "Mã anh em cùng học",
+                          //    dataField: "ma_anhem",
+                          //    width: 150,
+                          //},
+                    ],
+                    onCellClick: function (e) {
+                        var component = e.component,
+                            prevClickTime = component.lastClickTime;
+                        component.lastClickTime = new Date();
+                        if (prevClickTime && (component.lastClickTime - prevClickTime < 300)) {
+                            var dataGrid2 = $('#gridDanhSachHocVien').dxDataGrid('instance');
+                            var row = dataGrid2.getSelectedRowsData();
+                            $('#iconMoCT').css({ top: -41, left: -12 }).removeClass("fa-floppy-o").addClass('fa-spinner fa-pulse fa-fw');
+                            $('#spaniconMoCT').removeClass('hidden'); $('#spanMoCT').addClass('hidden');
+                            $.when(
+                                $.ajax({
+                                    method: 'GET',
+                                    url: '/HoSoHocVien/ChiTietHocVien',
+                                    data: { HoSoKhachHang: row[0].A_HOSOKHACHHANG },
+                                    dataType: 'html',
+                                    success: function (data) {
+                                        bootBox = bootbox.dialog({
+                                            size: 'large',
+                                            title: 'Thông tin chi tiết hồ sơ học sinh',
+                                            message: data
+                                        });
+                                    }
+                                })
+                            ).done(function () {
+                                setTimeout(function () {
+                                }, 500);
+                                $('#iconMoCT').removeAttr('style').removeClass('fa-spinner fa-pulse fa-fw').addClass("fa-floppy-o");
+                                $('#spaniconMoCT').addClass('hidden'); $('#spanMoCT').closest('hidden');
+                            });
+                        }
+                        else {
+                            ss = [];
+                        }
+                    },
+                    //onSelectionChanged: function (selectedItems) {
+                    //    $('#lichsu').show();
+                    //    var data = selectedItems.selectedRowsData[0];
+                    //    if (data) {
+                            
+                    //    }
+                    //}
+                }).dxDataGrid('instance');
+            },
+            error: function (a, b, c) {
+                DevExpress.ui.notify('Error ' + a.status + ': ' + a.statusText, 'error', 2000);
+            }
+
+        });
+    }
+    @*function loadtrungtam() {
+        $.getJSON('@Url.Action("GetTrungTam", "DanhMuc")', function (items) {
+            $("#TRUNGTAM").dxSelectBox({
+                items: items,
+                showPopupTitle: false,
+                displayExpr: "TENTRUNGTAM",
+                valueExpr: "ID_TRUNGTAM",
+                searchEnabled: true,
+                onValueChanged: function (e) {
+                    loadDanhSachHocSinh();
+                },
+            });
+        });
+    }
+    function loadchuongtrinh() {
+        $.getJSON('@Url.Action("GetChuongTrinh", "DanhMuc")', function (items) {
+            $("#CHUONGTRINH").dxSelectBox({
+                items: items,
+                showPopupTitle: false,
+                displayExpr: "TENLOAIKEHOACH",
+                valueExpr: "ID_LOAIKEHOACH",
+                searchEnabled: true,
+                onValueChanged: function (e) {
+                    loadDanhSachHocSinh();
+                },
+            });
+        });
+    }*@
+</script>

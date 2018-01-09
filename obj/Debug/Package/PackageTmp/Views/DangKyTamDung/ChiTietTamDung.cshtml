@@ -1,0 +1,511 @@
+﻿@{
+    ViewBag.Title = "ChiTietTamDung";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    string chucvu = ViewBag.ChucVu;
+}
+<style>
+    .csThongBao {
+        color: red;
+        font-size: 14px;
+        font-weight: bold;
+    }
+</style>
+<div class="box box-danger">
+    <div class="box-header with-border">
+        <h3 class="box-title">Đăng ký tạm dừng</h3>
+    </div>
+    <form class="form-horizontal">
+        <div class="col-sm-8">
+            <span id="divThongBaoQuyen" class="hidden"> * Chức năng tạm dừng chỉ dành cho Giám Đốc Trung Tâm và Admin </span>
+        </div>
+        <div class="col-sm-4">
+            <div class="margin text-right">
+                <div class="btn-group"><button type="button" onclick="Insert()" class="btn btn-block btn-danger">Thêm mới</button></div>
+                <div class="btn-group"><button id="btnTamDung" type="button" onclick="Stop()" class="btn btn-block btn-danger">Tạm dừng</button></div>
+            </div>
+        </div>
+
+        <div class="box-body">
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label class="col-sm-3 control-label">Tên học sinh</label>
+                    <div class="col-sm-9">
+                        <div class="input-group">
+                            <input type="text" class="form-control" disabled data-foo id="TIMKIEMHOCVIEN">
+                            <span class="input-group-btn">
+                                <button type="button" class="btn btn-block btn-danger" onclick="TimKiemHocVienCanTamDung()" data-toggle="modal" data-target="#TimHocVien">Tìm kiếm</button>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-3 control-label">Mã học sinh</label>
+                    <div class="col-sm-9">
+                        <input type="text" class="form-control" data-foo disabled id="MAHOCVIEN" placeholder="">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-3 control-label">Mã LMS</label>
+                    <div class="col-sm-9">
+                        <input type="text" class="form-control" data-foo disabled id="MALMS" placeholder="">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-3 control-label">Tên lớp</label>
+                    <div class="col-sm-9">
+                        <input type="text" class="form-control" data-foo disabled id="TENLOP" placeholder="">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-3 control-label">Trung tâm</label>
+                    <div class="col-sm-9">
+                        <input type="text" class="form-control" data-foo disabled id="TRUNGTAM" placeholder="">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-3 control-label">Chương trình</label>
+                    <div class="col-sm-9">
+                        <input type="text" class="form-control" data-foo disabled id="CHUONGTRINH" placeholder="">
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="form-group">
+                    <div class="col-sm-6">
+                        <label class="col-sm-6 control-label">Buổi 1</label>
+                        <div class="col-sm-6">
+                            <input type="text" class="form-control" data-foo id="BUOI1" placeholder="">
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <label class="col-sm-6 control-label">Buổi 2</label>
+                        <div class="col-sm-6">
+                            <input type="text" class="form-control" data-foo id="BUOI2" placeholder="">
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-sm-6">
+                        <label class="col-sm-6 control-label">Số buổi</label>
+                        <div class="col-sm-6">
+                            <input type="text" class="form-control" data-foo id="SOBUOI" placeholder="">
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <label class="col-sm-6 control-label">Số buổi còn lại</label>
+                        <div class="col-sm-6">
+                            <input type="text" class="form-control" data-foo id="SOBUOICONLAI" placeholder="">
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-sm-6">
+                        <label class="col-sm-6 control-label">Đơn giá</label>
+                        <div class="col-sm-6">
+                            <input type="text" class="form-control" data-foo id="DONGIA" placeholder="">
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <label class="col-sm-6 control-label">Thành tiền</label>
+                        <div class="col-sm-6">
+                            <input type="text" class="form-control" data-foo id="THANHTIEN" placeholder="">
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-sm-6">
+                        <label class="col-sm-6 control-label">Ngày bắt đầu</label>
+                        <div class="col-sm-6">
+                            <input type="text" class="form-control" disabled data-foo id="NGAYBATDAU" placeholder="">
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <label class="col-sm-6 control-label">Ngày học cuối</label>
+                        <div class="col-sm-6">
+                            <input type="text" class="form-control" disabled data-foo id="NGAYHOCCUOI" placeholder="">
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-sm-6">
+                        <label class="col-sm-6 control-label">Ngày bắt đấu tạm dừng</label>
+                        <div class="col-sm-6">
+                            <div id="NgayBatDauTamUng" style="width:115px"></div>
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <label class="col-sm-6 control-label">Ngày kết thúc tạm dừng</label>
+                        <div class="col-sm-6">
+                            <div id="NgayKetThucTamUng" style="width:115px"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="divThongBaoTamDung" class="hidden">
+                <span class="csThongBao">Ngày tạm dừng vượt quá 30 ngày. Phải chờ xếp lớp, chuyển trung tâm, chuyển lớp </span>
+            </div>
+        </div>
+    </form>
+</div>
+<div class="box box-danger">
+    <div class="box-header with-border">
+        <h3 class="box-title">Lịch sử tạm dừng</h3>
+    </div>
+    <form class="form-horizontal">
+        <div class="row">
+            <div class="col-md-12">
+                <div id="gridLichSuTamDung"></div>
+            </div>
+        </div>
+        <div class="box-footer">
+        </div>
+    </form>
+</div>
+<div id="DanhSachHocSinh" class="modal face" role="dialog">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header bg-red">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+                <h4 class="modal-title">Danh sách học sinh</h4>
+            </div>
+            <div class="modal-body">
+                <div id="gridDanhSachHocSinh"></div>
+            </div>
+        </div>
+    </div>
+</div>
+<script type="text/javascript">
+    var a_hosokhachhang;
+    var a_kehoach;
+    var a_sanpham;
+    var a_th_dubao;
+    var id_khuvuc;
+    var id_buoi1;
+    var id_buoi2;
+    var ngaygiaohang;
+    var ngaythanhtoan;
+    $(document).ready(function () {
+        if ('@chucvu' != "NV_GIAM_DOC_TT") {
+            $('#divThongBaoQuyen').removeClass('hidden').addClass('csThongBao');
+            $("#btnTamDung").prop("disabled", true);
+        }
+        LoadGridLichSuTamDung();
+        $("#NgayBatDauTamUng").dxDateBox({
+            value: new Date(),
+            formatString: 'dd/MM/yyyy',
+            onValueChanged: function (data) {
+                KiemTraNgayBatDauTamDung(data);
+                TinhSoBuoiConLai(data);
+            },
+        }).dxDateBox("instance");
+        $("#NgayKetThucTamUng").dxDateBox({
+            value: new Date(),
+            formatString: 'dd/MM/yyyy',
+            onValueChanged: function (data) {
+                KiemTraSoNgayTamDung(data);
+            },
+        }).dxDateBox("instance");
+    })
+    function KiemTraNgayBatDauTamDung(data) {
+        var nbd = new Date(Globalize.format($("#NgayBatDauTamUng").dxDateBox('instance').option('value'), 'yyyy-MM-dd'));
+        var ngh = new Date(Globalize.format(ngaygiaohang, 'yyyy-MM-dd'));
+        if (nbd.getTime() < ngh.getTime()) {
+            DevExpress.ui.notify('Ngày bắt đầu tạm dừng phải lớn hơn hoặc bằng ngày bắt đầu!', 'error', 3000);
+            document.querySelector('.dx-toast-warning').style.transform = "translate(720px, 30px)";
+            return;
+        }
+    }
+    function TinhSoBuoiConLai(data) {
+        $.ajax({
+            url: '@Url.Action("TinhBuoiConLai", "DangKyTamDung")',
+            data: {
+                NgayChuyen: Globalize.format(data.value, 'yyyy-MM-dd'),
+                NgayKetThuc: $('#NGAYHOCCUOI').val(),
+                KhuVuc: id_khuvuc,
+                Buoi1: id_buoi1,
+                Buoi2: id_buoi2,
+                A_DuBao: a_th_dubao
+            },
+            type: 'GET',
+            contentType: 'application/json',
+            success: function (rs) {
+                $('#SOBUOICONLAI').val(rs);
+                $('#THANHTIEN').val(Number(rs) * Number($('#DONGIA').val()));
+            }
+        })
+    }
+    function KiemTraSoNgayTamDung(data) {
+        var oneDay = 24 * 60 * 60 * 1000;
+        var ngaybdtamdung = $("#NgayBatDauTamUng").dxDateBox('instance').option('value');
+        var ngaykttamdung = data.value
+        var diffDays = Math.round(Math.abs((ngaybdtamdung.getTime() - ngaykttamdung.getTime()) / (oneDay)));
+        if (diffDays > 30)
+            $('#divThongBaoTamDung').removeClass('hidden').removeClass('form-group text-center').addClass('form-group text-center');
+        else
+            $('#divThongBaoTamDung').removeClass('hidden').removeClass('form-group text-center').addClass('hidden');
+
+        //Tính số buổi đã tạm dừng
+        $.ajax({
+            url: '@Url.Action("TinhBuoiTamDung", "DangKyTamDung")',
+            data: {
+                NgayBatDauTamDung: Globalize.format(ngaybdtamdung, 'yyyy-MM-dd'),
+                NgayKetThucTamDung: Globalize.format(ngaykttamdung, 'yyyy-MM-dd'),
+                KhuVuc: id_khuvuc,
+                Buoi1: id_buoi1,
+                Buoi2: id_buoi2,
+                A_DuBao: a_th_dubao
+            },
+            type: 'GET',
+            contentType: 'application/json',
+            success: function (rs) {
+
+                // Tính ngày kết thúc sau khi tạm dừng
+                var ngaybdtamdung = $("#NgayBatDauTamUng").dxDateBox('instance').option('value');
+                $.ajax({
+                    url: '@Url.Action("LayNgayKetThucHoanChinh", "DangKyTamDung")',
+                    data: {
+                        ngaybd: Globalize.format(ngaybdtamdung, 'yyyy-MM-dd'),
+                        SoBuoi: Number($('#SOBUOICONLAI').val()) + Number(rs),
+                        Buoi1: id_buoi1,
+                        Buoi2: id_buoi2,
+                        KhuVuc: id_khuvuc
+                    },
+                    type: 'GET',
+                    contentType: 'application/json',
+                    success: function (rs) {
+                        $("#NGAYHOCCUOI").val(rs);
+                    }
+                })
+            }
+        })
+    }
+    function Insert() {
+        var elements = document.querySelectorAll('[data-foo]');
+        for (var i = 0; i < elements.length; i++) {
+            elements[i].value = "";
+        }
+    }
+    function TimKiemHocVienCanTamDung() {
+        $('#DanhSachHocSinh').modal('show');
+        $.ajax({
+            url: '@Url.Action("GetDanhSachHocVienCanTamDung", "DangKyTamDung")',
+            type: 'GET',
+            contentType: 'application/json',
+            success: function (rs) {
+                $("#gridDanhSachHocSinh").dxDataGrid({
+                    dataSource: rs,
+                    allowColumnReordering: false,
+                    allowColumnResizing: false,
+                    columnAutoWidth: false,
+                    columnFixing: {
+                        enabled: true
+                    },
+                    paging: {
+                        pageSize: 10
+                    },
+                    showColumnLines: true,
+                    showRowLines: true,
+                    filterRow: {
+                        visible: true,
+                        applyFilter: "auto"
+                    },
+                    columns: [
+                        {
+                            caption: "Chọn", alignment: 'center',
+                            width: 100,
+                            cellTemplate: function (container, options) {
+                                var dt = options.data;
+                                $('<a href="javascript:" onclick="LoadChiTietHocVien(\'' + dt.A_HOSOKHACHHANG + '\')"  class="text-green"><b>...</b></a>').appendTo(container);
+                            }
+                        }, {
+                            dataField: "MaHocVien",
+                            caption: "Mã học sinh",
+                            width: 200,
+                        }, {
+                            caption: "Tên học viên",
+                            dataField: "TenHocVien",
+                            width: 200,
+                        }, {
+                            caption: "Trung tâm",
+                            dataField: "TrungTam",
+                            width: 200,
+                        }, {
+                            caption: "Chương trình",
+                            dataField: "ChuongTrinh",
+                            width: 200,
+                        }, {
+                            caption: "Số buổi",
+                            dataField: "SoBuoi",
+                            width: 100,
+                        }, {
+                            caption: "Đơn giá",
+                            dataField: "DonGia",
+                            width: 100,
+                        }, {
+                            caption: "Buổi 1",
+                            dataField: "BUOI1",
+                            width: 120,
+                        }, {
+                            caption: "Buổi 2",
+                            dataField: "BUOI2",
+                            width: 100,
+                        }, {
+                            caption: "Ngày bắt đầu",
+                            dataField: "NgayBatDau",
+                            width: 100,
+                        }, {
+                            caption: "Ngày kết thúc",
+                            dataField: "NgayKetThuc",
+                            width: 100,
+                        }, {
+                            caption: "CM phụ trách",
+                            dataField: "NguoiDangKy",
+                            width: 150,
+                        }, {
+                            caption: "A_HOSOKHACHHANG",
+                            dataField: "A_HOSOKHACHHANG",
+                            width: 0,
+                        },
+                    ],
+
+                }).dxDataGrid('instance');
+            },
+            error: function (a, b, c) {
+                DevExpress.ui.notify('Error ' + a.status + ': ' + a.statusText, 'error', 2000);
+            }
+        });
+    }
+    function LoadChiTietHocVien(e) {
+        var hocvien = $('#TIMKIEMHOCVIEN').val();
+        $('#DanhSachHocSinh').modal('hide');
+        $.getJSON('/DangKyTamDung/LoadHocSinhInfo',
+            $.param({ ID: e }, true),
+            function (data) {
+                $('#TIMKIEMHOCVIEN').val(data.TenHocVien);
+                $('#MAHOCVIEN').val(data.MaHocVien);
+                $('#MALMS').val(data.MALMS);
+
+                $('#TENLOP').val(data.TenLop);
+                $('#TRUNGTAM').val(data.TrungTam);
+                $('#CHUONGTRINH').val(data.ChuongTrinh);
+                $('#BUOI1').val(data.BUOI1);
+                $('#BUOI2').val(data.BUOI2);
+                $('#SOBUOI').val(data.SoBuoi);
+                $('#SOBUOICONLAI').val(data.SoBuoiConLai);
+                $('#DONGIA').val(data.DonGia);
+                $('#THANHTIEN').val(data.SoTienChuyen);
+                $('#NGAYBATDAU').val(data.NgayBatDau);
+                $('#NGAYHOCCUOI').val(data.NgayKetThuc);
+                a_kehoach = data.A_KEHOACH;
+                a_hosokhachhang = data.A_HOSOKHACHHANG;
+                a_sanpham = data.A_SANPHAM;
+                a_tongtien = data.TongTien;
+                a_th_dubao = data.A_TH_DUBAO;
+                id_khuvuc = data.ID_KHUVUC;
+                id_buoi1 = data.ID_PHUONGTHUC;
+                id_buoi2 = data.ID_CONGCU;
+                ngaygiaohang = data.NGAYBD;
+                ngaythanhtoan = data.NGAYKT;
+            });
+    }
+    function Stop() {
+        var nbd = new Date(Globalize.format($("#NgayBatDauTamUng").dxDateBox('instance').option('value'), 'yyyy-MM-dd'));
+        var ngh = new Date(Globalize.format(ngaygiaohang, 'yyyy-MM-dd'));
+        if (nbd.getTime() < ngh.getTime()) {
+            DevExpress.ui.notify('Ngày bắt đầu tạm dừng phải lớn hơn hoặc bằng ngày bắt đầu!', 'error', 3000);
+            document.querySelector('.dx-toast-warning').style.transform = "translate(720px, 30px)";
+            return;
+        }
+        var result = DevExpress.ui.dialog.confirm('Bạn có muốn lưu kết quả không?', "Xác nhận");
+        result.done(function (dialogResult) {
+            if (dialogResult) {
+                $.ajax({
+                    url: '@Url.Action("TamDungHoc", "DangKyTamDung")',
+                    data: {
+                        J_HOSOKHACHHANG: a_hosokhachhang,
+                        J_KEHOACH: a_kehoach,
+                        SOBUOICONLAI: $('#SOBUOICONLAI').val(),
+                        TONGTIEN_DH: a_tongtien,
+                        J_SANPHAM: a_sanpham,
+                        DONGIA: $('#DONGIA').val(),
+                        THANHTIEN: $('#THANHTIEN').val(),
+                        A_TH_DUBAO: a_th_dubao,
+                    },
+                    success: function (result) {
+                        if (result > 0) {
+                            LoadGridLichSuTamDung();
+                            DevExpress.ui.notify('Tạm dừng thành công!', 'success', 2000);
+                            document.querySelector('.dx-toast-success').style.transform = "translate(720px, 30px)";
+                        } else {
+                            DevExpress.ui.notify('Có lỗi chưa cập nhật được!', 'error', 2000);
+                            document.querySelector('.dx-toast-error').style.transform = "translate(720px, 30px)";
+                        }
+                    },
+                    error: function () {
+                        DevExpress.ui.notify('Có lỗi chưa cập nhật được!', 'error', 2000);
+                        document.querySelector('.dx-toast-error').style.transform = "translate(720px, 30px)";
+                    },
+                    timeout: 60000
+                });
+            }
+            else { }
+        })
+    }
+    function LoadGridLichSuTamDung() {
+        $.ajax({
+            url: '@Url.Action("LoadLichSuTamDung", "DangKyTamDung")',
+            type: 'GET',
+            data: { HocVien: 0 },
+            contentType: 'application/json',
+            success: function (rs) {
+                var dataGrid = $("#gridLichSuTamDung").dxDataGrid({
+                    dataSource: rs,
+                    allowColumnReordering: false,
+                    allowColumnResizing: false,
+                    columnAutoWidth: false,
+                    columnFixing: {
+                        enabled: true
+                    },
+                    paging: {
+                        pageSize: 10
+                    },
+                    showColumnLines: true,
+                    showRowLines: true,
+                    filterRow: {
+                        visible: true,
+                        applyFilter: "auto"
+                    },
+                    columns: [{
+                        dataField: "STT",
+                        caption: "STT",
+                        width: 50,
+                    }, {
+                        dataField: "MaHocVien",
+                        caption: "Mã học viên",
+                        width: 200,
+                    }, {
+                        caption: "Tên học viên",
+                        dataField: "TenHocVien",
+                        width: 230,
+                    }, {
+                        caption: "Ngày làm",
+                        dataField: "NGAYDANGKY",
+                        width: 120,
+                    }, {
+                        caption: "Số buổi còn lại",
+                        dataField: "SoBuoiConLai",
+                        width: 230,
+                    }, {
+                        dataField: "SoTienChuyen",
+                        caption: "Số tiền còn lại",
+                        width: 120,
+                    },
+                    ],
+                }).dxDataGrid('instance');
+            },
+            //error: function (a, b, c) {
+            //    DevExpress.ui.notify('Error ' + a.status + ': ' + a.statusText, 'error', 2000);
+            //}
+        });
+    }
+</script>

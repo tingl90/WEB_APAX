@@ -1,0 +1,70 @@
+﻿@using Web_Apax.Models;
+@{
+    ViewBag.Title = "ChiTietLopHoc";
+    Layout = null;
+}
+@model SP_APAX_DANHSACHLOP_Result
+<form class="form-horizontal">
+    <div class="box-body" style="padding-top:0px">
+        <div class="col-sm-12">
+            <div class="form-group">
+               @* <label class="col-sm-12 control-label text-bold" style="text-align:left">THÔNG TIN LỚP HỌC</label>*@
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="form-group">
+                <label class="col-sm-4 control-label">Tên Lớp học</label>
+                <div class="col-sm-8">
+                    <input type="text" class="form-control" value="@Model.TENLOP">
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-4 control-label">Tên trung tâm<span></span></label>
+                <div class="col-sm-8">
+                    <input type="text" class="form-control" value="@Model.TRUNGTAM">
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-4 control-label">Chương trình<span></span></label>
+                <div class="col-sm-8">
+                    <input type="text" class="form-control" value="@Model.CHUONGTRINH">
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="form-group">
+                <label class="col-sm-4 control-label">Sản phẩm<span></span></label>
+                <div class="col-sm-8">
+                    <input type="text" class="form-control" value="@Model.TENNHOMSANPHAM">
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-4 control-label">Buổi 1<span></span></label>
+                <div class="col-sm-8">
+                    <input type="text" class="form-control" value="@Model.BUOI1">
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-4 control-label">Buổi 2<span></span></label>
+                <div class="col-sm-8">
+                    <input type="text" class="form-control" value="@Model.BUOI2">
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-4">
+            <div class="form-group">
+                <label class="col-sm-4 control-label">Ngày bắt đầu<span></span></label>
+                <div class="col-sm-8">
+                    <input type="text" class="form-control" value="@Model.NGAYBATDAU">
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-4 control-label">Ngày kết thúc<span></span></label>
+                <div class="col-sm-8">
+                    <input type="text" class="form-control" value="@Model.NGAYKETTHUC">
+                </div>
+            </div>
+          
+        </div>
+    </div>
+</form>

@@ -1,0 +1,490 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<eLanguage>
+  <!--HỆ THỐNG-->
+  <item>
+    <sKey>TAIKHOAN</sKey>
+    <sValue>Tài khoản</sValue>
+  </item>
+  <item>
+    <sKey>TenQuyen</sKey>
+    <sValue>Tên quyền</sValue>
+  </item>
+  <item>
+    <sKey>NHOMNGUOIDUNG</sKey>
+    <sValue>Nhóm người dùng</sValue>
+  </item>
+  <item>
+    <sKey>MATKHAU</sKey>
+    <sValue>Mật khẩu</sValue>
+  </item>
+  <item>
+    <sKey>GHICHU</sKey>
+    <sValue>Ghi chú</sValue>
+  </item>
+  <item>
+    <sKey>HOATDONG</sKey>
+    <sValue>Hoạt động</sValue>
+  </item>
+  <!-- BUTTON -->
+  <item>
+    <sKey>HETHONG</sKey>
+    <sValue>HỆ THỐNG</sValue>
+  </item>
+  <item>
+    <sKey>ThemMoiNguoiDung</sKey>
+    <sValue>Thêm mới người dùng</sValue>
+  </item>
+  <item>
+    <sKey>DanhSachNhomNguoiDung</sKey>
+    <sValue>Danh sách nhóm người dùng</sValue>
+  </item>
+  <item>
+    <sKey>NhanSu</sKey>
+    <sValue>Nhân sự</sValue>
+  </item>
+  <item>
+    <sKey>NguoiDung</sKey>
+    <sValue>Người dùng</sValue>
+  </item>
+  <item>
+    <sKey>NhomNguoiDung</sKey>
+    <sValue>Nhóm người dùng</sValue>
+  </item>
+  <item>
+    <sKey>ThemMoiBaoLuu</sKey>
+    <sValue>Thêm mới</sValue>
+  </item>
+  <item>
+    <sKey>CapNhatBaoLuu</sKey>
+    <sValue>Cập nhật</sValue>
+  </item>
+  <item>
+    <sKey>XoaBaoLuu</sKey>
+    <sValue>Xóa</sValue>
+  </item>
+  <item>
+    <sKey>DangKyMoi</sKey>
+    <sValue>Đăng ký mới</sValue>
+  </item>
+  <item>
+    <sKey>LuuDangKy</sKey>
+    <sValue>Lưu đăng ký</sValue>
+  </item>
+  <item>
+    <sKey>XoaDangKy</sKey>
+    <sValue>Xóa đăng ký</sValue>
+  </item>
+  <item>
+    <sKey>ThemMoi</sKey>
+    <sValue>Thêm mới</sValue>
+  </item>
+  <item>
+    <sKey>Xoa</sKey>
+    <sValue>Xóa</sValue>
+  </item>
+  <item>
+    <sKey>Luu</sKey>
+    <sValue>Cập nhật</sValue>
+  </item>
+  <!-- /BUTTON -->
+  <item>
+    <sKey>HSNVCODE</sKey>
+    <sValue>APAX Quản lý học sinh</sValue>
+  </item>
+  <item>
+    <sKey>Username</sKey>
+    <sValue>Tài khoản</sValue>
+  </item>
+  <item>
+    <sKey>Password</sKey>
+    <sValue>Mật khẩu</sValue>
+  </item>
+  <item>
+    <sKey>RememberMe</sKey>
+    <sValue>Ghi nhớ</sValue>
+  </item>
+  <item>
+    <sKey>SignIn</sKey>
+    <sValue>Đăng nhập</sValue>
+  </item>
+  <item>
+    <sKey>HeThong</sKey>
+    <sValue>Hệ Thống</sValue>
+  </item>
+  <item>
+    <sKey>Login</sKey>
+    <sValue>Đăng nhập hệ thống</sValue>
+  </item>
+  <item>
+    <sKey>TrangQuanTri</sKey>
+    <sValue>Trang quản trị</sValue>
+  </item>
+  <item>
+    <sKey>QuanTriHeThong</sKey>
+    <sValue>Quản trị hệ thống</sValue>
+  </item>
+  <item>
+    <sKey>NhomNguoiDung</sKey>
+    <sValue>Nhóm người dùng</sValue>
+  </item>
+  <item>
+    <sKey>NguoiDung</sKey>
+    <sValue>Người dùng</sValue>
+  </item>
+  <item>
+    <sKey>HoSoNhanSu</sKey>
+    <sValue>Hồ sơ nhân viên</sValue>
+  </item>
+  <item>
+    <sKey>NgonNgu</sKey>
+    <sValue>Ngôn ngữ</sValue>
+  </item>
+  <item>
+    <sKey>TiengViet</sKey>
+    <sValue>TIẾNG VIỆT</sValue>
+  </item>
+  <item>
+    <sKey>TiengAnh</sKey>
+    <sValue>TIẾNG ANH</sValue>
+  </item>
+  <item>
+    <sKey>ThongTinNguoiDung</sKey>
+    <sValue>Thông tin người dùng</sValue>
+  </item>
+  <item>
+    <sKey>Nhom</sKey>
+    <sValue>Nhóm</sValue>
+  </item>
+  <item>
+    <sKey>TrangThai</sKey>
+    <sValue>Trạng thái</sValue>
+  </item>
+  <item>
+    <sKey>ThongTinNhanSu</sKey>
+    <sValue>Thông tin nhân viên</sValue>
+  </item>
+  <item>
+    <sKey>NhanSu</sKey>
+    <sValue>Nhân viên</sValue>
+  </item>
+  <item>
+    <sKey>ChiNhanh</sKey>
+    <sValue>Chi nhánh</sValue>
+  </item>
+  <item>
+    <sKey>NgaySinh</sKey>
+    <sValue>Ngày sinh</sValue>
+  </item>
+  <item>
+    <sKey>DiDong</sKey>
+    <sValue>Di động</sValue>
+  </item>
+  <!--/HỆ THỐNG-->
+  <!-- HOC SINH -->
+  <item>
+    <sKey>HSHS</sKey>
+    <sValue>Hồ sơ học sinh</sValue>
+  </item>
+  <item>
+    <sKey>DIEMDANHHOCSINH</sKey>
+    <sValue>Điểm danh học sinh</sValue>
+  </item>
+  <item>
+    <sKey>HOSOHOCSINH</sKey>
+    <sValue>HỒ SƠ HỌC SINH</sValue>
+  </item>
+  <item>
+    <sKey>QUANLYHOCSINH</sKey>
+    <sValue>QUẢN LÝ HỌC SINH</sValue>
+  </item>
+  <item>
+    <sKey>TAOLOPHOC</sKey>
+    <sValue>Tạo lớp học</sValue>
+  </item>
+  <item>
+    <sKey>DANGKYBAOLUU</sKey>
+    <sValue>Đăng ký bảo lưu</sValue>
+  </item>
+  <item>
+    <sKey>DANGKYCHUYENLOP</sKey>
+    <sValue>Đăng ký chuyển lớp</sValue>
+  </item>
+  <item>
+    <sKey>DANGKYLOPHOC</sKey>
+    <sValue>Đăng ký lớp học</sValue>
+  </item>
+  <item>
+    <sKey>DANGKYCHUYENPHI</sKey>
+    <sValue>Đăng ký chuyển phí</sValue>
+  </item>
+  <item>
+    <sKey>MaHocSinh</sKey>
+    <sValue>Mã học sinh</sValue>
+  </item>
+  <item>
+    <sKey>TenHocSinh</sKey>
+    <sValue>Tên học sinh</sValue>
+  </item>
+  <item>
+    <sKey>DienThoai</sKey>
+    <sValue>Điện thoại</sValue>
+  </item>
+  <item>
+    <sKey>Email</sKey>
+    <sValue>Email</sValue>
+  </item>
+  <item>
+    <sKey>TrungTam</sKey>
+    <sValue>Trung tâm</sValue>
+  </item>
+  <item>
+    <sKey>TenLopHoc</sKey>
+    <sValue>Tên lớp học</sValue>
+  </item>
+  <item>
+    <sKey>NgayHocCuoi</sKey>
+    <sValue>Ngày học cuối</sValue>
+  </item>
+  <!-- /HOC SINH -->
+  <!-- THIET LAP LICH HOC -->
+  <item>
+    <sKey>THIETLAPLICHHOC</sKey>
+    <sValue>THIẾT LẬP LỊCH HỌC</sValue>
+  </item>
+  <!-- /THIET LAP LICH HOC -->
+  <!-- /LOP HOC -->
+  <item>
+    <sKey>DANHSACHLOPHOC</sKey>
+    <sValue>Danh sách lớp học</sValue>
+  </item>
+  <item>
+    <sKey>TENLOPHOC</sKey>
+    <sValue>Tên lớp học</sValue>
+  </item>
+  <item>
+    <sKey>CHUONGTRINH</sKey>
+    <sValue>Chương trình</sValue>
+  </item>
+  <item>
+    <sKey>ChuongTrinh</sKey>
+    <sValue>Chương trình</sValue>
+  </item>
+  <item>
+    <sKey>BUOI</sKey>
+    <sValue>Buổi</sValue>
+  </item>
+  <item>
+    <sKey>NGAYBATDAU</sKey>
+    <sValue>Ngày bắt đầu</sValue>
+  </item>
+  <item>
+    <sKey>TRUNGTAM</sKey>
+    <sValue>Trung tâm</sValue>
+  </item>
+  <item>
+    <sKey>SOBUOI</sKey>
+    <sValue>Số buổi</sValue>
+  </item>
+  <item>
+    <sKey>BUOI2</sKey>
+    <sValue>Buổi 2</sValue>
+  </item>
+  <item>
+    <sKey>NGAYKETTHUC</sKey>
+    <sValue>Ngày kết thúc</sValue>
+  </item>
+  <item>
+    <sKey>ThemMoiLopHoc</sKey>
+    <sValue>Thêm mới lớp học</sValue>
+  </item>
+  <item>
+    <sKey>GhiChu</sKey>
+    <sValue>Ghi chú</sValue>
+  </item>
+  <item>
+    <sKey>DANHSACHHOCSINHDONGFULLHOCPHI</sKey>
+    <sValue>Danh sách học sinh đóng đầy đủ học phí</sValue>
+  </item>
+  <item>
+    <sKey>DONGIABUOI</sKey>
+    <sValue>Đơn giá buổi</sValue>
+  </item>
+  <item>
+    <sKey>MAHOCSINH</sKey>
+    <sValue>Mã học sinh</sValue>
+  </item>
+  <item>
+    <sKey>DONGIA</sKey>
+    <sValue>Đơn giá</sValue>
+  </item>
+  <item>
+    <sKey>BUOI1</sKey>
+    <sValue>Buổi 1</sValue>
+  </item>
+  <item>
+    <sKey>TENHOCSINH</sKey>
+    <sValue>Tên học sinh</sValue>
+  </item>
+  <item>
+    <sKey>THANHTIENDONG</sKey>
+    <sValue>Thành tiền</sValue>
+  </item>
+  <item>
+    <sKey>SOBUOIBAOLUU</sKey>
+    <sValue>Số buổi bảo lưu</sValue>
+  </item>
+  <item>
+    <sKey>TUNGAY</sKey>
+    <sValue>Từ ngày</sValue>
+  </item>
+  <item>
+    <sKey>DENNGAY</sKey>
+    <sValue>Đến ngày</sValue>
+  </item>
+  <item>
+    <sKey>DANHSACHHOCSINHBAOLUU</sKey>
+    <sValue>Danh sách học sinh bảo lưu</sValue>
+  </item>
+  <item>
+    <sKey>DanhSachHocSinh</sKey>
+    <sValue>Danh sách học sinh</sValue>
+  </item>
+  <item>
+    <sKey>BaoLuu</sKey>
+    <sValue>Bảo lưu</sValue>
+  </item>
+  <item>
+    <sKey>TimTheoNgay</sKey>
+    <sValue>Tìm theo ngày</sValue>
+  </item>
+  <item>
+    <sKey>LopHoc</sKey>
+    <sValue>Lớp học</sValue>
+  </item>
+  <item>
+    <sKey>DANHSACHDIEMDANH</sKey>
+    <sValue>Danh sách điểm danh</sValue>
+  </item>
+  <item>
+    <sKey>NgayDiemDanh</sKey>
+    <sValue>Ngày điểm danh</sValue>
+  </item>
+  <item>
+    <sKey>TimKiem</sKey>
+    <sValue>Tìm kiếm</sValue>
+  </item>
+  <item>
+    <sKey>LuuDiemDanh</sKey>
+    <sValue>Điểm danh</sValue>
+  </item>
+  <item>
+    <sKey>Close</sKey>
+    <sValue>Đóng</sValue>
+  </item>
+  <item>
+    <sKey>DangKy</sKey>
+    <sValue>Đăng ký</sValue>
+  </item>
+  <item>
+    <sKey>ChonLop</sKey>
+    <sValue>Chọn lớp</sValue>
+  </item>
+  <item>
+    <sKey>XuatExcel</sKey>
+    <sValue>Xuất</sValue>
+  </item>
+  <item>
+    <sKey>XuatExcelAll</sKey>
+    <sValue>Xuất excel</sValue>
+  </item>
+  <item>
+    <sKey>DANHSACHHOCSINHCHUYENLOP</sKey>
+    <sValue>DANH SÁCH HỌC SINH ĐĂNG KÝ CHUYỂN LỚP</sValue>
+  </item>
+  <item>
+    <sKey>DangKy</sKey>
+    <sValue>Đăng ký</sValue>
+  </item>
+  <item>
+    <sKey>XoaDangKy</sKey>
+    <sValue>Xóa đăng ký</sValue>
+  </item>
+  <item>
+    <sKey>LOPHIENTAI</sKey>
+    <sValue>Lớp hiện tại</sValue>
+  </item>
+
+  <item>
+    <sKey>LOPDANGKYCHUYEN</sKey>
+    <sValue>Lớp đăng ký chuyển</sValue>
+  </item>
+  <item>
+    <sKey>NGAYDANGKY</sKey>
+    <sValue>Ngày đăng ký</sValue>
+  </item>
+  <item>
+    <sKey>LOPHOCHIENTAI</sKey>
+    <sValue>Lớp học hiện tại</sValue>
+  </item>
+  <item>
+    <sKey>LOPCANCHUYEN</sKey>
+    <sValue>Lớp đăng ký</sValue>
+  </item>
+  <item>
+    <sKey>DANGKY</sKey>
+    <sValue>Đăng ký</sValue>
+  </item>
+  <item>
+    <sKey>DONGIALOP</sKey>
+    <sValue>Đơn giá</sValue>
+  </item>
+  <item>
+    <sKey>TimHocSinh</sKey>
+    <sValue>Tìm học sinh</sValue>
+  </item>
+  <item>
+  <sKey>TimLopHoc</sKey>
+  <sValue>Tìm lớp học</sValue>
+</item>
+  <item>
+    <sKey>TONGDOANHSOMUCTIEU</sKey>
+    <sValue>Số buổi</sValue>
+  </item>
+  <item>
+    <sKey>NGAYKEHOACHTU</sKey>
+    <sValue>Ngày bắt đầu</sValue>
+  </item>
+  <item>
+    <sKey>NGAYKEHOACHDEN</sKey>
+    <sValue>Ngày kết thúc</sValue>
+  </item>
+  <item>
+    <sKey>NGAYDONG</sKey>
+    <sValue>Ngày đóng</sValue>
+  </item>
+  <item>
+    <sKey>TIEPNHANCHUYENLOP</sKey>
+    <sValue>Tiếp nhận chuyển lớp</sValue>
+  </item>
+  <item>
+    <sKey>TENKEHOACH</sKey>
+    <sValue>Tên lớp</sValue>
+  </item>
+  <item>
+    <sKey>TENKHACHHANG</sKey>
+    <sValue>Tên khách hàng</sValue>
+  </item>
+  <item>
+    <sKey>MAKH</sKey>
+    <sValue>Mã khách hàng</sValue>
+  </item>
+  <item>
+    <sKey>TENLOP</sKey>
+    <sValue>Lớp học</sValue>
+  </item>
+  <item>
+    <sKey>THIETLAPNGAYNGHI</sKey>
+    <sValue>Thiết lập ngày nghỉ</sValue>
+  </item>
+  <!-- LOP HOC -->
+</eLanguage>

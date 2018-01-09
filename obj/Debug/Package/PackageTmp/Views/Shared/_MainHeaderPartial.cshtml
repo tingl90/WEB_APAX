@@ -1,0 +1,81 @@
+﻿@{
+    var base64 = ViewBag.Image != null ? Convert.ToBase64String(ViewBag.Image) : null;
+    var imgSrc = base64 != null ? String.Format("data:image/jpg;base64,{0}", base64) : null;
+}
+<header class="main-header">
+    <!-- Logo -->
+    <a href="@Url.Action("QuanLyHocVien", "HoSoHocVien")" class="logo">
+        <!-- mini logo for sidebar mini 50x50 pixels -->
+        <span class="logo-mini"><b>APAX</b></span>
+        <!-- logo for regular state and mobile devices -->
+        <span class="logo-lg"><img src="~/Content/img/logo.png" style="width: 200px;height: 50px;"/></span>
+    </a>
+    <!-- Header Navbar: style can be found in header.less -->
+    <nav class="navbar navbar-static-top">
+        <!-- Sidebar toggle button-->
+        <a href="#" class="sidebar-toggle" data-toggle="offcanvas" role="button">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+        </a>
+        <div class="navbar-custom-menu">
+            <ul class="nav navbar-nav">
+                <!-- Tasks: style can be found in dropdown.less -->
+                <li class="dropdown tasks-menu">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                        @{
+                            if (Request.Cookies["language"] != null && Request.Cookies["language"].Value.Equals("en-US"))
+                            {
+                                ViewContext.Writer.Write("<img src='/Content/assets/images/flags/gb.png' class='position-left' alt=''>" + Web_Apax.Models.ResourceManager.GetString("ENGLISH") + "<span class='caret'></span>");
+                            }
+                            if (Request.Cookies["language"] != null && Request.Cookies["language"].Value.Equals("vi-VN"))
+                            {
+                                ViewContext.Writer.Write("<img src='/Content/assets/images/flags/vn.png' class='position-left' alt=''>" + Web_Apax.Models.ResourceManager.GetString("TiengViet") + "<span class='caret'></span>");
+                            }
+                        }
+                    </a>
+                    <ul class="dropdown-menu">
+                        @if (Request.Cookies["language"] != null && Request.Cookies["language"].Value.Equals("en-US"))
+                        {
+                            <li><a class="tiengviet" href="/Language/ChangeLanguage?KeyLanguage=vi-VN&returnurl=@{ViewContext.Writer.Write(Request.Url.AbsolutePath);}"><img src="/Content/assets/images/flags/vn.png" alt=""> @Web_Apax.Models.ResourceManager.GetString("TiengViet")</a></li>
+                        }
+                        @if (Request.Cookies["language"] != null && Request.Cookies["language"].Value.Equals("vi-VN"))
+                        {
+                            <li><a class="english" href="/Language/ChangeLanguage?KeyLanguage=en-US&returnurl=@{ViewContext.Writer.Write(Request.Url.AbsolutePath);}"><img src="/Content/assets/images/flags/gb.png" alt=""> @Web_Apax.Models.ResourceManager.GetString("ENGLISH")</a></li>
+                        }
+                    </ul>
+                </li>                
+                <!-- User Account: style can be found in dropdown.less -->
+                <li class="dropdown user user-menu">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">                        
+                        <img src="@{ViewContext.Writer.Write(ViewBag.Image == null || ViewBag.Image == null ? "/Content/img/avatar5.png" :imgSrc);}" class="user-image" alt="User Image">
+                        <span class="hidden-xs">@User.Identity.Name</span>
+                    </a>
+                    <ul class="dropdown-menu">
+                        <!-- User image -->
+                        <li class="user-header">
+                            <img src="@{ViewContext.Writer.Write(ViewBag.Image == null || ViewBag.Image == null ? "/Content/img/avatar5.png" :imgSrc);}" class="img-circle" alt="User Image">
+                            <p>
+                                @User.Identity.Name
+                                <small>Member since @DateTime.Now.ToString("dd/MM/yyyy")</small>
+                            </p>
+                        </li>                        
+                        <!-- Menu Footer-->
+                        <li class="user-footer">                            
+                            <div class="pull-right">
+                                <button class="btn btn-danger" onclick="self.location = '/Account/Logout'">
+                                    Logout
+                                </button>
+                            </div>
+                        </li>
+                    </ul>
+                </li>
+                <!-- Control Sidebar Toggle Button -->
+                <li>
+                    <a href="#" data-toggle="control-sidebar"><i class="fa fa-gears"></i></a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+</header>

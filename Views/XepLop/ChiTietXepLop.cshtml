@@ -1,0 +1,645 @@
+﻿@{
+    ViewBag.Title = "ChiTietXepLop";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    int id_trungtam = ViewBag.TrungTam;
+}
+<style>
+    .hidden {
+        display:none;
+    }
+    .dx-data-row td.center {
+        text-align: center !important;
+    }
+
+    .dx-data-row td.left {
+        text-align: left !important;
+    }
+
+    .dx-data-row td.right {
+        text-align: right !important;
+    }
+
+    .dx-header-row td {
+        text-align: center !important;
+    }
+</style>
+<div class="box box-danger">
+    <div class="box-header with-border">
+        <h3 class="box-title">Hàng chờ xếp lớp</h3>
+    </div>
+    <form class="form-horizontal">
+        <div class="row">
+            <div class="form-group">
+                <div class="col-sm-5">
+                    <label class="col-sm-3 control-label">Trung tâm: </label>
+                    <div class="col-sm-9">
+                        <div id="TrungTam" style="width:100%"></div>
+                    </div>
+                </div>
+                <div class="col-sm-5">
+                    <label class="col-sm-3 control-label">Chương trình: </label>
+                    <div class="col-sm-9">
+                        <div id="ChuongTrinh" style="width:100%"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <div id="gridDanhSachCho"></div>
+            </div>
+        </div>
+    </form>
+</div>
+<div class="box box-danger">
+    <form class="form-horizontal">
+        <div class="box-header with-border">
+            <h3 class="box-title">Chọn lớp học</h3>
+        </div>
+        <div class="box-body">
+            <div class="col-md-8">
+                <div class="form-group">
+                    <label class="col-sm-2 control-label">Lớp học</label>
+                    <div class="col-sm-10">
+                        <div class="input-group">
+                            <input type="text" class="form-control" disabled id="TIMKIEMLOPHOC">
+                            <span class="input-group-btn">
+                                <button type="button" class="btn btn-block btn-danger" onclick="TimKiemLopHoc()" data-toggle="modal" data-target="#TimLopHoc">Tìm kiếm</button>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label class="col-sm-4 control-label">Số HS tối đa</label>
+                    <div class="col-sm-8">
+                        <input type="text" class="form-control" disabled id="TONGSOHOCSINHTOIDA" placeholder="">
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label class="col-sm-4 control-label">Trung tâm</label>
+                    <div class="col-sm-8">
+                        <input type="text" class="form-control" disabled id="TRUNGTAM" placeholder="">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-4 control-label">Chương trình</label>
+                    <div class="col-sm-8">
+                        <input type="text" class="form-control" disabled id="CHUONGTRINH" placeholder="">
+                    </div>
+                </div>
+
+            </div>
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label class="col-sm-4 control-label">Buổi 1</label>
+                    <div class="col-sm-8">
+                        <input type="text" class="form-control" disabled id="BUOI1" placeholder="">
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="col-sm-4 control-label">Buổi 2</label>
+                    <div class="col-sm-8">
+                        <input type="text" class="form-control" disabled id="BUOI2" placeholder="">
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label class="col-sm-4 control-label">Ngày mở lớp</label>
+                    <div class="col-sm-8">
+                        <input type="text" class="form-control" disabled id="NGAYBATDAU" placeholder="">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-4 control-label">Ngày KT lớp</label>
+                    <div class="col-sm-8">
+                        <input type="text" class="form-control" disabled id="NGAYKETTHUC" placeholder="">
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label class="col-sm-4 control-label" style="padding:7px 0px!important">Ca học</label>
+                    <div class="col-sm-8">
+                        <input type="text" class="form-control" disabled id="NOIDUNGKEHOACH" placeholder="">
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label class="col-sm-4 control-label" style="padding:7px 0px!important">Ngày bắt đầu học</label>
+                    <div class="col-sm-8">
+                        <div id="NgayXepLop" style="width:100%"></div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="col-md-12">
+                    <div class="form-group">
+                        <div class="btn-group"><button type="button" onclick="GHEPLOPHOC()" style="width:100px" class="btn btn-block btn-danger">Xếp lớp</button></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="box-header">
+            <h3 class="box-title">Danh sách học sinh</h3>
+        </div>
+        <div class="box-body">
+            <div class="box box-default box-solid" style="margin-top: -10px;">
+                <div id="gridDanhSachDangHoc"></div>
+            </div>
+        </div>
+    </form>
+</div>
+<div class="modal fade" id="DanhSachLopHoc" role="dialog">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header bg-red">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+                <h4 class="modal-title">Danh sách lớp học</h4>
+            </div>
+            <div class="modal-body">
+                <div id="gridDanhSachLopHoc"></div>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    var a_kehoach, phuongthuoc, congcu, khuvuc, trungtam = Number('@id_trungtam') > 0 ? Number('@id_trungtam') : 0, chuongtrinh = 0, soluonghocviendadangky, ngayxeplop, ngayxeplop = new Date(), ngaymolop, ngaydonglop;
+    $(document).ready(function () {
+        $.getJSON('@Url.Action("GetTrungTam", "DanhMuc")', function (items) {
+            $("#TrungTam").dxSelectBox({
+                items: items,
+                displayExpr: "TENTRUNGTAM",
+                valueExpr: "ID_TRUNGTAM",
+                readOnly: Number('@id_trungtam') == 0 ? false : true,
+                searchEnabled: true,
+                value: Number('@id_trungtam'),
+                onValueChanged: function (e) {
+                    trungtam = e.value;
+                    LoadDanhSachCho();
+                },
+            });
+        });
+        $.getJSON('@Url.Action("GetChuongTrinhSanPham", "DanhMuc")', function (items) {
+            $("#ChuongTrinh").dxSelectBox({
+                items: items,
+                displayExpr: "TENSANPHAM",
+                valueExpr: "A_SANPHAM",
+                searchEnabled: true,
+                onValueChanged: function (e) {
+                    chuongtrinh = e.value;
+                    LoadDanhSachCho();
+                },
+            });
+        });
+        LoadDanhSachCho();
+    });
+    function LoadDanhSachCho() {
+        $.ajax({
+            url: '@Url.Action("GetDanhSachCho", "XepLop")',
+            type: 'GET',
+            data: { TrungTam: trungtam, ChuongTrinh: chuongtrinh },
+            contentType: 'application/json',
+            success: function (rs) {
+                $("#gridDanhSachCho").dxDataGrid({
+                    dataSource: rs,
+                    allowColumnReordering: false,
+                    allowColumnResizing: false,
+                    columnAutoWidth: false,
+                    columnFixing: {
+                        enabled: true
+                    },
+                    paging: {
+                        pageSize: 10
+                    },
+                    showColumnLines: true,
+                    showRowLines: true,
+                    filterRow: {
+                        visible: true,
+                        applyFilter: "auto"
+                    },
+                    selection: {
+                        mode: "single",
+                    },
+                    columns: [{
+
+                        caption: "STT",
+                        allowEditing: false, alignment: 'center', width: 50,
+                        cellTemplate: function (cellElement, cellInfo) {
+                            cellElement.text(cellInfo.row.rowIndex + 1)
+                        }
+                    }, {
+                        dataField: "MAHOCVIEN",
+                        caption: "Mã học viên",
+                        width: 180
+                    }, {
+                        dataField: "TENHOCVIEN",
+                        caption: "Tên học viên",
+                        width: 200
+                    }, {
+                        dataField: "SOBUOIHOC",
+                        caption: "Số buổi",
+                        width: 70,
+                        cssClass: "center"
+                    }, {
+                        dataField: "DONGIA",
+                        caption: "Đơn giá",
+                        width: 100,
+                        dataType: "number",
+                        format: 'decimal fixedPoint'
+                    }, {
+                        dataField: "TENTRUNGTAM",
+                        caption: "Trung tâm",
+                        width: 250
+                    }, {
+                        dataField: "TENCHUONGTRINH",
+                        caption: "Chương trình",
+                        width: 100
+                    }, {
+                        dataField: "NGAYDANGKY",
+                        caption: "Ngày thực hiện",
+                        width: 120,
+                        cssClass: "center"
+                    }, {
+                        dataField: "NGAYDUKIENHOC",
+                        caption: "Ngày bắt đầu học",
+                        width: 130,
+                        cssClass: "center"
+                    }, {
+                        dataField: "NGAYKETTHUC",
+                        caption: "Ngày học cuối",
+                        width: 120,
+                        cssClass: "center"
+                    }, {
+                        dataField: "TrangThaiHoc",
+                        caption: "Trạng thái học",
+                        width: 150
+                    }, {
+                        dataField: "TrangThaiXepLop",
+                        caption: "Trạng thái xếp lớp",
+                        width: 130,
+                        cssClass: "center"
+                    }, {
+                        dataField: "TONGTIENTHU",
+                        caption: "Tổng tiền thu",
+                        width: 120,
+                        dataType: "number",
+                        format: 'decimal fixedPoint'
+                    }, {
+                        dataField: "NGAYTHUTIEN",
+                        caption: "Ngày thu tiền",
+                        width: 120,
+                        cssClass: "center"
+                    }, {
+                        dataField: "SoNgayChoXepLop",
+                        caption: "Số ngày chờ xếp lớp",
+                        width: 150,
+                        cssClass: "center"
+                    }, {
+                        dataField: "TRANGTHAI",
+                        caption: "Trạng thái",
+                        width: 150
+                    }, {
+                        dataField: "CM",
+                        caption: "CM",
+                        width: 150
+                    }, {
+                        dataField: "EC",
+                        caption: "EC",
+                        width: 150
+                    }, {
+                        dataField: "TENTIENGANH",
+                        caption: "Nick name",
+                        width: 150
+                    }, {
+                        dataField: "A_TH_DUBAO",
+                        caption: "A_TH_DUBAO",
+                        width: 0
+                    }]
+                }).dxDataGrid('instance');
+            },
+            error: function (a, b, c) {
+                DevExpress.ui.notify('Error ' + a.status + ': ' + a.statusText, 'error', 2000);
+            }
+        });
+    }
+    function TimKiemLopHoc() {
+        if ($('#ChuongTrinh').dxSelectBox('instance').option('value') == null) {
+            DevExpress.ui.notify('Chưa chọn chương trình !', 'warning', 2000);
+            document.querySelector('.dx-toast-warning').style.transform = "translate(720px, 30px)";
+            return
+        }
+        $('#DanhSachLopHoc').modal('show');
+        LoadDSLopHoc();
+    }
+    function LoadDSLopHoc() {
+        var trungtam = $('#TrungTam').dxSelectBox('instance').option('value');
+        var chuongtrinh = $('#ChuongTrinh').dxSelectBox('instance').option('value');
+        $.ajax({
+            url: '@Url.Action("GetDanhSachLopHoc", "XepLop")',
+            type: 'GET',
+            data: { TrungTam: trungtam, ChuongTrinh: chuongtrinh },
+            contentType: 'application/json',
+            success: function (rs) {
+                $("#gridDanhSachLopHoc").dxDataGrid({
+                    dataSource: rs,
+                    allowColumnReordering: false,
+                    allowColumnResizing: false,
+                    columnAutoWidth: false,
+                    columnFixing: {
+                        enabled: true
+                    },
+                    paging: {
+                        pageSize: 20
+                    },
+                    showColumnLines: true,
+                    showRowLines: true,
+                    filterRow: {
+                        visible: true,
+                        applyFilter: "auto"
+                    },
+                    columns: [
+                        {
+                            caption: "Chọn", alignment: 'center',
+                            width: 100,
+                            cellTemplate: function (container, options) {
+                                var dt = options.data;
+                                $('<a href="javascript:" onclick="LoadDanhSachLopHoc(\'' + dt.A_KEHOACH + '\')"  class="text-green"><b>...</b></a>').appendTo(container);
+                            }
+                        }, {
+                            dataField: "TENLOP",
+                            caption: "Tên lớp",
+                            width: 250,
+                        }, {
+                            caption: "Chương trình",
+                            dataField: "CHUONGTRINH",
+                            width: 200,
+                        }, {
+                            caption: "Trung tâm",
+                            dataField: "TRUNGTAM",
+                            width: 200,
+                        }, {
+                            dataField: "BUOI1",
+                            caption: "Buổi 1",
+                            width: 120,
+                        }, {
+                            dataField: "BUOI2",
+                            caption: "Buổi 2",
+                            width: 120,
+                        }, {
+                            dataField: "NGAYBATDAU",
+                            caption: "Ngày bắt đấu",
+                            width: 120,
+                        }, {
+                            dataField: "NGAYKETTHUC",
+                            caption: "Ngày kết thúc",
+                            width: 120,
+                        }, {
+                            dataField: "SO_HOCSINHMAX",
+                            caption: "Số học sinh Max",
+                            width: 120,
+                        },
+                    ],
+
+                }).dxDataGrid('instance');
+            },
+            error: function (a, b, c) {
+                DevExpress.ui.notify('Error ' + a.status + ': ' + a.statusText, 'error', 2000);
+            }
+        });
+    }
+    function LoadDanhSachLopHoc(e) {
+        $('#DanhSachLopHoc').modal('hide');
+        $.getJSON('/XepLop/LoadLopHocInfo', $.param({ ID: e }, true), function (data) {
+            $('#TIMKIEMLOPHOC').val(data.TENLOP);
+            $('#CHUONGTRINH').val(data.CHUONGTRINH);
+            $('#TRUNGTAM').val(data.TRUNGTAM);
+            $('#BUOI1').val(data.BUOI1);
+            $('#BUOI2').val(data.BUOI2);
+            $('#NGAYBATDAU').val(data.NGAYBATDAU);
+            $('#NGAYKETTHUC').val(data.NGAYKETTHUC);
+            $('#NOIDUNGKEHOACH').val(data.NOIDUNGKEHOACH);
+            $('#TONGSOHOCSINHTOIDA').val(data.SO_HOCSINHMAX);
+            a_kehoach = data.A_KEHOACH;
+            phuongthuoc = data.ID_PHUONGTHUC;
+            congcu = data.ID_CONGCU;
+            khuvuc = data.ID_KHUVUC;
+            LoadDanhSachDangHoc(data.A_KEHOACH);
+            soluonghocviendadangky = data.SOLUONGHOCVIENDADANGKY;
+            ngaymolop = data.NGAYBD;
+            ngaydonglop = data.NGAYKT;
+            $("#NgayXepLop").dxDateBox({
+                value: new Date(),
+                formatString: 'dd/MM/yyyy',
+                onValueChanged: function (Datedata) {
+                    ngayxeplop = Datedata.value;
+                    //var ngaybd = new Date(data.NGAYBD).getTime();
+                    //var ngaykt = new Date(data.NGAYKT).getTime();
+                    //var ngayxep = Datedata.value.getTime();
+                    //if (ngayxep < ngaybd || ngayxep > ngaykt) {
+                    //    DevExpress.ui.notify('Ngày bắt đầu học phải nằm trong đoạn Ngày mở lớp và ngày kết thúc lớp !', 'warning', 2000);
+                    //    document.querySelector('.dx-toast-warning').style.transform = "translate(720px, 30px)";
+                    //    return
+                    // }
+                },
+            }).dxDateBox("instance");
+        });
+    }
+    function LoadDanhSachDangHoc(a_kehoach) {
+        $.ajax({
+            url: '@Url.Action("GetDanhSachDangHoc", "XepLop")',
+            type: 'GET',
+            data: { LopHoc: a_kehoach },
+            contentType: 'application/json',
+            success: function (rs) {
+                $("#gridDanhSachDangHoc").dxDataGrid({
+                    dataSource: rs,
+                    allowColumnReordering: false,
+                    allowColumnResizing: false,
+                    allowColumnReordering: true,
+                    columnAutoWidth: false,
+                    columnFixing: {
+                        enabled: true
+                    },
+                    paging: {
+                        pageSize: 10
+                    },
+                    showColumnLines: true,
+                    showRowLines: true,
+                    filterRow: {
+                        visible: true,
+                        applyFilter: "auto"
+                    },
+                    columns: [{
+
+                        caption: "STT",
+                        allowEditing: false, alignment: 'center', width: 50,
+                        cellTemplate: function (cellElement, cellInfo) {
+                            cellElement.text(cellInfo.row.rowIndex + 1)
+                        }
+                    }, {
+                        dataField: "MAHOCVIEN",
+                        caption: "Mã học viên",
+                        width: 100
+                    }, {
+                        dataField: "TENHOCVIEN",
+                        caption: "Tên học viên",
+                        width: 200
+                    }, {
+                        dataField: "SOBUOIHOC",
+                        caption: "Số buổi",
+                        width: 100
+                    }, {
+                        dataField: "TENTRUNGTAM",
+                        caption: "Trung tâm",
+                        width: 150
+                    }, {
+                        dataField: "TENCHUONGTRINH",
+                        caption: "Chương trình",
+                        width: 150
+                    }, {
+                        dataField: "NGAYDANGKY",
+                        caption: "Ngày thực hiện",
+                        width: 150
+                    }, {
+                        dataField: "NGAYDUKIENHOC",
+                        caption: "Ngày bắt đầu học",
+                        width: 150
+                    }, {
+                        dataField: "NGAYKETTHUCHOC",
+                        caption: "Ngày học cuối",
+                        width: 150
+                    }, {
+                        dataField: "trangthaihoc",
+                        caption: "Trạng thái học",
+                        width: 150
+                    }, {
+                        dataField: "trangthaixeplop",
+                        caption: "Trạng thái xếp lớp",
+                        width: 150
+                    }, {
+                        dataField: "CM",
+                        caption: "CM",
+                        width: 200
+                    }, {
+                        dataField: "SM",
+                        caption: "EC",
+                        width: 200
+                    }, {
+                        dataField: "TENTIENGANH",
+                        caption: "Nick name",
+                        width: 200
+                    }, {
+                        dataField: "A_TH_DUBAO",
+                        caption: "A_TH_DUBAO",
+                        width: 0
+                    }]
+                }).dxDataGrid('instance');
+            },
+            error: function (a, b, c) {
+                DevExpress.ui.notify('Error ' + a.status + ': ' + a.statusText, 'error', 2000);
+            }
+        });
+    }
+
+    function GHEPLOPHOC() {
+        if (a_kehoach == "" || a_kehoach == null) {
+            DevExpress.ui.notify('Chưa chọn lớp học!', 'warning', 2000);
+            document.querySelector('.dx-toast-warning').style.transform = "translate(720px, 30px)";
+            return
+        }
+        var array = [];
+        var dataGrid = $('#gridDanhSachCho').dxDataGrid('instance');
+        var keys = dataGrid.getSelectedRowKeys();
+        if (keys.length == 0) {
+            DevExpress.ui.notify('Chưa chọn học sinh!', 'warning', 2000);
+            document.querySelector('.dx-toast-warning').style.transform = "translate(720px, 30px)";
+            return
+        }
+        if (keys[0].TENTIENGANH == null || keys[0].TENTIENGANH == "") {
+            DevExpress.ui.notify('Học viên này chưa có Nick name !', 'warning', 3000);
+            document.querySelector('.dx-toast-warning').style.transform = "translate(720px, 30px)";
+            return;
+        }
+        var nickname = "";
+        var gridItems = $("#gridDanhSachDangHoc").dxDataGrid('instance')._controllers.data._dataSource._items;
+        $.each(gridItems, function (i, v) {
+            if (v.TENTIENGANH == keys[0].TENTIENGANH && keys[0].TENTIENGANH != null && keys[0].TENTIENGANH != "") {
+                nickname = v.TENTIENGANH;
+                return
+            }
+        })
+        if (nickname.length > 0) {
+            DevExpress.ui.notify('Trùng nick name học viên đang học trong lớp (Tên Nick name là: ' + nickname + ') !', 'warning', 3000);
+            document.querySelector('.dx-toast-warning').style.transform = "translate(720px, 30px)";
+            return;
+        }
+        var soluonghocvienchon = Number(keys.length);
+        var soluonghocvienduthua = (soluonghocvienchon + soluonghocviendadangky) - Number($('#TONGSOHOCSINHTOIDA').val());
+        if (soluonghocvienduthua > 0) {
+            DevExpress.ui.notify('Quá số lượng học viên của lớp (' + soluonghocvienduthua + ' học viên)', 'warning', 2000);
+            document.querySelector('.dx-toast-warning').style.transform = "translate(720px, 30px)";
+            return
+        }
+        var ngaybd = new Date(ngaymolop).getTime();
+        var ngaykt = new Date(ngaydonglop).getTime();
+        if (ngayxeplop < ngaybd || ngayxeplop > ngaykt) {
+            DevExpress.ui.notify('Ngày bắt đầu học phải nằm trong đoạn Ngày mở lớp và ngày kết thúc lớp !', 'warning', 2000);
+            document.querySelector('.dx-toast-warning').style.transform = "translate(720px, 30px)";
+            return
+        }
+        var result = DevExpress.ui.dialog.confirm('Bạn có muốn lưu kết quả không?', "Xác nhận");
+        result.done(function (dialogResult) {
+            if (dialogResult) {
+                $.ajax({
+                    url: '@Url.Action("XepLopChoHocVien","XepLop")',
+                    beforeSend: function () { window.parent.$('#loading').show(); },
+                    data: {
+                        HocVien: keys[0].A_HOSOKHACHHANG,
+                        LopHoc: a_kehoach,
+                        CM_PHUTRACH: keys[0].CMphutrach,
+                        CM_LEADER: keys[0].CMphutrach,
+                        GD_TRUNGTAM: keys[0].magiamdoctrungtam,
+                        GD_VUNG: keys[0].magiamdocvung,
+                        HopDong: keys[0].A_TH_HOPDONG,
+                        SoBuoi: keys[0].SOBUOIHOC,
+                        DONGIA: keys[0].DONGIA,
+                        CHIETKHAU: keys[0].CHIETKHAU,
+                        THANHTIEN: keys[0].THANHTIEN,
+                        EC: keys[0].EC,
+                        EC_LEADER: keys[0].EC_LEADER,
+                        CM: keys[0].CM,
+                        OM: keys[0].OM,
+                        A_TH_DUBAO: keys[0].A_TH_DUBAO,
+                        Buoi1: phuongthuoc,
+                        Buoi2: congcu,
+                        KhuVuc: khuvuc,
+                        NgayXepLop: Globalize.format($("#NgayXepLop").dxDateBox('instance').option('value'), 'yyyy-MM-dd'),
+                        ChuongTrinh: $('#ChuongTrinh').dxSelectBox('instance').option('value')
+                    },
+                    success: function (rs) {
+                        if (rs > 0) {
+                            if (rs = -1) {
+                                DevExpress.ui.notify('Ngày bắt đầu học phải nằm trong đoạn Ngày mở lớp và ngày kết thúc lớp !', 'warning', 2000);
+                                document.querySelector('.dx-toast-warning').style.transform = "translate(720px, 30px)";
+                            }
+                            LoadDanhSachDangHoc(a_kehoach);
+                            LoadDanhSachCho();
+                            DevExpress.ui.notify('Xếp thành công', 'success', 2000);
+                            document.querySelector('.dx-toast-success').style.transform = "translate(720px, 30px)";
+                        }
+                        window.parent.$("#loading").fadeOut("fast");
+                    },
+                });
+            }
+            else { }
+        });
+    }
+</script>
