@@ -146,6 +146,7 @@
                     <label class="col-sm-2 control-label">Thành tiền</label>
                     <div class="col-sm-4">
                         <input id="THANHTIEN" type="text" disabled class="form-control" data-foo>
+                        <input id="LICHSUTHANHTIEN" type="text" disabled class="hidden" data-foo>
                     </div>
                 </div>
                 <div class="form-group">
@@ -286,8 +287,7 @@
                 var dateBoxValue = dateBox.option('text');
                 $("#NgayDuKienHoc").dxDateBox('instance').option('value', ConvertDate(dateBoxValue));
             },
-            onValueChanged: function (data) {
-            },
+            onValueChanged: function (data) {},
         }).dxDateBox("instance");
         if ($('#HocVien').val() != null && $('#HocVien').val() != "")
             LoadDanhSachHocSinh($('#HocVien').val());
@@ -402,17 +402,6 @@
                               dataField: "CHUONGTRINH",
                               caption: "Chương trình",
                               width: 120,
-                          }, {
-                              caption: "Đơn giá",
-                              dataField: "DONGIA",
-                              width: 120,
-                              dataType: "number",
-                              format: 'fixedPoint',
-                              precision: 2,
-                              customizeText: function (ctrl) {
-                                  var giatri = ctrl.value > 0 ? ctrl.value : 0;
-                                  return customizeNumber(giatri.toFixed(0));
-                              }
                           }, {
                               caption: "Ghi chú",
                               dataField: "GHICHUSANPHAM",
@@ -590,6 +579,7 @@
     function Insert() {
         xemlichsu = false;
         ActiveButtonSave(false);
+        VisibleInput('form-control', 'hidden');
         $("#NgayDuKienHoc").dxDateBox('instance').option('value', new Date());
         var elements = document.querySelectorAll('[data-foo]');
         for (var i = 0; i < elements.length; i++) {
@@ -708,8 +698,7 @@
                     displayExpr: "TENLOAIHOPDONG",
                     valueExpr: "ID_LOAIHOPDONG",
                     searchEnabled: true,
-                    onValueChanged: function (e) {
-                    },
+                    onValueChanged: function (e) {},
                 });
             }
         })
@@ -722,8 +711,7 @@
                 displayExpr: "TENTRUNGTAM",
                 valueExpr: "ID_TRUNGTAM",
                 searchEnabled: true,
-                onValueChanged: function (e) {
-                },
+                onValueChanged: function (e) {},
             });
         });
     }
@@ -834,9 +822,9 @@
 
                 }).dxDataGrid('instance');
             },
-            error: function (a, b, c) {
-                DevExpress.ui.notify('Error ' + a.status + ': ' + a.statusText, 'error', 2000);
-            }
+            //error: function (a, b, c) {
+            //    DevExpress.ui.notify('Error ' + a.status + ': ' + a.statusText, 'error', 2000);
+            //}
         });
     }
 
@@ -908,10 +896,15 @@
                     $('#GIATRIGOI').val(gtg.toString().replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1,"));
                     $('#CHIETKHAU').val(rs[0].CHIETKHAU);
                     $("#NgayDuKienHoc").dxDateBox('instance').option('value', rs[0].NgayDuKienHoc);
-                    $('#THANHTIEN').val(rs[0].THANHTIEN.toString().replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1,"));
+                    VisibleInput('hidden', 'form-control');
+                    $('#LICHSUTHANHTIEN').val(rs[0].THANHTIEN.toString().replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1,"));
                 }
             }
         })
+    }
+    function VisibleInput(thanhtien, lichsuthanhtien) {
+        $('#THANHTIEN').removeClass('form-control').removeClass('hidden').addClass(thanhtien)
+        $('#LICHSUTHANHTIEN').removeClass('form-control').removeClass('hidden').addClass(lichsuthanhtien)
     }
 
     function LoadDanhSachHocVien(obj) {

@@ -135,7 +135,7 @@ namespace Web_Apax.Controllers
                         J_SANPHAM = A_SANPHAM_CHUYEN>0?(int)A_SANPHAM_CHUYEN:0,
                         SOLUONG = SOBUOICON == null ? 0 : decimal.Parse(SOBUOICON.ToString()),
                         DONGIA = SOTIEN,
-                        THANHTIEN = SOTIEN,
+                        THANHTIEN = SOTIEN*(SOBUOICON == null ? 0 : decimal.Parse(SOBUOICON.ToString())),
                     });
                     sc+= db.SaveChanges();
                     if (sc>=2)
@@ -167,7 +167,7 @@ namespace Web_Apax.Controllers
                                 J_SANPHAM = A_SANPHAM_NHAN>0?(int)A_SANPHAM_NHAN:0,
                                 SOLUONG = SOBUOINHAN == null ? 0 : decimal.Parse(SOBUOINHAN.ToString()),
                                 DONGIA = DONGIANHAN,
-                                THANHTIEN = SOTIEN,
+                                THANHTIEN = DONGIANHAN*(SOBUOINHAN == null ? 0 : decimal.Parse(SOBUOINHAN.ToString())),
                             });
                             ec += db.SaveChanges();
                         }

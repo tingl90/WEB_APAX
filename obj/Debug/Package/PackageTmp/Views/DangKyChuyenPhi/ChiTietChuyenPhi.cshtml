@@ -160,13 +160,13 @@
                     </div>
                     <label class="col-sm-2 control-label" style="padding-left: 0px!important">Đơn giá</label>
                     <div class="col-sm-4">
-                        <input type="text" id="DONGIA2" data-foo class="form-control">
+                        <input type="text" id="DONGIA2" readonly data-foo class="form-control">
                     </div>
                 </div>
                 <div class="form-group">
                     <label class="col-sm-2 control-label">Tổng tiền</label>
                     <div class="col-sm-4">
-                        <input type="text" id="TONGTIEN2" data-foo class="form-control">
+                        <input type="text" id="TONGTIEN2" readonly data-foo class="form-control">
                         <input type="text" id="TIENHOCVIENCU" data-foo class="hidden">
                     </div>
                     <label class="col-sm-2 control-label" style="padding-left: 0px!important">Tiền chuyển</label>
@@ -433,9 +433,9 @@
                             cellTemplate: function (container, options) {
                                 var dt = options.data;
                                 if (obj == 1)
-                                    $('<a href="javascript:" onclick="LoadDanhSachHocSinhCho(\'' + dt.A_HOSOKHACHHANG + '\')"  class="text-green"><b>...</b></a>').appendTo(container);
+                                    $('<a href="javascript:" onclick="LoadDanhSachHocSinhCho(\'' + dt.A_TH_DUBAO + '\')"  class="text-green"><b>...</b></a>').appendTo(container);
                                 else if (obj == 2)
-                                    $('<a href="javascript:" onclick="LoadDanhSachHocSinhNhan(\'' + dt.A_HOSOKHACHHANG + '\')"  class="text-green"><b>...</b></a>').appendTo(container);
+                                    $('<a href="javascript:" onclick="LoadDanhSachHocSinhNhan(\'' + dt.A_TH_DUBAO + '\')"  class="text-green"><b>...</b></a>').appendTo(container);
                             }
                         },
                           {
@@ -764,9 +764,6 @@
                 //var ngayhientai = new Date(data.NGAYBD).getTime();
                 if (ngayxep < ngayhientai) {
                     dungngaychuyen = false;
-                    DevExpress.ui.notify('Ngày chuyển phải lớn hơn hoặc bằng ngày hiện tại !', 'warning', 2000);
-                    document.querySelector('.dx-toast-warning').style.transform = "translate(720px, 30px)";
-                    return
                 }
                 else
                 {
@@ -916,13 +913,13 @@
                     $("#NgayChuyen").dxDateBox('instance').option('value', rs[0].NGAYCHUYEN);
                     $('#SOBUOI').val(rs[0].SOBUOIHOC);
                     $('#SOBUOCONLAI').val(rs[0].SOBUOICHUYEN);
-                    $('#DONGIA').val(rs[0].DONGIACHUYEN);
-                    $('#SOTIENCHUYEN').val(rs[0].SOTIENCHUYEN);
+                    $('#DONGIA').val(rs[0].DONGIACHUYEN.toString().replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1,"));
+                    $('#SOTIENCHUYEN').val(rs[0].SOTIENCHUYEN.toString().replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1,"));
                     $('#NGAYBATDAU').val(rs[0].NGAYBATDAUCHUYEN);
                     $('#NGAYHOCCUOI').val(rs[0].NGAYKETTHUCCHUYEN);
 
                     $("#HinhThuc").dxSelectBox('instance').option('value', rs[0].ID_THAIDO);
-                    $('#SOTIENCHUYEN2').val(rs[0].SOTIENNHAN);
+                    $('#SOTIENCHUYEN2').val(rs[0].SOTIENNHAN.toString().replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1,"));
                     $('#NGAYBATDAU2').val(rs[0].NGAYBATDAUNHAN);
                     $('#NGAYKETTHUC2').val(rs[0].NGAYKETTHUCNHAN);
                     $('#TIMKIEMHVNHAN').val(rs[0].TENHOCSINHNHAN);
@@ -932,8 +929,8 @@
                     $('#MAEffect2').val(rs[0].MAEFFECHOCSINHNHAN);
                     $('#TRUNGTAM2').val(rs[0].TENTRUNGTAMNHAN);
                     $('#CHUONGTRINH2').val(rs[0].TENCHUONGTRINHNHAN);
-                    $('#DONGIA2').val(rs[0].DONGIANHAN);
-                    $('#TONGTIEN2').val(rs[0].SOTIENCUNHAN);
+                    $('#DONGIA2').val(rs[0].DONGIANHAN.toString().replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1,"));
+                    $('#TONGTIEN2').val(rs[0].SOTIENCUNHAN.toString().replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1,"));
                     $('#SOBUOI2').val(rs[0].SOBUOINHAN);
                 }
             }
@@ -1178,6 +1175,7 @@
                             $("#btnLuu").prop("disabled", true);
                             DevExpress.ui.notify('Cập nhật thành công', 'success', 2000);
                             LoadDanhSachLichSuDuyet(a_dubao_duyet);
+                            location.href = "/DangKyChuyenPhi/ChiTietChuyenPhi";
                         }
                         else {
                             DevExpress.ui.notify('Chưa cập nhật được', 'error', 2000);

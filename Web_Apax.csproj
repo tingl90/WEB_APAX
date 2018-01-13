@@ -191,6 +191,9 @@
     <Compile Include="Models\APAX_DANHSACHLICHSUDUYETDANGKYLOP_Result.cs">
       <DependentUpon>LTEModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\APAX_DANHSACHLICHSUDUYETTIEPNHANCHUYENLOP_Result.cs">
+      <DependentUpon>LTEModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\APAX_DANHSACHLICHSUDUYET_Result.cs">
       <DependentUpon>LTEModel.tt</DependentUpon>
     </Compile>

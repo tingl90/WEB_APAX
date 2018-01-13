@@ -223,9 +223,9 @@ namespace Web_Apax.Controllers
                     var tongsobuoi = modelTaiPhi.SoBuoi + SOLUONG;
                     var modelDuBao = db.TH_DUBAO.FirstOrDefault(t => t.A_TH_DUBAO == modelTaiPhi.A_TH_DUBAO);
                     modelDuBao.NGAYLAM = DateTime.Now;
-                    modelDuBao.NGAYGIAOHANG = DateTime.Parse(NGAYBATDAU);
+                    //modelDuBao.NGAYGIAOHANG = DateTime.Parse(NGAYBATDAU);
                     //modelDuBao.ID_LYDO_HV = 97;
-                    modelDuBao.NGAYTHANHTOAN = LayNgayKetThucDateTime(modelTaiPhi.NgayHocCuoi, tongsobuoi, modelTaiPhi.Buoi1, modelTaiPhi.Buoi2, modelTaiPhi.ID_KHUVUC);
+                    modelDuBao.NGAYTHANHTOAN = LayNgayKetThucDateTime(modelTaiPhi.NgayHocCuoi, SOLUONG, modelTaiPhi.Buoi1, modelTaiPhi.Buoi2, modelTaiPhi.ID_KHUVUC);
                     //modelDuBao.ID_LYDO_TD = 237; 
                     modelDuBao.TK_EC = EC;
                     modelDuBao.TK_CM = CM;
@@ -323,7 +323,7 @@ namespace Web_Apax.Controllers
             try
             {
                 string ngaybatdau = ngaybd.Value.ToString("yyyy-MM-dd");
-                var model = db.APAX_HamLayNgayKetThuc(ngaybd.Value.ToString("yyyy-MM-dd"), Buoi1, Buoi2, SoBuoi, KhuVuc).ToList();
+                var model = db.APAX_HamLayNgayKetThucBaoLuu(ngaybd.Value.ToString("yyyy-MM-dd"), Buoi1, Buoi2, SoBuoi, KhuVuc).ToList();
                 return model[0].Date.Value;
             }
             catch

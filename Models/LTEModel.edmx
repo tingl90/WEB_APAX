@@ -5104,6 +5104,7 @@ warning 6002: The table/view 'APAX.dbo.tmp_henlich' does not have a primary key 
         <Function Name="APAX_CHECK_HSTRUNG" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" ReturnType="nvarchar">
           <Parameter Name="DIDONG" Type="nvarchar" Mode="In" />
           <Parameter Name="TENHS" Type="nvarchar" Mode="In" />
+          <Parameter Name="A_HOSOKHACHHANG" Type="int" Mode="In" />
         </Function>
         <Function Name="APAX_DANGKYHOC_DM_GOIPHI" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="TENTRUNGTAM" Type="nvarchar" Mode="In" />
@@ -5120,6 +5121,9 @@ warning 6002: The table/view 'APAX.dbo.tmp_henlich' does not have a primary key 
           <Parameter Name="DuBao" Type="int" Mode="In" />
         </Function>
         <Function Name="APAX_DANHSACHLICHSUDUYETDANGKYLOP" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="DuBao" Type="int" Mode="In" />
+        </Function>
+        <Function Name="APAX_DANHSACHLICHSUDUYETTIEPNHANCHUYENLOP" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="DuBao" Type="int" Mode="In" />
         </Function>
         <Function Name="APAX_DemNgayConLaiChuyenPhi" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
@@ -5199,6 +5203,7 @@ warning 6002: The table/view 'APAX.dbo.tmp_henlich' does not have a primary key 
         <Function Name="SP_APAX_CHECKTRUNG" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="SoDienThoai" Type="nvarchar" Mode="In" />
           <Parameter Name="TenKhachHang" Type="nvarchar" Mode="In" />
+          <Parameter Name="A_HOSOKHACHHANG" Type="int" Mode="In" />
         </Function>
         <Function Name="SP_APAX_CHITIETHOCSINHNHANHOCPHI" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="ID" Type="int" Mode="In" />
@@ -9097,6 +9102,7 @@ warning 6002: The table/view 'APAX.dbo.tmp_henlich' does not have a primary key 
           <FunctionImport Name="SP_APAX_CHECKTRUNG" ReturnType="Collection(APAXModel.SP_APAX_CHECKTRUNG_Result)">
             <Parameter Name="SoDienThoai" Mode="In" Type="String" />
             <Parameter Name="TenKhachHang" Mode="In" Type="String" />
+            <Parameter Name="A_HOSOKHACHHANG" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="SP_APAX_LICHSUTHUTIEN" ReturnType="Collection(APAXModel.SP_APAX_LICHSUTHUTIEN_Result)">
             <Parameter Name="HocVien" Mode="In" Type="Int32" />
@@ -9247,6 +9253,9 @@ warning 6002: The table/view 'APAX.dbo.tmp_henlich' does not have a primary key 
           </FunctionImport>
           <FunctionImport Name="SP_DanhSachDeNghiTiepNhan" ReturnType="Collection(APAXModel.SP_DanhSachDeNghiTiepNhan_Result)">
           <Parameter Name="TaiKhoan" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="APAX_DANHSACHLICHSUDUYETTIEPNHANCHUYENLOP" ReturnType="Collection(APAXModel.APAX_DANHSACHLICHSUDUYETTIEPNHANCHUYENLOP_Result)">
+          <Parameter Name="DuBao" Mode="In" Type="Int32" />
           </FunctionImport>
         </EntityContainer>
         <ComplexType Name="APAX_GETDANHSACHHOCSINH_Result">
@@ -9442,7 +9451,6 @@ warning 6002: The table/view 'APAX.dbo.tmp_henlich' does not have a primary key 
           <Property Type="String" Name="ma_anhem" Nullable="true" MaxLength="100" />
           <Property Type="String" Name="saleman" Nullable="true" MaxLength="30" />
           <Property Type="String" Name="CM" Nullable="true" MaxLength="30" />
-          <Property Type="String" Name="LOAIHOCSINH" Nullable="true" MaxLength="100" />
           <Property Type="String" Name="TENTRUNGTAM" Nullable="true" />
           <Property Type="String" Name="DIENTHOAIHS" Nullable="true" MaxLength="100" />
           <Property Type="String" Name="EMAILHS" Nullable="true" />
@@ -9453,6 +9461,8 @@ warning 6002: The table/view 'APAX.dbo.tmp_henlich' does not have a primary key 
           <Property Type="Int32" Name="J_GD_VUNG" Nullable="true" />
           <Property Type="Int64" Name="STT" Nullable="true" />
           <Property Type="String" Name="SOCMTND" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="TENLOAIKHACHHANG" Nullable="true" MaxLength="200" />
+          <Property Type="Int32" Name="ID_LOAIHOPDONG" Nullable="true" />
         </ComplexType>
         <EntityType Name="DM_CHUNHIEM_DA">
           <Key>
@@ -13782,14 +13792,14 @@ warning 6002: The table/view 'APAX.dbo.tmp_henlich' does not have a primary key 
           <Property Type="String" Name="GDV" Nullable="true" MaxLength="30" />
         </ComplexType>
         <ComplexType Name="SP_APAX_DANHSACHDAXEPLOP_Result">
-          <Property Type="Int32" Name="A_HOSOKHACHHANG" Nullable="false" />
+          <Property Type="Int32" Name="A_HOSOKHACHHANG" Nullable="true" />
           <Property Type="String" Name="MaDangky" Nullable="true" MaxLength="50" />
-          <Property Type="String" Name="MaHocVien" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="MaHocVien" Nullable="true" MaxLength="50" />
           <Property Type="String" Name="TenHocVien" Nullable="true" MaxLength="200" />
-          <Property Type="String" Name="TenLop" Nullable="false" MaxLength="150" />
+          <Property Type="String" Name="TenLop" Nullable="true" MaxLength="150" />
           <Property Type="String" Name="TrungTam" Nullable="true" />
           <Property Type="String" Name="ChuongTrinh" Nullable="true" MaxLength="150" />
-          <Property Type="Int32" Name="SobuoiHoc" Nullable="true" />
+          <Property Type="Decimal" Name="SobuoiHoc" Nullable="true" Precision="18" Scale="2" />
           <Property Type="Decimal" Name="DonGia" Nullable="true" Precision="18" Scale="0" />
           <Property Type="String" Name="Buoi1" Nullable="true" MaxLength="100" />
           <Property Type="String" Name="Buoi2" Nullable="true" MaxLength="100" />
@@ -13797,9 +13807,9 @@ warning 6002: The table/view 'APAX.dbo.tmp_henlich' does not have a primary key 
           <Property Type="String" Name="NGAYDUKIENHOC" Nullable="true" MaxLength="10" />
           <Property Type="String" Name="NGAYKETHUCHOC" Nullable="true" MaxLength="10" />
           <Property Type="Decimal" Name="TongTien" Nullable="true" Precision="18" Scale="0" />
-          <Property Type="String" Name="TrangThaiHoc" Nullable="false" MaxLength="100" />
-          <Property Type="Int32" Name="A_KEHOACH" Nullable="false" />
-          <Property Type="Int32" Name="A_TH_HOPDONG" Nullable="false" />
+          <Property Type="String" Name="TrangThaiHoc" Nullable="true" MaxLength="100" />
+          <Property Type="Int32" Name="A_KEHOACH" Nullable="true" />
+          <Property Type="Int32" Name="A_TH_HOPDONG" Nullable="true" />
           <Property Type="String" Name="DienThoai" Nullable="true" MaxLength="100" />
           <Property Type="String" Name="Email" Nullable="true" />
           <Property Type="String" Name="DiaChi" Nullable="true" MaxLength="300" />
@@ -13929,7 +13939,7 @@ warning 6002: The table/view 'APAX.dbo.tmp_henlich' does not have a primary key 
           <Property Type="String" Name="TenLop" Nullable="false" MaxLength="150" />
           <Property Type="String" Name="TrungTam" Nullable="true" />
           <Property Type="String" Name="ChuongTrinh" Nullable="true" MaxLength="150" />
-          <Property Type="Int32" Name="SobuoiHoc" Nullable="true" />
+          <Property Type="Decimal" Name="SobuoiHoc" Nullable="true" Precision="18" Scale="2" />
           <Property Type="Decimal" Name="DonGia" Nullable="true" Precision="18" Scale="2" />
           <Property Type="String" Name="Buoi1" Nullable="true" MaxLength="100" />
           <Property Type="String" Name="Buoi2" Nullable="true" MaxLength="100" />
@@ -14954,10 +14964,10 @@ warning 6002: The table/view 'APAX.dbo.tmp_henlich' does not have a primary key 
           <Property Type="String" Name="TENTRUNGTAMCHUYEN" Nullable="true" />
           <Property Type="String" Name="TENCHUONGTRINHCHUYEN" Nullable="true" MaxLength="150" />
           <Property Type="String" Name="NGAYCHUYEN" Nullable="true" MaxLength="10" />
-          <Property Type="Int32" Name="SOBUOIHOC" Nullable="true" />
-          <Property Type="Int32" Name="SOBUOICHUYEN" Nullable="true" />
-          <Property Type="Decimal" Name="DONGIACHUYEN" Nullable="true" Precision="18" Scale="0" />
-          <Property Type="Decimal" Name="SOTIENCHUYEN" Nullable="true" Precision="18" Scale="0" />
+          <Property Type="Int32" Name="SOBUOIHOC" Nullable="false" />
+          <Property Type="Int32" Name="SOBUOICHUYEN" Nullable="false" />
+          <Property Type="Decimal" Name="DONGIACHUYEN" Nullable="false" Precision="18" Scale="0" />
+          <Property Type="Decimal" Name="SOTIENCHUYEN" Nullable="false" Precision="18" Scale="0" />
           <Property Type="String" Name="NGAYBATDAUCHUYEN" Nullable="true" MaxLength="30" />
           <Property Type="String" Name="NGAYKETTHUCCHUYEN" Nullable="true" MaxLength="30" />
           <Property Type="Int32" Name="A_DUBAO_NHAN" Nullable="false" />
@@ -14970,11 +14980,14 @@ warning 6002: The table/view 'APAX.dbo.tmp_henlich' does not have a primary key 
           <Property Type="String" Name="TENCHUONGTRINHNHAN" Nullable="true" MaxLength="150" />
           <Property Type="Decimal" Name="SOBUOINHAN" Nullable="false" Precision="18" Scale="2" />
           <Property Type="Decimal" Name="DONGIANHAN" Nullable="true" Precision="18" Scale="0" />
-          <Property Type="Decimal" Name="SOTIENNHAN" Nullable="true" Precision="18" Scale="0" />
+          <Property Type="Decimal" Name="SOTIENNHAN" Nullable="false" Precision="18" Scale="0" />
           <Property Type="String" Name="NGAYBATDAUNHAN" Nullable="true" MaxLength="30" />
           <Property Type="String" Name="NGAYKETTHUCNHAN" Nullable="true" MaxLength="30" />
           <Property Type="Int32" Name="ID_THAIDO" Nullable="true" />
-          <Property Type="Decimal" Name="SOTIENCUNHAN" Nullable="true" Precision="18" Scale="2" />
+          <Property Type="Decimal" Name="SOTIENCUNHAN" Nullable="false" Precision="18" Scale="2" />
+          <Property Type="Decimal" Name="SOBUOICHUADUYET" Nullable="true" Precision="19" Scale="2" />
+          <Property Type="Decimal" Name="THANHTIENCHUADUYET" Nullable="true" Precision="21" Scale="2" />
+          <Property Type="Int32" Name="SOBUOICHUYENCHUADUYET" Nullable="true" />
         </ComplexType>
         <ComplexType Name="SP_APAX_GETDANHSACHCHUYENPHIDUYET_Result">
           <Property Type="Int32" Name="TONGSOBUOI" Nullable="true" />
@@ -15092,6 +15105,13 @@ warning 6002: The table/view 'APAX.dbo.tmp_henlich' does not have a primary key 
           <Property Type="String" Name="TK_CM" Nullable="true" MaxLength="20" />
           <Property Type="String" Name="TK_EC" Nullable="true" MaxLength="20" />
           <Property Type="String" Name="DUYET" Nullable="false" MaxLength="1" />
+        </ComplexType>
+        <ComplexType Name="APAX_DANHSACHLICHSUDUYETTIEPNHANCHUYENLOP_Result">
+          <Property Type="String" Name="NGAYDUYET" Nullable="true" MaxLength="20" />
+          <Property Type="String" Name="TENDTTC" Nullable="true" MaxLength="150" />
+          <Property Type="String" Name="TENDUYET" Nullable="true" MaxLength="200" />
+          <Property Type="String" Name="YKIENBOSUNG" Nullable="true" MaxLength="2000" />
+          <Property Type="Int32" Name="ID_DUYET" Nullable="true" />
         </ComplexType>
       </Schema>
     </edmx:ConceptualModels>
@@ -15342,7 +15362,6 @@ warning 6002: The table/view 'APAX.dbo.tmp_henlich' does not have a primary key 
                 <ScalarProperty Name="ma_anhem" ColumnName="ma_anhem" />
                 <ScalarProperty Name="saleman" ColumnName="saleman" />
                 <ScalarProperty Name="CM" ColumnName="CM" />
-                <ScalarProperty Name="LOAIHOCSINH" ColumnName="LOAIHOCSINH" />
                 <ScalarProperty Name="TENTRUNGTAM" ColumnName="TENTRUNGTAM" />
                 <ScalarProperty Name="DIENTHOAIHS" ColumnName="DIENTHOAIHS" />
                 <ScalarProperty Name="EMAILHS" ColumnName="EMAILHS" />
@@ -15353,6 +15372,8 @@ warning 6002: The table/view 'APAX.dbo.tmp_henlich' does not have a primary key 
                 <ScalarProperty Name="J_GD_VUNG" ColumnName="J_GD_VUNG" />
                 <ScalarProperty Name="STT" ColumnName="STT" />
                 <ScalarProperty Name="SOCMTND" ColumnName="SOCMTND" />
+                <ScalarProperty Name="TENLOAIKHACHHANG" ColumnName="TENLOAIKHACHHANG" />
+                <ScalarProperty Name="ID_LOAIHOPDONG" ColumnName="ID_LOAIHOPDONG" />
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
@@ -21090,6 +21111,9 @@ warning 6002: The table/view 'APAX.dbo.tmp_henlich' does not have a primary key 
                 <ScalarProperty Name="NGAYKETTHUCNHAN" ColumnName="NGAYKETTHUCNHAN" />
                 <ScalarProperty Name="ID_THAIDO" ColumnName="ID_THAIDO" />
                 <ScalarProperty Name="SOTIENCUNHAN" ColumnName="SOTIENCUNHAN" />
+                <ScalarProperty Name="SOBUOICHUADUYET" ColumnName="SOBUOICHUADUYET" />
+                <ScalarProperty Name="THANHTIENCHUADUYET" ColumnName="THANHTIENCHUADUYET" />
+                <ScalarProperty Name="SOBUOICHUYENCHUADUYET" ColumnName="SOBUOICHUYENCHUADUYET" />
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
@@ -21231,6 +21255,17 @@ warning 6002: The table/view 'APAX.dbo.tmp_henlich' does not have a primary key 
                 <ScalarProperty Name="TK_CM" ColumnName="TK_CM" />
                 <ScalarProperty Name="TK_EC" ColumnName="TK_EC" />
                 <ScalarProperty Name="DUYET" ColumnName="DUYET" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="APAX_DANHSACHLICHSUDUYETTIEPNHANCHUYENLOP" FunctionName="APAXModel.Store.APAX_DANHSACHLICHSUDUYETTIEPNHANCHUYENLOP">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="APAXModel.APAX_DANHSACHLICHSUDUYETTIEPNHANCHUYENLOP_Result">
+                <ScalarProperty Name="NGAYDUYET" ColumnName="NGAYDUYET" />
+                <ScalarProperty Name="TENDTTC" ColumnName="TENDTTC" />
+                <ScalarProperty Name="TENDUYET" ColumnName="TENDUYET" />
+                <ScalarProperty Name="YKIENBOSUNG" ColumnName="YKIENBOSUNG" />
+                <ScalarProperty Name="ID_DUYET" ColumnName="ID_DUYET" />
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>

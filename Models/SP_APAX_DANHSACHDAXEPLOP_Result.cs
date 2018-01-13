@@ -13,14 +13,14 @@ namespace Web_Apax.Models
     
     public partial class SP_APAX_DANHSACHDAXEPLOP_Result
     {
-        public int A_HOSOKHACHHANG { get; set; }
+        public Nullable<int> A_HOSOKHACHHANG { get; set; }
         public string MaDangky { get; set; }
         public string MaHocVien { get; set; }
         public string TenHocVien { get; set; }
         public string TenLop { get; set; }
         public string TrungTam { get; set; }
         public string ChuongTrinh { get; set; }
-        public Nullable<int> SobuoiHoc { get; set; }
+        public Nullable<decimal> SobuoiHoc { get; set; }
         public Nullable<decimal> DonGia { get; set; }
         public string Buoi1 { get; set; }
         public string Buoi2 { get; set; }
@@ -29,8 +29,8 @@ namespace Web_Apax.Models
         public string NGAYKETHUCHOC { get; set; }
         public Nullable<decimal> TongTien { get; set; }
         public string TrangThaiHoc { get; set; }
-        public int A_KEHOACH { get; set; }
-        public int A_TH_HOPDONG { get; set; }
+        public Nullable<int> A_KEHOACH { get; set; }
+        public Nullable<int> A_TH_HOPDONG { get; set; }
         public string DienThoai { get; set; }
         public string Email { get; set; }
         public string DiaChi { get; set; }

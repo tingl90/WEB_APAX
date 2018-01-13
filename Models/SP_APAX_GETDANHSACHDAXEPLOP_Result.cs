@@ -20,7 +20,7 @@ namespace Web_Apax.Models
         public string TenLop { get; set; }
         public string TrungTam { get; set; }
         public string ChuongTrinh { get; set; }
-        public Nullable<int> SobuoiHoc { get; set; }
+        public Nullable<decimal> SobuoiHoc { get; set; }
         public Nullable<decimal> DonGia { get; set; }
         public string Buoi1 { get; set; }
         public string Buoi2 { get; set; }

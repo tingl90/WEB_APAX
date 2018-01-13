@@ -5099,6 +5099,7 @@ warning 6002: The table/view 'APAX.dbo.tmp_henlich' does not have a primary key 
   <Function Name="APAX_CHECK_HSTRUNG" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" ReturnType="nvarchar">
     <Parameter Name="DIDONG" Type="nvarchar" Mode="In" />
     <Parameter Name="TENHS" Type="nvarchar" Mode="In" />
+    <Parameter Name="A_HOSOKHACHHANG" Type="int" Mode="In" />
   </Function>
   <Function Name="APAX_DANGKYHOC_DM_GOIPHI" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
     <Parameter Name="TENTRUNGTAM" Type="nvarchar" Mode="In" />
@@ -5115,6 +5116,9 @@ warning 6002: The table/view 'APAX.dbo.tmp_henlich' does not have a primary key 
     <Parameter Name="DuBao" Type="int" Mode="In" />
   </Function>
   <Function Name="APAX_DANHSACHLICHSUDUYETDANGKYLOP" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="DuBao" Type="int" Mode="In" />
+  </Function>
+  <Function Name="APAX_DANHSACHLICHSUDUYETTIEPNHANCHUYENLOP" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
     <Parameter Name="DuBao" Type="int" Mode="In" />
   </Function>
   <Function Name="APAX_DemNgayConLaiChuyenPhi" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
@@ -5194,6 +5198,7 @@ warning 6002: The table/view 'APAX.dbo.tmp_henlich' does not have a primary key 
   <Function Name="SP_APAX_CHECKTRUNG" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
     <Parameter Name="SoDienThoai" Type="nvarchar" Mode="In" />
     <Parameter Name="TenKhachHang" Type="nvarchar" Mode="In" />
+    <Parameter Name="A_HOSOKHACHHANG" Type="int" Mode="In" />
   </Function>
   <Function Name="SP_APAX_CHITIETHOCSINHNHANHOCPHI" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
     <Parameter Name="ID" Type="int" Mode="In" />

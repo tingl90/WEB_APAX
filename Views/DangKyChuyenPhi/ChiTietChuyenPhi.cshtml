@@ -78,6 +78,7 @@
                     <label class="col-sm-2 control-label" style="padding:7px 0px!important">Số buổi còn</label>
                     <div class="col-sm-4">
                         <input type="text" id="SOBUOCONLAI" data-foo class="form-control">
+                        <input type="text" id="SOBUOCONLAILICHSU" data-foo class="hidden">
                     </div>
                 </div>
                 <div class="form-group">
@@ -88,8 +89,10 @@
                     <label class="col-sm-2 control-label" style="padding:7px 0px!important">Tiền chuyển</label>
                     <div class="col-sm-4">
                         <input type="text" id="SOTIENCHUYEN" data-foo class="form-control">
+                        <input type="text" id="SOTIENCHUYENLICHSU" data-foo class="hidden">
                     </div>
                 </div>
+
                 <div class="form-group">
                     <label class="col-sm-2 control-label" style="padding:7px 0px!important">Ngày bắt đầu</label>
                     <div class="col-sm-4">
@@ -156,22 +159,25 @@
                     <label class="col-sm-2 control-label">Số buổi</label>
                     <div class="col-sm-4">
                         <input type="text" id="SOBUOI2" data-foo class="form-control">
+                        <input type="text" id="SOBUOI2LICHSU" hidden data-foo class="hidden">
                         <input type="text" id="SOBUOIBANDAU2" style="display:none" data-foo class="form-control">
                     </div>
                     <label class="col-sm-2 control-label" style="padding-left: 0px!important">Đơn giá</label>
                     <div class="col-sm-4">
-                        <input type="text" id="DONGIA2" data-foo class="form-control">
+                        <input type="text" id="DONGIA2" readonly data-foo class="form-control">
                     </div>
                 </div>
                 <div class="form-group">
                     <label class="col-sm-2 control-label">Tổng tiền</label>
                     <div class="col-sm-4">
-                        <input type="text" id="TONGTIEN2" data-foo class="form-control">
+                        <input type="text" id="TONGTIEN2" readonly data-foo class="form-control">
+                        <input type="text" id="TONGTIEN2LICHSU" readonly data-foo class="hidden">
                         <input type="text" id="TIENHOCVIENCU" data-foo class="hidden">
                     </div>
                     <label class="col-sm-2 control-label" style="padding-left: 0px!important">Tiền chuyển</label>
                     <div class="col-sm-4">
                         <input type="text" id="SOTIENCHUYEN2" data-foo class="form-control">
+                        <input type="text" id="SOTIENCHUYEN2LICHSU" data-foo class="hidden">
                     </div>
                 </div>
                 <div class="form-group">
@@ -239,23 +245,23 @@
     </div>
 </div>
 @*<div class="modal fade" id="DanhSachDuyetChuyenPhi" style="display: none;">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header bg-red">
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">×</span>
-                </button>
-                <h4 class="modal-title">Danh sách duyệt chuyển phi</h4>
-            </div>
-            <div class="modal-body">
-                <div id="gridDanhSachDuyetChuyenPhi">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header bg-red">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">×</span>
+                    </button>
+                    <h4 class="modal-title">Danh sách duyệt chuyển phi</h4>
+                </div>
+                <div class="modal-body">
+                    <div id="gridDanhSachDuyetChuyenPhi">
+                    </div>
                 </div>
             </div>
+            <!-- /.modal-content -->
         </div>
-        <!-- /.modal-content -->
-    </div>
-    <!-- /.modal-dialog -->
-</div>*@
+        <!-- /.modal-dialog -->
+    </div>*@
 <div class="modal fade" id="DuyetTiepNhan" style="display: none;">
     <div class="modal-dialog">
         <div class="modal-content">
@@ -312,8 +318,8 @@
 <input hidden id="DonGiaChuongTrinh" />
 <script type="text/javascript">
     var dungngaychuyen = false;
-    var a_hosokhachhang=0;
-    var a_hosokhachhang2=0;
+    var a_hosokhachhang = 0;
+    var a_hosokhachhang2 = 0;
     var a_kehoach;
     var a_kehoach2
     var a_sanpham;
@@ -333,7 +339,7 @@
     var tongbuoi_xeplop;
     var Knewdate;
     var lichsu = false;
-    var NgayChuyen, NgayBatDau, khuvuc = 0,hinhthucchuyen=1, hinhthuc = false; var modelHinhThuc = [{ ID_HinhThuc: 1, TenHinhThuc: "Chuyển buổi" }, { ID_HinhThuc: 2, TenHinhThuc: "Chuyển phí" }];
+    var NgayChuyen, NgayBatDau, khuvuc = 0, hinhthucchuyen = 1, hinhthuc = false; var modelHinhThuc = [{ ID_HinhThuc: 1, TenHinhThuc: "Chuyển buổi" }, { ID_HinhThuc: 2, TenHinhThuc: "Chuyển phí" }];
     $(document).ready(function () {
         $("#HinhThuc").dxSelectBox({
             items: modelHinhThuc,
@@ -433,16 +439,22 @@
                             cellTemplate: function (container, options) {
                                 var dt = options.data;
                                 if (obj == 1)
-                                    $('<a href="javascript:" onclick="LoadDanhSachHocSinhCho(\'' + dt.A_HOSOKHACHHANG + '\')"  class="text-green"><b>...</b></a>').appendTo(container);
+                                    $('<a href="javascript:" onclick="LoadDanhSachHocSinhCho(\'' + dt.A_TH_DUBAO + '\')"  class="text-green"><b>...</b></a>').appendTo(container);
                                 else if (obj == 2)
-                                    $('<a href="javascript:" onclick="LoadDanhSachHocSinhNhan(\'' + dt.A_HOSOKHACHHANG + '\')"  class="text-green"><b>...</b></a>').appendTo(container);
+                                    $('<a href="javascript:" onclick="LoadDanhSachHocSinhNhan(\'' + dt.A_TH_DUBAO + '\')"  class="text-green"><b>...</b></a>').appendTo(container);
                             }
                         },
                           {
                               dataField: "MaHocVien",
                               caption: "Mã học sinh",
                               width: 100,
-                          }, {
+                          },
+                          {
+                              dataField: "MALMS",
+                              caption: "Mã LMS",
+                              width: 100,
+                          },
+                          {
                               caption: "Tên học viên",
                               dataField: "TenHocVien",
                               width: 200,
@@ -580,8 +592,7 @@
                 $('#TRUNGTAM').val(data.TrungTam);
                 $('#CHUONGTRINH').val(data.ChuongTrinh);
                 $('#SOBUOI').val(data.SoBuoi);
-                if (data.SoBuoiConLai > data.SoBuoi)
-                {
+                if (data.SoBuoiConLai > data.SoBuoi) {
                     $('#SOBUOICONLAI').val(0);
                 }
                 else {
@@ -684,8 +695,7 @@
                         var yyn = dn.getFullYear();
                         var newdaten = yyn + "-" + mmn + "-" + ddn
                         var ngayKT = $('#NGAYKETTHUC2').val();
-                        if (ngayKT != null && ngayKT!='')
-                        {
+                        if (ngayKT != null && ngayKT != '') {
                             var Kd = new Date($('#NGAYKETTHUC2').val().split("/").reverse().join("-"));
                             var Kdd = Kd.getDate();
                             var Kmm = Kd.getMonth() + 1;
@@ -742,8 +752,7 @@
                             },
                         });
                     }
-                    else
-                    {
+                    else {
                         $("#iCapNhat").prop("disabled", false);
                     }
                 });
@@ -764,12 +773,8 @@
                 //var ngayhientai = new Date(data.NGAYBD).getTime();
                 if (ngayxep < ngayhientai) {
                     dungngaychuyen = false;
-                    DevExpress.ui.notify('Ngày chuyển phải lớn hơn hoặc bằng ngày hiện tại !', 'warning', 2000);
-                    document.querySelector('.dx-toast-warning').style.transform = "translate(720px, 30px)";
-                    return
                 }
-                else
-                {
+                else {
                     dungngaychuyen = true;
                 }
                 NgayChuyen = Globalize.format(data.value, 'yyyy-MM-dd');
@@ -791,16 +796,13 @@
                     contentType: 'application/json',
                     success: function (rs) {
                         var sobuoicon = 0;
-                        if (a_kehoach > 0)
-                        {
+                        if (a_kehoach > 0) {
                             sobuoicon = (rs > Number($('#SOBUOI').val()) ? 0 : rs);
                         }
-                        else
-                        {
+                        else {
                             sobuoicon = Number($('#SOBUOI').val());
                         }
-                        if (hinhthucchuyen != null && lichsu == false)
-                        {
+                        if (hinhthucchuyen != null && lichsu == false) {
                             $("#SOBUOCONLAI").val(sobuoicon);
                             $("#SOTIENCHUYEN").val((sobuoicon * Number($('#DONGIA').val().replace(/,/g, ''))).toString().replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1,"));
                             if (hinhthucchuyen == 1)
@@ -895,7 +897,7 @@
 
         });
     }
-    function XemChiTietLichSu(obj) {
+    function XemChiTietLichSu(obj, duyet) {
         lichsu = true;
         a_dubao_duyet = obj;
         $("#iCapNhat").prop("disabled", true);
@@ -906,6 +908,7 @@
             contentType: 'application/json',
             success: function (rs) {
                 if (rs.length > 0) {
+
                     $('#TIMKIEMHOCVIEN').val(rs[0].TENHOCSINHCHUYEN);
                     $('#MAHOCVIEN').val(rs[0].MAHOCSINHCHUYEN);
                     $('#MaLMS').val(rs[0].MA_LMS);
@@ -915,14 +918,12 @@
                     $('#CHUONGTRINH').val(rs[0].TENCHUONGTRINHCHUYEN);
                     $("#NgayChuyen").dxDateBox('instance').option('value', rs[0].NGAYCHUYEN);
                     $('#SOBUOI').val(rs[0].SOBUOIHOC);
-                    $('#SOBUOCONLAI').val(rs[0].SOBUOICHUYEN);
-                    $('#DONGIA').val(rs[0].DONGIACHUYEN);
-                    $('#SOTIENCHUYEN').val(rs[0].SOTIENCHUYEN);
+                    $('#DONGIA').val(rs[0].DONGIACHUYEN.toString().replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1,"));
                     $('#NGAYBATDAU').val(rs[0].NGAYBATDAUCHUYEN);
                     $('#NGAYHOCCUOI').val(rs[0].NGAYKETTHUCCHUYEN);
 
                     $("#HinhThuc").dxSelectBox('instance').option('value', rs[0].ID_THAIDO);
-                    $('#SOTIENCHUYEN2').val(rs[0].SOTIENNHAN);
+                    
                     $('#NGAYBATDAU2').val(rs[0].NGAYBATDAUNHAN);
                     $('#NGAYKETTHUC2').val(rs[0].NGAYKETTHUCNHAN);
                     $('#TIMKIEMHVNHAN').val(rs[0].TENHOCSINHNHAN);
@@ -932,9 +933,26 @@
                     $('#MAEffect2').val(rs[0].MAEFFECHOCSINHNHAN);
                     $('#TRUNGTAM2').val(rs[0].TENTRUNGTAMNHAN);
                     $('#CHUONGTRINH2').val(rs[0].TENCHUONGTRINHNHAN);
-                    $('#DONGIA2').val(rs[0].DONGIANHAN);
-                    $('#TONGTIEN2').val(rs[0].SOTIENCUNHAN);
-                    $('#SOBUOI2').val(rs[0].SOBUOINHAN);
+                    $('#DONGIA2').val(rs[0].DONGIANHAN.toString().replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1,"));
+                    if (duyet != 'Chờ duyệt') {
+
+                        $('#SOBUOCONLAI').val(rs[0].SOBUOIHOC);
+                        $('#SOTIENCHUYEN').val(rs[0].SOTIENCHUYEN.toString().replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1,"));
+                        $('#SOTIENCHUYEN2').val(rs[0].SOTIENNHAN.toString().replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1,"));
+                        $('#TONGTIEN2').val(rs[0].SOTIENCUNHAN.toString().replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1,"));
+                        $('#SOBUOI2').val(rs[0].SOBUOINHAN);
+                        VisibleInput('form-control','hidden');
+                    }
+                    else {
+
+                        $('#SOBUOCONLAILICHSU').val(rs[0].SOBUOICHUYENCHUADUYET);
+                        $('#SOTIENCHUYENLICHSU').val(rs[0].SOTIENNHAN.toString().replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1,"));
+                        $('#SOTIENCHUYEN2LICHSU').val(rs[0].SOTIENNHAN.toString().replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1,"));
+
+                        $('#TONGTIEN2LICHSU').val(rs[0].THANHTIENCHUADUYET.toString().replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1,"));
+                        $('#SOBUOI2LICHSU').val(rs[0].SOBUOICHUADUYET);
+                        VisibleInput('hidden', 'form-control');
+                    }
                 }
             }
         })
@@ -1024,7 +1042,7 @@
                     onSelectionChanged: function (selectedItems) {
                         var data = selectedItems.selectedRowsData[0];
                         if (data) {
-                            XemChiTietLichSu(data.A_DUBAO_CHUYEN);
+                            XemChiTietLichSu(data.A_DUBAO_CHUYEN, data.TENDUYETCHUYEN);
                         } else {
 
                         }
@@ -1178,6 +1196,7 @@
                             $("#btnLuu").prop("disabled", true);
                             DevExpress.ui.notify('Cập nhật thành công', 'success', 2000);
                             LoadDanhSachLichSuDuyet(a_dubao_duyet);
+                            location.href = "/DangKyChuyenPhi/ChiTietChuyenPhi";
                         }
                         else {
                             DevExpress.ui.notify('Chưa cập nhật được', 'error', 2000);
@@ -1187,4 +1206,21 @@
             }
         });
     }
+    function VisibleInput(thanhtien, lichsuthanhtien) {
+        $('#SOBUOCONLAI').removeClass('form-control').removeClass('hidden').addClass(thanhtien)
+        $('#SOBUOCONLAILICHSU').removeClass('form-control').removeClass('hidden').addClass(lichsuthanhtien)
+
+        $('#SOTIENCHUYEN').removeClass('form-control').removeClass('hidden').addClass(thanhtien)
+        $('#SOTIENCHUYENLICHSU').removeClass('form-control').removeClass('hidden').addClass(lichsuthanhtien)
+
+        $('#SOBUOI2').removeClass('form-control').removeClass('hidden').addClass(thanhtien)
+        $('#SOBUOI2LICHSU').removeClass('form-control').removeClass('hidden').addClass(lichsuthanhtien)
+
+        $('#TONGTIEN2').removeClass('form-control').removeClass('hidden').addClass(thanhtien)
+        $('#TONGTIEN2LICHSU').removeClass('form-control').removeClass('hidden').addClass(lichsuthanhtien)
+
+        $('#SOTIENCHUYEN2').removeClass('form-control').removeClass('hidden').addClass(thanhtien)
+        $('#SOTIENCHUYEN2LICHSU').removeClass('form-control').removeClass('hidden').addClass(lichsuthanhtien)
+    }
+
 </script>

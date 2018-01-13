@@ -141,7 +141,7 @@
             <div class="col-md-4">
                 <div class="col-md-12">
                     <div class="form-group">
-                        <div class="btn-group"><button type="button" onclick="GHEPLOPHOC()" style="width:100px" class="btn btn-block btn-danger">Xếp lớp</button></div>
+                        <div class="btn-group"><button type="button" id="btnXepLop" onclick="GHEPLOPHOC()" style="width:100px" class="btn btn-block btn-danger">Xếp lớp</button></div>
                     </div>
                 </div>
             </div>
@@ -338,6 +338,7 @@
         }
         $('#DanhSachLopHoc').modal('show');
         LoadDSLopHoc();
+        ActiveButtonSave(false);
     }
     function LoadDSLopHoc() {
         var trungtam = $('#TrungTam').dxSelectBox('instance').option('value');
@@ -371,7 +372,7 @@
                             width: 100,
                             cellTemplate: function (container, options) {
                                 var dt = options.data;
-                                $('<a href="javascript:" onclick="LoadDanhSachLopHoc(\'' + dt.A_KEHOACH + '\')"  class="text-green"><b>...</b></a>').appendTo(container);
+                                $('<a href="javascript:" onclick="LoadChiTietLopHoc(\'' + dt.A_KEHOACH + '\')"  class="text-green"><b>...</b></a>').appendTo(container);
                             }
                         }, {
                             dataField: "TENLOP",
@@ -415,7 +416,7 @@
             }
         });
     }
-    function LoadDanhSachLopHoc(e) {
+    function LoadChiTietLopHoc(e) {
         $('#DanhSachLopHoc').modal('hide');
         $.getJSON('/XepLop/LoadLopHocInfo', $.param({ ID: e }, true), function (data) {
             $('#TIMKIEMLOPHOC').val(data.TENLOP);
@@ -440,14 +441,6 @@
                 formatString: 'dd/MM/yyyy',
                 onValueChanged: function (Datedata) {
                     ngayxeplop = Datedata.value;
-                    //var ngaybd = new Date(data.NGAYBD).getTime();
-                    //var ngaykt = new Date(data.NGAYKT).getTime();
-                    //var ngayxep = Datedata.value.getTime();
-                    //if (ngayxep < ngaybd || ngayxep > ngaykt) {
-                    //    DevExpress.ui.notify('Ngày bắt đầu học phải nằm trong đoạn Ngày mở lớp và ngày kết thúc lớp !', 'warning', 2000);
-                    //    document.querySelector('.dx-toast-warning').style.transform = "translate(720px, 30px)";
-                    //    return
-                    // }
                 },
             }).dxDateBox("instance");
         });
@@ -487,7 +480,7 @@
                     }, {
                         dataField: "MAHOCVIEN",
                         caption: "Mã học viên",
-                        width: 100
+                        width: 170
                     }, {
                         dataField: "TENHOCVIEN",
                         caption: "Tên học viên",
@@ -634,6 +627,7 @@
                             LoadDanhSachCho();
                             DevExpress.ui.notify('Xếp thành công', 'success', 2000);
                             document.querySelector('.dx-toast-success').style.transform = "translate(720px, 30px)";
+                            ActiveButtonSave(true);
                         }
                         window.parent.$("#loading").fadeOut("fast");
                     },
@@ -641,5 +635,8 @@
             }
             else { }
         });
+    }
+    function ActiveButtonSave(choose) {
+        $("#btnXepLop").prop("disabled", choose);
     }
 </script>

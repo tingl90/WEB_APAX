@@ -45,7 +45,7 @@ namespace Web_Apax.Controllers
         }
         public JsonResult GetDanhSachLichSuDuyet(int? DuBao)
         {
-            var model = db.APAX_DANHSACHLICHSUDUYET(DuBao).ToList();
+            var model = db.APAX_DANHSACHLICHSUDUYETTIEPNHANCHUYENLOP(DuBao).ToList();
             var json = Json(model, JsonRequestBehavior.AllowGet);
             json.MaxJsonLength = int.MaxValue;
             return json;
@@ -55,7 +55,7 @@ namespace Web_Apax.Controllers
             var NguoiDung = db.DM_DTTC.FirstOrDefault(it => it.TAIKHOAN.Equals(User.Identity.Name));
             try
             {
-                var model = db.APAX_DANHSACHLICHSUDUYET(DuBao).FirstOrDefault();
+                var model = db.APAX_DANHSACHLICHSUDUYETTIEPNHANCHUYENLOP(DuBao).FirstOrDefault();
                 if(model!=null)
                 {
                     return Json(model, JsonRequestBehavior.AllowGet);
@@ -89,7 +89,8 @@ namespace Web_Apax.Controllers
             string TK_GDTT,
             string TK_GDV,
             int? ID_TRUNGTAM_DI,
-            int? ID_TRUNGTAM_DEN
+            int? ID_TRUNGTAM_DEN,
+            int? A_DuBao
             )
         {
             int sc = 0;
@@ -117,6 +118,7 @@ namespace Web_Apax.Controllers
             thdubao.DONGIA = DONGIA;
             thdubao.ID_BOPHAN = ID_BOPHAN;
             thdubao.GHICHU = !string.IsNullOrEmpty(GHICHU) ? GHICHU : "";
+            thdubao.A_THUCHIEN = A_DuBao;
             db.TH_DUBAO.Add(thdubao);
             sc+= db.SaveChanges();
             if(sc>0)

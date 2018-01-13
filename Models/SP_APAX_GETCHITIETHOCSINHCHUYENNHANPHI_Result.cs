@@ -22,10 +22,10 @@ namespace Web_Apax.Models
         public string TENTRUNGTAMCHUYEN { get; set; }
         public string TENCHUONGTRINHCHUYEN { get; set; }
         public string NGAYCHUYEN { get; set; }
-        public Nullable<int> SOBUOIHOC { get; set; }
-        public Nullable<int> SOBUOICHUYEN { get; set; }
-        public Nullable<decimal> DONGIACHUYEN { get; set; }
-        public Nullable<decimal> SOTIENCHUYEN { get; set; }
+        public int SOBUOIHOC { get; set; }
+        public int SOBUOICHUYEN { get; set; }
+        public decimal DONGIACHUYEN { get; set; }
+        public decimal SOTIENCHUYEN { get; set; }
         public string NGAYBATDAUCHUYEN { get; set; }
         public string NGAYKETTHUCCHUYEN { get; set; }
         public int A_DUBAO_NHAN { get; set; }
@@ -38,10 +38,13 @@ namespace Web_Apax.Models
         public string TENCHUONGTRINHNHAN { get; set; }
         public decimal SOBUOINHAN { get; set; }
         public Nullable<decimal> DONGIANHAN { get; set; }
-        public Nullable<decimal> SOTIENNHAN { get; set; }
+        public decimal SOTIENNHAN { get; set; }
         public string NGAYBATDAUNHAN { get; set; }
         public string NGAYKETTHUCNHAN { get; set; }
         public Nullable<int> ID_THAIDO { get; set; }
-        public Nullable<decimal> SOTIENCUNHAN { get; set; }
+        public decimal SOTIENCUNHAN { get; set; }
+        public Nullable<decimal> SOBUOICHUADUYET { get; set; }
+        public Nullable<decimal> THANHTIENCHUADUYET { get; set; }
+        public Nullable<int> SOBUOICHUYENCHUADUYET { get; set; }
     }
 }

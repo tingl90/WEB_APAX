@@ -666,7 +666,7 @@ namespace Web_Apax.Models
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<SP_DanhSachDeNghiChuyenLop_Result>("SP_DanhSachDeNghiChuyenLop", taiKhoanParameter);
         }
     
-        public virtual ObjectResult<SP_APAX_CHECKTRUNG_Result> SP_APAX_CHECKTRUNG(string soDienThoai, string tenKhachHang)
+        public virtual ObjectResult<SP_APAX_CHECKTRUNG_Result> SP_APAX_CHECKTRUNG(string soDienThoai, string tenKhachHang, Nullable<int> a_HOSOKHACHHANG)
         {
             var soDienThoaiParameter = soDienThoai != null ?
                 new ObjectParameter("SoDienThoai", soDienThoai) :
@@ -676,7 +676,11 @@ namespace Web_Apax.Models
                 new ObjectParameter("TenKhachHang", tenKhachHang) :
                 new ObjectParameter("TenKhachHang", typeof(string));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<SP_APAX_CHECKTRUNG_Result>("SP_APAX_CHECKTRUNG", soDienThoaiParameter, tenKhachHangParameter);
+            var a_HOSOKHACHHANGParameter = a_HOSOKHACHHANG.HasValue ?
+                new ObjectParameter("A_HOSOKHACHHANG", a_HOSOKHACHHANG) :
+                new ObjectParameter("A_HOSOKHACHHANG", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<SP_APAX_CHECKTRUNG_Result>("SP_APAX_CHECKTRUNG", soDienThoaiParameter, tenKhachHangParameter, a_HOSOKHACHHANGParameter);
         }
     
         public virtual ObjectResult<SP_APAX_LICHSUTHUTIEN_Result> SP_APAX_LICHSUTHUTIEN(Nullable<int> hocVien, Nullable<int> hopDong, Nullable<int> loai)
@@ -1142,6 +1146,15 @@ namespace Web_Apax.Models
                 new ObjectParameter("TaiKhoan", typeof(string));
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<SP_DanhSachDeNghiTiepNhan_Result>("SP_DanhSachDeNghiTiepNhan", taiKhoanParameter);
+        }
+    
+        public virtual ObjectResult<APAX_DANHSACHLICHSUDUYETTIEPNHANCHUYENLOP_Result> APAX_DANHSACHLICHSUDUYETTIEPNHANCHUYENLOP(Nullable<int> duBao)
+        {
+            var duBaoParameter = duBao.HasValue ?
+                new ObjectParameter("DuBao", duBao) :
+                new ObjectParameter("DuBao", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<APAX_DANHSACHLICHSUDUYETTIEPNHANCHUYENLOP_Result>("APAX_DANHSACHLICHSUDUYETTIEPNHANCHUYENLOP", duBaoParameter);
         }
     }
 }

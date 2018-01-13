@@ -83,9 +83,9 @@ namespace Web_Apax.Controllers
             }
 
         }
-        public JsonResult KiemTraCheckTrung(string SoDienThoai,string TenHocVien)
+        public JsonResult KiemTraCheckTrung(string SoDienThoai,string TenHocVien, int A_HOSOKHACHHANG)
         {
-            var model = db.SP_APAX_CHECKTRUNG(SoDienThoai, TenHocVien).ToList();
+            var model = db.SP_APAX_CHECKTRUNG(SoDienThoai, TenHocVien, A_HOSOKHACHHANG).ToList();
             return Json(model, JsonRequestBehavior.AllowGet);
         }
           

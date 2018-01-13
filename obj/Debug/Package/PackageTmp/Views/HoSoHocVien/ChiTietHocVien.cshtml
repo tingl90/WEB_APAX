@@ -158,26 +158,26 @@
                                     <input type="text" class="form-control" id="DD_BO" value="@Model.DD_BO" maxlength="11">
                                     <span class="error" id="lbl_ddbo" hidden>This field is required</span>
                                     <script>
-                            $(function () {
-                                $('#DD_BO').keydown(function (e) {
-                                    if ($.inArray(e.keyCode, [46, 8, 9, 27, 13, 110, 190]) !== -1 ||
-                                        (e.keyCode === 65 && (e.ctrlKey === true || e.metaKey === true)) || (e.keyCode >= 35 && e.keyCode <= 40)) {
-                                        return;
-                                    }
-                                    if ((e.shiftKey || (e.keyCode < 48 || e.keyCode > 57)) && (e.keyCode < 96 || e.keyCode > 105)) {
-                                        e.preventDefault();
-                                    }
-                                });
-                                $('#DD_ME').keydown(function (e) {
-                                    if ($.inArray(e.keyCode, [46, 8, 9, 27, 13, 110, 190]) !== -1 ||
-                                        (e.keyCode === 65 && (e.ctrlKey === true || e.metaKey === true)) || (e.keyCode >= 35 && e.keyCode <= 40)) {
-                                        return;
-                                    }
-                                    if ((e.shiftKey || (e.keyCode < 48 || e.keyCode > 57)) && (e.keyCode < 96 || e.keyCode > 105)) {
-                                        e.preventDefault();
-                                    }
-                                });
-                            })
+                                        $(function () {
+                                            $('#DD_BO').keydown(function (e) {
+                                                if ($.inArray(e.keyCode, [46, 8, 9, 27, 13, 110, 190]) !== -1 ||
+                                                    (e.keyCode === 65 && (e.ctrlKey === true || e.metaKey === true)) || (e.keyCode >= 35 && e.keyCode <= 40)) {
+                                                    return;
+                                                }
+                                                if ((e.shiftKey || (e.keyCode < 48 || e.keyCode > 57)) && (e.keyCode < 96 || e.keyCode > 105)) {
+                                                    e.preventDefault();
+                                                }
+                                            });
+                                            $('#DD_ME').keydown(function (e) {
+                                                if ($.inArray(e.keyCode, [46, 8, 9, 27, 13, 110, 190]) !== -1 ||
+                                                    (e.keyCode === 65 && (e.ctrlKey === true || e.metaKey === true)) || (e.keyCode >= 35 && e.keyCode <= 40)) {
+                                                    return;
+                                                }
+                                                if ((e.shiftKey || (e.keyCode < 48 || e.keyCode > 57)) && (e.keyCode < 96 || e.keyCode > 105)) {
+                                                    e.preventDefault();
+                                                }
+                                            });
+                                        })
                                     </script>
                                 </div>
                             </div>
@@ -230,36 +230,37 @@
                             <div class="form-group">
                                 <label class="col-sm-4 control-label" style="padding:7px 0px">Mã anh em học cùng</label>
                                 <div class="col-sm-8">
-                                    <input type="text" class="form-control" id="MA_CH" value="@Model.MA_CH">
+                                    <input type="text" class="form-control" id="MA_CH" onblur="KiemTraMaAnhEm()" onKeydown="Javascript: if (event.keyCode == 13) KiemTraMaAnhEm();" value="@Model.MA_CH">
                                     <script>
-                        $('#MA_CH').keyup(function (e) {
-                            if (e.which == 13) {
-                                if ($('#MA_CH').val() == $('#MAKH').val()) {
-                                    DevExpress.ui.notify('Mã anh em học cùng trùng với mã học sinh! Vui lòng kiểm tra lại.', 'warning', 2000);
-                                    $('#TEN_CH').val('');
-                                    $('#MA_CH').val('');
-                                } else {
-                                    if ($('#MA_CH').val() == '') {
-                                        $('#TEN_CH').val('');
-                                    } else {
-                                        $.ajax({
-                                            url: '@Url.Action("GetTenAnhEmHocCung", "HoSoHocVien")?ma=' + $('#MA_CH').val(),
-                                            success: function (result) {
-                                                if (result != '') {
-                                                    $('#TEN_CH').val(result);
+                                        function KiemTraMaAnhEm() {
+                                            if ($('#MA_CH').val() == $('#MAKH').val()) {
+                                                DevExpress.ui.notify('Mã anh em học cùng trùng với mã học sinh! Vui lòng kiểm tra lại.', 'warning', 2000);
+                                                document.querySelector('.dx-toast-warning').style.transform = "translate(720px, 30px)";
+                                                $('#TEN_CH').val('');
+                                                $('#MA_CH').val('');
+                                            } else {
+                                                if ($('#MA_CH').val() == '') {
+                                                    $('#TEN_CH').val('');
+                                                } else {
+                                                    $.ajax({
+                                                        url: '@Url.Action("GetTenAnhEmHocCung", "HoSoHocVien")?ma=' + $('#MA_CH').val(),
+                                                        success: function (result) {
+                                                            if (result != '') {
+                                                                $('#TEN_CH').val(result);
+                                                            }
+                                                            else {
+                                                                DevExpress.ui.notify('Mã anh em học cùng không tồn tại trong hệ thống! Vui lòng kiểm tra lại.', 'warning', 2000);
+                                                                document.querySelector('.dx-toast-warning').style.transform = "translate(720px, 30px)";
+                                                            }
+                                                        },
+                                                        error: function (a, b, c) {
+                                                            DevExpress.ui.notify('Error ' + a.status + ': ' + a.statusText, 'error', 2000);
+                                                            document.querySelector('.dx-toast-error').style.transform = "translate(720px, 30px)";
+                                                        }
+                                                    })
                                                 }
-                                                else {
-                                                    DevExpress.ui.notify('Mã anh em học cùng không tồn tại trong hệ thống! Vui lòng kiểm tra lại.', 'warning', 2000);
-                                                }
-                                            },
-                                            error: function (a, b, c) {
-                                                DevExpress.ui.notify('Error ' + a.status + ': ' + a.statusText, 'error', 2000);
                                             }
-                                        })
-                                    }
-                                }
-                            }
-                        })
+                                        }
                                     </script>
                                 </div>
                             </div>
@@ -392,15 +393,14 @@
     </div>
 </div>
 <style>
-    .error{
-	display: none;
-	margin-left: 10px;
-    color:red;
-}	
+    .error {
+        display: none;
+        margin-left: 10px;
+        color: red;
+    }
 </style>
 <script>
-    function Load_LSGiaoDich(hv)
-    {
+    function Load_LSGiaoDich(hv) {
         $.ajax({
             url: '@Url.Action("LoadHocSinhGiaoDich", "GiaoDich")',
             type: 'GET',
@@ -441,7 +441,7 @@
                           }, {
                               dataField: "NGUOIGIAODICH",
                               caption: "Người thực hiện",
-                          },  {
+                          }, {
                               caption: "Phương thức",
                               dataField: "PHUONGTHUC",
                           },
@@ -578,15 +578,15 @@
                         dataField: "NGAYBAOLUU",
                         alignment: "right",
                     }, {
-                              dataField: "SOBUOIBAOLUU",
-                              caption: "Số buổi bảo lưu",
-                          }, {
-                              dataField: "HINHTHUC",
-                              caption: "Hình thức",
-                          }, {
-                              dataField: "GHICHU",
-                              caption: "Lý do",
-                          },
+                        dataField: "SOBUOIBAOLUU",
+                        caption: "Số buổi bảo lưu",
+                    }, {
+                        dataField: "HINHTHUC",
+                        caption: "Hình thức",
+                    }, {
+                        dataField: "GHICHU",
+                        caption: "Lý do",
+                    },
                     ],
 
                 }).dxDataGrid('instance');
@@ -1036,7 +1036,7 @@
                         success: function (rs) {
                             if (rs != null) {
                                 $('#SalePhuTrach').dxSelectBox('instance').option('value', rs.MADTTC);
-                                if ($('#ChucVuTK').val() >=186 || $('#ChucVuTK').val()==181) {
+                                if ($('#ChucVuTK').val() >= 186 || $('#ChucVuTK').val() == 180 || $('#ChucVuTK').val() == 181) {
                                     $('#SalePhuTrach').dxSelectBox('instance').option("disabled", false);
                                 } else {
                                     $('#SalePhuTrach').dxSelectBox('instance').option("disabled", true);
@@ -1083,7 +1083,7 @@
                         success: function (rs) {
                             if (rs != null) {
                                 $('#CMPhuTrach').dxSelectBox('instance').option('value', rs.MADTTC);
-                                if ($('#ChucVuTK').val() == 185) {
+                                if ($('#ChucVuTK').val() >= 185 || $('#ChucVuTK').val() == 181) {
                                     $('#CMPhuTrach').dxSelectBox('instance').option("disabled", false);
                                 } else {
                                     $('#CMPhuTrach').dxSelectBox('instance').option("disabled", true);
@@ -1250,9 +1250,9 @@
                     }
                     $.ajax({
                         url: '@Url.Action("KiemTraCheckTrung", "HoSoHocVien")',
-                        data: { SoDienThoai: $('#DD_BO').val(), TenHocVien: $('#TENKHACHHANG').val() },
+                        data: { SoDienThoai: $('#DD_BO').val(), TenHocVien: $('#TENKHACHHANG').val(), A_HOSOKHACHHANG: $('#A_HOSOKHACHHANG').val() },
                         success: function (rs) {
-                            if ((rs[0].CheckTrung == null && $('#A_HOSOKHACHHANG').val() == 0) || (rs.length == 1 && $('#A_HOSOKHACHHANG').val() != 0)) {
+                            if ((rs[0].CheckTrung == null && $('#A_HOSOKHACHHANG').val() == 0) || (rs[0].CheckTrung!=null && $('#A_HOSOKHACHHANG').val() != 0)) {
                                 $.ajax({
                                     url: '@Url.Action("SaveHocVien", "HoSoHocVien")',
                                     data: JSON.stringify({
@@ -1264,7 +1264,7 @@
                                             TENME: $('#TENME').val(), DD_ME: $('#DD_ME').val(), EMAIL_ME: $('#EmailMe').val(), TENBO: $('#TENBO').val(),
                                             DD_BO: $('#DD_BO').val(), EMAIL_BO: $('#EmailBo').val(), ID_LOAIHOSOKH: $('#ID_LOAIHOSOKH').dxSelectBox('instance').option('value'),
                                             J_SALE_MAN: $('#SalePhuTrach').dxSelectBox('instance').option('value'), J_CSO: $('#CMPhuTrach').dxSelectBox('instance').option('value'),
-                                            ID_TRUNGTAM: $('#TrungTam').dxSelectBox('instance').option('value'), SOCMTND: $('#SOCMTND').val(),TENTIENGANH:$('#TENTIENGANH').val()
+                                            ID_TRUNGTAM: $('#TrungTam').dxSelectBox('instance').option('value'), SOCMTND: $('#SOCMTND').val(), TENTIENGANH: $('#TENTIENGANH').val()
                                         }
                                     }),
                                     type: 'POST',
@@ -1323,42 +1323,42 @@
                         mode: "single"
                     },
                     columns: [{
-                            dataField: "STT",
-                            caption: "STT",
-                            width: 50
-                        },{
-                              dataField: "MAHOCSINH",
-                              caption: "Mã học sinh",
-                              width: 150,
+                        dataField: "STT",
+                        caption: "STT",
+                        width: 50
+                    }, {
+                        dataField: "MAHOCSINH",
+                        caption: "Mã học sinh",
+                        width: 150,
 
-                          }, {
-                              caption: "Mã Effect",
-                              dataField: "ma_effect",
-                              width: 120,
+                    }, {
+                        caption: "Mã Effect",
+                        dataField: "ma_effect",
+                        width: 120,
 
-                          }, {
-                              caption: "Mã LMS",
-                              dataField: "ma_lms",
-                              width: 120,
+                    }, {
+                        caption: "Mã LMS",
+                        dataField: "ma_lms",
+                        width: 120,
 
-                          }, {
-                              dataField: "tenhocsinh",
-                              caption: "Tên học sinh",
-                              width: 200,
-                          }, {
-                              dataField: "TENTRUNGTAM",
-                              caption: "Trung tâm",
-                              width: 200,
-                          }, {
-                              caption: "Loại khách hàng",
-                              dataField: "LOAIHOCSINh",
-                              width: 120,
+                    }, {
+                        dataField: "tenhocsinh",
+                        caption: "Tên học sinh",
+                        width: 200,
+                    }, {
+                        dataField: "TENTRUNGTAM",
+                        caption: "Trung tâm",
+                        width: 200,
+                    }, {
+                        caption: "Loại khách hàng",
+                        dataField: "LOAIHOCSINH",
+                        width: 120,
 
-                          }, {
-                              caption: "EC",
-                              dataField: "saleman",
-                              width: 200,
-                          },
+                    }, {
+                        caption: "EC",
+                        dataField: "saleman",
+                        width: 200,
+                    },
                           {
                               caption: "CM phụ trách",
                               dataField: "CM",

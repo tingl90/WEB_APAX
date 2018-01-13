@@ -244,7 +244,6 @@
           <ScalarProperty Name="ma_anhem" ColumnName="ma_anhem" />
           <ScalarProperty Name="saleman" ColumnName="saleman" />
           <ScalarProperty Name="CM" ColumnName="CM" />
-          <ScalarProperty Name="LOAIHOCSINH" ColumnName="LOAIHOCSINH" />
           <ScalarProperty Name="TENTRUNGTAM" ColumnName="TENTRUNGTAM" />
           <ScalarProperty Name="DIENTHOAIHS" ColumnName="DIENTHOAIHS" />
           <ScalarProperty Name="EMAILHS" ColumnName="EMAILHS" />
@@ -255,6 +254,8 @@
           <ScalarProperty Name="J_GD_VUNG" ColumnName="J_GD_VUNG" />
           <ScalarProperty Name="STT" ColumnName="STT" />
           <ScalarProperty Name="SOCMTND" ColumnName="SOCMTND" />
+          <ScalarProperty Name="TENLOAIKHACHHANG" ColumnName="TENLOAIKHACHHANG" />
+          <ScalarProperty Name="ID_LOAIHOPDONG" ColumnName="ID_LOAIHOPDONG" />
         </ComplexTypeMapping>
       </ResultMapping>
     </FunctionImportMapping>
@@ -5992,6 +5993,9 @@
           <ScalarProperty Name="NGAYKETTHUCNHAN" ColumnName="NGAYKETTHUCNHAN" />
           <ScalarProperty Name="ID_THAIDO" ColumnName="ID_THAIDO" />
           <ScalarProperty Name="SOTIENCUNHAN" ColumnName="SOTIENCUNHAN" />
+          <ScalarProperty Name="SOBUOICHUADUYET" ColumnName="SOBUOICHUADUYET" />
+          <ScalarProperty Name="THANHTIENCHUADUYET" ColumnName="THANHTIENCHUADUYET" />
+          <ScalarProperty Name="SOBUOICHUYENCHUADUYET" ColumnName="SOBUOICHUYENCHUADUYET" />
         </ComplexTypeMapping>
       </ResultMapping>
     </FunctionImportMapping>
@@ -6133,6 +6137,17 @@
           <ScalarProperty Name="TK_CM" ColumnName="TK_CM" />
           <ScalarProperty Name="TK_EC" ColumnName="TK_EC" />
           <ScalarProperty Name="DUYET" ColumnName="DUYET" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="APAX_DANHSACHLICHSUDUYETTIEPNHANCHUYENLOP" FunctionName="APAXModel.Store.APAX_DANHSACHLICHSUDUYETTIEPNHANCHUYENLOP">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="APAXModel.APAX_DANHSACHLICHSUDUYETTIEPNHANCHUYENLOP_Result">
+          <ScalarProperty Name="NGAYDUYET" ColumnName="NGAYDUYET" />
+          <ScalarProperty Name="TENDTTC" ColumnName="TENDTTC" />
+          <ScalarProperty Name="TENDUYET" ColumnName="TENDUYET" />
+          <ScalarProperty Name="YKIENBOSUNG" ColumnName="YKIENBOSUNG" />
+          <ScalarProperty Name="ID_DUYET" ColumnName="ID_DUYET" />
         </ComplexTypeMapping>
       </ResultMapping>
     </FunctionImportMapping>

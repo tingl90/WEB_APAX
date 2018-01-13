@@ -28,7 +28,6 @@ namespace Web_Apax.Models
         public string ma_anhem { get; set; }
         public string saleman { get; set; }
         public string CM { get; set; }
-        public string LOAIHOCSINH { get; set; }
         public string TENTRUNGTAM { get; set; }
         public string DIENTHOAIHS { get; set; }
         public string EMAILHS { get; set; }
@@ -39,5 +38,7 @@ namespace Web_Apax.Models
         public Nullable<int> J_GD_VUNG { get; set; }
         public Nullable<long> STT { get; set; }
         public string SOCMTND { get; set; }
+        public string TENLOAIKHACHHANG { get; set; }
+        public Nullable<int> ID_LOAIHOPDONG { get; set; }
     }
 }

@@ -4,6 +4,9 @@
     int id_trungtam = ViewBag.TrungTam;
 }
 <style>
+    .hidden {
+        display:none;
+    }
     .dx-data-row td.center {
         text-align: center !important;
     }
@@ -444,7 +447,7 @@
                     //    DevExpress.ui.notify('Ngày bắt đầu học phải nằm trong đoạn Ngày mở lớp và ngày kết thúc lớp !', 'warning', 2000);
                     //    document.querySelector('.dx-toast-warning').style.transform = "translate(720px, 30px)";
                     //    return
-                   // }
+                    // }
                 },
             }).dxDateBox("instance");
         });
@@ -529,7 +532,7 @@
                         dataField: "SM",
                         caption: "EC",
                         width: 200
-                    },{
+                    }, {
                         dataField: "TENTIENGANH",
                         caption: "Nick name",
                         width: 200

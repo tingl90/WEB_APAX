@@ -1,11 +1,9 @@
-﻿
-@{
+﻿@{
     ViewBag.Title = "DanhSachTiepNhan";
     Layout = "~/Views/Shared/_Layout.cshtml";
     string NguoiDung = ViewBag.TenNguoiDung;
     <input type="hidden" value="@ViewBag.ChucVuTK" id="ChucVuTK" />
 }
-
 <div class="box box-danger">
     <div class="box-header with-border">
         <h3 class="box-title">Danh sách đề nghị chuyển trung tâm</h3>
@@ -73,7 +71,7 @@
                         </div>
                         <div class="form-group" style="margin-top:40px;">
                             <div class="col-sm-8">
-                                <button id="LuuDuyet" style="width:90px;height:90px;border-radius:10px;border-color:red" onclick="LuuDuyetTiepNhanChuyenLop()" class="btn-danger">Duyệt</button>
+                                <button id="LuuDuyet" style="width:90px;height:40px;border-radius:10px;border-color:red" onclick="LuuDuyetTiepNhanChuyenLop()" class="btn-danger">Duyệt</button>
                             </div>
                         </div>
                     </div>
@@ -129,12 +127,10 @@
                         </div>
                         <div class="form-group" style="margin-top:40px;">
                             <div class="col-sm-8">
-                                <button id="LuuDuyet" style="width:90px;height:90px;border-radius:10px;border-color:red" onclick="LuuCMSM()" class="btn-danger">Lưu</button>
+                                <button id="LuuDuyet" style="width:90px;height:40px;border-radius:10px;border-color:red" onclick="LuuCMSM()" class="btn-danger">Lưu</button>
                             </div>
                         </div>
                     </div>
-                </div>
-                <div id="gridDanhSachLichSuDuyet">
                 </div>
             </div>
         </div>
@@ -674,7 +670,7 @@
                         </div>
                         <div class="form-group" style="margin-top:40px;">
                             <div class="col-sm-8">
-                                <button id="LuuDuyetXL" style="width:90px;height:90px;border-radius:10px;border-color:red" onclick="LuuDuyetXepLop()" class="btn-danger">Duyệt</button>
+                                <button id="LuuDuyetXL" style="width:90px;height:40px;border-radius:10px;border-color:red" onclick="LuuDuyetXepLop()" class="btn-danger">Duyệt</button>
                             </div>
                         </div>
                     </div>
@@ -713,13 +709,17 @@
         tk_gdv,
         id_ttdi,
         a_dubao_duyetxl,
-        id_ttden;
+        id_ttden,
+        khsaleman,
+        khcmphutrach;
     $(document).ready(function () {
         $("#NgayKetThucLopChuyenDen").dxDateBox({
             formatString: 'dd/MM/yyyy',
             onValueChanged: function (data) {
             },
         }).dxDateBox("instance");
+        $("#SalePhuTrach,#CMPhuTrach").dxSelectBox({
+        });
         LoadDeNghiChuyenTrungTam();
         LoadDeNghiXepLopTuTrungTamKhac();
         LoadDanhMucDuyet();
@@ -785,8 +785,11 @@
             }
         })
     }
-    function LoadDanhSachHocSinh(A_duBao, CHUYENDEN) {
-        if (CHUYENDEN != 1) {
+    function LoadDanhSachHocSinh(A_duBao, ID_DUYET, CHUYENDEN) {
+        if (ID_DUYET != 1) {
+            DevExpress.ui.notify('Duyệt tiếp nhận trước khi tiếp nhận', 'error', 2000);
+            document.querySelector('.dx-toast-warning').style.transform = "translate(720px, 30px)";
+        }else if (CHUYENDEN != 1) {
             DevExpress.ui.notify('Không thể tiếp nhận học sinh chuyển đi', 'error', 2000);
             document.querySelector('.dx-toast-warning').style.transform = "translate(720px, 30px)";
         }
@@ -822,8 +825,8 @@
                         $('#SoBuoi').val(rs[0].SobuoiHoc);
                         $('#SoBuoiConLai').val(Number(rs[0].SOBUOI));
                         //sobuoiconlai = Number(rs[0].SobuoiHoc) - Number(rs[0].SOBUOIDAHOC);
-                        $('#DonGia').val(rs[0].DonGia);
-                        $('#ThanhTienConLai').val(Number(rs[0].DonGia) * Number(rs[0].SOBUOI));
+                        $('#DonGia').val(rs[0].DonGia.toString().replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1,"));
+                        $('#ThanhTienConLai').val((Number(rs[0].DonGia) * Number(rs[0].SOBUOI)).toString().replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1,"));
                         $('#NgayBatDau').val(rs[0].NGAYDUKIENHOC);
                         $('#NgayKetThuc').val(rs[0].NGAYKETHUCHOC);
                         $('#Email').val(rs[0].EMAIL);
@@ -883,7 +886,7 @@
                             width: 100,
                             cellTemplate: function (container, options) {
                                 var dt = options.data;
-                                $('<a href="javascript:" onclick="LoadDanhSachHocSinh(' + dt.A_TH_DUBAO + ',' + dt.CHUYENDEN + ')"  class="text-green"><b>...</b></a>').appendTo(container);
+                                $('<a href="javascript:" onclick="LoadDanhSachHocSinh(' + dt.A_TH_DUBAO + ',' + dt.ID_DUYET + ',' + dt.CHUYENDEN + ')"  class="text-green"><b>...</b></a>').appendTo(container);
                             }
                         },
 
@@ -984,6 +987,7 @@
         });
     }
     function DuyetChuyenDenChuyenDi(A_TH_DUBAO, CHUYENDEN) {
+        a_dubao = A_TH_DUBAO;
         if (CHUYENDEN != 1) {
             DevExpress.ui.notify('Chức năng duyệt chuyển đi không nằm ở form này!', 'warning', 2000);
             document.querySelector('.dx-toast-warning').style.transform = "translate(720px, 30px)";
@@ -1046,6 +1050,8 @@
                     searchEnabled: true,
                     value: j_saleman,
                     onValueChanged: function (e) {
+                        khsaleman = e.value;
+                        id_ttden = trungtam;
                     },
                 });
                 $.ajax({
@@ -1056,10 +1062,10 @@
                             if ($('#ChucVuTK').val() >= 186 || $('#ChucVuTK').val() == 181) {
                                 $('#SalePhuTrach').dxSelectBox('instance').option("disabled", false);
                             } else {
-                                $('#SalePhuTrach').dxSelectBox('instance').option("disabled", true);
+                                $('#SalePhuTrach').dxSelectBox('instance').option("disabled", false);
                             }
                         } else {
-                            $('#SalePhuTrach').dxSelectBox('instance').option("disabled", true);
+                            $('#SalePhuTrach').dxSelectBox('instance').option("disabled", false);
                         }
                     }
                 })
@@ -1079,6 +1085,8 @@
                     searchEnabled: true,
                     value: j_cso,
                     onValueChanged: function (e) {
+                        khcmphutrach = e.value;
+                        id_ttden = trungtam;
                     },
                 });
                 $.ajax({
@@ -1089,39 +1097,13 @@
                             if ($('#ChucVuTK').val() == 185) {
                                 $('#CMPhuTrach').dxSelectBox('instance').option("disabled", false);
                             } else {
-                                $('#CMPhuTrach').dxSelectBox('instance').option("disabled", true);
+                                $('#CMPhuTrach').dxSelectBox('instance').option("disabled", false);
                             }
                         } else {
-                            $('#CMPhuTrach').dxSelectBox('instance').option("disabled", true);
+                            $('#CMPhuTrach').dxSelectBox('instance').option("disabled", false);
                         }
                     }
                 })
-            }
-        });
-    }
-    function LuuCMSM() {
-        var result = DevExpress.ui.dialog.confirm('Bạn có muốn lưu kết quả không?', "Xác nhận thay đổi");
-        result.done(function (dialogResult) {
-            if (dialogResult) {
-                $.ajax({
-                    url: '@Url.Action("SaveHocVien", "TiepNhanChuyenLop")',
-                    data: JSON.stringify({
-                        khachhang: {
-                            A_HOSOKHACHHANG: $('#IDHOCSINHGAN').val(),
-                            J_SALE_MAN: $('#SalePhuTrach').dxSelectBox('instance').option('value'), J_CSO: $('#CMPhuTrach').dxSelectBox('instance').option('value'),
-                            ID_TRUNGTAM: $('#ID_TrungTam').dxSelectBox('instance').option('value'), MATRUNGTAM: $('#MaTrungTam').val()
-                        }
-                    }),
-                    type: 'POST',
-                    contentType: 'application/json; charset=utf-8',
-                    success: function (data) {
-
-                        idkhachhang = data;
-                        DevExpress.ui.notify('Cập nhật thành công', 'success', 2000);
-                    }
-                })
-            }
-            else {
             }
         });
     }
@@ -1242,6 +1224,7 @@
                             $("#btnLuu").prop("disabled", true);
                             DevExpress.ui.notify('Cập nhật thành công', 'success', 2000);
                             LoadDanhSachHocVien(a_dubao);
+                            LoadDeNghiChuyenTrungTam();
                         }
                         else {
                             DevExpress.ui.notify('Chưa cập nhật được', 'error', 2000);
@@ -1278,7 +1261,7 @@
                     $('#Buoi1LopChuyenDen').val(rs[0].BUOI1);
                     $('#Buoi2LopChuyenDen').val(rs[0].BUOI2);
                     //$('#SoBuoiNhanLopChuyenDen').val(Number(sobuoiconlai));
-                    $('#DonGiaLopChuyenDen').val(rs[0].DONGIA);
+                    $('#DonGiaLopChuyenDen').val(rs[0].DONGIA.toString().replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1,"));
                     //$('#ThanhTienLopChuyenDen').val(Number(rs[0].DONGIA) * Number(sobuoiconlai));
                     buoi1 = rs[0].ID_PHUONGTHUC;
                     buoi2 = rs[0].ID_CONGCU;
@@ -1299,7 +1282,7 @@
                 NGAYGIAOHANG: Globalize.format($("#NgayKetThucLopChuyenDen").dxDateBox('instance').option('value'), 'yyyy-MM-dd'),
                 TONGTIEN_DH: $('#ThanhTienLopChuyenDen').val().replace(/,/g, ''),
                 SOBUOI: $('#SoBuoiNhanLopChuyenDen').val(),
-                DONGIA: $('#DonGiaLopChuyenDen').val(),
+                DONGIA: $('#DonGiaLopChuyenDen').val().replace(/,/g, ''),
                 ID_BOPHAN: id_trungtam,
                 GHICHU: "",
                 J_SANPHAM: a_sanpham,
@@ -1312,16 +1295,18 @@
                 TK_GDTT: tk_gdtt,
                 TK_GDV: tk_gdv,
                 ID_TRUNGTAM_DI: id_ttdi,
-                ID_TRUNGTAM_DEN:id_ttden
+                ID_TRUNGTAM_DEN: id_ttden,
+                A_DuBao: a_dubao
             },
             beforeSend: function () { window.parent.$('#loading').show(); },
             success: function (data) {
                 window.parent.$("#loading").fadeOut("fast");
                 if (!isNaN(data)) {
                     if (data == 1) {
-                        $("#btnLuuTiepNhan").prop("disabled", true);
+                        LoadDeNghiXepLopTuTrungTamKhac();
                         DevExpress.ui.notify('Cập nhật thành công', 'success', 2000);
                         document.querySelector('.dx-toast-warning').style.transform = "translate(720px, 30px)";
+                        $("#btnLuuTiepNhan").prop("disabled", true);
                     }
                 }
                 else {
@@ -1595,6 +1580,33 @@
 
         });
     }
+    function LuuCMSM() {
+        var result = DevExpress.ui.dialog.confirm('Bạn có muốn lưu kết quả không?', "Xác nhận thay đổi");
+        result.done(function (dialogResult) {
+            if (dialogResult) {
+                $.ajax({
+                    url: '@Url.Action("SaveHocVien", "TiepNhanChuyenLop")',
+                    data: JSON.stringify({
+                        khachhang: {
+                            A_HOSOKHACHHANG: $('#IDHOCSINHGAN').val(),
+                            J_SALE_MAN: khsaleman,
+                            J_CSO: khcmphutrach,
+                            ID_TRUNGTAM: id_ttden,
+                            MATRUNGTAM: $('#MaTrungTam').val()
+                        }
+                    }),
+                    type: 'POST',
+                    contentType: 'application/json; charset=utf-8',
+                    success: function (data) {
+                        idkhachhang = data;
+                        DevExpress.ui.notify('Cập nhật thành công', 'success', 2000);
+                    }
+                })
+            }
+            else {
+            }
+        });
+    }
     function LoadChiTietDuyetXepLop(A_duBao) {
         $('#modalxeplop').modal('show');
         LoadChiTietXepLop(A_duBao);
@@ -1617,8 +1629,8 @@
                         $('#Buoi21').val(rs[0].BUOI2);
                         $('#SoBuoi1').val(rs[0].SOBUOIHOC);
                         $('#SoBuoiConLai1').val(Number(rs[0].SOBUOITTCHUYEN));
-                        $('#DonGia1').val(rs[0].DONGIA);
-                        $('#ThanhTienConLai1').val(Number(rs[0].THANHTIENTTCHUYEN));
+                        $('#DonGia1').val(rs[0].DONGIA.toString().replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1,"));
+                        $('#ThanhTienConLai1').val(Number(rs[0].THANHTIENTTCHUYEN).toString().replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1,"));
                         $('#NgayBatDau1').val(rs[0].NGAYDUKIENHOC);
                         $('#NgayKetThuc1').val(rs[0].NGAYKETHUCHOC);
                         $('#Email1').val(rs[0].EMAIL);
@@ -1632,7 +1644,7 @@
                         $('#Buoi1LopChuyenDen1').val(rs[0].BUOITTCHUYEN1);
                         $('#Buoi2LopChuyenDen1').val(rs[0].BUOITTCHUYEN2);
 
-                        $('#DonGiaLopChuyenDen1').val(rs[0].DONGIATTCHUYEN);
+                        $('#DonGiaLopChuyenDen1').val(rs[0].DONGIATTCHUYEN.toString().replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1,"));
                         $('#NgayBatDauLopChuyenDen1').val(rs[0].NGAYDUKIENHOCTTCHUYEN);
                         $('#NgayKetThucLopChuyenDen1').val(rs[0].NGAYKETHUCHOCTTCHUYEN);
                     }
@@ -1684,6 +1696,9 @@
                             DevExpress.ui.notify('Cập nhật thành công', 'success', 2000);
                             document.querySelector('.dx-toast-warning').style.transform = "translate(720px, 30px)";
                             LoadDanhSachDuyetXepLop(a_dubao_duyetxl);
+                            LoadDeNghiXepLopTuTrungTamKhac();
+                            LoadDeNghiChuyenTrungTam();
+                            self.location = '@Url.Action("DanhSachTiepNhan", "TiepNhanChuyenLop")'
                         }
                         else {
                             DevExpress.ui.notify('Chưa cập nhật được', 'error', 2000);
