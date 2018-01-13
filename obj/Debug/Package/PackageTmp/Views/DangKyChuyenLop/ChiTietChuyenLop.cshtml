@@ -380,7 +380,10 @@
                             var dg = Number($('#DonGia').val().replace(/,/g, ''));
                             var tt = rs * dg;
                             $("#ThanhTienConLai").val(tt.toString().replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1,"));
+
                             $('#SoBuoiNhanLopChuyenDen').val(rs);
+                            $('#DonGiaLopChuyenDen').val(dg.toString().replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1,"));
+                            $('#ThanhTienLopChuyenDen').val(tt.toString().replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1,"))
                         }
                     })
                 }
@@ -618,7 +621,7 @@
                     var dd = d.getDate();
                     var mm = d.getMonth() + 1;
                     var yy = d.getFullYear();
-                    var ngaythanhtoan_lopcu = yy + "-" + mm + "-" + dd
+                    var ngaygiaohang_lopcu = yy + "-" + mm + "-" + dd
 
                     var d = new Date($('#NgayKetThucLopChuyenDen').val().split("/").reverse().join("-"));
                     var dd = d.getDate();
@@ -632,7 +635,7 @@
                             J_HOSOKHACHHANG: a_hosokhachhang,
                             LOPCU: lopcu_kehoach,
                             LOPMOI: lopmoi_kehoach,
-                            NGAYGIAOHANG_LOPCU: ngaythanhtoan_lopcu,
+                            NGAYGIAOHANG_LOPCU: ngaygiaohang_lopcu,
                             NGAYTHANHTOAN_LOPCU: Globalize.format($("#NgayChuyen").dxDateBox('instance').option('value'), 'yyyy-MM-dd'),
                             THANHTIEN_LOPCU: $('#ThanhTienConLai').val().replace(/,/g, ''),
                             THANHTIEN_LOPMOI: $('#ThanhTienLopChuyenDen').val().replace(/,/g, ''),
@@ -671,14 +674,14 @@
                     var dd = d.getDate();
                     var mm = d.getMonth() + 1;
                     var yy = d.getFullYear();
-                    var ngaythanhtoan_lopcu = yy + "-" + mm + "-" + dd
+                    var ngaygiaohang_lopcu = yy + "-" + mm + "-" + dd
                     $.ajax({
                         url: '@Url.Action("ChuyenTrungTam", "DangKyChuyenLop")',
                         data: {
                             A_THDUBAO: lopcu_dubao,
                             J_HOSOKHACHHANG: a_hosokhachhang,
                             LOPCU: lopcu_kehoach,
-                            NGAYGIAOHANG_LOPCU: ngaythanhtoan_lopcu,
+                            NGAYGIAOHANG_LOPCU: ngaygiaohang_lopcu,
                             NGAYTHANHTOAN_LOPCU: Globalize.format($("#NgayChuyen").dxDateBox('instance').option('value'), 'yyyy-MM-dd'),
                             THANHTIEN_LOPCU: $('#ThanhTienConLai').val().replace(/,/g, ''),
                             SOBUOI: $('#SoBuoiConLai').val(),

@@ -38,7 +38,7 @@ namespace Web_Apax.Controllers
         }
         public JsonResult GetDanhSachLopHoc(int? TrungTam, int? LopCu)
         {
-            var model = db.SP_APAX_DANHSACHLOP(TrungTam, LopCu , TaiKhoan).ToList();
+            var model = db.SP_APAX_DANHSACHLOP(TrungTam, LopCu, TaiKhoan).ToList();
             var json = Json(model, JsonRequestBehavior.AllowGet);
             json.MaxJsonLength = int.MaxValue;
             return json;
@@ -149,15 +149,6 @@ namespace Web_Apax.Controllers
 
             //Hủy thông tin lớp cũ
             var nguoidung = db.DM_DTTC.FirstOrDefault(t => t.TAIKHOAN == TaiKhoan).ID_DTTC;
-            var model2 = db.TH_DUBAO.FirstOrDefault(x => x.J_HOSOKHACHHANG == J_HOSOKHACHHANG);
-            if (model2 != null)
-            {
-                model2.NGAYTHANHTOAN = DateTime.Now;
-                model2.SOBUOI = 0;
-                model2.ID_LYDO_TD = 240;
-                model2.ID_DTTC = nguoidung;
-            }
-            db.SaveChanges();
             var a_th_hopdong = db.TH_HOPDONG.FirstOrDefault(t => t.J_HOSOKHACHHANG == J_HOSOKHACHHANG).A_TH_HOPDONG;
 
             //Thiết lập thông tin lớp cũ
@@ -173,7 +164,7 @@ namespace Web_Apax.Controllers
                 SOBUOI = SOBUOI,
                 DONGIA = DONGIA_LOPCU,
                 ID_LYDO_HV = 101,
-                ID_LYDO_TD = 241, 
+                ID_LYDO_TD = 241,
                 ID_TRUNGTAM_DI = TRUNGTAM_LOPCU,
                 ID_TRUNGTAM_DEN = TRUNGTAM_LOPMOI,
                 ID_BOPHAN = TRUNGTAM_LOPCU,
@@ -216,7 +207,7 @@ namespace Web_Apax.Controllers
                 A_THUCHIEN = a_th_duabao_lopcu,
                 ID_DTTC = nguoidung
             });
-            db.SaveChanges();
+            sc += db.SaveChanges();
             var a_th_duabao_lopmoi = db.TH_DUBAO.OrderByDescending(x => x.A_TH_DUBAO).FirstOrDefault().A_TH_DUBAO;
             db.TH_DUBAO_SANPHAM.Add(new TH_DUBAO_SANPHAM()
             {
@@ -323,22 +314,103 @@ namespace Web_Apax.Controllers
             int sc = 0;
             try
             {
-                var a_th_dubao = db.TH_DUBAO.FirstOrDefault(t => t.A_THUCHIEN == A_THDUBAO).A_TH_DUBAO;
-                TH_DUYETTHUCHIEN New = new TH_DUYETTHUCHIEN()
+                //lớp cũ
+                var modelLopCu = db.TH_DUBAO.FirstOrDefault(t => t.A_TH_DUBAO == A_THDUBAO);
+                var a_th_dubao_lopcu = modelLopCu.A_TH_DUBAO;
+
+                TH_DUYETTHUCHIEN OldClass = new TH_DUYETTHUCHIEN()
                 {
-                    
-                    J_TH_DUBAO = a_th_dubao,
+                    J_TH_DUBAO = a_th_dubao_lopcu,
                     ID_DTTC = clsFunctions.GetUserID(),
                     NGAYDUYET = DateTime.Now,
                     ID_DUYET = IDDuyet,
                     YKIENBOSUNG = NoiDung
                 };
-                db.Set<TH_DUYETTHUCHIEN>().Add(New);
+                db.Set<TH_DUYETTHUCHIEN>().Add(OldClass);
                 sc += db.SaveChanges();
                 if (sc > 0)
                 {
-                    sc += db.Database.ExecuteSqlCommand("Update TH_DUBAO set ID_LYDO_TD = 242 where A_TH_DUBAO =" + a_th_dubao);
+                    sc += db.Database.ExecuteSqlCommand("Update TH_DUBAO set ID_LYDO_TD = 242 where A_TH_DUBAO =" + a_th_dubao_lopcu);
                 }
+
+                //lớp mới
+                var modelDuBaoLopMoi = db.TH_DUBAO.FirstOrDefault(t => t.A_THUCHIEN == A_THDUBAO);
+                var a_th_dubao_lopmoi = modelDuBaoLopMoi.A_TH_DUBAO;
+                TH_DUYETTHUCHIEN NewClass = new TH_DUYETTHUCHIEN()
+                {
+
+                    J_TH_DUBAO = a_th_dubao_lopmoi,
+                    ID_DTTC = clsFunctions.GetUserID(),
+                    NGAYDUYET = DateTime.Now,
+                    ID_DUYET = IDDuyet,
+                    YKIENBOSUNG = NoiDung
+                };
+                db.Set<TH_DUYETTHUCHIEN>().Add(NewClass);
+                sc += db.SaveChanges();
+                if (sc > 0)
+                {
+                    sc += db.Database.ExecuteSqlCommand("Update TH_DUBAO set ID_LYDO_TD = 242 where A_TH_DUBAO =" + a_th_dubao_lopmoi);
+                }
+
+                if (IDDuyet == 1)
+                {
+                    //Update dubao xếp lớp
+                    var modelDuBaoXepLopCu = db.TH_DUBAO.FirstOrDefault(
+                        t => t.ID_LYDO_HV == 97 &&
+                        t.ID_LYDO_TD == 238 &&
+                        t.J_KEHOACH == modelLopCu.J_KEHOACH &&
+                        t.J_HOSOKHACHHANG == modelLopCu.J_HOSOKHACHHANG);
+                    if (modelDuBaoXepLopCu != null)
+                    {
+                        var sobuoiconlaithucte = modelDuBaoXepLopCu.SOBUOI - modelLopCu.SOBUOI;
+                        modelDuBaoXepLopCu.SOBUOI = sobuoiconlaithucte;
+                        modelDuBaoXepLopCu.TONGTIEN_DH = sobuoiconlaithucte * modelDuBaoXepLopCu.DONGIA;
+                        modelDuBaoXepLopCu.NGAYTHANHTOAN = modelLopCu.NGAYTHANHTOAN;
+                        sc += db.SaveChanges();
+
+                        var modelDuBaoSanPhamXepLop = db.TH_DUBAO_SANPHAM.FirstOrDefault(t => t.J_TH_DUBAO == modelDuBaoXepLopCu.A_TH_DUBAO);
+                        modelDuBaoSanPhamXepLop.SOLUONG = decimal.Parse(sobuoiconlaithucte.ToString());
+                        modelDuBaoSanPhamXepLop.THANHTIEN = sobuoiconlaithucte * modelDuBaoXepLopCu.DONGIA;
+                        sc += db.SaveChanges();
+                    }
+
+                    //Insert dubao xếp lớp mới
+                    db.TH_DUBAO.Add(new TH_DUBAO()
+                    {
+                        J_HOSOKHACHHANG = modelDuBaoLopMoi.J_HOSOKHACHHANG,
+                        J_KEHOACH = modelDuBaoLopMoi.J_KEHOACH,
+                        J_TH_HOPDONG = modelDuBaoLopMoi.J_TH_HOPDONG,
+                        SOBUOI = modelDuBaoLopMoi.SOBUOI,
+                        DONGIA = modelDuBaoLopMoi.DONGIA,
+                        TONGTIEN_DH = modelDuBaoLopMoi.TONGTIEN_DH,
+                        NGAYLAM = DateTime.Now,
+                        NGAYGIAOHANG = modelDuBaoLopMoi.NGAYGIAOHANG,
+                        NGAYTHANHTOAN = modelDuBaoLopMoi.NGAYTHANHTOAN,
+                        ID_DTTC = clsFunctions.GetUserID(),
+                        ID_LYDO_HV = 97,
+                        ID_LYDO_TD = 238,
+                        TK_EC = modelDuBaoXepLopCu.TK_EC,
+                        TK_EC_LEADER = modelDuBaoXepLopCu.TK_EC_LEADER,
+                        TK_CM = modelDuBaoXepLopCu.TK_CM,
+                        TK_CM_LEADER = modelDuBaoXepLopCu.TK_CM_LEADER,
+                        TK_GDTT = modelDuBaoXepLopCu.TK_GDTT,
+                        TK_GDV = modelDuBaoXepLopCu.TK_GDV,
+                        SODONHANG = "1111",
+                    });
+                    sc += db.SaveChanges();
+
+                    var a_th_dubao_xeplopmoi = db.TH_DUBAO.OrderByDescending(t => t.A_TH_DUBAO).FirstOrDefault().A_TH_DUBAO;
+                    db.TH_DUBAO_SANPHAM.Add(new TH_DUBAO_SANPHAM()
+                    {
+                        J_TH_DUBAO = a_th_dubao_xeplopmoi,
+                        J_SANPHAM = db.TH_DUBAO_SANPHAM.FirstOrDefault(t => t.J_TH_DUBAO == modelDuBaoLopMoi.A_TH_DUBAO).J_SANPHAM,
+                        SOLUONG = decimal.Parse(modelDuBaoLopMoi.SOBUOI.ToString()),
+                        DONGIA = modelDuBaoLopMoi.DONGIA,
+                        THANHTIEN = modelDuBaoLopMoi.TONGTIEN_DH
+                    });
+                    sc += db.SaveChanges();
+                }
+
                 return Json(sc, JsonRequestBehavior.AllowGet);
             }
             catch

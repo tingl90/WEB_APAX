@@ -698,8 +698,7 @@
                     displayExpr: "TENLOAIHOPDONG",
                     valueExpr: "ID_LOAIHOPDONG",
                     searchEnabled: true,
-                    onValueChanged: function (e) {
-                    },
+                    onValueChanged: function (e) {},
                 });
             }
         })
@@ -712,8 +711,7 @@
                 displayExpr: "TENTRUNGTAM",
                 valueExpr: "ID_TRUNGTAM",
                 searchEnabled: true,
-                onValueChanged: function (e) {
-                },
+                onValueChanged: function (e) {},
             });
         });
     }
@@ -824,9 +822,9 @@
 
                 }).dxDataGrid('instance');
             },
-            error: function (a, b, c) {
-                DevExpress.ui.notify('Error ' + a.status + ': ' + a.statusText, 'error', 2000);
-            }
+            //error: function (a, b, c) {
+            //    DevExpress.ui.notify('Error ' + a.status + ': ' + a.statusText, 'error', 2000);
+            //}
         });
     }
 
@@ -898,11 +896,8 @@
                     $('#GIATRIGOI').val(gtg.toString().replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1,"));
                     $('#CHIETKHAU').val(rs[0].CHIETKHAU);
                     $("#NgayDuKienHoc").dxDateBox('instance').option('value', rs[0].NgayDuKienHoc);
-
                     VisibleInput('hidden', 'form-control');
                     $('#LICHSUTHANHTIEN').val(rs[0].THANHTIEN.toString().replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1,"));
-
-
                 }
             }
         })
