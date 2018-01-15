@@ -728,7 +728,8 @@
                                 DONGIACHUYEN: Number($('#DONGIA').val().replace(/,/g, '')),
                                 DONGIANHAN: Number($('#DONGIA2').val().replace(/,/g, '')),
                                 ThanhTien: Number($('#TONGTIEN2').val().replace(/,/g, '')),
-                                HinhThucChuyenPhi: $("#HinhThuc").dxSelectBox('instance').option('value')
+                                HinhThucChuyenPhi: $("#HinhThuc").dxSelectBox('instance').option('value'),
+                                A_DUBAO_XEPLOP: a_dubao
                             },
                             success: function (result) {
                                 window.parent.$("#loading").fadeOut("fast");

@@ -103,7 +103,8 @@ namespace Web_Apax.Controllers
             decimal? DONGIACHUYEN,
             decimal? DONGIANHAN,
             decimal? ThanhTien,
-            int? HinhThucChuyenPhi)
+            int? HinhThucChuyenPhi,
+            int? A_DUBAO_XEPLOP)
         {
             try
             {
@@ -170,6 +171,10 @@ namespace Web_Apax.Controllers
                                 THANHTIEN = DONGIANHAN*(SOBUOINHAN == null ? 0 : decimal.Parse(SOBUOINHAN.ToString())),
                             });
                             ec += db.SaveChanges();
+                            TH_DUBAO DUBAO = db.TH_DUBAO.FirstOrDefault(st=>st.A_TH_DUBAO==A_DUBAO_XEPLOP);
+                            DUBAO.ID_TRANGTHAI = 1;
+                            db.Entry(DUBAO).State = EntityState.Modified;
+                            sc+=db.SaveChanges();
                         }
                     }
                     else
@@ -281,6 +286,7 @@ namespace Web_Apax.Controllers
                         HSChuyen.NGAYTHANHTOAN = model1.NGAYTHANHTOAN;
                         HSChuyen.SOBUOI = HSChuyen.SOBUOI-model1.SOBUOI;
                         HSChuyen.TONGTIEN_DH = HSChuyen.TONGTIEN_DH-model1.TONGTIEN_DH;
+                        HSChuyen.ID_TRANGTHAI = 1;
                         db.Entry(HSChuyen).State = EntityState.Modified;
                         sc += db.SaveChanges();
                         //update dubao_sanphamn cho don hang chuyen phi
