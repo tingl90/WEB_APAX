@@ -5408,6 +5408,8 @@
           <ScalarProperty Name="A_TH_DUBAO" ColumnName="A_TH_DUBAO" />
           <ScalarProperty Name="TAIKHOANNGUOICHUYEN" ColumnName="TAIKHOANNGUOICHUYEN" />
           <ScalarProperty Name="TENNGUOICHUYEN" ColumnName="TENNGUOICHUYEN" />
+          <ScalarProperty Name="TENDUYET" ColumnName="TENDUYET" />
+          <ScalarProperty Name="YKIENBOSUNG" ColumnName="YKIENBOSUNG" />
         </ComplexTypeMapping>
       </ResultMapping>
     </FunctionImportMapping>
@@ -5465,6 +5467,7 @@
           <ScalarProperty Name="SOBUOIBAOLUU" ColumnName="SOBUOIBAOLUU" />
           <ScalarProperty Name="TUNGAY" ColumnName="TUNGAY" />
           <ScalarProperty Name="FILENAME" ColumnName="FILENAME" />
+          <ScalarProperty Name="DENNGAY" ColumnName="DENNGAY" />
         </ComplexTypeMapping>
       </ResultMapping>
     </FunctionImportMapping>
@@ -5787,6 +5790,7 @@
           <ScalarProperty Name="THANHTIEN_LOPCHUYEN" ColumnName="THANHTIEN_LOPCHUYEN" />
           <ScalarProperty Name="THANHTIEN_LOPNHAN" ColumnName="THANHTIEN_LOPNHAN" />
           <ScalarProperty Name="NGAYCHUYEN" ColumnName="NGAYCHUYEN" />
+          <ScalarProperty Name="TONGSOBUOI" ColumnName="TONGSOBUOI" />
         </ComplexTypeMapping>
       </ResultMapping>
     </FunctionImportMapping>

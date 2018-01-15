@@ -146,8 +146,6 @@ namespace Web_Apax.Controllers
             string GHICHU)
         {
             int sc = 0;
-
-            //Hủy thông tin lớp cũ
             var nguoidung = db.DM_DTTC.FirstOrDefault(t => t.TAIKHOAN == TaiKhoan).ID_DTTC;
             var a_th_hopdong = db.TH_HOPDONG.FirstOrDefault(t => t.J_HOSOKHACHHANG == J_HOSOKHACHHANG).A_TH_HOPDONG;
 
@@ -286,8 +284,6 @@ namespace Web_Apax.Controllers
                 return 0;
             }
         }
-
-        #region dũng
         public JsonResult LoadNguoiDung(int? DuBao)
         {
             var a_th_dubao = db.TH_DUBAO.FirstOrDefault(t => t.A_THUCHIEN == DuBao).A_TH_DUBAO;
@@ -408,6 +404,7 @@ namespace Web_Apax.Controllers
                         DONGIA = modelDuBaoLopMoi.DONGIA,
                         THANHTIEN = modelDuBaoLopMoi.TONGTIEN_DH
                     });
+                    sc += db.Database.ExecuteSqlCommand("Update TH_HOSOKHACHHANG set SOBUOIHOC = " + modelDuBaoLopMoi.SOBUOI + " where A_HOSOKHACHHANG = " + modelDuBaoLopMoi.J_HOSOKHACHHANG);
                     sc += db.SaveChanges();
                 }
 
@@ -426,6 +423,5 @@ namespace Web_Apax.Controllers
             json.MaxJsonLength = int.MaxValue;
             return json;
         }
-        #endregion
     }
 }

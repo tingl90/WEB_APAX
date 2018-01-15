@@ -75,7 +75,7 @@
                     <div class="col-sm-4">
                         <input type="text" id="SOBUOI" data-foo class="form-control">
                     </div>
-                    <label class="col-sm-2 control-label" style="padding:7px 0px!important">Số buổi còn</label>
+                    <label class="col-sm-2 control-label" style="padding:7px 0px!important">Số buổi chuyển</label>
                     <div class="col-sm-4">
                         <input type="text" id="SOBUOCONLAI" data-foo class="form-control">
                         <input type="text" id="SOBUOCONLAILICHSU" data-foo class="hidden">
@@ -728,7 +728,8 @@
                                 DONGIACHUYEN: Number($('#DONGIA').val().replace(/,/g, '')),
                                 DONGIANHAN: Number($('#DONGIA2').val().replace(/,/g, '')),
                                 ThanhTien: Number($('#TONGTIEN2').val().replace(/,/g, '')),
-                                HinhThucChuyenPhi: $("#HinhThuc").dxSelectBox('instance').option('value')
+                                HinhThucChuyenPhi: $("#HinhThuc").dxSelectBox('instance').option('value'),
+                                A_DUBAO_XEPLOP: a_dubao
                             },
                             success: function (result) {
                                 window.parent.$("#loading").fadeOut("fast");
@@ -1000,7 +1001,7 @@
                         {
                             dataField: "SOBUOICHUYEN",
                             caption: "Số buổi chuyển",
-                            width: 100,
+                            width: 150,
                         },
                         {
                             dataField: "HINHTHUCCHUYENPHI",

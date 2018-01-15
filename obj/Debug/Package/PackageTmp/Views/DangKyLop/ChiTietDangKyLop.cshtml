@@ -395,7 +395,7 @@
                             width: 100,
                             cellTemplate: function (container, options) {
                                 var dt = options.data;
-                                $('<a href="javascript:" onclick="LoadDanhSachChuongTrinh(\'' + dt.A_SANPHAM + '\')"  class="text-green"><b>...</b></a>').appendTo(container);
+                                $('<a href="javascript:" onclick="LoadChiTietChuongTrinh(\'' + dt.A_SANPHAM + '\')"  class="text-green"><b>...</b></a>').appendTo(container);
                             }
                         },
                           {
@@ -531,7 +531,13 @@
                 giamdocvung = data.GDV;
             });
     }
-    function LoadDanhSachChuongTrinh(e) {
+    function LoadChiTietChuongTrinh(e) {
+        $("#LoaiKhachHang").dxSelectBox('instance').option('value', null);
+        $("#CHIETKHAU").val("");
+        $("#GIATRIGOI").val("");
+        $("#THANHTIEN").val("");
+        $("#DONGIA").val("");
+
         $('#DanhSachChuongTrinh').modal('hide');
         $.getJSON('/DangKyLop/LoadChuongTrinhInfo', $.param({ ID: e }, true), function (data) {
             $('#TIMKIEMCHUONGTRINH').val(data.CHUONGTRINH);

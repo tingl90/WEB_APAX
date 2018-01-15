@@ -45,5 +45,6 @@ namespace Web_Apax.Models
         public Nullable<decimal> THANHTIEN_LOPCHUYEN { get; set; }
         public Nullable<decimal> THANHTIEN_LOPNHAN { get; set; }
         public string NGAYCHUYEN { get; set; }
+        public Nullable<int> TONGSOBUOI { get; set; }
     }
 }

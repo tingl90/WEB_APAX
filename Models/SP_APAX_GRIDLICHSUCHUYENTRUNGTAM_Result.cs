@@ -32,5 +32,7 @@ namespace Web_Apax.Models
         public Nullable<int> A_TH_DUBAO { get; set; }
         public string TAIKHOANNGUOICHUYEN { get; set; }
         public string TENNGUOICHUYEN { get; set; }
+        public string TENDUYET { get; set; }
+        public string YKIENBOSUNG { get; set; }
     }
 }

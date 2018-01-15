@@ -1030,7 +1030,7 @@
                 $('#MaHocSinh').val(rs.MAKH);
                 $("#TenHocSinh").val(rs.TENKHACHHANG);
                 $('#ID_TrungTam').val(rs.TrungTam);
-                $("#MaTrungTam").val(rs.MA_DVCS);
+                $("#MaTrungTam").val(rs.MATRUNGTAM);
                 loadsale(rs.ID_TRUNGTAM, rs.J_SALE_MAN)
                 loadcm(rs.ID_TRUNGTAM, rs.J_CSO)
             })
@@ -1304,6 +1304,7 @@
                 if (!isNaN(data)) {
                     if (data == 1) {
                         LoadDeNghiXepLopTuTrungTamKhac();
+                        LoadDeNghiChuyenTrungTam();
                         DevExpress.ui.notify('Cập nhật thành công', 'success', 2000);
                         document.querySelector('.dx-toast-warning').style.transform = "translate(720px, 30px)";
                         $("#btnLuuTiepNhan").prop("disabled", true);

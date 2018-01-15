@@ -29,5 +29,6 @@ namespace Web_Apax.Models
         public Nullable<decimal> SOBUOIBAOLUU { get; set; }
         public string TUNGAY { get; set; }
         public string FILENAME { get; set; }
+        public string DENNGAY { get; set; }
     }
 }

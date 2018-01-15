@@ -14468,6 +14468,8 @@ warning 6002: The table/view 'APAX.dbo.tmp_henlich' does not have a primary key 
           <Property Type="Int32" Name="A_TH_DUBAO" Nullable="true" />
           <Property Type="String" Name="TAIKHOANNGUOICHUYEN" Nullable="true" MaxLength="30" />
           <Property Type="String" Name="TENNGUOICHUYEN" Nullable="true" MaxLength="150" />
+          <Property Type="String" Name="TENDUYET" Nullable="true" MaxLength="200" />
+          <Property Type="String" Name="YKIENBOSUNG" Nullable="true" MaxLength="2000" />
         </ComplexType>
         <ComplexType Name="SP_APAX_LICHSUXEPLOP_Result">
           <Property Type="Int32" Name="A_HOSOKHACHHANG" Nullable="true" />
@@ -14513,6 +14515,7 @@ warning 6002: The table/view 'APAX.dbo.tmp_henlich' does not have a primary key 
           <Property Type="Decimal" Name="SOBUOIBAOLUU" Nullable="true" Precision="18" Scale="2" />
           <Property Type="String" Name="TUNGAY" Nullable="true" MaxLength="10" />
           <Property Type="String" Name="FILENAME" Nullable="true" MaxLength="200" />
+          <Property Type="String" Name="DENNGAY" Nullable="true" MaxLength="10" />
         </ComplexType>
         <ComplexType Name="SP_APAX_TIMKIEM_DANHSACH_NHANPHI_Result">
           <Property Type="String" Name="MaDangky" Nullable="true" MaxLength="50" />
@@ -14800,6 +14803,7 @@ warning 6002: The table/view 'APAX.dbo.tmp_henlich' does not have a primary key 
           <Property Type="Decimal" Name="THANHTIEN_LOPCHUYEN" Nullable="true" Precision="18" Scale="0" />
           <Property Type="Decimal" Name="THANHTIEN_LOPNHAN" Nullable="true" Precision="18" Scale="0" />
           <Property Type="String" Name="NGAYCHUYEN" Nullable="true" MaxLength="10" />
+          <Property Type="Int32" Name="TONGSOBUOI" Nullable="true" />
           </ComplexType>
         <ComplexType Name="BAOCAO_APAX_DS_CHOXEPLOP_Result">
           <Property Type="Int32" Name="A_HOSOKHACHHANG" Nullable="true" />
@@ -20526,6 +20530,8 @@ warning 6002: The table/view 'APAX.dbo.tmp_henlich' does not have a primary key 
                 <ScalarProperty Name="A_TH_DUBAO" ColumnName="A_TH_DUBAO" />
                 <ScalarProperty Name="TAIKHOANNGUOICHUYEN" ColumnName="TAIKHOANNGUOICHUYEN" />
                 <ScalarProperty Name="TENNGUOICHUYEN" ColumnName="TENNGUOICHUYEN" />
+                <ScalarProperty Name="TENDUYET" ColumnName="TENDUYET" />
+                <ScalarProperty Name="YKIENBOSUNG" ColumnName="YKIENBOSUNG" />
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
@@ -20583,6 +20589,7 @@ warning 6002: The table/view 'APAX.dbo.tmp_henlich' does not have a primary key 
                 <ScalarProperty Name="SOBUOIBAOLUU" ColumnName="SOBUOIBAOLUU" />
                 <ScalarProperty Name="TUNGAY" ColumnName="TUNGAY" />
                 <ScalarProperty Name="FILENAME" ColumnName="FILENAME" />
+                <ScalarProperty Name="DENNGAY" ColumnName="DENNGAY" />
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
@@ -20905,6 +20912,7 @@ warning 6002: The table/view 'APAX.dbo.tmp_henlich' does not have a primary key 
                 <ScalarProperty Name="THANHTIEN_LOPCHUYEN" ColumnName="THANHTIEN_LOPCHUYEN" />
                 <ScalarProperty Name="THANHTIEN_LOPNHAN" ColumnName="THANHTIEN_LOPNHAN" />
                 <ScalarProperty Name="NGAYCHUYEN" ColumnName="NGAYCHUYEN" />
+                <ScalarProperty Name="TONGSOBUOI" ColumnName="TONGSOBUOI" />
                 </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>

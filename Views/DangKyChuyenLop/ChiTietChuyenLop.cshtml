@@ -447,10 +447,12 @@
                         if (rs[0].TrungTam == $('#TIMKIEMTRUNGTAM').val()) {
                             chuyentrungtam = false;
                             $("#btnTimLopHoc").prop("disabled", false);
+                            $("#NgayBatDauLopChuyenDen").dxDateBox('instance').option('readOnly', false);
                         }
                         else {
                             chuyentrungtam = true;
                             $("#btnTimLopHoc").prop("disabled", true);
+                            $("#NgayBatDauLopChuyenDen").dxDateBox('instance').option('readOnly', true);
                         }
                     }
                     $('#TIMKIEMHOCVIEN').val(rs[0].TenHocVien);
@@ -573,10 +575,12 @@
                     if (rs[0].TENTRUNGTAM == trungtam) {
                         chuyentrungtam = false;
                         $("#btnTimLopHoc").prop("disabled", false);
+                        $("#NgayBatDauLopChuyenDen").dxDateBox('instance').option('readOnly', false);
                     }
                     else {
                         chuyentrungtam = true;
                         $("#btnTimLopHoc").prop("disabled", true);
+                        $("#NgayBatDauLopChuyenDen").dxDateBox('instance').option('readOnly', true);
                     }
                 }
             }
@@ -654,7 +658,7 @@
                         },
                         success: function (data) {
                             if (!isNaN(data)) {
-                                if (data == 1) {
+                                if (data > 0) {
                                     LoadDanhSachChoDuyet();
                                     LoadGridLichSuChuyenLop(a_hosokhachhang);
                                     DevExpress.ui.notify('Cập nhật thành công', 'success', 2000);
@@ -694,7 +698,7 @@
                         },
                         success: function (data) {
                             if (!isNaN(data)) {
-                                if (data == 1) {
+                                if (data > 0) {
                                     LoadDanhSachChoDuyet();
                                     LoadGridLichSuChuyenLop(a_hosokhachhang);
                                     DevExpress.ui.notify('Cập nhật thành công', 'success', 2000);
@@ -1161,11 +1165,11 @@
                     }, {
                         caption: "Lớp chuyển đi",
                         dataField: "LOPCHUYENDI",
-                        width: 200,
+                        width: 250,
                     }, {
                         caption: "Lớp chuyển đến",
                         dataField: "LOPCHUYENDEN",
-                        width: 200,
+                        width: 250,
                     }, {
                         caption: "Chương trình đi",
                         dataField: "CHUONGTRINHDI",
@@ -1173,6 +1177,14 @@
                     }, {
                         caption: "Chương trình đến",
                         dataField: "CHUONGTRINHDEN",
+                        width: 200,
+                    }, {
+                        caption: "Tình trạng duyệt",
+                        dataField: "TENDUYET",
+                        width: 150,
+                    }, {
+                        caption: "Ý kiến bổ sung",
+                        dataField: "YKIENBOSUNG",
                         width: 200,
                     },
                     ],
@@ -1219,6 +1231,7 @@
                     $('#ChuongTrinh').val(rs[0].TENCHUONGTRINH_LOPCHUYEN);
                     $('#Buoi1').val(rs[0].BUOI1_LOPCHUYEN);
                     $('#Buoi2').val(rs[0].BUOI2_LOPCHUYEN);
+                    $('#SoBuoi').val(rs[0].TONGSOBUOI);
                     $('#SoBuoiConLai').val(rs[0].SOBUOI_LOPCHUYEN);
                     $('#DonGia').val(rs[0].DONGIA_LOPCHUYEN.toString().replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1,"));
                     $('#ThanhTienConLai').val(rs[0].THANHTIEN_LOPCHUYEN.toString().replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1,"));

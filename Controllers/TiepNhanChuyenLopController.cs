@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Web;
@@ -134,6 +135,10 @@ namespace Web_Apax.Controllers
                 //thdubaosanpham.DATENOTE1 = NGAYDUKIENHOC != null ? NGAYDUKIENHOC : DateTime.Now;
                 //thdubaosanpham.DATENOTE2 = NGAYGIAOHANG != null ? NGAYGIAOHANG : DateTime.Now;
                 db.TH_DUBAO_SANPHAM.Add(thdubaosanpham);
+                sc += db.SaveChanges();
+                TH_DUBAO DUBAO = db.TH_DUBAO.FirstOrDefault(st => st.A_TH_DUBAO == A_DuBao);
+                DUBAO.ID_TRANGTHAI = 1;
+                db.Entry(DUBAO).State= EntityState.Modified;
                 sc += db.SaveChanges();
             }
             if (sc > 0)

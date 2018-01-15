@@ -5744,6 +5744,8 @@
     <Property Type="Int32" Name="A_TH_DUBAO" Nullable="true" />
     <Property Type="String" Name="TAIKHOANNGUOICHUYEN" Nullable="true" MaxLength="30" />
     <Property Type="String" Name="TENNGUOICHUYEN" Nullable="true" MaxLength="150" />
+    <Property Type="String" Name="TENDUYET" Nullable="true" MaxLength="200" />
+    <Property Type="String" Name="YKIENBOSUNG" Nullable="true" MaxLength="2000" />
   </ComplexType>
   <ComplexType Name="SP_APAX_LICHSUXEPLOP_Result">
     <Property Type="Int32" Name="A_HOSOKHACHHANG" Nullable="true" />
@@ -5789,6 +5791,7 @@
     <Property Type="Decimal" Name="SOBUOIBAOLUU" Nullable="true" Precision="18" Scale="2" />
     <Property Type="String" Name="TUNGAY" Nullable="true" MaxLength="10" />
     <Property Type="String" Name="FILENAME" Nullable="true" MaxLength="200" />
+    <Property Type="String" Name="DENNGAY" Nullable="true" MaxLength="10" />
   </ComplexType>
   <ComplexType Name="SP_APAX_TIMKIEM_DANHSACH_NHANPHI_Result">
     <Property Type="String" Name="MaDangky" Nullable="true" MaxLength="50" />
@@ -6076,6 +6079,7 @@
     <Property Type="Decimal" Name="THANHTIEN_LOPCHUYEN" Nullable="true" Precision="18" Scale="0" />
     <Property Type="Decimal" Name="THANHTIEN_LOPNHAN" Nullable="true" Precision="18" Scale="0" />
     <Property Type="String" Name="NGAYCHUYEN" Nullable="true" MaxLength="10" />
+    <Property Type="Int32" Name="TONGSOBUOI" Nullable="true" />
   </ComplexType>
   <ComplexType Name="BAOCAO_APAX_DS_CHOXEPLOP_Result">
     <Property Type="Int32" Name="A_HOSOKHACHHANG" Nullable="true" />
