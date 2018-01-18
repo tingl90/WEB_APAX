@@ -29,7 +29,7 @@ namespace Web_Apax.Models
         public string J_CSO { get; set; }
         public string ChuongTrinh { get; set; }
         public Nullable<int> LOAIKH { get; set; }
-        public Nullable<decimal> SoBuoiHoc { get; set; }
+        public Nullable<int> SoBuoiHoc { get; set; }
         public Nullable<decimal> DONGIA { get; set; }
         public Nullable<int> CHIETKHAU { get; set; }
         public Nullable<decimal> THANHTIEN { get; set; }
@@ -40,7 +40,7 @@ namespace Web_Apax.Models
         public string GHICHU { get; set; }
         public string CM { get; set; }
         public string saleman { get; set; }
-        public Nullable<int> ID_LYDO_HV { get; set; }
-        public Nullable<int> J_TH_HOPDONG { get; set; }
+        public int J_TH_HOPDONG { get; set; }
+        public Nullable<int> ID_LOAIHOPDONG { get; set; }
     }
 }

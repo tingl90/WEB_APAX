@@ -14247,6 +14247,7 @@ warning 6002: The table/view 'APAX.dbo.tmp_henlich' does not have a primary key 
           <Property Type="String" Name="SM" Nullable="true" MaxLength="30" />
           <Property Type="String" Name="NGAYKETTHUCHOC" Nullable="true" MaxLength="10" />
           <Property Type="String" Name="TENTIENGANH" Nullable="true" MaxLength="200" />
+          <Property Type="Int32" Name="ID_LOAIHOPDONG" Nullable="true" />
         </ComplexType>
         <EntityType Name="TH_GIAODICH">
           <Key>
@@ -14686,7 +14687,7 @@ warning 6002: The table/view 'APAX.dbo.tmp_henlich' does not have a primary key 
           <Property Type="String" Name="J_CSO" Nullable="true" MaxLength="20" />
           <Property Type="String" Name="ChuongTrinh" Nullable="true" MaxLength="150" />
           <Property Type="Int32" Name="LOAIKH" Nullable="true" />
-          <Property Type="Decimal" Name="SoBuoiHoc" Nullable="true" Precision="18" Scale="2" />
+          <Property Type="Int32" Name="SoBuoiHoc" Nullable="true" />
           <Property Type="Decimal" Name="DONGIA" Nullable="true" Precision="18" Scale="0" />
           <Property Type="Int32" Name="CHIETKHAU" Nullable="true" />
           <Property Type="Decimal" Name="THANHTIEN" Nullable="true" Precision="18" Scale="0" />
@@ -14697,8 +14698,8 @@ warning 6002: The table/view 'APAX.dbo.tmp_henlich' does not have a primary key 
           <Property Type="String" Name="GHICHU" Nullable="true" MaxLength="2000" />
           <Property Type="String" Name="CM" Nullable="true" MaxLength="30" />
           <Property Type="String" Name="saleman" Nullable="true" MaxLength="30" />
-          <Property Type="Int32" Name="ID_LYDO_HV" Nullable="true" />
-          <Property Type="Int32" Name="J_TH_HOPDONG" Nullable="true" />
+          <Property Type="Int32" Name="J_TH_HOPDONG" Nullable="false" />
+          <Property Type="Int32" Name="ID_LOAIHOPDONG" Nullable="true" />
         </ComplexType>
         <ComplexType Name="APAX_THONGTIN_XEPLOP_Result">
           <Property Type="Int32" Name="A_HOSOKHACHHANG" Nullable="true" />
@@ -20275,6 +20276,7 @@ warning 6002: The table/view 'APAX.dbo.tmp_henlich' does not have a primary key 
                 <ScalarProperty Name="SM" ColumnName="SM" />
                 <ScalarProperty Name="NGAYKETTHUCHOC" ColumnName="NGAYKETTHUCHOC" />
                 <ScalarProperty Name="TENTIENGANH" ColumnName="TENTIENGANH" />
+                <ScalarProperty Name="ID_LOAIHOPDONG" ColumnName="ID_LOAIHOPDONG" />
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
@@ -20793,8 +20795,8 @@ warning 6002: The table/view 'APAX.dbo.tmp_henlich' does not have a primary key 
                 <ScalarProperty Name="GHICHU" ColumnName="GHICHU" />
                 <ScalarProperty Name="CM" ColumnName="CM" />
                 <ScalarProperty Name="saleman" ColumnName="saleman" />
-                <ScalarProperty Name="ID_LYDO_HV" ColumnName="ID_LYDO_HV" />
                 <ScalarProperty Name="J_TH_HOPDONG" ColumnName="J_TH_HOPDONG" />
+                <ScalarProperty Name="ID_LOAIHOPDONG" ColumnName="ID_LOAIHOPDONG" />
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>

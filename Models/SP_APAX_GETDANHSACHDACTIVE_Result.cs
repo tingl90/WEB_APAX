@@ -43,5 +43,6 @@ namespace Web_Apax.Models
         public string SM { get; set; }
         public string NGAYKETTHUCHOC { get; set; }
         public string TENTIENGANH { get; set; }
+        public Nullable<int> ID_LOAIHOPDONG { get; set; }
     }
 }

@@ -5,8 +5,9 @@
 }
 <style>
     .hidden {
-        display:none;
+        display: none;
     }
+
     .dx-data-row td.center {
         text-align: center !important;
     }
@@ -565,6 +566,9 @@
         var gridItems = $("#gridDanhSachDangHoc").dxDataGrid('instance')._controllers.data._dataSource._items;
         $.each(gridItems, function (i, v) {
             if (v.TENTIENGANH == keys[0].TENTIENGANH && keys[0].TENTIENGANH != null && keys[0].TENTIENGANH != "") {
+                if (v.ID_LOAIHOPDONG == 29 && v.A_HOSOKHACHHANG == keys[0].A_HOSOKHACHHANG) {
+                    return;
+                }
                 nickname = v.TENTIENGANH;
                 return
             }

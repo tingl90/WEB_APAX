@@ -290,7 +290,7 @@
             onValueChanged: function (data) {},
         }).dxDateBox("instance");
         if ($('#HocVien').val() != null && $('#HocVien').val() != "")
-            LoadDanhSachHocSinh($('#HocVien').val());
+            LoadChiTietHocVien($('#HocVien').val());
         LoaiKhachHang();
         $('#CHIETKHAU').keyup(function () {
             if (!xemlichsu) {
@@ -448,7 +448,7 @@
                         width: 100,
                         cellTemplate: function (container, options) {
                             var dt = options.data;
-                            $('<a href="javascript:" onclick="LoadDanhSachHocSinh(\'' + dt.A_HOSOKHACHHANG + '\')"  class="text-green"><b>...</b></a>').appendTo(container);
+                            $('<a href="javascript:" onclick="LoadChiTietHocVien(\'' + dt.A_HOSOKHACHHANG + '\')"  class="text-green"><b>...</b></a>').appendTo(container);
                         }
                     }, {
                         dataField: "MaHocSinh",
@@ -499,7 +499,7 @@
             }
         });
     }
-    function LoadDanhSachHocSinh(e) {
+    function LoadChiTietHocVien(e) {
         $('#modalDanhSachHocSinh').modal('hide');
         LoadGridHocSinh(e);
         $.getJSON('/DangKyLop/LoadHocSinhInfo',
@@ -774,7 +774,7 @@
                             width: 100,
                             cellTemplate: function (container, options) {
                                 var dt = options.data;
-                                $('<a href="javascript:" onclick="LoadDanhSachHocSinh(\'' + dt.A_HOSOKHACHHANG + '\')"  class="text-green"><b>...</b></a>').appendTo(container);
+                                $('<a href="javascript:" onclick="LoadChiTietHocVien(\'' + dt.A_HOSOKHACHHANG + '\')"  class="text-green"><b>...</b></a>').appendTo(container);
                             }
                         },
                           {
@@ -815,13 +815,20 @@
                               width: 120,
                           },
                           {
-                              caption: "EC phụ trách",
-                              dataField: "SaleQuanLy",
+                              caption: "EC",
+                              dataField: "EC",
                               width: 120,
-                          },
-                          {
-                              caption: "Mã CM phụ trách",
-                              dataField: "SaleLeader",
+                          },{
+                              caption: "CM",
+                              dataField: "CM",
+                              width: 120,
+                          },{
+                              caption: "EC LEADER",
+                              dataField: "EC_LEADER",
+                              width: 120,
+                          },{
+                              caption: "CM leader",
+                              dataField: "OM",
                               width: 120,
                           },
                     ],

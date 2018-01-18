@@ -1261,13 +1261,7 @@
             }
         })
     }
-    function ConvertDate(obj) {
-        var lstngay = obj.split("/");
-        return lstngay[2] + "-" + lstngay[0] + "-" + lstngay[1];
-    }
-</script>
 
-<script>
     function DuyetTiepNhanChuyenLop() {
         if (a_thdubao > 0) {
             $.getJSON('/DangKyChuyenLop/LoadNguoiDung', $.param({ DuBao: a_thdubao }), function (rs) {
@@ -1396,5 +1390,9 @@
                 })
             }
         });
+    }
+    function ConvertDate(obj) {
+        var lstngay = obj.split("/");
+        return lstngay[2] + "-" + lstngay[0] + "-" + lstngay[1];
     }
 </script>

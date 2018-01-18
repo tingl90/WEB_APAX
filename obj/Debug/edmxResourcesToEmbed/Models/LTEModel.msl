@@ -5153,6 +5153,7 @@
           <ScalarProperty Name="SM" ColumnName="SM" />
           <ScalarProperty Name="NGAYKETTHUCHOC" ColumnName="NGAYKETTHUCHOC" />
           <ScalarProperty Name="TENTIENGANH" ColumnName="TENTIENGANH" />
+          <ScalarProperty Name="ID_LOAIHOPDONG" ColumnName="ID_LOAIHOPDONG" />
         </ComplexTypeMapping>
       </ResultMapping>
     </FunctionImportMapping>
@@ -5671,8 +5672,8 @@
           <ScalarProperty Name="GHICHU" ColumnName="GHICHU" />
           <ScalarProperty Name="CM" ColumnName="CM" />
           <ScalarProperty Name="saleman" ColumnName="saleman" />
-          <ScalarProperty Name="ID_LYDO_HV" ColumnName="ID_LYDO_HV" />
           <ScalarProperty Name="J_TH_HOPDONG" ColumnName="J_TH_HOPDONG" />
+          <ScalarProperty Name="ID_LOAIHOPDONG" ColumnName="ID_LOAIHOPDONG" />
         </ComplexTypeMapping>
       </ResultMapping>
     </FunctionImportMapping>
