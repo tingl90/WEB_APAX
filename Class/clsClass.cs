@@ -11,4 +11,5 @@ namespace Web_Apax.Models
         public int Total { get; set; }
         public IEnumerable Result { get; set; }
     }
+	//////master_tin
 }
